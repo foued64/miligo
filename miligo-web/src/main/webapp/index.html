@@ -1,10 +1,34 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>Accueil</title>
+    </h:head>
+	<h:body>
+        
+        Du HTML basique pour piger pourquoi pas d'interprétation du JSF.
+
+        <h1>
+            <h:outputText value="Ajouter un jeu" />
+        </h1>
+
+        <h:form>
+            
+            <h:panelGrid columns="2">
+            
+                <h:outputLabel value="Nom"/>
+                <h:inputText value="#{indexPageBean.nomJeu}" />
+                
+                <h:outputLabel value="Machine"/>
+                <h:inputText value="#{indexPageBean.machineJeu}" />
+                
+                <h:outputLabel value="Année"/>
+                <h:inputText value="#{indexPageBean.anneeSortie}" />
+
+                <h:commandButton value="Ajouter le jeu" actionListener="#{indexPageBean.ajouter()}" />
+
+            </h:panelGrid>
+        </h:form>
+        
+    </h:body>
 </html>
