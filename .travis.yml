@@ -5,18 +5,26 @@ install: true
 addons:
   sonarqube:
     organization: "zyra83-github"
+    # permet à travis de faire analyse le code sur sonarqube
     token:
-      secure: "uB6SN/uqTU71Ks6wRSGicDz+YFKkTpmBzi9FQEFb/d9frYbVbuqBlAdZXZQ5TWiicbZD8nVqrAvxZxjHZjlPFB+7yBq3S8MPgocknhKaCdunrTCuDXHM8oSu9xhYFFMftPRv01gN/Lxm6LPcImXFyDEcf+dOrROzrZnsFvAgwY5ikI9VN8ebi2mg87H/PHXgHeTiydQDGRzf5eudRuX/Ksz4CDLQ28oUHcC7pCMh23l55gTLRtMqo1gNiBm86/rQaQ/tngnV+1PDg6wlk69PZPnFLe6PPtjlfa+rnFddE4f89eKAXcc/nWE+TsR0m36R7HzNxX/t/Ind+8soiOjkuaeecyy0Xvlow25JWZh2es6KvZI3I4nrPhmiG5NAI5XMSOUZKUInXozYOl1Cmla4UOeIPGNFVpOrrTbPO4aNhym/tELgTXt58fhCq7vjocI9v+bHBw6WnvI8afE82pXg3dpUg3M+WkvrbbfBSjo587ZzYSl8c0X/51PBSnIfe0sEp4dyOTEIP94Y4WNup8iYlm1dCMCK5NLi+Da0g0zBOVrCEtMJ6UzyNUZ42uFvPaAVoomYSwEKd0YbkPSG9ZkM8fbd4Mmw9fcoKLNTkPo0DtLYGaXDtDnPUsPkCgii9/cbEDHkCr4lkakPAB4CWaNIjinf/AEobPumFguC7l0mvLY="
-    github_token:
-      secure: "CorG07HLyjc5e5daz6dYQe/AqpM5iboB2x4Vybhg4IB/7Cdbi4Lyz6neniKV3UVGWXLdBxxq2/8/ShqLOxaz0blbl1Ypl7lPfokDGdwXg8o/Bmwm5xBqcQAGdaLUXiHNCQgXR4xzoyN6tn9ZFpwDSBrKo25JyQI8ZCoVe7juoacRw2VYPc5jUurYzZ/Y952FGX5rL6nBBCBH47B7TGt8vNBqMpKEpLTp8UwqS9a77eSslBmo0TZA31ZjvpdbudGye/Mrdk/P4UX38TXodTlhQGB14e3wxGI58tORStCa6rWdyBG4knCjXB0NnbkeFn7tgzrwlrPKiwMpzfbhegZRixwZ8HaEQ6koNUoQv1aTOiOqk+MY6K9RD6uNGO2RBrysoAn7ZANh/NxrDdzU8kIr7rM3nMzjHVlzynu0ExGf6qOJkhu/t6RVWp3142AdDKfs/42AiAyZf5DAxsgZL37sGkaVwF+UJiTjk8i+GUXmxGa3/48YtuV1Grso4G8cxOa8M4tMYrxhHUwmx088uCe3FwejQZpPFIx1QGHp1jP01Lu29Al/BkrNi/DAtYxKSNfWoJit3QdIpAAFo5qn5+edSBEF4rNCg2h9j+bV52C+NqlPG1UUwsCuPnZagmuU+cquugqQRFBc8KyKHcleydzttjHuDAhwo7BCbzcZqjDNgjA="
+      secure: "A/DOrXcgNh7r6RhUGAY/lT9H08oracRuVSLPP2cqBVGp+hRu9kOaqt6TiZMMcarMys8bCL6dlvDTeDHO/XQnZEqHNz7efIcT63WGnH9yzb+xAhAnyy3kSZ52DPLqIQTOwr5VNTyJpRBJfNyvF5mn9OEEkVai7OdCr3254UD7ZaHiAlreRSOS9TIxDL4Upne+aCli461uRnvTFvDk0PvD3USiHP/dZPnq0TnxBnO8FYerkHjW4iNjZQZ+iR30O4PA+nB6qw499CSHk2EwJQaIJT0rosZ5s3bkPecsLYzT+FA5EGiaaVZrrC41o2CFs9ZZM6M3OZRNKWuxsNwkIfJRJ3uH49m55N+EfMpWayNWHBECwQLorMZtEUuZZwS3oGl1X2ZrCYM2Ei+/ts8Nb0s4FtN7KHMLrsvvMzqTyB97J+VmNB2JV34UXacOY+05oAOIjqpWv1yQBRLG8E7CKaLIElnolRYqVJbhU30Sqq+ubdgTf0zHUv0nqvrFx1W/dI2NJ7e1JoK9FLxbG6w+OMHrREUsy1bL21b83rVEsl4mJK0iOUi5+kBVEJosuC7Q7ieIjr0wjFll484DZGY1EJkxyZM80+/OxQg8HRlF0DwOOItAJiyhuZZcGmLNml+0gwSnAD2Qh4D2ZPAcyHChIPDyWa6NFhxI8tu1Qv5ihDz3TUY="
+    # permet à sonarqube de commenter les Pull Requests
+    github_token: 
+      secure: "c/kWlOED/ifMs9cSgHOF7y+8uM0PYMuvE4qI8pLtwmtUeiiUMILmGNheQamOCjtWvLPFK/3rkrpKnE9Ig8e9c8uiW/Y3/+q1IOXL5Kv2YcF1jsybi2rnMzNDPUudOZ11oKOyQtyinlZrD/AWGiDJQ43ssHc9h7g/ZFAh52nvpzpQFjAVnNuLGq9gifmo9NeFeHrg3eCPA3SzrD3+CEqndyR65cK05JTSNQtNpqjsmTF69+Oi00eA5y5QffkFueriygL6qQhpCkq+GWfx988Ri60kI2fsSlIVMRsJ/vMfIg5qrvTFjvA7abYIxdGuf9ZSjRC+hhK5NHOTWvZU867e/J4sNiIBUrfxnAauX5phwmC/c8fXRrlPON5ADEiydxAPzVshqAAGAX5Y+Cg5vHluSSm8HkS9T7+mV/Wi2jc0KFMQxNbB25R/hgOe1URpijhzrcHmwHx3/8XY9OK/8qIqTDhdoC6WhSIbWdImz9yNjDBjCyU8B3ed/b0sXb6A/gyNDM6ZGvJMfpfhHoFDD3vRvEXvnk726x2m1NSaKpDa56cGHMbtpCvyUqooPDBvwVX8jbbIXkwFOUqt6fynGf9pHwqI4mm1GndamlooHuNb2HU5YAmED8QdkgWCKvbCiw9BV6TJo/dNzqEJE4W9DHVAFNIrBbU5EqB9KsLMc1OvrV8="
+
+install:
+  - mvn install:install-file -Dfile=outillage/librairies/generic-commons-tools.jar -DgroupId=net.entetrs.commons -DartifactId=generic-common-tools -Dversion=1.0 -Dpackaging=jar
+  - mvn install:install-file -Dfile=outillage/librairies/jsf-commons-tools.jar -DgroupId=net.entetrs.commons -DartifactId=jsf-common-tools -Dversion=1.0 -Dpackaging=jar
+  - mvn install:install-file -Dfile=outillage/librairies/jpa-commons-tools.jar -DgroupId=net.entetrs.commons -DartifactId=jpa-common-tools -Dversion=1.0 -Dpackaging=jar
 
 jdk:
   - oraclejdk8
 
 script:
   # JaCoCo is used to have code coverage, the agent has to be activated
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
-
+  #- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar cobertura:cobertura
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarQube analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 cache:
   directories:
     - '$HOME/.m2/repository'
@@ -26,3 +34,4 @@ before_cache:
   # remove all the artifacts (JAR, ZIP) that are installed in local repo because of mvn deploy
   - rm -rf $HOME/.m2/repository/fr/teamy
   - find $HOME/.m2 -name resolver-status.properties -exec rm {} \;
+
