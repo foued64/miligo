@@ -18,25 +18,24 @@
     </properties>
 
     <dependencies>
+
         <dependency>
             <groupId>fr.teamy</groupId>
             <artifactId>miligo-ejb</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <!-- EJB et PROVIDED nécessaire pour éviter Ambiguous dependencies -->
             <type>ejb</type>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
           <groupId>org.primefaces</groupId>
           <artifactId>primefaces</artifactId>
-          <version>5.0</version>
         </dependency>
+
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
-            <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
