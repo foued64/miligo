@@ -7,9 +7,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>fr.teamy</groupId>
     <artifactId>miligo-web</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>miligo-web</name>
@@ -18,25 +16,32 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.16</version>
-            <type>jar</type>
-        </dependency>
         <dependency>
             <groupId>fr.teamy</groupId>
             <artifactId>miligo-ejb</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
+            <!-- EJB et PROVIDED nécessaire pour éviter Ambiguous dependencies -->
+            <type>ejb</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+          <groupId>org.primefaces</groupId>
+          <artifactId>primefaces</artifactId>
+          <version>5.0</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.16</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 
@@ -90,5 +95,12 @@
             </plugin>
         </plugins>
     </build>
-
+    <repositories>
+        <repository>
+            <url>http://repository.primefaces.org/</url>
+            <id>PrimeFaces-maven-lib</id>
+            <layout>default</layout>
+            <name>Repository for library PrimeFaces-maven-lib</name>
+        </repository>
+    </repositories>
 </project>

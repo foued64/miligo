@@ -1,19 +1,28 @@
 package fr.teamy.facades;
 
-import fr.teamy.entities.JeuVideo;
-import javax.ejb.LocalBean;
+import java.io.Serializable;
+
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import fr.teamy.entities.JeuVideo;
+
 @Stateless
-@LocalBean
-public class FacadeJeuxVideo {
+@WebService
+public class FacadeJeuxVideo implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	public FacadeJeuxVideo() {
+		// constructeur de Bean
+	}
 
 	@PersistenceContext
 	private EntityManager em;
 
-	public void save(JeuVideo jv){
+	public void save(JeuVideo jv) {
 		em.persist(jv);
 	}
 

@@ -2,6 +2,7 @@ package fr.teamy.entities;
 
 import java.io.Serializable;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,7 @@ import lombok.ToString;
 @Table(name = "JEU_VIDEO")
 @ToString(of = { "nom", "machine", "annee" })
 @EqualsAndHashCode(of = "id")
+@Dependent
 public class JeuVideo implements Serializable {
 
 	@Id
