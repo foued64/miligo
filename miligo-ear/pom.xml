@@ -42,6 +42,22 @@
                 <version>${version.ear.plugin}</version>
                 <configuration>
                     <version>7</version>
+                    <modules>
+                        <webModule>
+                            <groupId>fr.teamy</groupId>
+                            <artifactId>miligo-web</artifactId>
+                            <bundleFileName>miligo-web.war</bundleFileName>
+                            <!-- deploie miligo à la racine du payara -->
+                            <contextRoot>/</contextRoot>
+                        </webModule>
+                        <ejbModule>
+                            <groupId>fr.teamy</groupId>
+                            <artifactId>miligo-ejb</artifactId>
+                            <bundleFileName>miligo-ejb.jar</bundleFileName>
+                        </ejbModule>
+                    </modules>
+                    <displayName>Teamy Miligo</displayName>
+                    <generateApplicationXml>true</generateApplicationXml>
                     <fileNameMapping>no-version</fileNameMapping>
                     <defaultLibBundleDir>lib</defaultLibBundleDir>
                 </configuration>
