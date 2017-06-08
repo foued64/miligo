@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<h:outputStylesheet name="css/bootstrap.min.css" library="bootstrap" />
+	<title>BootsFaces Basic Page</title>
+</h:head>
+<h:body>
+	<b:container>
+		<b:navBar brand="Brand" brandHref="#">
+			<b:navbarLinks>
+				<b:navLink value="Link" href="#"></b:navLink>
+				<b:navLink value="Link" href="#"></b:navLink>
+				<b:dropMenu value="Dropdown" iconAwesome="birthday-cake">
+					<b:navLink value="Action" href="#"></b:navLink>
+					<b:navLink value="Another action" href="#"></b:navLink>
+					<b:navLink value="Something else here" href="#"></b:navLink>
+					<b:navLink></b:navLink>
+					<b:navLink header="Nav header"></b:navLink>
+					<b:navLink value="Separated link" href="#"></b:navLink>
+					<b:dropMenu value="Nested submenu" iconAwesome="birthday-cake"
+						iconAlign="right">
+						<b:navLink value="You can nest menus" href="#"></b:navLink>
+						<b:dropMenu value="Nested sub-submenu">
+							<b:navLink value="... as deep as ..." href="#"></b:navLink>
+							<b:dropMenu value="Nested sub-sub-submenu">
+								<b:navLink value="... you want!" href="#"></b:navLink>
+							</b:dropMenu>
+						</b:dropMenu>
+
+					</b:dropMenu>
+					<b:navLink value="One more separated link" href="#"></b:navLink>
+				</b:dropMenu>
+			</b:navbarLinks>
+			<form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs"
+				role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search" />
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+			<!-- Following line is needed for TBS 3.0.1 (panel content overflow issue) -->
+			<b:navbarLinks pull="right">
+				<b:navLink value="    " href="#"></b:navLink>
+			</b:navbarLinks>
+			<b:navbarLinks pull="right" styleClass="hidden-xs">
+				<b:navLink value="Link" href="#"></b:navLink>
+				<b:dropMenu value="Dropdown">
+					<b:navLink value="Action" href="#"></b:navLink>
+					<b:navLink value="Another action" href="#"></b:navLink>
+					<b:navLink value="Something else here" href="#"></b:navLink>
+					<b:navLink></b:navLink>
+					<b:navLink header="Nav header"></b:navLink>
+					<b:navLink value="Separated link" href="#"></b:navLink>
+					<b:navLink value="One more separated link" href="#"></b:navLink>
+				</b:dropMenu>
+			</b:navbarLinks>
+		</b:navBar>
+
+		<div class="ui-fluid">
+			<p:panelGrid columns="2" columnClasses="ui-grid-col-2,ui-grid-col-6"
+				layout="grid" styleClass="ui-panelgrid-blank">
+
+				<p:outputLabel for="input" value="Input" />
+				<p:inputText id="input" />
+
+				<p:outputLabel for="area" value="Textarea" />
+				<p:inputTextarea id="area" />
+
+				<p:outputLabel for="calendar" value="Calendar" />
+				<p:calendar id="calendar" />
+				
+				<b:label for="calendar2" value="Calendar2" />
+				<b:datepicker id="calendar2"></b:datepicker>
+			</p:panelGrid>
+		</div>
+
+	</b:container>
+
+	<h:outputScript name="jquery/jquery.js" library="primefaces" />
+	<h:outputScript name="js/bootstrap.min.js" library="bootstrap" />
+</h:body>
+</html>

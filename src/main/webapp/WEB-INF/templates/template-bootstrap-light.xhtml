@@ -1,0 +1,29 @@
+<!DOCTYPE html >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:include src="/WEB-INF/templates/fragments/fragment-bootstrap-header.xhtml" />
+
+<h:body>
+
+	<div class="container">
+
+		<ui:include src="/WEB-INF/templates/fragments/fragment-bootstrap-nav.xhtml" />
+	
+		<header class="jumbotron well">
+			<h2><ui:insert name="title">Votre titre ...</ui:insert></h2>
+			<p><ui:insert name="subtitle" /></p>
+		</header>
+	
+		<ui:insert name="content">Votre contenu...</ui:insert>
+		
+	</div>
+
+	<ui:include src="/WEB-INF/templates/fragments/fragment-bootstrap-footer.xhtml" />
+
+</h:body>
+
+</html>
