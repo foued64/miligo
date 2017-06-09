@@ -9,7 +9,7 @@
 	<http auto-config="true">
 		<intercept-url pattern="/resources/**" access="denyAll" />
 		<intercept-url pattern="/javax.faces.resource/**" access="permitAll" />
-		<!--<intercept-url pattern="/annuaire/**" access="hasRole('ROLE_ADMINISTRATEUR')" />-->
+		<intercept-url pattern="/annuaire/**" access="hasRole('ROLE_ADMINISTRATEUR')" />
 		<intercept-url pattern="/index.xhtml" access="permitAll" />
 
 		<form-login login-page="/login/index.xhtml"
@@ -22,7 +22,7 @@
 	</http>
 
 	
-    <b:bean name="miligoUserDetailsService" class="fr.miligo.security.MiligoUserDetailsService" />
+    <b:bean name="miligoUserDetailsService" class="fr.miligo.model.security.MiligoUserDetailsService" />
 
 	<authentication-manager>
 		<authentication-provider user-service-ref="miligoUserDetailsService" />
