@@ -16,6 +16,7 @@ install:
   - mvn install:install-file -Dfile=outillage/librairies/generic-commons-tools.jar -DgroupId=net.entetrs.commons -DartifactId=generic-common-tools -Dversion=1.0 -Dpackaging=jar
   - mvn install:install-file -Dfile=outillage/librairies/jsf-commons-tools.jar -DgroupId=net.entetrs.commons -DartifactId=jsf-common-tools -Dversion=1.0 -Dpackaging=jar
   - mvn install:install-file -Dfile=outillage/librairies/jpa-commons-tools.jar -DgroupId=net.entetrs.commons -DartifactId=jpa-common-tools -Dversion=1.0 -Dpackaging=jar
+  - mvn install:install-file -Dfile=outillage/librairies/security-commons-tools.jar -DgroupId=net.entetrs.commons -DartifactId=security-common-tools -Dversion=1.0 -Dpackaging=jar
 
 jdk:
   - oraclejdk8
@@ -32,6 +33,7 @@ cache:
 
 before_cache:
   # remove all the artifacts (JAR, ZIP) that are installed in local repo because of mvn deploy
+  - rm -rf $HOME/.m2/repository/net/entetrs
   - rm -rf $HOME/.m2/repository/fr/teamy
   - find $HOME/.m2 -name resolver-status.properties -exec rm {} \;
 

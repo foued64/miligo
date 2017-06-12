@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:b="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+						http://www.springframework.org/schema/jee      http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+	<http auto-config="true">
+		<intercept-url pattern="/resources/**" access="denyAll" />
+		<intercept-url pattern="/javax.faces.resource/**" access="permitAll" />
+		<intercept-url pattern="/annuaire/**" access="hasRole('ROLE_ADMINISTRATEUR')" />
+		<intercept-url pattern="/index.xhtml" access="permitAll" />
+
+		<form-login login-page="/login/index.xhtml"
+			username-parameter="j_username" password-parameter="j_password"
+			login-processing-url="/j_spring_security_check"
+			authentication-failure-url="/login/index.xhtml?fail=true" />
+
+		<logout logout-url="/j_spring_security_logout" />
+
+	</http>
+
+	
+    <b:bean name="miligoUserDetailsService" class="fr.miligo.model.security.MiligoUserDetailsService" />
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="miligoUserDetailsService" />
+
+		<authentication-provider>
+			<user-service>
+				<user name="admin" password="admin" authorities="ROLE_ADMINISTRATEUR" />
+				<user name="user" password="user" authorities="ROLE_UTILISATEUR" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+
+</b:beans>
+
