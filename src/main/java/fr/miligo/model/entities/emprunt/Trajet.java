@@ -46,7 +46,7 @@ public class Trajet extends AbstractEntity {
 	@Setter
 	Borne borneArrivee;
 
-	@OneToMany
+	@OneToMany(mappedBy = "trajet")
 	List<Emprunt> listeEmprunts = new ArrayList<>();
 
 }

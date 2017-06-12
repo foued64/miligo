@@ -18,13 +18,13 @@ import lombok.experimental.FieldDefaults;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "ETAT_VEHICULE")
+@Table(name = "DISPONIBILITE_VEHICULE")
 @NoArgsConstructor
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
-public class EtatVehicule extends AbstractEntity {
+public class DisponibiliteVehicule extends AbstractEntity {
 
 	@Column(name = "DATE_DEBUT_GDH", nullable = false)
 	Date dateDebutGdh;

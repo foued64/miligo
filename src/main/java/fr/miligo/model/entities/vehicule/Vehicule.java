@@ -80,6 +80,6 @@ public class Vehicule extends AbstractEntity {
 	List<Incident> listeIncidents = new ArrayList<>();
 
 	@OneToMany(mappedBy = "vehicule")
-	List<EtatVehicule> listeEtatsVehicules = new ArrayList<>();
+	List<DisponibiliteVehicule> listeDisponibiliteVehicules = new ArrayList<>();
 
 }

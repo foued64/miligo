@@ -101,8 +101,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="fr.miligo.model.entities.vehicule.EtatVehicule" project="miligo" 
-    file="/miligo/src/main/java/fr/miligo/model/entities/vehicule/EtatVehicule.java" binary="false" 
+  <class id="12" language="java" name="fr.miligo.model.entities.vehicule.DisponibiliteVehicule" project="miligo" 
+    file="/miligo/src/main/java/fr/miligo/model/entities/vehicule/DisponibiliteVehicule.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="205" y="1085"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
+import fr.miligo.model.entities.vehicule.Vehicule;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,4 +46,12 @@ public class Reservation extends AbstractEntity {
 	@ManyToOne
 	@JoinColumn(name = "ID_CONDUCTEUR", nullable = false)
 	Client conducteur;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_VEHICULE", nullable = false)
+	Vehicule vehicule;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_EMPRUNT", nullable = false)
+	Emprunt emprunt;
 }
