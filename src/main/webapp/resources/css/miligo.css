@@ -1,10 +1,25 @@
-#btnDeconnecter{
-	text-align: right;
-}
+#infoProfil
+	{
+		text-align: right;
+		position : absolute;
+		top : 0px;
+		right : 0px;
+		
+	}
 
 .banniere{
 	margin : auto;
 }
+
+.banniere_mobile{
+	margin : auto;
+	display : none;
+}
+
+.pageMobile{
+	display : none;
+}
+
 
 html
 {
@@ -31,4 +46,32 @@ body
 	bottom : 0;
 	right : 0;
 	left : 0;
+}
+
+.btnMobile
+{
+	margin : 5%;
+}
+
+@media screen and (max-width: 1024px)
+{
+	.banniere{
+	margin : auto;
+	display : none;
+	}
+
+.banniere_mobile{
+	margin : auto;
+	display : inline;
+	}
+	
+	.navbar
+	{
+		display : none;
+	}
+	
+	.pageMobile
+	{
+		display : inline;
+	}
 }

@@ -4,11 +4,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
-	
-
 	<h:form id="formNav">
 	
-		<nav class="navbar navbar-default navbar-inverse">
+		<nav class="navbar">
 		
 			<p:menubar>
 				<p:menuitem class="navbarChoix" value="Accueil"></p:menuitem>
@@ -20,18 +18,11 @@
             	<p:menuitem value="Gestion des utilisateurs" url="#" />
             	<p:menuitem value="Consulter les statistiques" url="#" />
             	
-            	 <f:facet name="options">
-                     <p:commandLink  id="btnDeconnecter" value="Se déconnecter"
-						styleClass="btn btn-success"
-						actionListener="#{loginBean.deconnexion()}"
-						action="pageAccueil.xhtml"
-						/>
-       	 		</f:facet>
-            	
  
         	</p:menubar>
 
 		</nav>
+		
 	</h:form>
 
 </ui:fragment>

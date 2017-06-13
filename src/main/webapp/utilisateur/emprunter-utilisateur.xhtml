@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/template-bootstrap-standard.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cps="http://java.sun.com/jsf/composite/composites">
+
+
+<ui:define name="title">Emprunter un véhicule - Utilisateur</ui:define>
+
+	<ui:define name="content">
+			
+			
+			
+		<div class="pageMobile">
+			<h:form>
+				<p:panelGrid id="optionsTrajet" column="2" style="margin-bottom:10px;">
+					<p:row id="positionBorne">
+						<p:column><h:outputText value="Vous êtes à : "/></p:column>
+						<p:column><ui:insert value="#{borne.site}"/></p:column>
+					</p:row>
+					<p:row id="choixTrajet">
+						<p:column><h:outputText value="Choisir un point d'arrivée :" /></p:column>
+						<p:column>
+							<p:selectOneMenu id="listeDestination" value="#{gsbdd.liste}">
+				                <f:selectItem itemLabel="Sélectionné une destination" itemValue="" noSelectionOption="true" />
+				                <f:selectItems value="#{gsbdd.site}" />
+			           	 	</p:selectOneMenu>
+			           	 </p:column>
+			        </p:row>
+					<p:row id="dureeTrajet">
+						<p:column><p:outputLabel for="duree" value="Durée du trajet :" /></p:column>
+        				<p:column><p:calendar id="duree" value="#{calendarView.date}" pattern="HH:mm" timeOnly="true"  /></p:column>
+        			</p:row>
+				</p:panelGrid>
+				
+				<p:panelGrid id="optionAllerRetour" column="2" style="margin-bottom:10px;">
+					<p:row id="checkBoxAllerRetour">
+						<p:column>
+							<p:selectManyCheckbox id="allerRetour" value="#{checkboxView.allerRetour}">
+					            <f:selectItem itemLabel="Réserver votre retour?" itemValue="retour" />
+					        </p:selectManyCheckbox>
+				        </p:column>
+				        <p:column>
+				        	<p:outputLabel for="heureRetour" value="Heure de départ :" />
+				        	<p:calendar id="heureRetour" value="#{calendarView.date}" pattern="HH:mm" timeOnly="true"  />
+                   		</p:column>
+						
+					</p:row>
+				
+				
+				</p:panelGrid>
+				
+				
+			</h:form>
+		</div>
+		
+		
+	</ui:define>
+	
+</ui:composition>
