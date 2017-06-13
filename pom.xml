@@ -24,7 +24,13 @@
 	</repositories>
 
 	<dependencies>
-		<dependency>
+	 <dependency>
+	  <groupId>org.hibernate</groupId>
+	  <artifactId>hibernate-validator</artifactId>
+	  <version>5.2.4.Final</version>
+	  <type>jar</type>
+	 </dependency>
+	 <dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<scope>provided</scope>
