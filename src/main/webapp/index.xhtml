@@ -2,13 +2,53 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/WEB-INF/templates/template-bootstrap-light.xhtml"
+	template="/WEB-INF/templates/template-bootstrap-standard.xhtml"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:cps="http://java.sun.com/jsf/composite/composites">
-	
+
+
+<ui:define name="title">Authentification</ui:define>
 
 	<ui:define name="content">
-		<!-- TODO : construire la page de login -->
+
+		<h:form id="loginForm" prependId="false" class="form-horizontal">	
+		    
+			<div class="form-group">
+				 
+				<h:outputLabel value="Compte" for="j_username" class="col-sm-2 control-label"/>
+				
+				<div class="col-sm-10">
+					<h:inputText id="j_username" required="true" requiredMessage="Obligatoire" class="form-control"/>
+				</div>
+
+				<h:message for="j_username" errorClass="alert alert-danger" />
+			</div>
+			
+			<div class="form-group">
+				 
+				<h:outputLabel value="Mot de passe" for="j_password" class="col-sm-2 control-label"/>
+				
+				<div class="col-sm-10">
+					<h:inputSecret id="j_password" required="true" requiredMessage="Obligatoire" class="form-control"/>
+				</div>
+			
+				<h:message for="j_password" errorClass="alert alert-danger" />
+			</div>
+			
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+
+					<h:commandButton id="btnConnecter" value="Se connecter"
+						styleClass="btn btn-success"
+						actionListener="#{loginBean.connexion()}"
+						action="pageAccueil.xhtml"
+						/>
+
+				</div>
+			</div>
+
+		</h:form>
+		
 	</ui:define>
 	
 </ui:composition>

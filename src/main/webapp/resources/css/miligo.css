@@ -1,0 +1,34 @@
+#btnDeconnecter{
+	text-align: right;
+}
+
+.banniere{
+	margin : auto;
+}
+
+html
+{
+	height : 100%;
+}
+
+body
+{
+	background-image:linear-gradient(white, lightgreen);
+}
+
+.container-big
+{
+	
+	position : relative;
+	min-height : 100%;
+	padding : 0;
+	margin : 0;
+}
+
+.footer
+{
+	position : absolute;
+	bottom : 0;
+	right : 0;
+	left : 0;
+}

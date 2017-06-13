@@ -3,23 +3,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
 
 <ui:include src="/WEB-INF/templates/fragments/fragment-bootstrap-header.xhtml" />
 
 <h:body>
-
-	<div class="container">
-
-
-		<header class="jumbotron well">
+	<div class="container-big">
+	<div class="container-fluid">
+	
+		<header>
+			<div class="banniere">
 			<h2><h:graphicImage library="img" name="miligo_banniere.png"/> </h2>
 			<p><ui:insert name="subtitle" /></p>
+			</div>
 		</header>
-	
-		<ui:insert name="content"></ui:insert>
 		
-	</div>
+		<ui:include src="/WEB-INF/templates/fragments/fragment-bootstrap-nav.xhtml" />
+		
+			<div class="col-md-10">
+				<ui:insert name="content">Votre contenu...</ui:insert>
+			</div>
+		</div>
+	</div>	
 
 	<ui:include src="/WEB-INF/templates/fragments/fragment-bootstrap-footer.xhtml" />
 

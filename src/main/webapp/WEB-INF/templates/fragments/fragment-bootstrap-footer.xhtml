@@ -6,20 +6,17 @@
 
 	<footer class="footer">
 		<div class="container">
-			<p class="text-muted">
+					<hr />
+					<p>
 				<h:outputText value="#{msg['template.bas-de-page']}" escape="false" />
+				
+		
+				
+				<h:outputText value="&#9400; Equipe Teamy - PRSI2017" />
 			</p>
 		</div>
 	</footer>
 
 	<p:growl globalOnly="true" autoUpdate="true" />
-
-
-	<!-- Nécessaire pour BootStrap -->
-	<h:outputScript library="primefaces" name="jquery/jquery.js"
-		target="head" />
-	<h:outputScript library="primefaces" name="jquery/jquery-plugins.js"
-		target="head" />
-	<h:outputScript name="bootstrap/js/bootstrap.min.js" />
 
 </ui:fragment>
