@@ -1,0 +1,21 @@
+version: '2'
+services:
+  frontal:
+    image: zyra83/miligo-front:latest
+    links:
+    - payara:payara
+  payara:
+    image: zyra83/miligo-app:latest
+    links:
+    - database-mysql:database-mysql
+    ports:
+    - 8484:4848/tcp
+    - 8080:8080/tcp
+    command:
+    - bin/asadmin
+    - start-domain
+    - -v
+    - --debug
+    - 'true'
+  database-mysql:
+    image: zyra83/miligo-db:latest

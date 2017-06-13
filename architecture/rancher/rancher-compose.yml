@@ -1,0 +1,11 @@
+version: '2'
+services:
+  frontal:
+    scale: 1
+    start_on_create: true
+  payara:
+    scale: 1
+    start_on_create: true
+  database-mysql:
+    scale: 1
+    start_on_create: true
