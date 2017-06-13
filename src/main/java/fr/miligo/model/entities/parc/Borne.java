@@ -3,6 +3,7 @@ package fr.miligo.model.entities.parc;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -13,6 +14,8 @@ import javax.persistence.Table;
 import fr.miligo.common.AbstractEntity;
 import fr.miligo.model.entities.vehicule.Vehicule;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,9 +26,12 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "BORNE")
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
+@Builder
+@Dependent
 public class Borne extends AbstractEntity {
 
 	@Column(name = "NOM_BORNE", nullable = false)

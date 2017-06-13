@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.13" icons="true" always-add-relationships="false" generalizations="false" 
-  realizations="false" associations="false" dependencies="false" nesting-relationships="false" router="FAN">  
+<class-diagram version="1.1.13" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="fr.miligo.model.entities.parc.Ville" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/parc/Ville.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-361" y="1695"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="107" y="2189"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -13,8 +13,8 @@
   <class id="2" language="java" name="fr.miligo.model.entities.vehicule.TypeVehicule" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/vehicule/TypeVehicule.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="637" y="1192"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="172" width="187" x="604" y="1605"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -22,8 +22,8 @@
   </class>  
   <class id="3" language="java" name="fr.miligo.model.entities.parc.Site" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/parc/Site.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-42" y="1370"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="107" y="1536"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -31,8 +31,8 @@
   </class>  
   <enumeration id="4" language="java" name="fr.miligo.model.entities.emprunt.EtatEnum" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/emprunt/EtatEnum.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-333" y="933"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="1413" y="107"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -40,8 +40,8 @@
   </enumeration>  
   <class id="5" language="java" name="fr.miligo.model.entities.vehicule.Incident" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/vehicule/Incident.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="875" y="1226"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="244" width="188" x="1015" y="1605"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -49,8 +49,8 @@
   </class>  
   <class id="6" language="java" name="fr.miligo.model.entities.emprunt.Trajet" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/emprunt/Trajet.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-24" y="416"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="138" y="241"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -58,8 +58,8 @@
   </class>  
   <class id="7" language="java" name="fr.miligo.model.entities.emprunt.Emprunt" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/emprunt/Emprunt.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="361" y="199"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="503" y="250"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -67,8 +67,8 @@
   </class>  
   <class id="8" language="java" name="fr.miligo.model.entities.parc.Borne" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/parc/Borne.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-38" y="963"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="125" y="1077"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -76,8 +76,8 @@
   </class>  
   <class id="9" language="java" name="fr.miligo.model.entities.emprunt.Client" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/emprunt/Client.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-406" y="81"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="743" y="-239"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -85,27 +85,27 @@
   </class>  
   <class id="10" language="java" name="fr.miligo.model.entities.parc.Adresse" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/parc/Adresse.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-357" y="1361"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="110" y="1843"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="fr.miligo.model.entities.vehicule.Entretien" project="miligo" 
-    file="/miligo/src/main/java/fr/miligo/model/entities/vehicule/Entretien.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="244" width="194" x="1014" y="1093"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="12" language="java" name="fr.miligo.model.entities.vehicule.DisponibiliteVehicule" project="miligo" 
+  <class id="11" language="java" name="fr.miligo.model.entities.vehicule.DisponibiliteVehicule" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/vehicule/DisponibiliteVehicule.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="205" y="1085"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="280" width="182" x="382" y="1605"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="fr.miligo.model.entities.vehicule.Entretien" project="miligo" 
+    file="/miligo/src/main/java/fr/miligo/model/entities/vehicule/Entretien.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="244" width="194" x="1243" y="1605"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -113,8 +113,8 @@
   </class>  
   <class id="13" language="java" name="fr.miligo.model.entities.vehicule.Marque" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/vehicule/Marque.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="433" y="1446"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="910" y="2056"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -122,8 +122,8 @@
   </class>  
   <class id="14" language="java" name="fr.miligo.model.entities.emprunt.Reservation" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/emprunt/Reservation.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-280" y="585"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="388" width="194" x="901" y="69"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -131,8 +131,8 @@
   </class>  
   <class id="15" language="java" name="fr.miligo.model.entities.vehicule.Maintenance" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/vehicule/Maintenance.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="172" width="187" x="1248" y="1093"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="172" width="187" x="1477" y="1605"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -141,8 +141,8 @@
   <class id="16" language="java" name="fr.miligo.model.entities.vehicule.Disponibilite" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/vehicule/Disponibilite.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="203" y="1436"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="471" y="2055"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -150,8 +150,8 @@
   </class>  
   <class id="17" language="java" name="fr.miligo.model.entities.vehicule.Vehicule" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/vehicule/Vehicule.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="924" y="545"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="-1" width="-1" x="609" y="875"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -159,250 +159,262 @@
   </class>  
   <class id="18" language="java" name="fr.miligo.model.entities.vehicule.Modele" project="miligo" 
     file="/miligo/src/main/java/fr/miligo/model/entities/vehicule/Modele.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="417" y="1163"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="190" width="144" x="831" y="1605"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
   <association id="19">    
-    <end type="SOURCE" refId="8" navigable="true">      
-      <attribute id="20" name="site"/>      
+    <bendpoint x="43" y="532"/>    
+    <bendpoint x="91" y="877"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="20" name="borneArrivee">        
+        <position height="19" width="70" x="17" y="845"/>      
+      </attribute>      
       <multiplicity id="21" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true">      
-      <attribute id="22" name="listeBornes"/>      
-      <multiplicity id="23" minimum="0" maximum="2147483647"/>    
-    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="24">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="25" name="conducteur">        
-        <position height="19" width="61" x="-361" y="249"/>      
-      </attribute>      
+  <association id="22">    
+    <end type="SOURCE" refId="9" navigable="true">      
+      <attribute id="23" name="listeEmprunts"/>      
+      <multiplicity id="24" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true">      
+      <attribute id="25" name="client"/>      
       <multiplicity id="26" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="27">    
-    <bendpoint x="-256" y="202"/>    
+    <bendpoint x="1242" y="863"/>    
+    <end type="SOURCE" refId="15" navigable="true">      
+      <attribute id="28" name="listeVehicules"/>      
+      <multiplicity id="29" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true">      
+      <attribute id="30" name="maintenance"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="28" name="reservation">        
-        <position height="19" width="61" x="-387" y="407"/>      
-      </attribute>      
-      <multiplicity id="29" minimum="0" maximum="1"/>    
+      <attribute id="33" name="reservation"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="30">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="31" name="disponibilite"/>      
-      <multiplicity id="32" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="16" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="33">    
-    <end type="SOURCE" refId="17" navigable="true">      
-      <attribute id="34" name="listeEtatsVehicules">        
-        <position height="19" width="95" x="318" y="1000"/>      
-      </attribute>      
-      <multiplicity id="35" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true">      
-      <attribute id="36" name="vehicule">        
-        <position height="19" width="46" x="745" y="628"/>      
-      </attribute>      
-      <multiplicity id="37" minimum="0" maximum="1"/>    
-    </end>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="38">    
-    <bendpoint x="247" y="760"/>    
-    <end type="SOURCE" refId="8" navigable="true">      
-      <attribute id="39" name="listeVehicules"/>      
-      <multiplicity id="40" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true">      
-      <attribute id="41" name="borne"/>      
-      <multiplicity id="42" minimum="0" maximum="1">        
-        <position height="17" width="23" x="60" y="865"/>      
-      </multiplicity>    
-    </end>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="43">    
-    <end type="SOURCE" refId="17" navigable="true">      
-      <attribute id="44" name="listeIncidents"/>      
-      <multiplicity id="45" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true">      
-      <attribute id="46" name="vehicule"/>      
-      <multiplicity id="47" minimum="0" maximum="1"/>    
-    </end>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="48">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="49" name="ville"/>      
-      <multiplicity id="50" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="51">    
-    <bendpoint x="41" y="748"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="52" name="borneDepart"/>      
-      <multiplicity id="53" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="54">    
-    <bendpoint x="244" y="69"/>    
-    <end type="SOURCE" refId="9" navigable="true">      
-      <attribute id="55" name="listeEmprunts"/>      
-      <multiplicity id="56" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true">      
-      <attribute id="57" name="client"/>      
-      <multiplicity id="58" minimum="0" maximum="1"/>    
-    </end>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="59">    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="60" name="modele">        
-        <position height="19" width="43" x="508" y="1050"/>      
-      </attribute>      
-      <multiplicity id="61" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="18" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="62">    
-    <end type="SOURCE" refId="17" navigable="true">      
-      <attribute id="63" name="maintenance"/>      
-      <multiplicity id="64" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true">      
-      <attribute id="65" name="listeVehicules">        
-        <position height="19" width="71" x="1060" y="720"/>      
-      </attribute>      
-      <multiplicity id="66" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="67">    
-    <bendpoint x="748" y="274"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="68" name="vehicule">        
-        <position height="19" width="46" x="735" y="334"/>      
-      </attribute>      
-      <multiplicity id="69" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="70">    
-    <bendpoint x="-477" y="585"/>    
-    <end type="SOURCE" refId="14" navigable="true">      
-      <attribute id="71" name="demandeur"/>      
-      <multiplicity id="72" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true">      
-      <attribute id="73" name="listeReservations"/>      
-      <multiplicity id="74" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="75">    
-    <bendpoint x="-112" y="745"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="76" name="borneArrivee"/>      
-      <multiplicity id="77" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="78">    
-    <end type="SOURCE" refId="18" navigable="true">      
-      <attribute id="79" name="marque"/>      
-      <multiplicity id="80" minimum="0" maximum="1">        
-        <position height="17" width="23" x="439" y="1337"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true">      
-      <attribute id="81" name="listeModeles"/>      
-      <multiplicity id="82" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="83">    
-    <bendpoint x="143" y="302"/>    
-    <end type="SOURCE" refId="7" navigable="true">      
-      <attribute id="84" name="trajet">        
-        <position height="19" width="32" x="96" y="353"/>      
-      </attribute>      
-      <multiplicity id="85" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true">      
-      <attribute id="86" name="listeEmprunts">        
-        <position height="19" width="72" x="174" y="285"/>      
-      </attribute>      
-      <multiplicity id="87" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="88">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="89" name="etat"/>      
-      <multiplicity id="90" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="91">    
-    <end type="SOURCE" refId="17" navigable="true">      
-      <attribute id="92" name="listeEntretiens"/>      
-      <multiplicity id="93" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true">      
-      <attribute id="94" name="vehicule"/>      
-      <multiplicity id="95" minimum="0" maximum="1"/>    
-    </end>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="96">    
+  <association id="35">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="97" name="adresse"/>      
-      <multiplicity id="98" minimum="0" maximum="1"/>    
+      <attribute id="36" name="adresse"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="99">    
-    <end type="SOURCE" refId="2" navigable="true">      
-      <attribute id="100" name="listeVehicules"/>      
-      <multiplicity id="101" minimum="0" maximum="2147483647"/>    
+  <association id="38">    
+    <end type="SOURCE" refId="8" navigable="true">      
+      <attribute id="39" name="site"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="17" navigable="true">      
-      <attribute id="102" name="typeVehicule">        
-        <position height="19" width="68" x="689" y="1084"/>      
-      </attribute>      
-      <multiplicity id="103" minimum="0" maximum="1"/>    
+    <end type="TARGET" refId="3" navigable="true">      
+      <attribute id="41" name="listeBornes"/>      
+      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
     </end>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <classifier-display autosize="false" stereotype="false" package="false" initial-value="true" signature="false" 
-    sort-features="false" accessors="true" visibility="false">    
+  <association id="43">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="44" name="modele"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="47" name="ville"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="50" name="etat">        
+        <position height="19" width="26" x="1299" y="120"/>      
+      </attribute>      
+      <multiplicity id="51" minimum="0" maximum="1">        
+        <position height="17" width="23" x="1312" y="150"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <end type="SOURCE" refId="17" navigable="true">      
+      <attribute id="53" name="typeVehicule"/>      
+      <multiplicity id="54" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true">      
+      <attribute id="55" name="listeVehicules">        
+        <position height="19" width="71" x="586" y="1205"/>      
+      </attribute>      
+      <multiplicity id="56" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <bendpoint x="213" y="539"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="58" name="borneDepart">        
+        <position height="19" width="69" x="168" y="846"/>      
+      </attribute>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="61" name="vehicule"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <end type="SOURCE" refId="18" navigable="true">      
+      <attribute id="64" name="marque"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true">      
+      <attribute id="66" name="listeModeles"/>      
+      <multiplicity id="67" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="68">    
+    <end type="SOURCE" refId="14" navigable="true">      
+      <attribute id="69" name="demandeur"/>      
+      <multiplicity id="70" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true">      
+      <attribute id="71" name="listeReservations"/>      
+      <multiplicity id="72" minimum="0" maximum="2147483647">        
+        <position height="17" width="21" x="867" y="50"/>      
+      </multiplicity>    
+    </end>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="6" navigable="true">      
+      <attribute id="74" name="listeEmprunts"/>      
+      <multiplicity id="75" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true">      
+      <attribute id="76" name="trajet"/>      
+      <multiplicity id="77" minimum="0" maximum="1"/>    
+    </end>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="78">    
+    <bendpoint x="619" y="497"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="79" name="vehicule">        
+        <position height="19" width="46" x="622" y="518"/>      
+      </attribute>      
+      <multiplicity id="80" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="81">    
+    <end type="SOURCE" refId="17" navigable="true">      
+      <attribute id="82" name="borne">        
+        <position height="19" width="36" x="225" y="1003"/>      
+      </attribute>      
+      <multiplicity id="83" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true">      
+      <attribute id="84" name="listeVehicules">        
+        <position height="19" width="71" x="389" y="967"/>      
+      </attribute>      
+      <multiplicity id="85" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="86">    
+    <bendpoint x="984" y="-180"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="87" name="conducteur"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="89">    
+    <end type="SOURCE" refId="11" navigable="true">      
+      <attribute id="90" name="vehicule"/>      
+      <multiplicity id="91" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true">      
+      <attribute id="92" name="listeDisponibiliteVehicules">        
+        <position height="19" width="127" x="374" y="1567"/>      
+      </attribute>      
+      <multiplicity id="93" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <bendpoint x="1170" y="1127"/>    
+    <end type="SOURCE" refId="12" navigable="true">      
+      <attribute id="95" name="vehicule">        
+        <position height="19" width="46" x="762" y="925"/>      
+      </attribute>      
+      <multiplicity id="96" minimum="0" maximum="1">        
+        <position height="17" width="23" x="763" y="954"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true">      
+      <attribute id="97" name="listeEntretiens"/>      
+      <multiplicity id="98" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="99">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="100" name="disponibilite"/>      
+      <multiplicity id="101" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="102">    
+    <bendpoint x="1020" y="1311"/>    
+    <end type="SOURCE" refId="5" navigable="true">      
+      <attribute id="103" name="vehicule">        
+        <position height="19" width="46" x="763" y="1025"/>      
+      </attribute>      
+      <multiplicity id="104" minimum="0" maximum="1">        
+        <position height="17" width="23" x="762" y="1058"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true">      
+      <attribute id="105" name="listeIncidents"/>      
+      <multiplicity id="106" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
     <operations public="true" package="true" protected="true" private="true" static="true"/>  
   </classifier-display>  
-  <association-display labels="false" multiplicity="false"/>
+  <association-display labels="true" multiplicity="true"/>
 </class-diagram>

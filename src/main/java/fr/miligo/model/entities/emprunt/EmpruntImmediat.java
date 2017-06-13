@@ -2,11 +2,14 @@ package fr.miligo.model.entities.emprunt;
 
 import java.util.Date;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import fr.miligo.common.AbstractEntity;
 import fr.miligo.model.entities.vehicule.Vehicule;
@@ -19,36 +22,36 @@ import lombok.experimental.FieldDefaults;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "EMPRUNT")
+@Table(name = "EMPRUNT_IMMEDIAT")
 @NoArgsConstructor
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
-public class Emprunt extends AbstractEntity {
-
-	@Column(name = "DATE_HEURE_DEBUT", nullable = false)
-	Date dateHeureDebut;
-
-	@Column(name = "DATE_HEURE_RESTITUTION")
-	Date dateHeureRestitution;
-
-	@Column(name = "DATE_HEURE_RESTITUTION_PREVUE", nullable = false)
-	Date dateHeureRestitutionPrevue;
+@Dependent
+public class EmpruntImmediat extends AbstractEntity {
 
 	@ManyToOne
-	@JoinColumn(name = "ID_TRAJET", nullable = false)
-	Trajet trajet;
+	@JoinColumn(name = "ID_VEHICULE", nullable = false)
+	Vehicule vehicule;
 
 	@ManyToOne
 	@JoinColumn(name = "ID_CLIENT", nullable = false)
 	Client client;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_RESERVATION")
-	Reservation reservation;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "GDH_RETOUR_PREVU")
+	Date gdhRetourPrevu;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "GDH_RETOUR_REEL")
+	Date gdhRetourReel;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "GDH_DEPART", nullable = false)
+	Date gdhDepart;
 
 	@ManyToOne
-	@JoinColumn(name = "ID_VEHICULE", nullable = false)
-	Vehicule vehicule;
+	@JoinColumn(name = "ID_TRAJET", nullable = false)
+	Trajet trajet;
 }

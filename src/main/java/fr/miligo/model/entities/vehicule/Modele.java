@@ -30,4 +30,8 @@ public class Modele extends AbstractEntity {
 	@ManyToOne
 	@JoinColumn(name = "ID_MARQUE", nullable = false)
 	Marque marque;
+
+	@ManyToOne
+	@JoinColumn(name = "ID_TYPE_VEHICULE", nullable = false)
+	TypeVehicule typeVehicule;
 }

@@ -3,6 +3,7 @@ package fr.miligo.model.entities.emprunt;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -13,6 +14,8 @@ import javax.persistence.Table;
 import fr.miligo.common.AbstractEntity;
 import fr.miligo.model.entities.parc.Borne;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,9 +26,12 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "TRAJET")
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
+@Dependent
+@Builder
 public class Trajet extends AbstractEntity {
 
 	@Column(name = "LONGUEUR_TRAJET")
@@ -47,6 +53,6 @@ public class Trajet extends AbstractEntity {
 	Borne borneArrivee;
 
 	@OneToMany(mappedBy = "trajet")
-	List<Emprunt> listeEmprunts = new ArrayList<>();
+	List<Reservation> listeReservations = new ArrayList<>();
 
 }
