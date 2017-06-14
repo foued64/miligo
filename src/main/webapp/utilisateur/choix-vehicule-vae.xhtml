@@ -2,7 +2,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/WEB-INF/templates/template-bootstrap-standard.xhtml"
+	template="/WEB-INF/templates/template-standard.xhtml"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:cps="http://java.sun.com/jsf/composite/composites">
 
@@ -15,14 +15,12 @@
 			
 			
 		<div class="pageMobile">
-			<p:commandButton value="VAE" class="btnImageVAE" />
+                    <div><p:button value=" " class="btnImageVAE" outcome="emprunter-resume.xhtml"  /></div>
+                    <div><p:button class="btnAutreChoix" value="Vous préférez une voiture?" outcome="choix-vehicule-ve.xhtml" /></div>
 
-			
-		
-		
                     <div id="validation">
                             <p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
-                            <p:button value="Valider" outcome="choix-vehicule-min.xhtml" />
+                            
                     </div>
                 </div>
 		

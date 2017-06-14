@@ -5,8 +5,8 @@
  */
 
 
+/* Permet l'affichage du calendrier lorsqu'aller retour est checké*/
 /* global PF */
-
 $(function()
 {
     PF('selectRetour').jq.change(function()

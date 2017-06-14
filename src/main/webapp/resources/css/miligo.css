@@ -11,17 +11,7 @@
 	text-align : center;
 	position :relative;
 	bottom : 0px;
-        margin-top : 25px;
-}
-
-#heureRetour
-{
-    display : none;
-}
-
-#allerRetour:checked #heureRetour
-{
-    display : block;
+        margin-top : 50px;
 }
 
 .banniere{
@@ -88,9 +78,34 @@ body
 	text-align : center;
 	position :relative;
 	margin : auto;
-        margin-top : 10%;
+        margin-left : 20px;
+        margin-bottom : 20px;
+        float : top;
         
 }
+
+.btnImageVE
+{
+	background: url('img/voiture-electrique-small.png') no-repeat top !important;
+	width : 250px;
+	height : 200px;
+	text-align : center;
+	position :relative;
+	margin : auto;
+        margin-right : 20px;
+        margin-bottom : 20px;
+        float : top;
+        
+}
+
+.autreChoix
+{
+    position :relative;
+    float : bottom;
+    
+}
+
+
 
 @media screen and (max-width: 1024px)
 {
