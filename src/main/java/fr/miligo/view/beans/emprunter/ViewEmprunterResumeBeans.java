@@ -14,6 +14,8 @@ import javax.inject.Named;
 /**
  *
  * @author benvenuti
+ * simulation de la création d'un emprunt
+ * classe à supprimer
  */
 @SuppressWarnings("serial")
 @Named

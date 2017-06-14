@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/template-standard.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	>
+
+<ui:define name="title">Modifier un véhicule - Gestionnaire de Parc</ui:define>
+	<ui:define name="content">
+	<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+		
+        <div>
+            <h2><p:outputLabel value="Modifier le véhicule immatricule = #{v}" /></h2>
+            <p:panelGrid>
+                <p:row>
+                    <p:column><p:outputLabel value="Modèle : " /></p:column>
+                    <p:column><p:outputLabel value="#{v.modele}" /></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel value="Immatriculation : "/></p:column>
+                    <p:column><p:inplace id="champImmat"><p:inputText value="Test" /></p:inplace></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel value="Etat : "/></p:column>
+                    <p:column>
+                        <p:selectOneMenu value="#{viewModifVehiculeBeans.listeDisponibilite.get(0)}">
+                            <f:selectItems value="#{viewModifVehiculeBeans.listeDisponibilite}" var="_dispo" />
+                        </p:selectOneMenu>
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
+        </div>
+        
+        <div>
+            <h2><p:outputLabel value="Date de mise en circulation : " /></h2>
+        </div>
+		
+		
+	</ui:define>
+	
+</ui:composition>
