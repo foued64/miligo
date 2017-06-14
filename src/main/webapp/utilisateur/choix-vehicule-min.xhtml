@@ -6,8 +6,6 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:cps="http://java.sun.com/jsf/composite/composites">
 
-<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
-
 
 <ui:define name="title">Choix du Véhicule - Utilisateur</ui:define>
 
@@ -17,14 +15,16 @@
 			
 			
 		<div class="pageMobile">
-			<p:commandButton value="VAE" styleClass="btnImageVAE" />
+			<p:commandButton value="VAE" class="btnImageVAE" />
+
 			
-		</div>
 		
-		<div id="validation">
-			<p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
-			<p:button value="Valider" outcome="choix-vehicule-min.xhtml" />
-		</div>
+		
+                    <div id="validation">
+                            <p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
+                            <p:button value="Valider" outcome="choix-vehicule-min.xhtml" />
+                    </div>
+                </div>
 		
 	</ui:define>
 	
