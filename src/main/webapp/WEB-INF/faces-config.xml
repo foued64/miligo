@@ -4,6 +4,16 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
 	version="2.2">
 
+	 <!-- permet l'ajout automatique de champs CSRF dans les h:form JSF -->
+	<render-kit>
+		<renderer>
+			<component-family>javax.faces.Form</component-family>
+			<renderer-type>javax.faces.Form</renderer-type>
+			<renderer-class>net.entetrs.commons.jsf.security.SpringSecurityJsfFormRenderer</renderer-class>
+		</renderer>
+	</render-kit>
+
+
 	<application>
 		<resource-handler>org.omnifaces.resourcehandler.UnmappedResourceHandler</resource-handler>
 	</application>

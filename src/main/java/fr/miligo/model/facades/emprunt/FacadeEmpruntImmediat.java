@@ -5,6 +5,7 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import fr.miligo.common.AbstractFacade;
@@ -14,6 +15,7 @@ import fr.miligo.model.entities.emprunt.EmpruntImmediat;
 import fr.miligo.model.entities.emprunt.Trajet;
 import fr.miligo.model.entities.vehicule.TypeVehicule;
 
+@Stateless
 public class FacadeEmpruntImmediat extends AbstractFacade<EmpruntImmediat> {
 
 	@Inject
@@ -22,6 +24,14 @@ public class FacadeEmpruntImmediat extends AbstractFacade<EmpruntImmediat> {
 	@Inject
 	private FacadeVehicule facadeVehicule;
 
+	/**
+	 * Emprunter un véhicule en fonction du typeVehicule et selon la dispo.
+	 * @param client
+	 * @param typeVehicule
+	 * @param trajet
+	 * @param dureeTrajet
+	 * @throws MiligoException
+	 */
 	public void emprunter(Client client, TypeVehicule typeVehicule, Trajet trajet, Date dureeTrajet)
 			throws MiligoException {
 
@@ -36,6 +46,12 @@ public class FacadeEmpruntImmediat extends AbstractFacade<EmpruntImmediat> {
 		create(empruntImmediat);
 	}
 
+	/**
+	 * Calcul la durée du trajet en fonction de la dateDebut et de la duree.
+	 * @param dateDebut
+	 * @param duree
+	 * @return
+	 */
 	private Date ajouterTempsTrajet(Date dateDebut, Date duree) {
 		if (dateDebut != null && duree != null) {
 			Calendar cal = Calendar.getInstance();

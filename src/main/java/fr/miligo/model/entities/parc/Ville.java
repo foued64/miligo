@@ -1,5 +1,6 @@
 package fr.miligo.model.entities.parc;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -20,6 +21,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
+@Dependent
 public class Ville extends AbstractEntity {
 
 	@Column(name = "CODE_POSTAL")

@@ -3,6 +3,7 @@ package fr.miligo.model.entities.vehicule;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +25,7 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
+@Dependent
 public class Marque extends AbstractEntity {
 
 	@Column(name = "LIBELLE_MARQUE", nullable = false)
