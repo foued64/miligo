@@ -1,5 +1,6 @@
 package fr.miligo.model.entities.vehicule;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -26,6 +27,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
+@Dependent
 public class Maintenance extends AbstractEntity {
 
 	@Column(name = "LIBELLE_MAINTENANCE", nullable = false)

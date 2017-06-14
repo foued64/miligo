@@ -3,6 +3,7 @@ package fr.miligo.model.entities.parc;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -24,6 +25,7 @@ import lombok.experimental.FieldDefaults;
 @ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
+@Dependent
 public class Gsbdd extends AbstractEntity {
 
 	@Column(name = "NUMERO_CREDO")
