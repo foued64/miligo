@@ -99,9 +99,6 @@ public class EmprunterBeans implements Serializable {
 		//Récuperation de la borne selon l'adresse ip
 		this.borneAller=facadeBorne.searchFirstResult("adresseIp", adresseIp);
 		
-//		Utilisateur uti = login.getUtilisateurCourant();
-//		clientCourant = facadeClient.searchFirstResult("adresseEmail", uti.getIdentifiant());
-		
 	}
 	
 	/**
