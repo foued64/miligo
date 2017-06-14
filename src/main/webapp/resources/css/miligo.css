@@ -1,11 +1,18 @@
 #infoProfil
-	{
-		text-align: right;
-		position : absolute;
-		top : 0px;
-		right : 0px;
-		
-	}
+{
+	text-align: right;
+	position : absolute;
+	top : 0px;
+	right : 0px;
+}
+	
+#validation
+{
+	text-align : right;
+	position :relative;
+	bottom : 0px;
+	right : 0px;
+}
 
 .banniere{
 	margin : auto;
@@ -18,6 +25,16 @@
 
 .pageMobile{
 	display : none;
+}
+
+.heureRetourOff
+{
+	display : none;
+}
+
+.heureRetourOff
+{
+	display : block;
 }
 
 
@@ -51,6 +68,15 @@ body
 .btnMobile
 {
 	margin : 5%;
+}
+
+.btnImageVAE
+{
+	background: url('img/velo-electrique-small.png') no-repeat top;
+	width : 250px;
+	height : 200px;
+	text : bottom;
+	margin-left : 10%;
 }
 
 @media screen and (max-width: 1024px)

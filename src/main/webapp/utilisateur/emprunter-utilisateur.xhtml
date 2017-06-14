@@ -5,11 +5,13 @@
 	template="/WEB-INF/templates/template-bootstrap-standard.xhtml"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:cps="http://java.sun.com/jsf/composite/composites">
-
+	
+<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
 
 <ui:define name="title">Emprunter un véhicule - Utilisateur</ui:define>
 
 	<ui:define name="content">
+	<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
 			
 			
 			
@@ -30,7 +32,7 @@
 			           	 </p:column>
 			        </p:row>
 					<p:row id="dureeTrajet">
-						<p:column><p:outputLabel for="duree" value="Durée du trajet :" /></p:column>
+						<p:column><p:outputLabel for="duree" value="Durée du trajet : " /></p:column>
         				<p:column><p:calendar id="duree" value="#{calendarView.date}" pattern="HH:mm" timeOnly="true"  /></p:column>
         			</p:row>
 				</p:panelGrid>
@@ -38,24 +40,25 @@
 				<p:panelGrid id="optionAllerRetour" column="2" style="margin-bottom:10px;">
 					<p:row id="checkBoxAllerRetour">
 						<p:column>
-							<p:selectManyCheckbox id="allerRetour" value="#{checkboxView.allerRetour}">
+							<p:selectManyCheckbox id="allerRetour" value="#{checkboxView.allerRetour}" onchange="verifAllerRetour();" >
 					            <f:selectItem itemLabel="Réserver votre retour?" itemValue="retour" />
 					        </p:selectManyCheckbox>
 				        </p:column>
-				        <p:column>
-				        	<p:outputLabel for="heureRetour" value="Heure de départ :" />
+				        <p:column id="colonneHeureRetour">
+				        	<p:outputLabel for="heureRetour" value="Heure de départ : " />
 				        	<p:calendar id="heureRetour" value="#{calendarView.date}" pattern="HH:mm" timeOnly="true"  />
                    		</p:column>
 						
 					</p:row>
-				
-				
 				</p:panelGrid>
 				
+				<div id="validation">
+					<p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
+					<p:button value="Valider" outcome="choix-vehicule-min.xhtml" />
+				</div>
 				
 			</h:form>
 		</div>
-		
 		
 	</ui:define>
 	
