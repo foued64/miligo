@@ -1,42 +1,74 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/WEB-INF/templates/template-standard.xhtml"
-	xmlns:p="http://primefaces.org/ui"
-	>
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-standard.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                >
 
-<ui:define name="title">Modifier un véhicule - Gestionnaire de Parc</ui:define>
-	<ui:define name="content">
-	<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
-		
-        <div>
-            <h2><p:outputLabel value="Modifier le véhicule immatricule = #{v}" /></h2>
+    <ui:define name="title">Modifier un véhicule - Gestionnaire de Parc</ui:define>
+    <ui:define name="content">
+        <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+        <h:form>
             <p:panelGrid>
                 <p:row>
-                    <p:column><p:outputLabel value="Modèle : " /></p:column>
-                    <p:column><p:outputLabel value="#{v.modele}" /></p:column>
-                </p:row>
-                <p:row>
-                    <p:column><p:outputLabel value="Immatriculation : "/></p:column>
-                    <p:column><p:inplace id="champImmat"><p:inputText value="Test" /></p:inplace></p:column>
-                </p:row>
-                <p:row>
-                    <p:column><p:outputLabel value="Etat : "/></p:column>
                     <p:column>
-                        <p:selectOneMenu value="#{viewModifVehiculeBeans.listeDisponibilite.get(0)}">
-                            <f:selectItems value="#{viewModifVehiculeBeans.listeDisponibilite}" var="_dispo" />
-                        </p:selectOneMenu>
-                    </p:column>
-                </p:row>
+                        <div id="divDetailVehicule">
+
+                            <h2><p:outputLabel value="Modifier le véhicule immatricule : #{v}" /></h2>
+
+
+                            <p:panelGrid>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Modèle : " /></p:column>
+                                    <p:column><p:outputLabel value="#{v.modele}" /></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Immatriculation : "/></p:column>
+                                    <p:column><p:inplace id="champImmat"><p:inputText value="Test" /></p:inplace></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Etat : "/></p:column>
+                                    <p:column>
+                                        <p:selectOneMenu value="#{viewModifVehiculeBeans.listeDisponibilite}" var="_dispo" >
+                                            <f:selectItems value="#{viewModifVehiculeBeans.listeDisponibilite}"  />
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+
+
+                        </div>
+                    </p:column><p:column>
+                        <div id="divMaintenance" >
+
+                            <h2><p:outputLabel value="Date de mise en circulation : #{dateMeC}" /></h2>
+                            <p:panelGrid id="panneauIndispo">
+                                <p:row>
+                                    <p:column><p:outputLabel value ="En maintenance jusqu'au : " for="calendrier" /></p:column>
+                                    <p:column><p:calendar id="calendrier" showOn="button"/></p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column><p:outputLabel value="Cause : " /></p:column>
+                                    <p:column>
+                                        <p:selectOneMenu value="#{listeCause}"  >
+                                            <f:selectItems value="#{listeCause}" var="_cause"/>
+                                        </p:selectOneMenu>
+                                    </p:column>
+                                </p:row>
+                            </p:panelGrid>
+
+                        </div>
+                    </p:column></p:row>
             </p:panelGrid>
+        </h:form>
+
+        <div id="validation">
+            <p:button value="Retour à l'accueil" outcome="accueil-gestionnaire-parc.xhtml" />
+            <p:button value="Valider" outcome="page-404.xhtml" />
         </div>
-        
-        <div>
-            <h2><p:outputLabel value="Date de mise en circulation : " /></h2>
-        </div>
-		
-		
-	</ui:define>
-	
+
+
+    </ui:define>
+
 </ui:composition>

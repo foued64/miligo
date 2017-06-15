@@ -1,138 +1,139 @@
 #infoProfil
 {
-	text-align: right;
-	position : absolute;
-	top : 0px;
-	right : 0px;
-}
-	
-#validation
-{
-	text-align : center;
-	position :relative;
-	bottom : 0px;
-        margin-top : 50px;
+    text-align: right;
+    position : absolute;
+    top : 0px;
+    right : 0px;
 }
 
+#validation
+{
+    text-align : center;
+    position :relative;
+    bottom : 0px;
+    margin-top : 50px;
+}
+
+
 .banniere{
-	margin : auto;
+    margin : auto;
 }
 
 .banniere_mobile{
-	margin : auto;
-	display : none;
+    margin : auto;
+    display : none;
 }
 
 .pageMobile{
-	display : none;
+    display : none;
 }
 
 .heureRetourOff
 {
-	display : none;
+    display : none;
 }
 
 .heureRetourOff
 {
-	display : block;
+    display : block;
 }
 
 
 html
 {
-	height : 100%;
+    height : 100%;
 }
 
 body
 {
-	background-image:linear-gradient(white, lightgreen);
+    background-image:linear-gradient(white, lightgreen);
 }
 
 .container-big
 {
-	
-	position : relative;
-	min-height : 100%;
-	padding : 0;
-	margin : 0;
+
+    position : relative;
+    min-height : 100%;
+    padding : 0;
+    margin : 0;
 }
 
 .footer
 {
-	position : absolute;
-	bottom : 0;
-	right : 0;
-	left : 0;
+    position : absolute;
+    bottom : 0;
+    right : 0;
+    left : 0;
 }
 
 .btnMobile
 {
-	margin : 5%;
+    margin : 5%;
 }
 
 .btnImageVAE
 {
-	background: url('img/velo-electrique-small.png') no-repeat top !important;
-	width : 250px;
-	height : 200px;
-	text-align : center;
-	position :relative;
-	margin : auto;
-        margin-left : 20px;
-        margin-bottom : 20px;
-        float : top;
-        
+    background: url('img/velo-electrique-small.png') no-repeat top !important;
+    width : 250px;
+    height : 200px;
+    text-align : center;
+    position :relative;
+    margin : auto;
+    margin-left : 20px;
+    margin-bottom : 20px;
+    float : top;
+
 }
 
 .btnImageVE
 {
-	background: url('img/voiture-electrique-small.png') no-repeat top !important;
-	width : 250px;
-	height : 200px;
-	text-align : center;
-	position :relative;
-	margin : auto;
-        margin-right : 20px;
-        margin-bottom : 20px;
-        float : top;
-        
+    background: url('img/voiture-electrique-small.png') no-repeat top !important;
+    width : 250px;
+    height : 200px;
+    text-align : center;
+    position :relative;
+    margin : auto;
+    margin-right : 20px;
+    margin-bottom : 20px;
+    float : top;
+
 }
 
 .autreChoix
 {
     position :relative;
     float : bottom;
-    
+
 }
 
 
 
 @media screen and (max-width: 1024px)
 {
-	.banniere{
-	margin : auto;
-	display : none;
-	}
+    .banniere{
+        margin : auto;
+        display : none;
+    }
 
-        .banniere_mobile{
-	margin : auto;
-	display : inline;
-	}
-	
-	.navbar
-	{
-            display : none;
-	}
-	
-	.pageMobile
-	{
-            display : block;
-            text-align : center;
-            position :relative;
-	}
-        
-        .footer
-        {
-            display : none;
-        }
+    .banniere_mobile{
+        margin : auto;
+        display : inline;
+    }
+
+    .navbar
+    {
+        display : none;
+    }
+
+    .pageMobile
+    {
+        display : block;
+        text-align : center;
+        position :relative;
+    }
+
+    .footer
+    {
+        display : none;
+    }
 }

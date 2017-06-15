@@ -1,67 +1,67 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/WEB-INF/templates/template-bootstrap-standard.xhtml"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:cps="http://java.sun.com/jsf/composite/composites">
-	
-<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-standard.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:cps="http://java.sun.com/jsf/composite/composites">
 
-<ui:define name="title">Emprunter un véhicule - Utilisateur</ui:define>
+    <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
 
-	<ui:define name="content">
-	<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
-			
-			
-			
-			<h:form>
-				<p:panelGrid id="optionsTrajet" columns="2" style="margin-bottom:10px;">
-					<p:row id="positionBorne">
-						<p:column><h:outputText value="Vous êtes à : "/></p:column>
-						<p:column><h:outputText value="#{emprunterBeans.borneAller.nomBorne}" /></p:column>
-					</p:row>
-					<p:row id="choixTrajet">
-						<p:column><h:outputText value="Choisir un point d'arrivée :" /></p:column>
-						<p:column>
-							
-							 <p:selectOneMenu id="car" value="#{emprunterBeans.borneRetour}" converter="#{genericConverter}">
-					            <f:selectItem itemValue="" itemLabel="Sélectionné une destination" noSelectionOption="true" />
-					            <f:selectItems value="#{emprunterBeans.lstBorne}" var="b" itemLabel="#{b.nomBorne}" 
-					            itemValue="#{b}" />
-					        </p:selectOneMenu>
-							
-							
-							
-			           	 </p:column>
-			        </p:row>
-					<p:row id="dureeTrajet">
-						<p:column><p:outputLabel for="duree" value="Durée du trajet : " /></p:column>
-        				<p:column><p:calendar id="duree" value="#{emprunterBeans.tempsEmprunt}" pattern="HH:mm" timeOnly="true"  /></p:column>
-        			</p:row>
-				</p:panelGrid>
-				
+    <ui:define name="title">Emprunter un véhicule - Utilisateur</ui:define>
 
-				
-				<div id="validation">
-					<p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
-				
-					<p:commandButton id="btnEnregistrer" value="Valider" ajax="false"
-							    actionListener="#{emprunterBeans.validerTrajet()}" type="button" onclick="PF('choixTV').show();" />
-				</div>
-				
-			</h:form>
+    <ui:define name="content">
+        <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
 
 
 
-			<p:dialog header="Choix du véhicule" widgetVar="choixTV" height="100">
-				 
-				<p:commandButton value="VAE" styleClass="btnImageVAE" rendered="#{emprunterBeans.btnVAE}" />
-				<p:commandButton value="VE" styleClass="btnImageVE" rendered="#{emprunterBeans.btnVE}" 
-					actionListener="#{emprunterBeans.emprunterVehicule()}"  />
-				<h:outputText value="Choisir un autre type de véhicule" />
-			</p:dialog>
-		
-	</ui:define>
-	
+        <h:form>
+            <p:panelGrid id="optionsTrajet" columns="2" style="margin-bottom:10px;">
+                <p:row id="positionBorne">
+                    <p:column><h:outputText value="Vous êtes à : "/></p:column>
+                    <p:column><h:outputText value="#{emprunterBeans.borneAller.nomBorne}" /></p:column>
+                </p:row>
+                <p:row id="choixTrajet">
+                    <p:column><h:outputText value="Choisir un point d'arrivée :" /></p:column>
+                    <p:column>
+
+                        <p:selectOneMenu id="car" value="#{emprunterBeans.borneRetour}" converter="#{genericConverter}">
+                            <f:selectItem itemValue="" itemLabel="Sélectionné une destination" noSelectionOption="true" />
+                            <f:selectItems value="#{emprunterBeans.lstBorne}" var="b" itemLabel="#{b.nomBorne}" 
+                                           itemValue="#{b}" />
+                        </p:selectOneMenu>
+
+
+
+                    </p:column>
+                </p:row>
+                <p:row id="dureeTrajet">
+                    <p:column><p:outputLabel for="duree" value="Durée du trajet : " /></p:column>
+                    <p:column><p:calendar id="duree" value="#{emprunterBeans.tempsEmprunt}" pattern="HH:mm" timeOnly="true"  /></p:column>
+                </p:row>
+            </p:panelGrid>
+
+
+
+            <div id="validation">
+                <p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
+
+                <p:commandButton id="btnEnregistrer" value="Valider" ajax="false"
+                                 actionListener="#{emprunterBeans.validerTrajet()}" type="button" onclick="PF('choixTV').show();" />
+            </div>
+
+        </h:form>
+
+
+
+        <p:dialog header="Choix du véhicule" widgetVar="choixTV" height="100">
+
+            <p:commandButton value="VAE" styleClass="btnImageVAE" rendered="#{emprunterBeans.btnVAE}" />
+            <p:commandButton value="VE" styleClass="btnImageVE" rendered="#{emprunterBeans.btnVE}" 
+                             actionListener="#{emprunterBeans.emprunterVehicule()}"  />
+            <h:outputText value="Choisir un autre type de véhicule" />
+        </p:dialog>
+
+    </ui:define>
+
 </ui:composition>

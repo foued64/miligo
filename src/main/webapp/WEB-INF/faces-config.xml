@@ -12,6 +12,8 @@
 			<renderer-class>net.entetrs.commons.jsf.security.SpringSecurityJsfFormRenderer</renderer-class>
 		</renderer>
 	</render-kit>
+        
+       
 
 
 	<application>

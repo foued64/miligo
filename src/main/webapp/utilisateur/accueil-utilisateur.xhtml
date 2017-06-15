@@ -1,46 +1,46 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/WEB-INF/templates/template-standard.xhtml"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:cps="http://java.sun.com/jsf/composite/composites">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-standard.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:cps="http://java.sun.com/jsf/composite/composites">
 
-<ui:define name="title">Accueil - Utilisateur</ui:define>
-	<ui:define name="content">
-	<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
-        
-		<div class="pageMobile">
-		
-			<p:button class="btnMobile" value="Emprunter" outcome="emprunter-vehicule.xhtml"  />
-			<p:button class="btnMobile" value="Restituer"/>
-			<p:button class="btnMobile" value="Réserver" />
-			
-		</div>
-		
-		<hr />
-		
-		<!-- Ici le tableau récapitulatif des réservations -->
-		
-		<p:dataTable var="car" value="#{listeDesReservations}">
-		    <p:column headerText="Liste des réservations">
-		        <h:outputText value="#{r.id}" />
-		    </p:column>
-		 
-		    <p:column headerText="Départ -Arrivée">
-		        <h:outputText value="#{r.trajetDepart} - #{r.trajetArrivee}" />
-		    </p:column>
-		 
-		    <p:column headerText="GDH">
-		        <h:outputText value="#{r.gdh}" />
-		    </p:column>
-		 
-		    <p:column headerText="">
-		        <h:outputText value="#{r.empruntPossible}" />
-		    </p:column>
-		</p:dataTable>
-		
-		
-	</ui:define>
-	
+    <ui:define name="title">Accueil - Utilisateur</ui:define>
+    <ui:define name="content">
+        <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+
+        <div class="pageMobile">
+
+            <p:button class="btnMobile" value="Emprunter" outcome="emprunter-vehicule.xhtml"  />
+            <p:button class="btnMobile" value="Restituer"/>
+            <p:button class="btnMobile" value="Réserver" />
+
+        </div>
+
+        <hr />
+
+        <!-- Ici le tableau récapitulatif des réservations -->
+
+        <p:dataTable var="car" value="#{listeDesReservations}">
+            <p:column headerText="Liste des réservations">
+                <h:outputText value="#{r.id}" />
+            </p:column>
+
+            <p:column headerText="Départ -Arrivée">
+                <h:outputText value="#{r.trajetDepart} - #{r.trajetArrivee}" />
+            </p:column>
+
+            <p:column headerText="GDH">
+                <h:outputText value="#{r.gdh}" />
+            </p:column>
+
+            <p:column headerText="">
+                <h:outputText value="#{r.empruntPossible}" />
+            </p:column>
+        </p:dataTable>
+
+
+    </ui:define>
+
 </ui:composition>

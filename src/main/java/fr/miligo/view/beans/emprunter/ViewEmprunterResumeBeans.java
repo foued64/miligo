@@ -13,26 +13,21 @@ import javax.inject.Named;
 
 /**
  *
- * @author benvenuti
- * simulation de la création d'un emprunt
- * classe à supprimer
+ * @author benvenuti simulation de la création d'un emprunt classe à supprimer
  */
 @SuppressWarnings("serial")
 @Named
 @SessionScoped
-public class ViewEmprunterResumeBeans implements Serializable
-{
+public class ViewEmprunterResumeBeans implements Serializable {
 
     public ViewEmprunterResumeBeans() {
     }
-    
-    public void creerEmprunt()
-    {
+
+    public void creerEmprunt() {
         addMessage("Emprunt effectue", "Véhicule prêt!");
     }
-    
-    public void addMessage(String resume, String detail)
-    {
+
+    public void addMessage(String resume, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, resume, detail);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }

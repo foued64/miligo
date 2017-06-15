@@ -1,62 +1,62 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/WEB-INF/templates/template-standard.xhtml"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:cps="http://java.sun.com/jsf/composite/composites">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-standard.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:cps="http://java.sun.com/jsf/composite/composites">
 
-<ui:define name="title">Accueil - Utilisateur</ui:define>
-	<ui:define name="content">
-	<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
-        
-		<div class="pageMobile">
-                    <p:panel>
-                        <p:outputLabel value="Le véhicule n°#{vehicule.immat} vous a été attribué" />
-                    </p:panel>
-                    
-                    <p:panelGrid>
-                        <p:row>
-                            <p:column><p:outputLabel value="Résumé du trajet : " /></p:column>
-                            <p:column><p:outputLabel value="#{trajet.depart} - #{trajet.arrivee}" /></p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column><p:outputLabel value="Distance : " /></p:column>
-                            <p:column><p:outputLabel value="#{trajet.distance} " /></p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column><p:outputLabel value="Durée : " /></p:column>
-                            <p:column><p:outputLabel value="#{trajet.duree} " /></p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column><p:outputLabel value="Allée Retour : " /></p:column>
-                            <p:column><p:outputLabel value="#{trajet.allerRetour} " /></p:column>
-                        </p:row>
-                    </p:panelGrid>
-		</div>
-        
+    <ui:define name="title">Accueil - Utilisateur</ui:define>
+    <ui:define name="content">
+        <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+
+        <div class="pageMobile">
+            <p:panel>
+                <p:outputLabel value="Le véhicule n°#{vehicule.immat} vous a été attribué" />
+            </p:panel>
+
+            <p:panelGrid>
+                <p:row>
+                    <p:column><p:outputLabel value="Résumé du trajet : " /></p:column>
+                    <p:column><p:outputLabel value="#{trajet.depart} - #{trajet.arrivee}" /></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel value="Distance : " /></p:column>
+                    <p:column><p:outputLabel value="#{trajet.distance} " /></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel value="Durée : " /></p:column>
+                    <p:column><p:outputLabel value="#{trajet.duree} " /></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel value="Allée Retour : " /></p:column>
+                    <p:column><p:outputLabel value="#{trajet.allerRetour} " /></p:column>
+                </p:row>
+            </p:panelGrid>
+        </div>
+
         <div>
             <h:form>
                 <p:commandButton value="C'est parti!" actionListener="#{viewEmprunterResumeBeans.creerEmprunt()}">
-                <p:confirm header="Confirmation" message="Vous pouvez désormais emprunter le véhicule n°" />
-            </p:commandButton>
-            
+                    <p:confirm header="Confirmation" message="Vous pouvez désormais emprunter le véhicule n°" />
+                </p:commandButton>
+
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                     <p:commandButton value="Se déconnecter"
-				actionListener="#{loginBean.deconnexion()}"
-				action="../../index.xhtml"
-		/>
+                                     actionListener="#{loginBean.deconnexion()}"
+                                     action="../../index.xhtml"
+                                     />
                     <p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
-                    
+
                 </p:confirmDialog>
             </h:form>
         </div>
-        
-                 <div id="validation">
-                            <p:button value="Annuler et revenir à l'accueil" outcome="accueil-utilisateur.xhtml" />
-                </div>
-		
-		
-	</ui:define>
-	
+
+        <div id="validation">
+            <p:button value="Annuler et revenir à l'accueil" outcome="accueil-utilisateur.xhtml" />
+        </div>
+
+
+    </ui:define>
+
 </ui:composition>

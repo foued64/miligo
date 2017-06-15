@@ -1,50 +1,50 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/WEB-INF/templates/template-standard.xhtml"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:cps="http://java.sun.com/jsf/composite/composites">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-standard.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:cps="http://java.sun.com/jsf/composite/composites">
 
-<ui:define name="title">Accueil - Gestionnaire de Parc</ui:define>
-	<ui:define name="content">
-	<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
-		
-                <div style="margin-top : 40px;"><p:outputLabel value="Emplacement de la borne : "  /></div>
-                <div style="margin-bottom : 40px;"><p:outputLabel value="#{viewGestionParcBeans.site.nomBorne}" /></div>
-		
-		<hr />
-		<!-- Ici le tableau récapitulatif des véhicules -->
-                
-                <div>
-                    <p:button value="Ajouter un véhicule" style="margin-top : 40px;" />
-                    <p:outputLabel value="Nombre de véhicule présent en ce moment : #{borne.nbVehicule}" style="float: right;"/>
-                </div>
-                
-                <div>
-                    <p:dataTable var="v" value="#{viewGestionParcBeans.listeVehicule}" style="margin-top : 40px;">
-                        <p:column headerText="N° immatricualtion" filterBy="#{v.immatriculation}" filterMatchMode="contains">
-                            <h:outputText value="#{v.immatriculation}" />
-		    </p:column>
-		 
-		    <p:column headerText="Type de véhicule">
-                        <h:outputText value="#{v.modele.typeVehicule.libelle}" />
-		    </p:column>
-		 
-		    <p:column headerText="Etat général">
-                        <h:outputText value="#{v.disponibilite.libelle}" />
-		    </p:column>
-		 
-		    <p:column headerText="Emplacement">
-                        <h:outputText value="#{v.borne.nomBorne}" />
-		    </p:column>
-                    <p:column headerText="Action">
-                        <p:link value="Modifier" outcome="modif-vehicule.xhtml" />/<p:link value="Supprimer" outcome="accueil-gestionnaire-parc.xhtml"/>
-		    </p:column>
-		</p:dataTable>
-                </div>
-		
-		
-	</ui:define>
-	
+    <ui:define name="title">Accueil - Gestionnaire de Parc</ui:define>
+    <ui:define name="content">
+        <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+
+        <div style="margin-top : 40px;"><p:outputLabel value="Emplacement de la borne : "  /></div>
+        <div style="margin-bottom : 40px;"><p:outputLabel value="#{viewGestionParcBeans.site.nomBorne}" /></div>
+
+        <hr />
+        <!-- Ici le tableau récapitulatif des véhicules -->
+
+        <div>
+            <p:button value="Ajouter un véhicule" style="margin-top : 40px;" outcome="page-404.xhtml"/>
+            <p:outputLabel value="Nombre de véhicule présent en ce moment : #{borne.nbVehicule}" style="float: right;"/>
+        </div>
+
+        <div>
+            <p:dataTable var="v" value="#{viewGestionParcBeans.listeVehicule}" style="margin-top : 40px;">
+                <p:column headerText="N° immatricualtion" filterBy="#{v.immatriculation}" filterMatchMode="contains">
+                    <h:outputText value="#{v.immatriculation}" />
+                </p:column>
+
+                <p:column headerText="Type de véhicule">
+                    <h:outputText value="#{v.modele.typeVehicule.libelle}" />
+                </p:column>
+
+                <p:column headerText="Etat général">
+                    <h:outputText value="#{v.disponibilite.libelle}" />
+                </p:column>
+
+                <p:column headerText="Emplacement">
+                    <h:outputText value="#{v.borne.nomBorne}" />
+                </p:column>
+                <p:column headerText="Action">
+                    <p:link value="Modifier" outcome="modif-vehicule.xhtml" />/<p:link value="Supprimer" outcome="page-404.xhtml"/>
+                </p:column>
+            </p:dataTable>
+        </div>
+
+
+    </ui:define>
+
 </ui:composition>

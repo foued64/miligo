@@ -1,39 +1,39 @@
 <!DOCTYPE html >
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
 
-<ui:include src="/WEB-INF/templates/fragments/fragment-header.xhtml" />
+    <ui:include src="/WEB-INF/templates/fragments/fragment-header.xhtml" />
 
-<h:body>
-	<div class="container-big">
-	<div class="container-fluid">
-	
-		<header>
-			<div class="banniere">
-			<h2><h:graphicImage library="img" name="miligo_banniere.png"/> </h2>
-			<p><ui:insert name="subtitle" /></p>
-			</div>
-			<div class="banniere_mobile">
-				<h2><h:graphicImage library="img" name="miligo_logo.png"/> </h2>
-				<p><ui:insert name="subtitle" /></p>
-			</div>
-		</header>
-		
-		<ui:include src="/WEB-INF/templates/fragments/fragment-nav.xhtml" />
-		
-			<div class="col-md-10">
-				<ui:insert name="content">Votre contenu...</ui:insert>
-			</div>
-		</div>
-	</div>	
+    <h:body>
+        <div class="container-big">
+            <div class="container-fluid">
 
-	<ui:include src="/WEB-INF/templates/fragments/fragment-footer.xhtml" />
+                <header>
+                    <div class="banniere">
+                        <h2><h:graphicImage library="img" name="miligo_banniere.png"/> </h2>
+                        <p><ui:insert name="subtitle" /></p>
+                    </div>
+                    <div class="banniere_mobile">
+                        <h2><h:graphicImage library="img" name="miligo_logo.png"/> </h2>
+                        <p><ui:insert name="subtitle" /></p>
+                    </div>
+                </header>
 
-</h:body>
+                <ui:include src="/WEB-INF/templates/fragments/fragment-nav.xhtml" />
+
+                <div class="col-md-10">
+                    <ui:insert name="content">Votre contenu...</ui:insert>
+                </div>
+            </div>
+        </div>	
+
+        <ui:include src="/WEB-INF/templates/fragments/fragment-footer.xhtml" />
+
+    </h:body>
 
 </html>

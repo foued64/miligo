@@ -5,7 +5,6 @@
  */
 package fr.miligo.view.beans.gestionparc;
 
-import fr.miligo.model.entities.vehicule.Disponibilite;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,32 +15,30 @@ import javax.inject.Named;
 
 /**
  *
- * @author benvenuti
- * classe permettant la modif d'un vehicule
- * peut être conserver si elle s'avère sufffisante pour les itérations futures
+ * @author benvenuti 
+ * classe permettant la modif d'un vehicule peut être
+ * conserver si elle s'avère sufffisante pour les itérations futures
  */
 @SuppressWarnings("serial")
 @Named
 @SessionScoped
-public class ViewModifVehiculeBeans implements Serializable
-{
+public class ViewModifVehiculeBeans implements Serializable {
+
     @Named
     private final List<String> listeDispo = new ArrayList<>();
-    
-    public ViewModifVehiculeBeans()
-    {
+
+    public ViewModifVehiculeBeans() {
     }
-    
+
     @PostConstruct
     public void init() {
         listeDispo.add(DisponibiliteEnum.DISPONIBLE.toString());
         listeDispo.add(DisponibiliteEnum.INDISPONIBLE.toString());
-    // Récupération du vehicule selectionné 
+        // Récupération du vehicule selectionné 
     }
-    
-    public List<String> getListeDisponibilite()
-    {
+
+    public List<String> getListeDisponibilite() {
         return listeDispo;
     }
-		
+
 }

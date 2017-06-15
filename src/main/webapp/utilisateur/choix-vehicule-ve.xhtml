@@ -1,29 +1,29 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/WEB-INF/templates/template-standard.xhtml"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:cps="http://java.sun.com/jsf/composite/composites">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-standard.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:cps="http://java.sun.com/jsf/composite/composites">
 
 
-<ui:define name="title">Choix du Véhicule - Utilisateur</ui:define>
+    <ui:define name="title">Choix du Véhicule - Utilisateur</ui:define>
 
-	<ui:define name="content">
-	<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
-			
-			
-			
-		<div class="pageMobile">
-                    <div><p:button value=" " class="btnImageVE" outcome="emprunter-resume.xhtml" /></div>
-                    <div><p:button class="btnAutreChoix" value="Vous pouvez aussi emprunter un vélo" outcome="choix-vehicule-vae.xhtml" /></div>
+    <ui:define name="content">
+        <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
 
-                    <div id="validation">
-                            <p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
-                            
-                    </div>
-                </div>
-		
-	</ui:define>
-	
+
+
+        <div class="pageMobile">
+            <div><p:button value=" " class="btnImageVE" outcome="emprunter-resume.xhtml" /></div>
+            <div><p:button class="btnAutreChoix" value="Vous pouvez aussi emprunter un vélo" outcome="choix-vehicule-vae.xhtml" /></div>
+
+            <div id="validation">
+                <p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
+
+            </div>
+        </div>
+
+    </ui:define>
+
 </ui:composition>

@@ -1,28 +1,28 @@
 <!DOCTYPE html >
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<ui:include src="/WEB-INF/templates/fragments/fragment-header.xhtml" />
+    <ui:include src="/WEB-INF/templates/fragments/fragment-header.xhtml" />
 
-<h:body>
+    <h:body>
 
-	<div class="container">
+        <div class="container">
 
 
-		<header class="jumbotron well">
-			<h2><h:graphicImage library="img" name="miligo_banniere.png"/> </h2>
-			<p><ui:insert name="subtitle" /></p>
-		</header>
-	
-		<ui:insert name="content"></ui:insert>
-		
-	</div>
+            <header class="jumbotron well">
+                <h2><h:graphicImage library="img" name="miligo_banniere.png"/> </h2>
+                <p><ui:insert name="subtitle" /></p>
+            </header>
 
-	<ui:include src="/WEB-INF/templates/fragments/fragment-footer.xhtml" />
+            <ui:insert name="content"></ui:insert>
 
-</h:body>
+        </div>
+
+        <ui:include src="/WEB-INF/templates/fragments/fragment-footer.xhtml" />
+
+    </h:body>
 
 </html>
