@@ -1,5 +1,6 @@
 package fr.miligo.model.facades.emprunt;
 
+import fr.miligo.model.facades.vehicule.FacadeVehicule;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
