@@ -44,10 +44,16 @@ html
     height : 100%;
 }
 
-body
+#utilisateur
 {
     background-image:linear-gradient(white, lightgreen);
 }
+
+#gestionnaire
+{
+    background-image:linear-gradient(white, lightskyblue);
+}
+
 
 .container-big
 {
@@ -103,9 +109,7 @@ body
 {
     position :relative;
     float : bottom;
-
 }
-
 
 
 @media screen and (max-width: 1024px)

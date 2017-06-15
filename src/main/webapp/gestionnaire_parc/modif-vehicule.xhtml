@@ -2,7 +2,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="/WEB-INF/templates/template-standard.xhtml"
+                template="/WEB-INF/templates/template-standard-gestionnaire.xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 >
 
@@ -16,16 +16,21 @@
                         <div id="divDetailVehicule">
 
                             <h2><p:outputLabel value="Modifier le véhicule immatricule : #{v}" /></h2>
-
-
-                            <p:panelGrid>
+                            <p:growl id="message" showDetail="true" />
+                            
+                            <p:panelGrid class="panneau">
                                 <p:row>
                                     <p:column><p:outputLabel value="Modèle : " /></p:column>
                                     <p:column><p:outputLabel value="#{v.modele}" /></p:column>
                                 </p:row>
                                 <p:row>
                                     <p:column><p:outputLabel value="Immatriculation : "/></p:column>
-                                    <p:column><p:inplace id="champImmat"><p:inputText value="Test" /></p:inplace></p:column>
+                                    <p:column>
+                                        <p:outputLabel id="champImmat" value="123 AZ 35" />
+                                        <p:commandButton icon="ui-icon-pencil" type="button" onclick="PF('modifImmat').show();" actionListener="#{viewModifVehiculeBeans.modifImmat()}" update="message">
+                                            <p:confirm message="Modifier l'immatriculation" />
+                                        </p:commandButton>
+                                    </p:column>
                                 </p:row>
                                 <p:row>
                                     <p:column><p:outputLabel value="Etat : "/></p:column>
@@ -36,6 +41,14 @@
                                     </p:column>
                                 </p:row>
                             </p:panelGrid>
+                            
+                            <!-- Popup pour la modif de l'immatriculation -->
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" widgetVar="modifImmat">
+                                <p:outputLabel value="123 AZ 35" />
+                                <p:inputText />
+                                <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" />
+                                <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" />
+                            </p:confirmDialog>
 
 
                         </div>

@@ -2,7 +2,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="/WEB-INF/templates/template-standard.xhtml"
+                template="/WEB-INF/templates/template-standard-utilisateur.xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:cps="http://java.sun.com/jsf/composite/composites">
 
@@ -31,11 +31,11 @@
                 <h:outputText value="#{r.trajetDepart} - #{r.trajetArrivee}" />
             </p:column>
 
-            <p:column headerText="GDH">
+            <p:column headerText="Date - Heure">
                 <h:outputText value="#{r.gdh}" />
             </p:column>
 
-            <p:column headerText="">
+            <p:column headerText="Action">
                 <h:outputText value="#{r.empruntPossible}" />
             </p:column>
         </p:dataTable>

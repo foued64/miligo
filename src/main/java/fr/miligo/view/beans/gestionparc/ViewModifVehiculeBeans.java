@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -39,6 +41,15 @@ public class ViewModifVehiculeBeans implements Serializable {
 
     public List<String> getListeDisponibilite() {
         return listeDispo;
+    }
+    
+    public void modifImmat() {
+        addMessage("Modifier l'immatriculation", "Modification prise en compte.");
+    }
+
+    public void addMessage(String resume, String detail) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, resume, detail);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
 }

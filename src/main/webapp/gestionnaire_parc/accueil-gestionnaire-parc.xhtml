@@ -2,13 +2,17 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="/WEB-INF/templates/template-standard.xhtml"
+                template="/WEB-INF/templates/template-standard-gestionnaire.xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:cps="http://java.sun.com/jsf/composite/composites">
-
+    
     <ui:define name="title">Accueil - Gestionnaire de Parc</ui:define>
+    
     <ui:define name="content">
+        
         <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+        
+        
 
         <div style="margin-top : 40px;"><p:outputLabel value="Emplacement de la borne : "  /></div>
         <div style="margin-bottom : 40px;"><p:outputLabel value="#{viewGestionParcBeans.site.nomBorne}" /></div>
@@ -44,7 +48,7 @@
             </p:dataTable>
         </div>
 
-
+        
     </ui:define>
 
 </ui:composition>
