@@ -46,6 +46,10 @@ public class ViewModifVehiculeBeans implements Serializable {
     public void modifImmat() {
         addMessage("Modifier l'immatriculation", "Modification prise en compte.");
     }
+    
+    public void modifVehicule(){
+        addMessage("Succès de la modificiation", "Le véhicule à bien été modifié.");
+    }
 
     public void addMessage(String resume, String detail) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, resume, detail);

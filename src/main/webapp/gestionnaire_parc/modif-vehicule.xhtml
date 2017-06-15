@@ -17,7 +17,7 @@
 
                             <h2><p:outputLabel value="Modifier le véhicule immatricule : #{v}" /></h2>
                             <p:growl id="message" showDetail="true" />
-                            
+
                             <p:panelGrid class="panneau">
                                 <p:row>
                                     <p:column><p:outputLabel value="Modèle : " /></p:column>
@@ -41,7 +41,7 @@
                                     </p:column>
                                 </p:row>
                             </p:panelGrid>
-                            
+
                             <!-- Popup pour la modif de l'immatriculation -->
                             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" widgetVar="modifImmat">
                                 <p:outputLabel value="123 AZ 35" />
@@ -78,8 +78,17 @@
 
         <div id="validation">
             <p:button value="Retour à l'accueil" outcome="accueil-gestionnaire-parc.xhtml" />
-            <p:button value="Valider" outcome="page-404.xhtml" />
+            
+            <p:commandButton value="Valider" type="button" onclick="PF('modifVehicule').show();" actionListener="#{viewModifVehiculeBeans.modifVehicule()}" update="message">
+                <p:confirm message="Modifier le véhicule?" />
+            </p:commandButton>
         </div>
+
+        <!-- Popup pour la modif du véhicule -->
+        <p:confirmDialog global="true" header="Demande de confirmation" showEffect="fade" hideEffect="fade" widgetVar="modifVehicule">
+            <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" />
+            <p:button value="Confirmer" outcome="accueil-gestionnaire-parc.xhtml" styleClass="ui-confirmdialog-yes" />
+        </p:confirmDialog>
 
 
     </ui:define>

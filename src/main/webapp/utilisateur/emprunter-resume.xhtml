@@ -12,7 +12,7 @@
 
         <div class="pageMobile">
             <p:panel>
-                <p:outputLabel value="Le véhicule n°#{vehicule.immat} vous a été attribué" />
+                <!--<p:outputLabel value=" n°#{vehicule.immat} vous a été attribué" />-->
             </p:panel>
 
             <p:panelGrid>
@@ -38,7 +38,7 @@
         <div>
             <h:form>
                 <p:commandButton value="C'est parti!" actionListener="#{viewEmprunterResumeBeans.creerEmprunt()}">
-                    <p:confirm header="Confirmation" message="Vous pouvez désormais emprunter le véhicule n°" />
+                    <p:confirm header="Confirmation" message="Vous pouvez désormais emprunter le #{v.typeBehicule} n°#{v.immat}" />
                 </p:commandButton>
 
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
