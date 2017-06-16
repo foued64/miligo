@@ -31,9 +31,11 @@ public class Elastik {
 		InetSocketTransportAddress ista = new InetSocketTransportAddress(InetAddress.getByName("172.16.128.178"), 9200);
 		preBuiltTransportClient = new PreBuiltTransportClient(Settings.EMPTY);
 		client = preBuiltTransportClient.addTransportAddress(ista);
+                System.out.println("Connected!");
 	}
 
 	public IndexResponse sendToElastik(EmpruntImmediat ei) throws JsonProcessingException {
-		return client.prepareIndex("Miligo", "EmpruntImmediat").setSource(ei).get();
+            System.out.println("Sending...");
+		return client.prepareIndex("Miligo", "EmpruntImmediat").setSource(new String("test")).get();
 	}
 }

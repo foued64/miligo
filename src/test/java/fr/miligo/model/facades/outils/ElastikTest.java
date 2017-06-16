@@ -92,7 +92,7 @@ public class ElastikTest {
 
         Elastik instance = new Elastik();
         IndexResponse reponse = instance.sendToElastik(ei);
-
+        System.out.println(reponse.status().toString());
         Assert.assertTrue(reponse.status() == RestStatus.CREATED);
     }
 
