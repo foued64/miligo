@@ -1,54 +1,25 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/WEB-INF/templates/template-light.xhtml"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:cps="http://java.sun.com/jsf/composite/composites">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-light.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                >
 
 
-<ui:define name="title">Authentification</ui:define>
+    <ui:define name="title">DEMO - IT1</ui:define>
 
-	<ui:define name="content">
+    <ui:define name="content">
+        
+        <h2>DEMO</h2>
 
-		<h:form id="loginForm" prependId="false" class="form-horizontal">	
-		    
-			<div class="form-group">
-				 
-				<h:outputLabel value="Compte" for="j_username" class="col-sm-2 control-label"/>
-				
-				<div class="col-sm-10">
-					<h:inputText id="j_username" required="true" requiredMessage="Obligatoire" class="form-control"/>
-				</div>
+        <h:form id="loginForm" prependId="false" class="form-horizontal">	
+            <p:button value="Emprunter un véhicule" style="margin-top: 10px; margin-left : 10px;" outcome="utilisateur/accueil-utilisateur.xhtml"/>
 
-				<h:message for="j_username" errorClass="alert alert-danger" />
-			</div>
-			
-			<div class="form-group">
-				 
-				<h:outputLabel value="Mot de passe" for="j_password" class="col-sm-2 control-label"/>
-				
-				<div class="col-sm-10">
-					<h:inputSecret id="j_password" required="true" requiredMessage="Obligatoire" class="form-control"/>
-				</div>
-			
-				<h:message for="j_password" errorClass="alert alert-danger" />
-			</div>
-			
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
+            <p:button value="Modifier la disponibilité d'un véhicule" style="margin-top: 10px; margin-left : 10px;" outcome="gestionnaire_parc/accueil-gestionnaire-parc.xhtml"/>
 
-					<h:commandButton id="btnConnecter" value="Se connecter"
-						styleClass="btn btn-success"
-						actionListener="#{loginBean.connexion()}"
-						action="pageAccueil.xhtml"
-						/>
+        </h:form>
 
-				</div>
-			</div>
+    </ui:define>
 
-		</h:form>
-		
-	</ui:define>
-	
 </ui:composition>
