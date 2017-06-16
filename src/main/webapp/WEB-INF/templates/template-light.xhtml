@@ -9,17 +9,24 @@
 
     <h:body>
 
-        <div class="container">
 
+        <header>
+            
+            <div class="banniere">
+                <div class="logo">
+                    <h:graphicImage library="img" name="miligo_car_rgba.png"/>
+                </div>
+            </div>
+            
+            <p>
+                <ui:insert name="subtitle" />
+            </p>
+            
+            
+        </header>
 
-            <header class="jumbotron well">
-                <h2><h:graphicImage library="img" name="miligo_banniere.png"/> </h2>
-                <p><ui:insert name="subtitle" /></p>
-            </header>
+        <ui:insert name="content"></ui:insert>
 
-            <ui:insert name="content"></ui:insert>
-
-        </div>
 
         <ui:include src="/WEB-INF/templates/fragments/fragment-footer.xhtml" />
 

@@ -16,93 +16,139 @@
 			Permet à JSF de traiter les chaînes vide comme des valeurs nulles
 			Du coup les @NotNull sur les champs de type String fonctionnent 
 		</description>
-        <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    <context-param>
-        <param-name>BootsFaces_USETHEME</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    <context-param>
-        <param-name>BootsFaces_THEME</param-name>
-        <param-value>flatly</param-value>
-    </context-param>
-    <context-param>
-        <param-name>net.bootsfaces.get_bootstrap_from_cdn</param-name>
-        <param-value>false</param-value>
-    </context-param>
-    <context-param>
-        <param-name>net.bootsfaces.get_fontawesome_from_cdn</param-name>
-        <param-value>false</param-value>
-    </context-param>
-    <context-param>
-        <param-name>primefaces.THEME</param-name>
-        <param-value>south-street</param-value>
-    </context-param>
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
-        <url-pattern>/javax.faces.resource/*</url-pattern>
-    </servlet-mapping>
-    <!--SPRING SECURITY : BEGIN -->
-    <!-- 	<context-param> -->
-    <!-- 		<param-name>contextConfigLocation</param-name> -->
-    <!-- 		<param-value>/WEB-INF/configuration.xml</param-value> -->
-    <!-- 	</context-param> -->
-    <!-- 	<listener> -->
-    <!-- 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> -->
-    <!-- 	</listener> -->
-    <!-- 	<filter> -->
-    <!-- 		<filter-name>springSecurityFilterChain</filter-name> -->
-    <!-- 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> -->
-    <!-- 	</filter> -->
-    <!-- 	<filter-mapping> -->
-    <!-- 		<filter-name>springSecurityFilterChain</filter-name> -->
-    <!-- 		<url-pattern>/*</url-pattern> -->
-    <!-- 		<dispatcher>FORWARD</dispatcher> -->
-    <!-- 		<dispatcher>REQUEST</dispatcher> -->
-    <!-- 	</filter-mapping> -->
-    <!--SPRING SECURITY : END -->
-    <!--FILTRE HTTP HEADERS : BEGIN -->
-    <filter>
-        <filter-name>httpHeadersFilter</filter-name>
-        <filter-class>net.entetrs.commons.filters.HttpHeadersFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>httpHeadersFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
-    <!--FILTRE HTTP HEADERS : END -->
-    <!-- SESSION TIMEOUT : BEGIN -->
-    <session-config>
-        <session-timeout>5</session-timeout>
-    </session-config>
-    <!-- SESSION TIMEOUT : END -->
-    <mime-mapping>
-        <extension>ttf</extension>
-        <mime-type>css/fonts</mime-type>
-    </mime-mapping>
-    <mime-mapping>
-        <extension>otf</extension>
-        <mime-type>font/opentype</mime-type>
-    </mime-mapping>
-    <mime-mapping>
-        <extension>woff2</extension>
-        <mime-type>font/woff2</mime-type>
-    </mime-mapping>
-    <mime-mapping>
-        <extension>woff</extension>
-        <mime-type>font/woff</mime-type>
-    </mime-mapping>
-    <mime-mapping>
-        <extension>eot</extension>
-        <mime-type>application/vnd.ms-fontobject</mime-type>
-    </mime-mapping>
+		<param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>BootsFaces_USETHEME</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>BootsFaces_THEME</param-name>
+		<param-value>flatly</param-value>
+	</context-param>
+
+	
+	<context-param>
+		<param-name>net.bootsfaces.get_bootstrap_from_cdn</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>net.bootsfaces.get_fontawesome_from_cdn</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>south-street</param-value>
+	</context-param>
+	
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+		<url-pattern>/javax.faces.resource/*</url-pattern>
+	</servlet-mapping>
+	
+
+
+	<!--SPRING SECURITY : BEGIN -->
+	
+<!-- 	<context-param> -->
+<!-- 		<param-name>contextConfigLocation</param-name> -->
+<!-- 		<param-value>/WEB-INF/configuration.xml</param-value> -->
+<!-- 	</context-param> -->
+<!-- 	<listener> -->
+<!-- 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> -->
+<!-- 	</listener> -->
+<!-- 	<filter> -->
+<!-- 		<filter-name>springSecurityFilterChain</filter-name> -->
+<!-- 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>springSecurityFilterChain</filter-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 		<dispatcher>FORWARD</dispatcher> -->
+<!-- 		<dispatcher>REQUEST</dispatcher> -->
+<!-- 	</filter-mapping> -->
+	<!--SPRING SECURITY : END -->
+	
+	<!--FILTRE HTTP HEADERS : BEGIN -->
+	
+	<filter>
+		<filter-name>httpHeadersFilter</filter-name>
+		<filter-class>net.entetrs.commons.filters.HttpHeadersFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>httpHeadersFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
+	<!--FILTRE HTTP HEADERS : END -->
+	
+	<!-- SESSION TIMEOUT : BEGIN -->
+	
+	<session-config>
+		<session-timeout>5</session-timeout>
+	</session-config>
+	<!-- SESSION TIMEOUT : END -->
+
+	
+	<mime-mapping>
+		<extension>ttf</extension>
+		<mime-type>css/fonts</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>otf</extension>
+		<mime-type>font/opentype</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>woff2</extension>
+		<mime-type>font/woff2</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>woff</extension>
+		<mime-type>font/woff</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>eot</extension>
+		<mime-type>application/vnd.ms-fontobject</mime-type>
+	</mime-mapping>
+	
+	
+    <error-page>
+        <!-- Missing login -->
+        <error-code>401</error-code>
+        <location>/erreurs/erreur-generique.xhtml</location>
+    </error-page>
+    <error-page>
+        <!-- Forbidden directory listing -->
+        <error-code>403</error-code>
+        <location>/erreurs/erreur-generique.xhtml</location>
+    </error-page>
+    <error-page>
+        <!-- Missing resource -->
+        <error-code>404</error-code>
+        <location>/erreurs/erreur-generique.xhtml</location>
+    </error-page>
+    <error-page>
+        <!-- Uncaught exception -->
+        <error-code>500</error-code>
+        <location>/erreurs/erreur-generique.xhtml</location>
+    </error-page>
+    <error-page>
+        <!-- Unsupported servlet method -->
+        <error-code>503</error-code>
+        <location>/erreurs/erreur-generique.xhtml</location>
+    </error-page>
+
 </web-app>

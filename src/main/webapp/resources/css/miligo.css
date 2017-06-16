@@ -1,3 +1,9 @@
+/* reset CSS */
+body{
+    padding: 0;
+    margin: 0;
+}
+
 #infoProfil
 {
     text-align: right;
@@ -17,8 +23,28 @@
 
 .banniere{
     margin : auto;
+    height: 180px;
+    background: url(img/fleurs.png), linear-gradient(#b5c585, #ffffff);
+    background-position: bottom left;
+    background-repeat: repeat-x;
+    background-position: bottom left;
+    border-bottom: 3px solid #a1c636;
 }
 
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.logo{
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+    /* calle la voiture à droite */
+    text-align: right;
+}
 .banniere_mobile{
     margin : auto;
     display : none;
