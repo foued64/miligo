@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import fr.miligo.model.entities.parc.Adresse;
 import fr.miligo.model.entities.parc.Gsbdd;
 import fr.miligo.model.facades.parc.FacadeGsbdd;
 import net.entetrs.commons.logs.LogUtils;
@@ -38,9 +37,6 @@ public class InitSingleton {
 	@Inject
 	private FacadeGsbdd facadeGsbdd;
 
-	@Inject
-	private FacadeCompetence facadeCompetence;
-
 	/**
 	 * Méthode d'initialisation de l'application.
 	 * 
@@ -50,25 +46,39 @@ public class InitSingleton {
 	@PostConstruct
 	public void init() {
 		LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Démarrage de l'application : Miligo");
-		this.initialiserGrades();
-		this.initialiserCompetences();
+		this.initialiserGsbdd();
+
 	}
 
+	/**
+	 *  Traitement du fichier properties gsbdd
+	 * @param entry
+	 * @return
+	 */
 	public Gsbdd mapPropertyEntryToGsbdd(Entry<?, ?> entry) {
 		String key = entry.getKey().toString();
 		String values = entry.getValue().toString();
-
 		return facadeGsbdd.newInstance(key,values);
 	}
 
 	/**
-	 * Initialisation des grades.
+	 * Initialisation des gsbdd
 	 */
-	private void initialiserGrades() {
-		if (facadeGrade.isEmpty()) {
+	private void initialiserGsbdd() {
+		if (facadeGsbdd.isEmpty()) {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des grades.");
-			Properties gradesProperties = loadFromResource("grades.properties");
-			gradesProperties.entrySet().stream().map(this::mapPropertyEntryToGrade).forEach(facadeGrade::create);
+                        
+                        try {
+                            Properties gsbddProperties = loadFromResource("gsbdd.properties");
+                            
+                            gsbddProperties.entrySet().stream().map(this::mapPropertyEntryToGsbdd).forEach(facadeGsbdd::create);
+                        } catch (Exception e) {
+                            System.err.println("Impossible de charger gsbdd.properties"  + e.getMessage());
+                            
+                        }
+                        
+                        
+//                        Properties gsbddProperties = new Properties();
 		}
 	}
 
@@ -79,25 +89,13 @@ public class InitSingleton {
 	 * @return instance de Properties chargé.
 	 */
 	private static Properties loadFromResource(String ressourceName) {
-		try (InputStream in = InitSingleton.class.getResourceAsStream(ressourceName)) {
+		try (InputStream in = InitSingleton.class.getClassLoader().getResourceAsStream(ressourceName)) {
 			Properties p = new Properties();
 			p.load(in);
 			return p;
-		} catch (IOException e) {
-			LogUtils.logException(LOGGER, LogLevel.ERROR, e, "Impossible de lire le fichier %s", ressourceName);
-			throw new RuntimeException("Impossible de lire le fichier de properties " + ressourceName, e);
-		}
-	}
-
-	/**
-	 * Initialisation des compétences. 
-	 * TODO : faire avec un fichier de properties en entrée.
-	 */
-	private void initialiserCompetences() {
-		if (facadeCompetence.isEmpty()) {
-			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des compétences");
-			String[] competences = {"JAVA", "UML", "HTML"};
-			Arrays.stream(competences).map(facadeCompetence::newInstance).forEach(facadeCompetence::create);
+		} catch (Exception e) {
+                    LogUtils.logException(LOGGER, LogLevel.ERROR, e, "Impossible de lire le fichier %s", ressourceName);
+                    throw new RuntimeException("Impossible de lire le fichier de properties " + ressourceName, e);
 		}
 	}
 
