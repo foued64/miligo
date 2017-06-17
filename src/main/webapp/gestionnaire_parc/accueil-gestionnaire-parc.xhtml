@@ -5,50 +5,55 @@
                 template="/WEB-INF/templates/template-standard-gestionnaire.xhtml"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:cps="http://java.sun.com/jsf/composite/composites">
-    
+
     <ui:define name="title">Accueil - Gestionnaire de Parc</ui:define>
-    
+
     <ui:define name="content">
-        
+
         <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
-        
-        
+
+
 
         <div style="margin-top : 40px;"><p:outputLabel value="Emplacement de la borne : "  /></div>
-        <div style="margin-bottom : 40px;"><p:outputLabel value="#{viewGestionParcBeans.site.nomBorne}" /></div>
+        <p:outputLabel value="#{accueilGestionParckBean.emplacementBorne.nomBorne}" />
+        <!--        <div style="margin-bottom : 40px;"></div>-->
 
         <hr />
         <!-- Ici le tableau récapitulatif des véhicules -->
 
-        <div>
-            <p:button value="Ajouter un véhicule" style="margin-top : 40px;" outcome="page-404.xhtml"/>
-            <p:outputLabel value="Nombre de véhicule présent en ce moment : #{borne.nbVehicule}" style="float: right;"/>
-        </div>
-
-        <div>
-            <p:dataTable var="v" value="#{viewGestionParcBeans.listeVehicule}" style="margin-top : 40px;">
-                <p:column headerText="N° immatricualtion" filterBy="#{v.immatriculation}" filterMatchMode="contains">
+        <h:form>
+            <p:panelGrid columns="2">
+                <p:button value="Ajouter un véhicule" style="margin-top : 40px;" outcome="page-404.xhtml" disabled="true"/>
+                <p:outputLabel value="Nombre de véhicule présent en ce moment : 
+                               #{accueilGestionParckBean.lstVehiculeBorne.size()}" style="float: right;"/>
+            </p:panelGrid>                
+            <p:dataTable id="dataTableLstVehicule" var="v" value="#{accueilGestionParckBean.lstVehiculeBorne}" style="margin-top : 40px;">
+                <p:column headerText="N° immatricualtion" filterBy="#{v.immatriculation}" 
+                          filterMatchMode="contains" sortBy="#{v.immatriculation}" >
                     <h:outputText value="#{v.immatriculation}" />
                 </p:column>
 
-                <p:column headerText="Type de véhicule">
+                <p:column headerText="Type de véhicule" sortBy="#{v.modele.typeVehicule.libelle}">
                     <h:outputText value="#{v.modele.typeVehicule.libelle}" />
                 </p:column>
 
-                <p:column headerText="Etat général">
+                <p:column headerText="Etat général" sortBy="#{v.disponibilite.libelle}">
                     <h:outputText value="#{v.disponibilite.libelle}" />
                 </p:column>
 
-                <p:column headerText="Emplacement">
+                <p:column headerText="Emplacement" sortBy="#{v.borne.nomBorne}">
                     <h:outputText value="#{v.borne.nomBorne}" />
                 </p:column>
                 <p:column headerText="Action">
-                    <p:link value="Modifier" outcome="modif-vehicule.xhtml" />/<p:link value="Supprimer" outcome="page-404.xhtml"/>
+                    <p:commandLink actionListener="#{accueilGestionParckBean.mettreVehiculeEnFlashScope(v)}"
+                                   action="modif-vehicule.xhtml" value="Modifier" />
+                    <!--                    <h:commandLink actionListener="{accueilGestionParckBean.mettreVehiculeEnFlashScope(v)}" action="modif-vehicule.xhtml?faces-redirect=true"value="Modifier"/> 
+                                        AAA <p:link value="Supprimer" outcome="page-404.xhtml"/>-->
                 </p:column>
             </p:dataTable>
-        </div>
+        </h:form>
 
-        
+
     </ui:define>
 
 </ui:composition>

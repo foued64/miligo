@@ -37,11 +37,11 @@ public class FacadeTrajet extends AbstractFacade<Trajet> {
 		tq.setParameter("borneA", borneRetour);
 		t = tq.getSingleResult();
 		if (t.getId() == null) {
-			TypedQuery<Trajet> tq1 = getEntityManager().createQuery("SELECT t FROM Trajet t WHERE t.borneDepart =:borneD AND t.borneArrivee =:borneA",Trajet.class);
-			
-			tq1.setParameter("borneD", retour);
-			tq1.setParameter("borneA", aller);
-			t = tq1.getSingleResult();
+                    TypedQuery<Trajet> tq1 = getEntityManager().createQuery("SELECT t FROM Trajet t WHERE t.borneDepart =:borneD AND t.borneArrivee =:borneA",Trajet.class);
+
+                    tq1.setParameter("borneD", retour);
+                    tq1.setParameter("borneA", aller);
+                    t = tq1.getSingleResult();
 		}
 		
 		return t;

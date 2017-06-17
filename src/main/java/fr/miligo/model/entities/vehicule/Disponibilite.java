@@ -30,8 +30,8 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class Disponibilite extends AbstractEntity {
 
-	@Column(name = "LIBELLE_DISPONIBILITE", nullable = false)
-	@Enumerated(EnumType.STRING)
-	DisponibiliteEnum libelle;
-
+    @Column(name = "LIBELLE_DISPONIBILITE", nullable = false)
+    @Enumerated(EnumType.STRING)
+    DisponibiliteEnum libelle;
+    
 }

@@ -2,5 +2,8 @@ package fr.miligo.model.entities.vehicule;
 
 public enum DisponibiliteEnum {
 
-	DISPONIBLE, INDISPONIBLE, EN_CHARGE, RESERVE, EMPRUNTE;
+	DISPONIBLE, EN_MAINTENANCE, EN_CHARGE, RESERVE, EMPRUNTE;
+
+
+        
 }

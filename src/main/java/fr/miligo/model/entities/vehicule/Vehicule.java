@@ -77,15 +77,19 @@ public class Vehicule extends AbstractEntity {
 	Disponibilite disponibilite;
 
 	@OneToMany(mappedBy = "vehicule")
-	List<Entretien> listeEntretiens = new ArrayList<>();
+        @Setter
+	List<Entretien> listeEntretiens;
 
 	@OneToMany(mappedBy = "vehicule")
-	List<Incident> listeIncidents = new ArrayList<>();
+        @Setter
+	List<Incident> listeIncidents;
 
 	@OneToMany(mappedBy = "vehicule")
-	List<EmpruntImmediat> listeEmpruntImmediats = new ArrayList<>();
+        @Setter
+	List<EmpruntImmediat> listeEmpruntImmediats;
 
 	@OneToMany(mappedBy = "vehicule")
-	List<EmpruntReservation> listeEmpruntReservations = new ArrayList<>();
+        @Setter
+	List<EmpruntReservation> listeEmpruntReservations;
 
 }

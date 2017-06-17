@@ -9,6 +9,7 @@ import javax.persistence.MappedSuperclass;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 import net.entetrs.commons.uuid.GeneratedUUID;
 import net.entetrs.commons.uuid.UUIDRepresentation;
 
@@ -16,6 +17,10 @@ import net.entetrs.commons.uuid.UUIDRepresentation;
 @MappedSuperclass
 // Annotations LomBok
 @Getter
+/**
+ * J'ai rajouter le setter pour pouvoir faire les tests avec la borne.SEB
+ */
+@Setter
 @EqualsAndHashCode(of = "id")
 public abstract class AbstractEntity implements Serializable {
 

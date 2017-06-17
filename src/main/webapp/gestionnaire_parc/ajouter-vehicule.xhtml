@@ -11,18 +11,10 @@
         <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
         <h:form>
             <p:panel id="panelModfiVehicule" >
+                <h3><p:outputLabel value="Modifier le véhicule immatricule : #{modiferDispoBean.vehicule.immatriculation}" /></h3>
                 <p:growl id="message" showDetail="true" />
+
                 <p:panelGrid class="panneau">
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel value="Modifier le véhicule immatricule : "/> 
-                        </p:column>
-                        <p:column>
-                            <h3>
-                                <p:outputLabel value="#{modiferDispoBean.vehicule.immatriculation}" />
-                            </h3>
-                        </p:column>
-                    </p:row>
                     <p:row>
                         <p:column>
                             <p:outputLabel value="Modèle : " />
@@ -45,7 +37,7 @@
                             <p:outputLabel value="Etat : "/>
                         </p:column>
                         <p:column>
-                            <p:selectOneMenu value="#{modiferDispoBean.vehicule.disponibilite}" converter="#{genericConverter}">
+                            <p:selectOneMenu value="#{modiferDispoBean.dispo}">
                                 <f:selectItems value="#{modiferDispoBean.listeDispo}"  />
                                 <p:ajax listener="#{modiferDispoBean.affichePageMaintenance()}" update="panelModfiVehicule " />
                             </p:selectOneMenu>
@@ -61,38 +53,34 @@
                                          onclick="PF('modifImmatriculation').close();" update="panelModfiVehicule message"/>
                     </p:dialog>
                 </p:panelGrid>
-                
+
+
+
                 <p:panelGrid id="panelMaintenance" rendered="#{modiferDispoBean.panelMaintenantVisu}">
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel value="Date de mise en circulation :" /> 
-                        </p:column>
-                        <p:column>
-                            <h3>
-                                <p:outputLabel value="#{modiferDispoBean.vehicule.dateMiseEnCirculation}">
-                                    <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-                                </p:outputLabel>
-                            </h3>
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel value ="En entretien jusqu'au : " for="calendrier" />
-                        </p:column>
-                        <p:column>
-                            <p:calendar id="calendrier" value="#{modiferDispoBean.entretien.dateEntretien}" showOn="button"/>
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel value="Cause : " />
-                        </p:column>
-                        <p:column>
-                            <p:selectOneMenu value="#{modiferDispoBean.maintenance}" converter="#{genericConverter}" >
-                                <f:selectItems value="#{modiferDispoBean.listeMaintenance}"/>
-                            </p:selectOneMenu>
-                        </p:column>
-                    </p:row>
+                    <h3><p:outputLabel value="Date de mise en circulation :" /> 
+                        <p:outputLabel value="#{modiferDispoBean.vehicule.dateMiseEnCirculation}">
+                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                        </p:outputLabel></h3>
+                    <p:panelGrid id="panneauIndispo">
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value ="En entretien jusqu'au : " for="calendrier" />
+                            </p:column>
+                            <p:column>
+                                <p:calendar id="calendrier" value="#{modiferDispoBean.DEntretien}" showOn="button"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="Cause : " />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu value="#{modiferDispoBean.maintenance}" converter="#{genericConverter}" >
+                                    <f:selectItems value="#{modiferDispoBean.listeMaintenance}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
                 </p:panelGrid>
 
 
@@ -106,7 +94,7 @@
                 <p:confirmDialog showEffect="fade" hideEffect="fade" global="true" >
                     <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" />
                     <p:commandButton value="Confirmer" type="button" action="accueil-gestionnaire-parc.xhtml"
-                                     update="message" styleClass="ui-confirmdialog-yes" />
+                                    update="message" styleClass="ui-confirmdialog-yes" />
                 </p:confirmDialog>
 
 

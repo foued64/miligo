@@ -1,6 +1,7 @@
 package fr.miligo.common;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -28,5 +29,5 @@ public abstract class AbstractFacade<T> extends AbstractDaoEntrepriseEdition<T> 
 	protected EntityManager getEntityManager() {
 		return this.em;
 	}
-
+        
 }

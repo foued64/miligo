@@ -10,7 +10,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 /**
@@ -23,15 +22,20 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "MAINTENANCE")
 @NoArgsConstructor
-@ToString
+//@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
 @Dependent
 public class Maintenance extends AbstractEntity {
 
-	@Column(name = "LIBELLE_MAINTENANCE", nullable = false)
-	@Setter
-	String libelle;
-
+    @Column(name = "LIBELLE_MAINTENANCE", nullable = false)
+    @Setter
+    String libelle; 
+    
+    @Override
+    public String toString() {
+        return  libelle ;
+    }
+    
 }

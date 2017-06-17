@@ -53,7 +53,7 @@ public class EmpruntTest {
         Trajet trajet = Trajet.builder().borneDepart(bDepart).borneArrivee(bArrivee).build();
 
         Disponibilite dispo = Disponibilite.builder().libelle(DisponibiliteEnum.DISPONIBLE).build();
-        Disponibilite indispo = Disponibilite.builder().libelle(DisponibiliteEnum.INDISPONIBLE).build();
+        Disponibilite indispo = Disponibilite.builder().libelle(DisponibiliteEnum.EN_MAINTENANCE).build();
 
         Vehicule vehiculeDispo = Vehicule.builder().disponibilite(dispo).borne(bDepart).build();
         Vehicule vehiculeindispo = Vehicule.builder().disponibilite(indispo).borne(bDepart).build();

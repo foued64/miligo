@@ -5,12 +5,38 @@
  */
 package fr.miligo.view.beans.gestionnaireparc;
 
+import fr.miligo.model.entities.parc.Borne;
+import fr.miligo.model.entities.vehicule.Vehicule;
+import fr.miligo.model.facades.parc.FacadeBorne;
+import fr.miligo.model.facades.vehicule.FacadeDisponibilite;
+import fr.miligo.model.facades.vehicule.FacadeVehicule;
+import javax.inject.Inject;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *
  * @author codeur
  */
-public class AbstractGestionParcBean {
+public abstract class AbstractGestionParcBean {
     
+    @Inject
+    protected FacadeDisponibilite facadeDispo;
     
+    @Inject
+    protected FacadeVehicule facadeVehicule;
+    
+    @Inject
+    protected FacadeBorne facadeBorne;
+    
+    @Getter
+    @Setter
+    @Inject
+    protected Vehicule vehicule;
+    
+    @Getter
+    @Setter
+    @Inject
+    protected Borne emplacementBorne;
     
 }
