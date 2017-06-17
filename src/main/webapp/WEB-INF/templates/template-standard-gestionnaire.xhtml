@@ -13,14 +13,17 @@
         <div class="container-big">
             <div class="container-fluid">
 
-                <header>
-                    <div class="banniere">
-                        <h2><h:graphicImage library="img" name="miligo_banniere.png"/> </h2>
-                        <p><ui:insert name="subtitle" /></p>
-                    </div>
-                    <div class="banniere_mobile">
-                        <h2><h:graphicImage library="img" name="miligo_logo.png"/> </h2>
-                        <p><ui:insert name="subtitle" /></p>
+                <header class="ui-g">
+                    <div class="ui-g-12 ui-g-nopad">
+                        <div class="banniere">
+                            <div class="logo">
+                                <h:graphicImage library="img" name="miligo_car_rgba.png"/>
+                            </div>
+                        </div>
+                        <p>
+                            <!-- TODO à quoi sert cet insert ? -->
+                            <ui:insert name="subtitle" />
+                        </p>
                     </div>
                 </header>
 

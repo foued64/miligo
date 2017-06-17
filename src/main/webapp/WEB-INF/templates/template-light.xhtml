@@ -9,23 +9,33 @@
 
     <h:body>
 
-
-        <header>
-            
-            <div class="banniere">
-                <div class="logo">
-                    <h:graphicImage library="img" name="miligo_car_rgba.png"/>
+        <header class="ui-g">
+            <div class="ui-g-12 ui-g-nopad">
+                <div class="banniere">
+                    <div class="logo">
+                        <h:graphicImage library="img" name="miligo_car_rgba.png"/>
+                    </div>
                 </div>
+                <p>
+                    <!-- TODO à quoi sert cet insert ? -->
+                    <ui:insert name="subtitle" />
+                </p>
             </div>
-            
-            <p>
-                <ui:insert name="subtitle" />
-            </p>
-            
-            
         </header>
 
-        <ui:insert name="content"></ui:insert>
+      <div class="ui-g">
+            <div class="ui-g-4">
+          </div>
+          <div class="ui-g-4">
+                <ui:insert name="content"></ui:insert>
+          </div>
+          <div class="ui-g-4">
+          </div>
+          
+      </div>
+            
+          
+
 
 
         <ui:include src="/WEB-INF/templates/fragments/fragment-footer.xhtml" />

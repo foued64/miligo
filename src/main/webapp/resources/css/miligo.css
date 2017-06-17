@@ -24,7 +24,7 @@ body{
 .banniere{
     margin : auto;
     height: 180px;
-    background: url(img/fleurs.png), linear-gradient(#b5c585, #ffffff);
+    background: url(img/fleurs.png), linear-gradient(#b5c585, rgba(181, 197, 133, 0));
     background-position: bottom left;
     background-repeat: repeat-x;
     background-position: bottom left;
