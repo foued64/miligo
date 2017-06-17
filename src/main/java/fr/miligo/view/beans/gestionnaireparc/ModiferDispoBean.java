@@ -53,9 +53,12 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
     private List<Maintenance> listeMaintenance = new ArrayList<>();
 
     @Getter
+    private Date dateMinEntretien;
+    
+    @Getter
     @Setter
     private String dispo;
-
+   
     @Getter
     @Setter
     @Inject
@@ -68,16 +71,18 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
 
     @PostConstruct
     public void init() {
+        dateMinEntretien = Date.from(Instant.now());
         //Permet de recuperer le véhicule passer dans le falshScoped
         Vehicule v = (Vehicule) JsfUtils.getFromFlashScope(AccueilGestionParckBean.FLASH_PARAM_VEHICULE);
 
         vehicule = facadeVehicule.read(v.getId());
-//        if(facadeEntretien.dernierEntretien(vehicule) != null){
-//            isPanelMaintenantVisu = true;
-////            dEntretien = e.
-//        }else{
-//            isPanelMaintenantVisu = false;
-//        }
+        /**
+         * Permet de savoir si la disponibilité est en maitenance.
+         * Pour la modif du vechiule il faut mettre l'entretien en fin.
+         */
+        if(vehicule.getDisponibilite().getLibelle().equals(DisponibiliteEnum.EN_MAINTENANCE)){
+          isPanelMaintenantVisu = true;
+        }
 
         //EN attente de l'enumeartion dispo MAILLOT
         listeDispo = facadeDispo.readAll();
@@ -91,6 +96,8 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
     public void affichePageMaintenance() {
         if (vehicule.getDisponibilite().getLibelle().equals(DisponibiliteEnum.EN_MAINTENANCE)) {
             isPanelMaintenantVisu = true;
+        }else if(vehicule.getDisponibilite().getLibelle().equals(DisponibiliteEnum.DISPONIBLE)){
+            isPanelMaintenantVisu = false;
         }
     }
 
@@ -103,17 +110,21 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
     }
 
     /**
-     *
+     * Permet de creer un entretien du véchiule si la dispo passe de DISPO -> En maitenance
+     * Sinon mets un date de fin a l'entretien pour rendre le vehicule a nouveau disponible.
      */
     public void modifVehicule() {
-        facadeVehicule.update(vehicule);
-        entretien.setVehicule(vehicule);
-//        entretien.setDateEntretien(dEntretien);
-        Maintenance m = facadeMaintenance.read(maintenance.getId());
-        entretien.getListeMaintenance().add(m);
-        facadeEntretien.create(entretien);
+        if(vehicule.getDisponibilite().getLibelle().equals(DisponibiliteEnum.EN_MAINTENANCE)){
+            entretien.setVehicule(vehicule);
+            Maintenance m = facadeMaintenance.read(maintenance.getId());
+            entretien.getListeMaintenance().add(m);
+            facadeEntretien.create(entretien);
+            facadeVehicule.update(vehicule);
+        }else{
+           facadeVehicule.update(vehicule);
+        }
+        
         addMessage("Succès de la modificiation", "Le véhicule à bien été modifié.");
-
     }
 
     /**

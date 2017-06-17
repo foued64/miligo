@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
+import java.util.Objects;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import lombok.AccessLevel;
@@ -44,5 +45,5 @@ public class Entretien extends AbstractEntity {
 
     @OneToMany
     @Setter
-    List<Maintenance> listeMaintenance = new ArrayList<>();
+    List<Maintenance> listeMaintenance = new ArrayList<>();    
 }

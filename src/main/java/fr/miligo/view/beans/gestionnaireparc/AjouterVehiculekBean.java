@@ -26,13 +26,13 @@ import org.primefaces.event.SelectEvent;
  */
 @ViewScoped
 @Named
-public class AccueilGestionParckBean extends AbstractGestionParcBean implements Serializable  {
+public class AjouterVehiculekBean extends AbstractGestionParcBean implements Serializable  {
     
     public static final String FLASH_PARAM_VEHICULE = "vehicule_selectionne";
     
     @Getter
+//    @Setter
     protected List<Vehicule> lstVehiculeBorne = new ArrayList<>();
-    
     
     @PostConstruct
     private void init(){
@@ -46,28 +46,7 @@ public class AccueilGestionParckBean extends AbstractGestionParcBean implements 
         lstVehiculeBorne = facadeVehicule.readAll();
     
     }
-    
-    /**
-     * AJouter au HTMl
-     * 
-     */
      
-    /**
-     * Recherche la liste des véhicule associéer a la borne.
-     * @param immat 
-     */
-    public void rechercherVehicule(String immat){
-        lstVehiculeBorne = facadeVehicule.rechercherVehiculeByImmat(immat);
-    }
     
-       
-    
-    /**
-     * Permet de passer en parametre le vehicule.
-     * @param vechiculeSelectionne 
-     */
-    public void mettreVehiculeEnFlashScope(Vehicule vechiculeSelectionne){
-        JsfUtils.putInFlashScope(FLASH_PARAM_VEHICULE, vechiculeSelectionne);
-}
     
 }

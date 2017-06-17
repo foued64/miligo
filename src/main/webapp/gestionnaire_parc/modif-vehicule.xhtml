@@ -46,13 +46,13 @@
                         </p:column>
                         <p:column>
                             <p:selectOneMenu value="#{modiferDispoBean.vehicule.disponibilite}" converter="#{genericConverter}">
-                                <f:selectItems value="#{modiferDispoBean.listeDispo}"  />
+                                <f:selectItems value="#{modiferDispoBean.listeDispo}" var="v" itemLabel="#{v.libelle}" itemValue="#{v}"  />
                                 <p:ajax listener="#{modiferDispoBean.affichePageMaintenance()}" update="panelModfiVehicule " />
                             </p:selectOneMenu>
                         </p:column>
                     </p:row>
 
-                    <!-- Popup pour la modif de l'immatriculation -->
+                     <!--Popup pour la modif de l'immatriculation--> 
                     <p:dialog id="modifImmatr" modal="false" widgetVar="modifImmatriculation">
                         <p:outputLabel value="#{modiferDispoBean.vehicule.immatriculation}" />
                         <p:inputText   value="#{modiferDispoBean.vehicule.immatriculation}"/>
@@ -98,14 +98,15 @@
 
                 <p:button value="Retour à l'accueil" outcome="accueil-gestionnaire-parc.xhtml" />
 
-                <p:commandButton value="Valider" actionListener="#{modiferDispoBean.modifVehicule()}" update="message">
+                <p:commandButton value="Valider" actionListener="#{modiferDispoBean.modifVehicule()}" action="accueil-gestionnaire-parc.xhtml"
+                                 update="message">
                     <p:confirm message="Modifier le véhicule?" />
                 </p:commandButton>
 
                 <!-- Popup pour la modif du véhicule -->
                 <p:confirmDialog showEffect="fade" hideEffect="fade" global="true" >
                     <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" />
-                    <p:commandButton value="Confirmer" type="button" action="accueil-gestionnaire-parc.xhtml"
+                    <p:commandButton value="Confirmer" type="button" 
                                      update="message" styleClass="ui-confirmdialog-yes" />
                 </p:confirmDialog>
 

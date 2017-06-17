@@ -10,10 +10,14 @@ import fr.miligo.exceptions.MessagesException;
 import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.parc.Borne;
 import fr.miligo.model.entities.vehicule.Disponibilite;
+import fr.miligo.model.entities.vehicule.Entretien;
 import fr.miligo.model.entities.vehicule.TypeVehicule;
 import fr.miligo.model.entities.vehicule.Vehicule;
 import fr.miligo.model.facades.parc.FacadeBorne;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import javax.inject.Inject;
 
 @Stateless
@@ -117,6 +121,29 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
         lstVehicule = tq.getResultList();
 
         return lstVehicule;
+    }
+    
+    /**
+     * Permet de triée la liste des enrtretiens du vehicule en fonction de la dateEntretien
+     * Du plus moins au plus  recents. 
+     * @param v Attention il faut que la listeEntretien soit différent de vide.
+     * @return  
+     */
+    public Vehicule trieListEntretien(Vehicule v){
+        if(!v.getListeEntretiens().isEmpty()){
+            List<Entretien> lstEntretien = v.getListeEntretiens();
+            
+            Collections.sort(lstEntretien, new Comparator<Entretien>()
+{
+            @Override
+            public int compare(Entretien e1, Entretien e2)
+                {
+                     return (e1.getDateEntretien().compareTo(e2.getDateEntretien()));
+                }
+            });
+            v.setListeEntretiens(lstEntretien);
+        }
+        return v;
     }
         
         
