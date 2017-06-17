@@ -21,9 +21,9 @@
         <hr />
         <!-- Ici le tableau récapitulatif des véhicules -->
 
-        <h:form>
+        <h:form id="formAcceuilGestion" >
             <p:panelGrid columns="2">
-                <p:button value="Ajouter un véhicule" style="margin-top : 40px;" outcome="page-404.xhtml" disabled="true"/>
+                <p:button value="Ajouter un véhicule" style="margin-top : 40px;" outcome="ajouter-vehicule.xhtml" />
                 <p:outputLabel value="Nombre de véhicule présent en ce moment : 
                                #{accueilGestionParckBean.lstVehiculeBorne.size()}" style="float: right;"/>
             </p:panelGrid>                
@@ -47,8 +47,9 @@
                 <p:column headerText="Action">
                     <p:commandLink actionListener="#{accueilGestionParckBean.mettreVehiculeEnFlashScope(v)}"
                                    action="modif-vehicule.xhtml" value="Modifier" />
-                    <!--                    <h:commandLink actionListener="{accueilGestionParckBean.mettreVehiculeEnFlashScope(v)}" action="modif-vehicule.xhtml?faces-redirect=true"value="Modifier"/> 
-                                        AAA <p:link value="Supprimer" outcome="page-404.xhtml"/>-->
+                    <!--<p:outputLabel value=" || " />-->
+<!--                    <p:commandLink actionListener="{accueilGestionParckBean.supprimerVechiule(v)}" update="formAcceuilGestion"
+                                   value="Supprimer" />-->
                 </p:column>
             </p:dataTable>
         </h:form>

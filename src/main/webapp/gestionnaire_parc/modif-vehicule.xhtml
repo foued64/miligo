@@ -55,7 +55,9 @@
                      <!--Popup pour la modif de l'immatriculation--> 
                     <p:dialog id="modifImmatr" modal="false" widgetVar="modifImmatriculation">
                         <p:outputLabel value="#{modiferDispoBean.vehicule.immatriculation}" />
-                        <p:inputText   value="#{modiferDispoBean.vehicule.immatriculation}"/>
+                        <p:inputText   value="#{modiferDispoBean.vehicule.immatriculation}">
+                            <f:validateRegex pattern="[A-Z]{2}-[0-9]{3}-[A-Z]{2}" />
+                        </p:inputText>
                         <p:commandButton value="Annuler" />
                         <p:commandButton value="Valider" actionListener="#{modiferDispoBean.modifVehiculeImmat()}"
                                          onclick="PF('modifImmatriculation').close();" update="panelModfiVehicule message"/>
@@ -80,7 +82,8 @@
                             <p:outputLabel value ="En entretien jusqu'au : " for="calendrier" />
                         </p:column>
                         <p:column>
-                            <p:calendar id="calendrier" value="#{modiferDispoBean.entretien.dateEntretien}" showOn="button"/>
+                            <p:calendar id="calendrier" locale="fr" mindate="#{modiferDispoBean.dateMinEntretien}" 
+                                        value="#{modiferDispoBean.entretien.dateEntretien}" showOn="button"/>
                         </p:column>
                     </p:row>
                     <p:row>

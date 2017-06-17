@@ -10,103 +10,76 @@
     <ui:define name="content">
         <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
         <h:form>
-            <p:panel id="panelModfiVehicule" >
-                <h3><p:outputLabel value="Modifier le véhicule immatricule : #{modiferDispoBean.vehicule.immatriculation}" /></h3>
-                <p:growl id="message" showDetail="true" />
+            <p:panel id="panelModfiVehicule" style="text-align: center" >
+                <p:panelGrid id="panelGridAjoutVehicule" columns="3" >
+                    
+                    <p:outputLabel value="Modele : " for="selectOneMenuId" />
+                    <p:selectOneMenu id="selectOneMenuId" value="#{ajouterVehiculekBean.vehicule.modele}" converter="#{genericConverter}" required="true" >
+                        <f:selectItems value="#{ajouterVehiculekBean.lstModele}" var="m" itemLabel="#{m.libelle}" itemValue="#{m}" />
+                    </p:selectOneMenu>
+                    <p:message for="selectOneMenuId"/>
+                    
+                    <p:outputLabel value="Immatriculation : " for="inputTextKm" />
+                    <p:inputText id="inputTextKm" value="#{ajouterVehiculekBean.vehicule.immatriculation}"  required="true">
+                        <f:validateRegex pattern="[A-Z]{2}-[0-9]{3}-[A-Z]{2}" />
+                    </p:inputText>
+                    <p:message for="inputTextKm"/>
+                    
+                    <p:outputLabel value="Date de mise en circulation :" for="calendrier" />   
+                    <p:calendar id="calendrier" value="#{ajouterVehiculekBean.vehicule.dateMiseEnCirculation}" 
+                                maxdate="#{ajouterVehiculekBean.dateDuJour}" required="true" locale="fr" />
+                    <p:message for="calendrier"/>
+                    
+                    <p:outputLabel value="Kilométrage : " for="inputKm"/>
+                    <p:inputText id="inputKm" value="#{ajouterVehiculekBean.vehicule.kilometrage}" required="true" />
+                    <p:message for="inputKm"/>
+                    
+                    <p:outputLabel value="Niveau Baterrie : " for="inputBatterie" />
+                    <p:column>
+                        <h:outputText id="output" value="#{ajouterVehiculekBean.vehicule.niveauBatterie} %" />
+                        <h:inputHidden id="inputBatterie" value="#{ajouterVehiculekBean.vehicule.niveauBatterie}" required="true" />
+                        <p:slider for="inputBatterie" display="output"  style="width: 200px"  />
+                    </p:column>
+                    <p:message for="inputBatterie"/>
+                    
+                    <p:outputLabel value="Libelle Vehicule : " for="inputLib" />
+                    <p:inputText id="inputLib" value="#{ajouterVehiculekBean.vehicule.libelle}" required="true"  />
+                    <p:message for="inputLib"/>
+                    
+                    <p:outputLabel value="Puissance : " for="inputPuissance" />
+                    <p:inputText id="inputPuissance" value="#{ajouterVehiculekBean.vehicule.puissance}" required="true"  />
+                    <p:message for="inputPuissance"/>
+                    
+                    <p:outputLabel value="Disponibilité : " for="selectOneDisp" />
+                    <p:selectOneMenu id="selectOneDisp" value="#{ajouterVehiculekBean.vehicule.disponibilite}" converter="#{genericConverter}" required="true" >
+                        <f:selectItem itemLabel="Selectionnée Disponibilité" itemValue="" />
+                        <f:selectItems value="#{ajouterVehiculekBean.listeDispo}" var="v" itemLabel="#{v.libelle}" itemValue="#{v}"  />
+                    </p:selectOneMenu>
+                    <p:message for="selectOneDisp"/>
+                    
+                    <p:outputLabel value="Borne de ratachement : " for="selectOneBorne"  />
+                    <p:selectOneMenu id="selectOneBorne" value="#{ajouterVehiculekBean.vehicule.borne}" converter="#{genericConverter}" required="true" >
+                        <f:selectItems value="#{ajouterVehiculekBean.lstBorne}" var="b" itemLabel="#{b.nomBorne}" itemValue="#{b}"  />
+                    </p:selectOneMenu>
+                    <p:message for="selectOneBorne"/>
 
-                <p:panelGrid class="panneau">
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel value="Modèle : " />
-                        </p:column>
-                        <p:column>
-                            <p:outputLabel value="#{modiferDispoBean.vehicule.modele.libelle}" />
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column><p:outputLabel value="Immatriculation : "/></p:column>
-                        <p:column>
-                            <p:outputLabel id="champImmat" value="#{modiferDispoBean.vehicule.immatriculation}" />
-                            <p:commandButton icon="ui-icon-pencil" type="button" onclick="PF('modifImmatriculation').show();">
-                                <!--<p:confirm message="Modifier l'immatriculation" />-->
-                            </p:commandButton>
-                        </p:column>
-                    </p:row>
-                    <p:row>
-                        <p:column>
-                            <p:outputLabel value="Etat : "/>
-                        </p:column>
-                        <p:column>
-                            <p:selectOneMenu value="#{modiferDispoBean.dispo}">
-                                <f:selectItems value="#{modiferDispoBean.listeDispo}"  />
-                                <p:ajax listener="#{modiferDispoBean.affichePageMaintenance()}" update="panelModfiVehicule " />
-                            </p:selectOneMenu>
-                        </p:column>
-                    </p:row>
+                    <p:button value="Retour à l'accueil" outcome="accueil-gestionnaire-parc.xhtml" />
 
-                    <!-- Popup pour la modif de l'immatriculation -->
-                    <p:dialog id="modifImmatr" modal="false" widgetVar="modifImmatriculation">
-                        <p:outputLabel value="#{modiferDispoBean.vehicule.immatriculation}" />
-                        <p:inputText   value="#{modiferDispoBean.vehicule.immatriculation}"/>
-                        <p:commandButton value="Annuler" />
-                        <p:commandButton value="Valider" actionListener="#{modiferDispoBean.modifVehiculeImmat()}"
-                                         onclick="PF('modifImmatriculation').close();" update="panelModfiVehicule message"/>
-                    </p:dialog>
+                    <p:commandButton value="Valider" actionListener="#{ajouterVehiculekBean.ajouterVechiule()}" action="accueil-gestionnaire-parc.xhtml"
+                                     update=" panelGridAjoutVehicule">
+                        <p:confirm message="Ajouter le véhicule?" />
+                    </p:commandButton>
+
+                    <!-- Popup pour la modif du véhicule -->
+                    <p:confirmDialog showEffect="fade" hideEffect="fade" global="true" >
+                        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" />
+                        <p:commandButton value="Confirmer" type="button" 
+                                        styleClass="ui-confirmdialog-yes" />
+                    </p:confirmDialog>
+               
                 </p:panelGrid>
-
-
-
-                <p:panelGrid id="panelMaintenance" rendered="#{modiferDispoBean.panelMaintenantVisu}">
-                    <h3><p:outputLabel value="Date de mise en circulation :" /> 
-                        <p:outputLabel value="#{modiferDispoBean.vehicule.dateMiseEnCirculation}">
-                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
-                        </p:outputLabel></h3>
-                    <p:panelGrid id="panneauIndispo">
-                        <p:row>
-                            <p:column>
-                                <p:outputLabel value ="En entretien jusqu'au : " for="calendrier" />
-                            </p:column>
-                            <p:column>
-                                <p:calendar id="calendrier" value="#{modiferDispoBean.DEntretien}" showOn="button"/>
-                            </p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>
-                                <p:outputLabel value="Cause : " />
-                            </p:column>
-                            <p:column>
-                                <p:selectOneMenu value="#{modiferDispoBean.maintenance}" converter="#{genericConverter}" >
-                                    <f:selectItems value="#{modiferDispoBean.listeMaintenance}"/>
-                                </p:selectOneMenu>
-                            </p:column>
-                        </p:row>
-                    </p:panelGrid>
-                </p:panelGrid>
-
-
-                <p:button value="Retour à l'accueil" outcome="accueil-gestionnaire-parc.xhtml" />
-
-                <p:commandButton value="Valider" actionListener="#{modiferDispoBean.modifVehicule()}" update="message">
-                    <p:confirm message="Modifier le véhicule?" />
-                </p:commandButton>
-
-                <!-- Popup pour la modif du véhicule -->
-                <p:confirmDialog showEffect="fade" hideEffect="fade" global="true" >
-                    <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" />
-                    <p:commandButton value="Confirmer" type="button" action="accueil-gestionnaire-parc.xhtml"
-                                    update="message" styleClass="ui-confirmdialog-yes" />
-                </p:confirmDialog>
-
-
             </p:panel>
         </h:form>
-
-
-
-
-
-
-
     </ui:define>
 
 </ui:composition>

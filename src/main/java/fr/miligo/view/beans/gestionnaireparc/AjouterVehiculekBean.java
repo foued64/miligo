@@ -5,23 +5,27 @@
  */
 package fr.miligo.view.beans.gestionnaireparc;
 
-import fr.miligo.model.entities.emprunt.Client;
-import fr.miligo.model.entities.vehicule.Vehicule;
+import fr.miligo.model.entities.parc.Borne;
+import fr.miligo.model.entities.vehicule.Disponibilite;
+import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
+import fr.miligo.model.entities.vehicule.Modele;
+import fr.miligo.model.facades.vehicule.FacadeModele;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
-import lombok.Setter;
-import net.entetrs.commons.jsf.JsfUtils;
-import org.primefaces.event.SelectEvent;
 
 /**
- *
+ *  Page qui permet d'ajouter un véchicule. 
  * @author codeur
  */
 @ViewScoped
@@ -31,22 +35,33 @@ public class AjouterVehiculekBean extends AbstractGestionParcBean implements Ser
     public static final String FLASH_PARAM_VEHICULE = "vehicule_selectionne";
     
     @Getter
-//    @Setter
-    protected List<Vehicule> lstVehiculeBorne = new ArrayList<>();
+    protected List<Modele> lstModele = new ArrayList<>();
+    
+     @Getter
+    protected List<Borne> lstBorne = new ArrayList<>();
+    
+    @Inject
+    private FacadeModele facadeModele;
+    
+    @Getter
+    private Date dateDuJour;
     
     @PostConstruct
     private void init(){
-//        //Il faut initialiser la borne actuel
-//        emplacementBorne.setAdresseIp("51.51.51.51");
-//        emplacementBorne.setId("gi0imlDmEeexFAAAsvkz1Q");
-//        facadeBorne.read(emplacementBorne);
-        
-////        Init la liste des véhicule present sur la borne
-//        lstVehiculeBorne = facadeVehicule.vehiculeBorne(emplacementBorne);
-        lstVehiculeBorne = facadeVehicule.readAll();
-    
+        lstModele = facadeModele.readAll();
+        lstBorne = facadeBorne.readAll();
+        dateDuJour = java.sql.Date.valueOf(LocalDate.now());
+        listeDispo = facadeDispo.readAll();
     }
      
+    /**
+     * Ajouter un vechicule.
+     */
+    public void ajouterVechiule(){
+        facadeVehicule.create(vehicule);
+        addMessage("Ajout réussi", "Le véhicule à bien été ajouté.");
+    }
     
+ 
     
 }

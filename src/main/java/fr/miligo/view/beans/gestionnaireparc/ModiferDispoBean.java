@@ -26,6 +26,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.apachecommons.CommonsLog;
 import net.entetrs.commons.jsf.JsfUtils;
 
 /**
@@ -34,6 +35,7 @@ import net.entetrs.commons.jsf.JsfUtils;
  */
 @ViewScoped
 @Named
+@CommonsLog
 public class ModiferDispoBean extends AbstractGestionParcBean implements Serializable {
 
     @Inject
@@ -45,9 +47,6 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
     @Getter
     @Setter
     private boolean isPanelMaintenantVisu = false;
-
-    @Getter
-    private List<Disponibilite> listeDispo = new ArrayList<>();
 
     @Getter
     private List<Maintenance> listeMaintenance = new ArrayList<>();
@@ -71,7 +70,7 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
 
     @PostConstruct
     public void init() {
-        dateMinEntretien = Date.from(Instant.now());
+        dateMinEntretien = java.sql.Date.valueOf(LocalDate.now());
         //Permet de recuperer le véhicule passer dans le falshScoped
         Vehicule v = (Vehicule) JsfUtils.getFromFlashScope(AccueilGestionParckBean.FLASH_PARAM_VEHICULE);
 
@@ -107,6 +106,9 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
     public void modifVehiculeImmat() {
         facadeVehicule.update(vehicule);
         addMessage("Modifier l'immatriculation", "Modification prise en compte.");
+        if (log.isInfoEnabled()){
+            log.info("Modfication Prise en compte");					
+	}
     }
 
     /**
@@ -125,17 +127,6 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
         }
         
         addMessage("Succès de la modificiation", "Le véhicule à bien été modifié.");
-    }
-
-    /**
-     * Permet d'afficher el growMessage
-     *
-     * @param resume
-     * @param detail
-     */
-    public void addMessage(String resume, String detail) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, resume, detail);
-        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
 }
