@@ -23,7 +23,7 @@ body{
 
 .banniere{
     margin : auto;
-    height: 180px;
+    height: 8em;
     background: url(img/fleurs.png), linear-gradient(#b5c585, rgba(181, 197, 133, 0));
     background-position: bottom left;
     background-repeat: repeat-x;
@@ -45,25 +45,18 @@ body{
     /* calle la voiture à droite */
     text-align: right;
 }
+.logo img{
+    height: 8em;
+}
 .banniere_mobile{
     margin : auto;
     display : none;
 }
 
-.pageMobile{
-    display : none;
-}
-
 .heureRetourOff
 {
     display : none;
 }
-
-.heureRetourOff
-{
-    display : block;
-}
-
 
 html
 {
@@ -98,10 +91,10 @@ html
     left : 0;
 }
 
-.btnMobile
+/*.btnMobile
 {
     margin : 5%;
-}
+}*/
 
 .btnImageVAE
 {
@@ -140,7 +133,7 @@ html
 
 @media screen and (max-width: 1024px)
 {
-    .banniere{
+/*    .banniere{
         margin : auto;
         display : none;
     }
@@ -153,16 +146,17 @@ html
     .navbar
     {
         display : none;
-    }
+    }*/
 
-    .pageMobile
+/*    .pageMobile
     {
         display : block;
         text-align : center;
         position :relative;
-    }
+    }*/
 
-    .footer
+    
+    footer
     {
         display : none;
     }

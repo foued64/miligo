@@ -10,30 +10,28 @@
     <ui:define name="content">
         <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
 
-        <div class="pageMobile">
-            <p:panel>
-                <!--<p:outputLabel value=" n°#{vehicule.immat} vous a été attribué" />-->
-            </p:panel>
+        <p:panel>
+            <!--<p:outputLabel value=" n°#{vehicule.immat} vous a été attribué" />-->
+        </p:panel>
 
-            <p:panelGrid>
-                <p:row>
-                    <p:column><p:outputLabel value="Résumé du trajet : " /></p:column>
-                    <p:column><p:outputLabel value="#{trajet.depart} - #{trajet.arrivee}" /></p:column>
-                </p:row>
-                <p:row>
-                    <p:column><p:outputLabel value="Distance : " /></p:column>
-                    <p:column><p:outputLabel value="#{trajet.distance} " /></p:column>
-                </p:row>
-                <p:row>
-                    <p:column><p:outputLabel value="Durée : " /></p:column>
-                    <p:column><p:outputLabel value="#{trajet.duree} " /></p:column>
-                </p:row>
-                <p:row>
-                    <p:column><p:outputLabel value="Allée Retour : " /></p:column>
-                    <p:column><p:outputLabel value="#{trajet.allerRetour} " /></p:column>
-                </p:row>
-            </p:panelGrid>
-        </div>
+        <p:panelGrid>
+            <p:row>
+                <p:column><p:outputLabel value="Résumé du trajet : " /></p:column>
+                <p:column><p:outputLabel value="#{trajet.depart} - #{trajet.arrivee}" /></p:column>
+            </p:row>
+            <p:row>
+                <p:column><p:outputLabel value="Distance : " /></p:column>
+                <p:column><p:outputLabel value="#{trajet.distance} " /></p:column>
+            </p:row>
+            <p:row>
+                <p:column><p:outputLabel value="Durée : " /></p:column>
+                <p:column><p:outputLabel value="#{trajet.duree} " /></p:column>
+            </p:row>
+            <p:row>
+                <p:column><p:outputLabel value="Allée Retour : " /></p:column>
+                <p:column><p:outputLabel value="#{trajet.allerRetour} " /></p:column>
+            </p:row>
+        </p:panelGrid>
 
         <div>
             <h:form>

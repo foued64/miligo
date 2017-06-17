@@ -6,41 +6,43 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-
-    <ui:include src="/WEB-INF/templates/fragments/fragment-header.xhtml" />
+    <h:head>
+        <ui:include src="/WEB-INF/templates/fragments/fragment-head.xhtml" />
+    </h:head>
 
     <h:body id="utilisateur">
-        <div>
-            <div>
-                <header class="ui-g">
-                    <div class="ui-g-12 ui-g-nopad">
-                        <div class="banniere">
-                            <div class="logo">
-                                <h:graphicImage library="img" name="miligo_car_rgba.png"/>
-                            </div>
-                        </div>
-                        <p>
-                            <!-- TODO à quoi sert cet insert ? -->
-                            <ui:insert name="subtitle" />
-                        </p>
-                    </div>
-                </header>
-                
-                <div class="ui-g">
-                    
-                    <div class="ui-g-12">
-                        <ui:include src="/WEB-INF/templates/fragments/fragment-nav.xhtml" />
-                    </div>
-                    
-                </div>
 
-                <div class="col-md-10">
-                    <ui:insert name="content">Votre contenu...</ui:insert>
+        <header class="ui-g">
+            <div class="ui-g-12 ui-g-nopad">
+                <div class="banniere">
+                    <div class="logo">
+                        <h:graphicImage library="img" name="miligo_car_rgba.png"/>
+                    </div>
                 </div>
+                <p>
+                    <!-- TODO à quoi sert cet insert ? -->
+                    <ui:insert name="subtitle" />
+                </p>
             </div>
-        </div>	
+        </header>
 
-        <ui:include src="/WEB-INF/templates/fragments/fragment-footer.xhtml" />
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <ui:include src="/WEB-INF/templates/fragments/fragment-nav.xhtml" />
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <ui:insert name="content">Votre contenu...</ui:insert>
+            </div>
+        </div>
+
+        <footer class="ui-g">
+            <div class="ui-g-12">
+                <ui:include src="/WEB-INF/templates/fragments/fragment-footer.xhtml" />
+            </div>
+        </footer>
 
     </h:body>
 

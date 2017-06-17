@@ -10,15 +10,10 @@
     <ui:define name="content">
         <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
 
-        <div class="pageMobile">
+        <p:button value="Emprunter" outcome="emprunter-vehicule.xhtml"  />
+        <p:button value="Restituer"/>
+        <p:button value="Réserver" />
 
-            <p:button class="btnMobile" value="Emprunter" outcome="emprunter-vehicule.xhtml"  />
-            <p:button class="btnMobile" value="Restituer"/>
-            <p:button class="btnMobile" value="Réserver" />
-
-        </div>
-
-        <hr />
 
         <!-- Ici le tableau récapitulatif des réservations -->
 

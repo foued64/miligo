@@ -5,7 +5,9 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
-    <ui:include src="/WEB-INF/templates/fragments/fragment-header.xhtml" />
+    <h:head>
+        <ui:include src="/WEB-INF/templates/fragments/fragment-head.xhtml" />
+    </h:head>
 
     <h:body>
 
@@ -23,22 +25,21 @@
             </div>
         </header>
 
-      <div class="ui-g">
+        <div class="ui-g">
             <div class="ui-g-4">
-          </div>
-          <div class="ui-g-4">
+            </div>
+            <div class="ui-g-4">
                 <ui:insert name="content"></ui:insert>
-          </div>
-          <div class="ui-g-4">
-          </div>
-          
-      </div>
-            
-          
+            </div>
+            <div class="ui-g-4">
+            </div>
+        </div>
 
-
-
-        <ui:include src="/WEB-INF/templates/fragments/fragment-footer.xhtml" />
+        <div class="ui-g">
+            <footer class="ui-g-12">
+                <ui:include src="/WEB-INF/templates/fragments/fragment-footer.xhtml" />
+            </footer>
+        </div>
 
     </h:body>
 

@@ -15,50 +15,48 @@
 
 
 
-        <div class="pageMobile">
-            <h:form>
-                <p:panelGrid id="optionsTrajet" style="margin-bottom:10px;">
-                    <p:row id="positionBorne">
-                        <p:column><h:outputText value="Vous êtes à : "/></p:column>
-                        <p:column><h:outputText value="#{borne.position}" /></p:column>
-                    </p:row>
-                    <p:row id="choixTrajet">
-                        <p:column><h:outputText value="Choisir un point d'arrivée :" /></p:column>>
-                        <p:column><p:selectOneMenu id="listeDestination" value="#{gsbdd.liste}">
-                                <f:selectItem itemLabel="Sélectionné une destination" itemValue="" noSelectionOption="true" />
-                                <f:selectItems value="#{gsbdd.site}" />
-                            </p:selectOneMenu>
-                        </p:column>
-                    </p:row>
-                    <p:row id="dureeTrajet">
-                        <p:column><p:outputLabel for="duree" value="Durée du trajet : " /></p:column>
-                        <p:column><p:calendar id="duree" value="#{calendarView.date}" pattern="HH:mm" timeOnly="true"  /></p:column>
-                    </p:row>
-                </p:panelGrid>
+        <h:form>
+            <p:panelGrid id="optionsTrajet" style="margin-bottom:10px;">
+                <p:row id="positionBorne">
+                    <p:column><h:outputText value="Vous êtes à : "/></p:column>
+                    <p:column><h:outputText value="#{borne.position}" /></p:column>
+                </p:row>
+                <p:row id="choixTrajet">
+                    <p:column><h:outputText value="Choisir un point d'arrivée :" /></p:column>>
+                    <p:column><p:selectOneMenu id="listeDestination" value="#{gsbdd.liste}">
+                            <f:selectItem itemLabel="Sélectionné une destination" itemValue="" noSelectionOption="true" />
+                            <f:selectItems value="#{gsbdd.site}" />
+                        </p:selectOneMenu>
+                    </p:column>
+                </p:row>
+                <p:row id="dureeTrajet">
+                    <p:column><p:outputLabel for="duree" value="Durée du trajet : " /></p:column>
+                    <p:column><p:calendar id="duree" value="#{calendarView.date}" pattern="HH:mm" timeOnly="true"  /></p:column>
+                </p:row>
+            </p:panelGrid>
 
-                <p:panelGrid id="optionAllerRetour" columns="2" style="margin-bottom:10px;">
-                    <p:row id="checkBoxAllerRetour">
-                        <p:column>
-                            <p:selectBooleanCheckbox widgetVar="selectRetour" id="allerRetour" value="#{checkboxView.allerRetour}">
-                                <f:selectItem itemLabel="Réserver votre retour?" itemValue="retour" />
-                            </p:selectBooleanCheckbox>
-                        </p:column>
-                        <p:column id="colonneHeureRetour" >
-                            <p:outputLabel for="heureRetour" value="Heure de départ : " />
-                            <p:calendar widgetVar="calendarRetour" style="display:none;" id="heureRetour" value="#{calendarView.date}" pattern="HH:mm" timeOnly="true" />
-                        </p:column>
+            <p:panelGrid id="optionAllerRetour" columns="2" style="margin-bottom:10px;">
+                <p:row id="checkBoxAllerRetour">
+                    <p:column>
+                        <p:selectBooleanCheckbox widgetVar="selectRetour" id="allerRetour" value="#{checkboxView.allerRetour}">
+                            <f:selectItem itemLabel="Réserver votre retour?" itemValue="retour" />
+                        </p:selectBooleanCheckbox>
+                    </p:column>
+                    <p:column id="colonneHeureRetour" >
+                        <p:outputLabel for="heureRetour" value="Heure de départ : " />
+                        <p:calendar widgetVar="calendarRetour" style="display:none;" id="heureRetour" value="#{calendarView.date}" pattern="HH:mm" timeOnly="true" />
+                    </p:column>
 
-                    </p:row>
-                </p:panelGrid>
+                </p:row>
+            </p:panelGrid>
 
-                <div id="validation">
-                    <p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
-                    <p:button value="Valider" outcome="choix-vehicule-vae.xhtml" />
-                </div>
+            <div id="validation">
+                <p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
+                <p:button value="Valider" outcome="choix-vehicule-vae.xhtml" />
+            </div>
 
-            </h:form>
-            <h:outputScript library="js" name="allerRetour.js" />
-        </div>
+        </h:form>
+        <h:outputScript library="js" name="allerRetour.js" />
 
     </ui:define>
 
