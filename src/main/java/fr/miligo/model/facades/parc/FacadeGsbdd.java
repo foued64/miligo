@@ -1,10 +1,11 @@
 package fr.miligo.model.facades.parc;
 
-import javax.ejb.Stateless;
 
 import fr.miligo.common.AbstractFacade;
 import fr.miligo.model.entities.parc.Gsbdd;
-import javax.enterprise.context.Dependent;
+import javax.ejb.Stateless;
+
+
 
 @Stateless
 public class FacadeGsbdd extends AbstractFacade<Gsbdd> {

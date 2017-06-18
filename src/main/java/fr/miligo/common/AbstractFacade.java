@@ -16,7 +16,7 @@ import net.entetrs.commons.jpa.AbstractDaoEntrepriseEdition;
  */
 public abstract class AbstractFacade<T> extends AbstractDaoEntrepriseEdition<T> {
 
-	@PersistenceContext(unitName = "miligoPU")
+	@PersistenceContext(unitName = "miligo")
 	private EntityManager em;
 
 	@Override
