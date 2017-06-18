@@ -1,0 +1,85 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-standard-gestionnaire.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                >
+
+    <ui:define name="title">Modifier un véhicule - Gestionnaire de Parc</ui:define>
+    <ui:define name="content">
+        <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+        <h:form>
+            <p:panel id="panelModfiVehicule" style="text-align: center" >
+                <p:panelGrid id="panelGridAjoutVehicule" columns="3" >
+                    
+                    <p:outputLabel value="Modele : " for="selectOneMenuId" />
+                    <p:selectOneMenu id="selectOneMenuId" value="#{ajouterVehiculekBean.vehicule.modele}" converter="#{genericConverter}" required="true" >
+                        <f:selectItems value="#{ajouterVehiculekBean.lstModele}" var="m" itemLabel="#{m.libelle}" itemValue="#{m}" />
+                    </p:selectOneMenu>
+                    <p:message for="selectOneMenuId"/>
+                    
+                    <p:outputLabel value="Immatriculation : " for="inputTextKm" />
+                    <p:inputText id="inputTextKm" value="#{ajouterVehiculekBean.vehicule.immatriculation}"  required="true">
+                        <f:validateRegex pattern="[A-Z]{2}-[0-9]{3}-[A-Z]{2}" />
+                    </p:inputText>
+                    <p:message for="inputTextKm"/>
+                    
+                    <p:outputLabel value="Date de mise en circulation :" for="calendrier" />   
+                    <p:calendar id="calendrier" value="#{ajouterVehiculekBean.vehicule.dateMiseEnCirculation}" 
+                                maxdate="#{ajouterVehiculekBean.dateDuJour}" required="true" locale="fr" />
+                    <p:message for="calendrier"/>
+                    
+                    <p:outputLabel value="Kilométrage : " for="inputKm"/>
+                    <p:inputText id="inputKm" value="#{ajouterVehiculekBean.vehicule.kilometrage}" required="true" />
+                    <p:message for="inputKm"/>
+                    
+                    <p:outputLabel value="Niveau Baterrie : " for="inputBatterie" />
+                    <p:column>
+                        <h:outputText id="output" value="#{ajouterVehiculekBean.vehicule.niveauBatterie} %" />
+                        <h:inputHidden id="inputBatterie" value="#{ajouterVehiculekBean.vehicule.niveauBatterie}" required="true" />
+                        <p:slider for="inputBatterie" display="output"  style="width: 200px"  />
+                    </p:column>
+                    <p:message for="inputBatterie"/>
+                    
+                    <p:outputLabel value="Libelle Vehicule : " for="inputLib" />
+                    <p:inputText id="inputLib" value="#{ajouterVehiculekBean.vehicule.libelle}" required="true"  />
+                    <p:message for="inputLib"/>
+                    
+                    <p:outputLabel value="Puissance : " for="inputPuissance" />
+                    <p:inputText id="inputPuissance" value="#{ajouterVehiculekBean.vehicule.puissance}" required="true"  />
+                    <p:message for="inputPuissance"/>
+                    
+                    <p:outputLabel value="Disponibilité : " for="selectOneDisp" />
+                    <p:selectOneMenu id="selectOneDisp" value="#{ajouterVehiculekBean.vehicule.disponibilite}" converter="#{genericConverter}" required="true" >
+                        <f:selectItem itemLabel="Selectionnée Disponibilité" itemValue="" />
+                        <f:selectItems value="#{ajouterVehiculekBean.listeDispo}" var="v" itemLabel="#{v}" itemValue="#{v}"  />
+                    </p:selectOneMenu>
+                    <p:message for="selectOneDisp"/>
+                    
+                    <p:outputLabel value="Borne de ratachement : " for="selectOneBorne"  />
+                    <p:selectOneMenu id="selectOneBorne" value="#{ajouterVehiculekBean.vehicule.borne}" converter="#{genericConverter}" required="true" >
+                        <f:selectItems value="#{ajouterVehiculekBean.lstBorne}" var="b" itemLabel="#{b.site.nom}" itemValue="#{b}"  />
+                    </p:selectOneMenu>
+                    <p:message for="selectOneBorne"/>
+
+                    <p:button value="Retour à l'accueil" outcome="accueil-gestionnaire-parc.xhtml" />
+
+                    <p:commandButton value="Valider" actionListener="#{ajouterVehiculekBean.ajouterVechiule()}" action="accueil-gestionnaire-parc.xhtml"
+                                     update=" panelGridAjoutVehicule">
+                        <p:confirm message="Ajouter le véhicule?" />
+                    </p:commandButton>
+
+                    <!-- Popup pour la modif du véhicule -->
+                    <p:confirmDialog showEffect="fade" hideEffect="fade" global="true" >
+                        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" />
+                        <p:commandButton value="Confirmer" type="button" 
+                                        styleClass="ui-confirmdialog-yes" />
+                    </p:confirmDialog>
+               
+                </p:panelGrid>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

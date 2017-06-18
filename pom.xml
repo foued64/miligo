@@ -5,7 +5,7 @@
 
 	<groupId>fr</groupId>
 	<artifactId>miligo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>miligo</name>
@@ -14,9 +14,23 @@
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url>http://repository.primefaces.org</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
-		<dependency>
+	 <dependency>
+	  <groupId>org.hibernate</groupId>
+	  <artifactId>hibernate-validator</artifactId>
+	  <version>5.2.4.Final</version>
+	  <type>jar</type>
+	 </dependency>
+	 <dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<scope>provided</scope>
@@ -42,11 +56,6 @@
 			<artifactId>lombok</artifactId>
 			<version>1.16.16</version>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-		    <groupId>commons-logging</groupId>
-		    <artifactId>commons-logging</artifactId>
-		    <version>1.1.3</version>
 		</dependency>
 		<dependency>
             <groupId>net.entetrs.commons</groupId>
@@ -89,7 +98,24 @@
 		    <artifactId>rewrite-config-prettyfaces</artifactId>
 		    <version>3.4.1.Final</version>
 		</dependency>
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>1.2.17</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.2</version>
+		</dependency>
+				
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>south-street</artifactId>
+			<version>1.0.10</version>
+		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>
@@ -108,10 +134,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.3</version>
+				<version>3.1.0</version>
 				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
+                                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                                        <warName>miligo</warName>
+                                </configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

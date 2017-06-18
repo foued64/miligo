@@ -1,0 +1,156 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-standard-gestionnaire.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                >
+
+    <ui:define name="title">Modifier un véhicule - Gestionnaire de Parc</ui:define>
+    <ui:define name="content">
+        <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+        <h:form>
+
+
+
+
+            <p:growl id="message" showDetail="true" />
+
+
+
+
+
+
+            <p:panel class="ui-g" id="panelModfiVehicule" >
+                <div class="ui-g-6 panneau">
+
+                    <p:panelGrid columns="2">
+
+                        <p:outputLabel value="Modifier le véhicule immatricule :"/> 
+                        <p:outputLabel value="#{modiferDispoBean.vehicule.immatriculation}" />
+
+                        <p:outputLabel value="Modèle :" />
+                        <p:outputLabel value="#{modiferDispoBean.vehicule.modele.libelle}" />
+
+                        <p:outputLabel id="champImmat" value="Immatriculation :" />
+                        <p:commandButton icon="ui-icon-pencil" type="button" onclick="PF('modifImmatriculation').show();">
+                            <p:outputLabel value="#{modiferDispoBean.vehicule.immatriculation}" />
+                        </p:commandButton>
+
+                        <p:outputLabel value="Etat : "/>
+                        <p:selectOneMenu value="#{modiferDispoBean.vehicule.disponibilite}" converter="#{genericConverter}">
+                            <f:selectItems value="#{modiferDispoBean.listeDispo}" var="v" itemLabel="#{v}" itemValue="#{v}"  />
+                            <p:ajax listener="#{modiferDispoBean.affichePageMaintenance()}" update="panelModfiVehicule " />
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+
+
+
+
+                    <!--Popup pour la modif de l'immatriculation--> 
+                    <p:dialog id="modifImmatr" modal="false" widgetVar="modifImmatriculation">
+                        <div>
+                            Nouvelle immatriculation : 
+                            <p:inputText   value="#{modiferDispoBean.vehicule.immatriculation}">
+                                <f:validateRegex pattern="[A-Z]{2}-[0-9]{3}-[A-Z]{2}" />
+                            </p:inputText>
+                            
+                        </div>
+                        
+                        
+                        <div><p:commandButton value="Annuler" onclick="PF('modifImmatriculation').hide();"/>
+                            <p:commandButton value="Valider" actionListener="#{modiferDispoBean.modifVehiculeImmat()}"
+                                             onclick="PF('modifImmatriculation').close();" update="panelModfiVehicule message"/>
+                        </div>                    </p:dialog>
+                </div>
+
+
+
+
+                <div class="ui-g-6" id="panelMaintenance" >
+                    
+                    <p:panelGrid  columns="2" rendered="#{modiferDispoBean.panelMaintenantVisu}">
+
+                        <p:outputLabel value="Date de mise en circulation :" /> 
+                        <p:outputLabel value="#{modiferDispoBean.vehicule.dateMiseEnCirculation}">
+                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                        </p:outputLabel>
+
+                        <p:outputLabel value ="En entretien jusqu'au : " for="calendrier" />
+                        <p:calendar id="calendrier" locale="fr" mindate="#{modiferDispoBean.dateMinEntretien}" 
+                                    value="#{modiferDispoBean.entretien.dateEntretien}" showOn="button"/>
+
+                        <p:outputLabel value="Cause : " />
+                        <p:selectOneMenu value="#{modiferDispoBean.maintenance}" converter="#{genericConverter}" >
+                            <f:selectItems value="#{modiferDispoBean.listeMaintenance}"/>
+                        </p:selectOneMenu>
+
+                    </p:panelGrid>
+                </div>
+
+
+
+
+
+                <!-- Popup pour la modif du véhicule -->
+                <p:confirmDialog showEffect="fade" hideEffect="fade" global="true" >
+                    <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" />
+                    <p:commandButton value="Confirmer" type="button" 
+                                     update="message" styleClass="ui-confirmdialog-yes" />
+                </p:confirmDialog>
+
+            </p:panel>
+
+            <!-- Boutons -->
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <p:button value="Retour à l'accueil" outcome="accueil-gestionnaire-parc.xhtml" />
+
+                    <p:commandButton value="Valider" actionListener="#{modiferDispoBean.modifVehicule()}" action="accueil-gestionnaire-parc.xhtml"
+                                     update="message">
+                        <p:confirm message="Modifier le véhicule?" />
+                    </p:commandButton>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </h:form>
+
+
+
+
+
+
+
+    </ui:define>
+
+</ui:composition>

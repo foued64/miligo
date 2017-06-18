@@ -1,0 +1,163 @@
+/* reset CSS */
+body{
+    padding: 0;
+    margin: 0;
+}
+
+#infoProfil
+{
+    text-align: right;
+    position : absolute;
+    top : 0px;
+    right : 0px;
+}
+
+#validation
+{
+    text-align : center;
+    position :relative;
+    bottom : 0px;
+    margin-top : 50px;
+}
+
+
+.banniere{
+    margin : auto;
+    height: 8em;
+    background: url(img/fleurs.png), linear-gradient(#b5c585, rgba(181, 197, 133, 0));
+    background-position: bottom left;
+    background-repeat: repeat-x;
+    background-position: bottom left;
+    border-bottom: 3px solid #a1c636;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.logo{
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+    /* calle la voiture à droite */
+    text-align: right;
+}
+.logo img{
+    height: 8em;
+}
+.banniere_mobile{
+    margin : auto;
+    display : none;
+}
+
+.heureRetourOff
+{
+    display : none;
+}
+
+html
+{
+    height : 100%;
+}
+
+#utilisateur
+{
+    background-image:linear-gradient(white, lightgreen);
+}
+
+#gestionnaire
+{
+    background-image:linear-gradient(white, yellow);
+}
+
+
+.container-big
+{
+
+    position : relative;
+    min-height : 100%;
+    padding : 0;
+    margin : 0;
+}
+
+.footer
+{
+    position : absolute;
+    bottom : 0;
+    right : 0;
+    left : 0;
+}
+
+/*.btnMobile
+{
+    margin : 5%;
+}*/
+
+.btnImageVAE
+{
+    background: url('img/velo-electrique-small.png') no-repeat top !important;
+    width : 250px;
+    height : 200px;
+    text-align : center;
+    position :relative;
+    margin : auto;
+    margin-left : 20px;
+    margin-bottom : 20px;
+    float : top;
+
+}
+
+.btnImageVE
+{
+    background: url('img/voiture-electrique-small.png') no-repeat top !important;
+    width : 250px;
+    height : 200px;
+    text-align : center;
+    position :relative;
+    margin : auto;
+    margin-right : 20px;
+    margin-bottom : 20px;
+    float : top;
+
+}
+
+.autreChoix
+{
+    position :relative;
+    float : bottom;
+}
+
+
+@media screen and (max-width: 1024px)
+{
+/*    .banniere{
+        margin : auto;
+        display : none;
+    }
+
+    .banniere_mobile{
+        margin : auto;
+        display : inline;
+    }
+
+    .navbar
+    {
+        display : none;
+    }*/
+
+/*    .pageMobile
+    {
+        display : block;
+        text-align : center;
+        position :relative;
+    }*/
+
+    
+    footer
+    {
+        display : none;
+    }
+}

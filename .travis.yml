@@ -8,8 +8,11 @@ addons:
     # permet à travis de faire analyse le code sur sonarqube
     token:
       secure: "A/DOrXcgNh7r6RhUGAY/lT9H08oracRuVSLPP2cqBVGp+hRu9kOaqt6TiZMMcarMys8bCL6dlvDTeDHO/XQnZEqHNz7efIcT63WGnH9yzb+xAhAnyy3kSZ52DPLqIQTOwr5VNTyJpRBJfNyvF5mn9OEEkVai7OdCr3254UD7ZaHiAlreRSOS9TIxDL4Upne+aCli461uRnvTFvDk0PvD3USiHP/dZPnq0TnxBnO8FYerkHjW4iNjZQZ+iR30O4PA+nB6qw499CSHk2EwJQaIJT0rosZ5s3bkPecsLYzT+FA5EGiaaVZrrC41o2CFs9ZZM6M3OZRNKWuxsNwkIfJRJ3uH49m55N+EfMpWayNWHBECwQLorMZtEUuZZwS3oGl1X2ZrCYM2Ei+/ts8Nb0s4FtN7KHMLrsvvMzqTyB97J+VmNB2JV34UXacOY+05oAOIjqpWv1yQBRLG8E7CKaLIElnolRYqVJbhU30Sqq+ubdgTf0zHUv0nqvrFx1W/dI2NJ7e1JoK9FLxbG6w+OMHrREUsy1bL21b83rVEsl4mJK0iOUi5+kBVEJosuC7Q7ieIjr0wjFll484DZGY1EJkxyZM80+/OxQg8HRlF0DwOOItAJiyhuZZcGmLNml+0gwSnAD2Qh4D2ZPAcyHChIPDyWa6NFhxI8tu1Qv5ihDz3TUY="
+    branches:
+      - master
+      - dev
     # permet à sonarqube de commenter les Pull Requests
-    github_token: 
+    github_token:
       secure: "c/kWlOED/ifMs9cSgHOF7y+8uM0PYMuvE4qI8pLtwmtUeiiUMILmGNheQamOCjtWvLPFK/3rkrpKnE9Ig8e9c8uiW/Y3/+q1IOXL5Kv2YcF1jsybi2rnMzNDPUudOZ11oKOyQtyinlZrD/AWGiDJQ43ssHc9h7g/ZFAh52nvpzpQFjAVnNuLGq9gifmo9NeFeHrg3eCPA3SzrD3+CEqndyR65cK05JTSNQtNpqjsmTF69+Oi00eA5y5QffkFueriygL6qQhpCkq+GWfx988Ri60kI2fsSlIVMRsJ/vMfIg5qrvTFjvA7abYIxdGuf9ZSjRC+hhK5NHOTWvZU867e/J4sNiIBUrfxnAauX5phwmC/c8fXRrlPON5ADEiydxAPzVshqAAGAX5Y+Cg5vHluSSm8HkS9T7+mV/Wi2jc0KFMQxNbB25R/hgOe1URpijhzrcHmwHx3/8XY9OK/8qIqTDhdoC6WhSIbWdImz9yNjDBjCyU8B3ed/b0sXb6A/gyNDM6ZGvJMfpfhHoFDD3vRvEXvnk726x2m1NSaKpDa56cGHMbtpCvyUqooPDBvwVX8jbbIXkwFOUqt6fynGf9pHwqI4mm1GndamlooHuNb2HU5YAmED8QdkgWCKvbCiw9BV6TJo/dNzqEJE4W9DHVAFNIrBbU5EqB9KsLMc1OvrV8="
 
 install:
@@ -36,4 +39,3 @@ before_cache:
   - rm -rf $HOME/.m2/repository/net/entetrs
   - rm -rf $HOME/.m2/repository/fr/teamy
   - find $HOME/.m2 -name resolver-status.properties -exec rm {} \;
-

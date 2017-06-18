@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-standard-utilisateur.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:cps="http://java.sun.com/jsf/composite/composites">
+
+	<ui:define name="title">Accueil - Utilisateur</ui:define>
+	<ui:define name="content">
+		<ui:include
+			src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+
+		<div class="pageMobile">
+                    <p:messages id="messages" showDetail="false" autoUpdate="true"
+					closable="false" />
+                        
+			<p:panel>
+				<p:outputLabel value="Résumé de l'emprunt avant validation" />
+			</p:panel>
+
+			<p:panelGrid>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="Résumé du trajet : " />
+					</p:column>
+					<p:column>
+						<p:outputLabel
+							value="#{emprunterResumeBean.trajet.borneDepart.site.nom} - #{emprunterResumeBean.trajet.borneArrivee.site.nom}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="Distance  (km): " />
+					</p:column>
+					<p:column>
+						<p:outputLabel
+							value="#{emprunterResumeBean.trajet.longueurTrajet}" />
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="Durée (hh:mm) : " />
+					</p:column>
+					<p:column>					
+						<cps:outputDateTime  pattern="hh:mm " type="time" value="#{emprunterResumeBean.tempsEmprunt}"/>
+					</p:column>
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:outputLabel value="Type véhicule : " />
+					</p:column>
+					<p:column>					
+						<p:outputLabel value="#{emprunterResumeBean.typeVehicule.libelle}"/>
+					</p:column>
+				</p:row>
+
+			</p:panelGrid>
+		</div>
+
+		<div>
+                    <h:form id="formBoutton">
+		
+			<div>
+				<p:commandButton value="C'est parti!"
+					actionListener="#{emprunterResumeBean.creerEmprunt()}"
+					update="@form :formBoutton"
+					rendered="#{emprunterResumeBean.btnCestParti}"/>
+			</div>
+
+			<div id="validation">
+                            <p:button value="#{emprunterResumeBean.btnRetour}"
+					outcome="accueil-utilisateur.xhtml" />
+			</div>
+
+                    </h:form>
+                </div>
+
+		
+	</ui:define>
+
+</ui:composition>

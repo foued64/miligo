@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-standard-gestionnaire.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:cps="http://java.sun.com/jsf/composite/composites">
+
+    <ui:define name="title">Accueil - Gestionnaire de Parc</ui:define>
+
+    <ui:define name="content">
+
+        <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+
+
+
+        <div style="margin-top : 40px;"><p:outputLabel value="Emplacement de la borne : "  /></div>
+        <p:outputLabel value="#{accueilGestionParckBean.emplacementBorne.nomBorne}" />
+        <!--        <div style="margin-bottom : 40px;"></div>-->
+
+        <hr />
+        <!-- Ici le tableau récapitulatif des véhicules -->
+
+        <h:form id="formAcceuilGestion" >
+            <p:panelGrid columns="2">
+                <p:button value="Ajouter un véhicule" outcome="ajouter-vehicule.xhtml" />
+                <p:outputLabel value="Nombre de véhicule présent en ce moment : 
+                               #{accueilGestionParckBean.lstVehiculeBorne.size()}" style="float: right;"/>
+            </p:panelGrid>                
+            <p:dataTable id="dataTableLstVehicule" var="v" value="#{accueilGestionParckBean.lstVehiculeBorne}" style="margin-top : 40px;">
+                <p:column headerText="N° immatricualtion" filterBy="#{v.immatriculation}" 
+                          filterMatchMode="contains" sortBy="#{v.immatriculation}" >
+                    <h:outputText value="#{v.immatriculation}" />
+                </p:column>
+
+                <p:column headerText="Type de véhicule" sortBy="#{v.modele.typeVehicule.libelle}">
+                    <h:outputText value="#{v.modele.typeVehicule.libelle}" />
+                </p:column>
+
+                <p:column headerText="Etat général" sortBy="#{v.disponibilite}">
+                    <h:outputText value="#{v.disponibilite}" />
+                </p:column>
+
+                <p:column headerText="Emplacement" sortBy="#{v.borne.site.nom}">
+                    <h:outputText value="#{v.borne.site.nom}" />
+                </p:column>
+                <p:column headerText="Action">
+                    <p:commandLink actionListener="#{accueilGestionParckBean.mettreVehiculeEnFlashScope(v)}"
+                                   action="modif-vehicule.xhtml" value="Modifier" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

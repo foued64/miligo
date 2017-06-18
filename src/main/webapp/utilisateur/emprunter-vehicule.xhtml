@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/template-standard-utilisateur.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cps="http://java.sun.com/jsf/composite/composites">
+	
+<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+
+    <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+
+	<ui:define name="content">
+	<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+			
+			
+			
+			<h:form>
+				<p:panelGrid id="optionsTrajet" columns="2" style="margin-bottom:10px;">
+					<p:row id="positionBorne">
+						<p:column><h:outputText value="Vous êtes à : "/></p:column>
+						<p:column><h:outputText value="#{emprunterBean.borneAller.site.nom}" /></p:column>
+					</p:row>
+					<p:row id="choixTrajet">
+						<p:column><h:outputText value="Choisir un point d'arrivée :" /></p:column>
+						<p:column>
+							
+							 <p:selectOneMenu id="car" value="#{emprunterBean.borneRetour}" converter="#{genericConverter}" required="true">
+					            <f:selectItem itemValue="" itemLabel="Sélectionné une destination" noSelectionOption="true" />
+					            <f:selectItems value="#{emprunterBean.lstBorne}" var="b" itemLabel="#{b.site.nom}" 
+					            itemValue="#{b}" />
+					        </p:selectOneMenu>
+							
+							
+							
+			           	 </p:column>
+			        </p:row>
+					<p:row id="dureeTrajet">
+						<p:column><p:outputLabel for="duree" value="Durée du trajet : " /></p:column>
+                                        <p:column><p:calendar id="duree" value="#{emprunterBean.tempsEmprunt}" pattern="HH:mm" timeOnly="true"  required="true"/></p:column>
+        			</p:row>
+				</p:panelGrid>
+				
+
+				
+				<div id="validation">
+					<p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
+				
+					<p:commandButton actionListener="#{emprunterBean.validerTrajet()}" action="choix-vehicule-vevae.xhtml?faces-redirect=true" value="Emprunter"/>
+				</div>
+				
+			</h:form>
+		
+		
+	</ui:define>
+	
+</ui:composition>

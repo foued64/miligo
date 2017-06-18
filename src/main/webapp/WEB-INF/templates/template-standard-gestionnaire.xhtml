@@ -1,0 +1,43 @@
+<!DOCTYPE html >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" lang="fr">
+
+    <h:head>
+        <ui:include src="/WEB-INF/templates/fragments/fragment-head.xhtml" />
+    </h:head>
+
+    <h:body id="gestionnaire">
+
+        <header class="ui-g">
+            <div class="ui-g-12 ui-g-nopad">
+                <div class="banniere">
+                    <div class="logo">
+                        <h:graphicImage library="img" name="miligo_car_rgba.png"/>
+                    </div>
+                </div>
+                <p>
+                    <!-- TODO à quoi sert cet insert ? -->
+                    <ui:insert name="subtitle" />
+                </p>
+            </div>
+        </header>
+
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <ui:insert name="content">Votre contenu...</ui:insert>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <footer class="ui-g-12">
+                <ui:include src="/WEB-INF/templates/fragments/fragment-footer.xhtml" />
+            </footer>
+        </div>
+
+    </h:body>
+
+</html>

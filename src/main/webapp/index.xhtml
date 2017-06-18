@@ -1,14 +1,23 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/WEB-INF/templates/template-bootstrap-light.xhtml"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:cps="http://java.sun.com/jsf/composite/composites">
-	
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-light.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                >
 
-	<ui:define name="content">
-		<!-- TODO : construire la page de login -->
-	</ui:define>
-	
+
+    <ui:define name="title">DEMO - IT1</ui:define>
+
+    <ui:define name="content">
+        
+        <h2>DEMO - IT1</h2>
+
+        <h:form>
+            <p:commandButton value="Emprunter un véhicule" action="utilisateur/accueil-utilisateur.xhtml?faces-redirect=true" />
+            <p:commandButton value="Modifier la disponibilité d'un véhicule" action="gestionnaire-parc/accueil-gestionnaire-parc.xhtml?faces-redirect=true" />
+        </h:form>
+
+    </ui:define>
+
 </ui:composition>
