@@ -8,6 +8,8 @@ import fr.miligo.common.AbstractFacade;
 import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.emprunt.Trajet;
 import fr.miligo.model.entities.parc.Borne;
+import fr.miligo.model.entities.parc.Site;
+import fr.miligo.model.entities.parc.Ville;
 import fr.miligo.model.facades.parc.FacadeBorne;
 
 @Stateless
@@ -47,4 +49,31 @@ public class FacadeTrajet extends AbstractFacade<Trajet> {
 		}
 	}
 
+
+	/**
+	 * Méthode de fabrication d'un trajet
+	 * @param indice
+	 * @param longueur
+	 * @param borneArrive
+	 * @param borneDepart
+	 * @return une nouvelle instance de trajet
+	 */
+	public Trajet newInstance(Integer indice,Double longueur,String borneArrive,String borneDepart) {
+		
+		Borne bornearrive = facadeBorne.readbyNom(borneArrive);
+		Borne bornedepart = facadeBorne.readbyNom(borneDepart);
+		
+		Trajet t = super.newInstance();
+		t.setIndiceCarbone(indice);
+		t.setLongueurTrajet(longueur);
+		t.setBorneArrivee(bornearrive);
+		t.setBorneDepart(bornedepart);
+		
+		return t;
+	
+	}	
+	
+	
+
+	
 }
