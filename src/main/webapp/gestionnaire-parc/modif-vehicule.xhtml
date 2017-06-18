@@ -39,7 +39,7 @@
 
                         <p:outputLabel value="Etat : "/>
                         <p:selectOneMenu value="#{modiferDispoBean.vehicule.disponibilite}" converter="#{genericConverter}">
-                            <f:selectItems value="#{modiferDispoBean.listeDispo}" var="v" itemLabel="#{v.libelle}" itemValue="#{v}"  />
+                            <f:selectItems value="#{modiferDispoBean.listeDispo}" var="v" itemLabel="#{v}" itemValue="#{v}"  />
                             <p:ajax listener="#{modiferDispoBean.affichePageMaintenance()}" update="panelModfiVehicule " />
                         </p:selectOneMenu>
 

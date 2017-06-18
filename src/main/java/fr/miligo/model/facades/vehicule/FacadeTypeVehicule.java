@@ -12,17 +12,27 @@ import fr.miligo.model.entities.vehicule.TypeVehicule;
 @Stateless
 public class FacadeTypeVehicule extends AbstractFacade<TypeVehicule> {
 
+
 	/**
-	 * Permet de choisir le typeVehicule en fonction du trajet
-	 * @param t {@link Trajet}
+	 * Permet de choisir le typeVehicule en fonction de la distance du trajet
+	 * @param longueurTrajet {@link Trajet}
 	 */
-	public List<TypeVehicule> calculerTypeVehicule(Trajet t){
+	public List<TypeVehicule> calculerTypeVehicule(Double longueurTrajet){
+		
 		List<TypeVehicule> lstTv = new ArrayList<>();
-		if(t.getLongueurTrajet() < 8){
+		
+		//Vérification de la distance min qui ajoute un VAE à la lstTv
+		if(longueurTrajet < 8)
+		{
 			lstTv.add(searchFirstResult("libelle", "VAE"));
-		}else if(t.getLongueurTrajet() > 16){
+			
+		}
+		else if(longueurTrajet > 16) //Vérification de la distance max qui ajoute un VE à la lstTv
+		{
 			lstTv.add(searchFirstResult("libelle", "VE"));
-		}else{
+		}
+		else //La distance est comprise entre le min et le max dc ajout un VE et VAE à la lstTv
+		{
 			lstTv.add(searchFirstResult("libelle", "VAE"));
 			lstTv.add(searchFirstResult("libelle", "VE"));
 		}

@@ -5,7 +5,6 @@
  */
 package fr.miligo.view.beans.gestionnaireparc;
 
-import fr.miligo.model.entities.vehicule.Disponibilite;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.entities.vehicule.Entretien;
 import fr.miligo.model.entities.vehicule.Maintenance;
@@ -13,14 +12,11 @@ import fr.miligo.model.entities.vehicule.Vehicule;
 import fr.miligo.model.facades.vehicule.FacadeEntretien;
 import fr.miligo.model.facades.vehicule.FacadeMaintenance;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -79,12 +75,12 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
          * Permet de savoir si la disponibilité est en maitenance.
          * Pour la modif du vechiule il faut mettre l'entretien en fin.
          */
-        if(vehicule.getDisponibilite().getLibelle().equals(DisponibiliteEnum.EN_MAINTENANCE)){
+        if(vehicule.getDisponibilite().equals(DisponibiliteEnum.MAINTENANCE)){
           isPanelMaintenantVisu = true;
         }
 
         //EN attente de l'enumeartion dispo MAILLOT
-        listeDispo = facadeDispo.readAll();
+        listeDispo = DisponibiliteEnum.values();
 
         listeMaintenance = facadeMaintenance.readAll();
     }
@@ -93,9 +89,9 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
      * Affiche si la disponibilitée est INDISPONIBLE le panel associée.
      */
     public void affichePageMaintenance() {
-        if (vehicule.getDisponibilite().getLibelle().equals(DisponibiliteEnum.EN_MAINTENANCE)) {
+        if (vehicule.getDisponibilite().equals(DisponibiliteEnum.MAINTENANCE)) {
             isPanelMaintenantVisu = true;
-        }else if(vehicule.getDisponibilite().getLibelle().equals(DisponibiliteEnum.DISPONIBLE)){
+        }else if(vehicule.getDisponibilite().equals(DisponibiliteEnum.DISPONIBLE)){
             isPanelMaintenantVisu = false;
         }
     }
@@ -116,7 +112,7 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
      * Sinon mets un date de fin a l'entretien pour rendre le vehicule a nouveau disponible.
      */
     public void modifVehicule() {
-        if(vehicule.getDisponibilite().getLibelle().equals(DisponibiliteEnum.EN_MAINTENANCE)){
+        if(vehicule.getDisponibilite().equals(DisponibiliteEnum.MAINTENANCE)){
             entretien.setVehicule(vehicule);
             Maintenance m = facadeMaintenance.read(maintenance.getId());
             entretien.getListeMaintenance().add(m);
@@ -126,7 +122,7 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
            facadeVehicule.update(vehicule);
         }
         
-        addMessage("Succès de la modificiation", "Le véhicule à bien été modifié.");
+        addMessage("Succès de la modification", "Le véhicule à bien été modifié.");
     }
 
 }

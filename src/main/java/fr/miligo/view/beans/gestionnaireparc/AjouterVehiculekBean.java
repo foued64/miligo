@@ -6,19 +6,15 @@
 package fr.miligo.view.beans.gestionnaireparc;
 
 import fr.miligo.model.entities.parc.Borne;
-import fr.miligo.model.entities.vehicule.Disponibilite;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.entities.vehicule.Modele;
 import fr.miligo.model.facades.vehicule.FacadeModele;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -51,7 +47,7 @@ public class AjouterVehiculekBean extends AbstractGestionParcBean implements Ser
         lstModele = facadeModele.readAll();
         lstBorne = facadeBorne.readAll();
         dateDuJour = java.sql.Date.valueOf(LocalDate.now());
-        listeDispo = facadeDispo.readAll();
+        listeDispo = DisponibiliteEnum.values();
     }
      
     /**

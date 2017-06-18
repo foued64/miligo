@@ -5,48 +5,46 @@ import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 
 import fr.miligo.common.AbstractFacade;
+import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.emprunt.Trajet;
 import fr.miligo.model.entities.parc.Borne;
 import fr.miligo.model.facades.parc.FacadeBorne;
 
 @Stateless
 public class FacadeTrajet extends AbstractFacade<Trajet> {
-	
-	
+
 	@Inject
 	private FacadeBorne facadeBorne;
-	
+
 	/**
 	 * Recherche le trajet en fonction de la borne aller et de la borne retour
+	 * 
 	 * @param aller
 	 * @param retour
 	 * @return le {@link Trajet}
+	 * @throws MiligoException
 	 */
-	public Trajet rechercherTrajet(Borne aller, Borne retour){
-		
-			
-		//recuperation en BDD des bornes
-		Borne borneAller = facadeBorne.read(aller.getId());
-		Borne borneRetour = facadeBorne.read(retour.getId());
-				
-		Trajet t;		
-		TypedQuery<Trajet> tq = getEntityManager().createQuery("SELECT t FROM Trajet t WHERE t.borneDepart =:borneD AND t.borneArrivee =:borneA",Trajet.class);
-		
-		
-		tq.setParameter("borneD", borneAller);
-		tq.setParameter("borneA", borneRetour);
-		t = tq.getSingleResult();
-		if (t.getId() == null) {
-                    TypedQuery<Trajet> tq1 = getEntityManager().createQuery("SELECT t FROM Trajet t WHERE t.borneDepart =:borneD AND t.borneArrivee =:borneA",Trajet.class);
+	public Trajet rechercherTrajet(Borne aller, Borne retour) throws MiligoException {
+		try {
+			// recuperation en BDD des bornes
+			Borne borneAller = facadeBorne.read(aller.getId());
+			Borne borneRetour = facadeBorne.read(retour.getId());
 
-                    tq1.setParameter("borneD", retour);
-                    tq1.setParameter("borneA", aller);
-                    t = tq1.getSingleResult();
+			Trajet t;
+
+			// Recherche du trajet en base avec pour parametre les bornes aller et
+			// retour
+			TypedQuery<Trajet> tq = getEntityManager().createNamedQuery("rechercherTrajetByBornes", Trajet.class);
+			tq.setParameter("borneD", borneAller);
+			tq.setParameter("borneA", borneRetour);
+
+			// Récupération du resultat de la requête
+			t = tq.getSingleResult();
+
+			return t;
+		} catch (Exception e) {
+			throw new MiligoException(e);
 		}
-		
-		return t;
 	}
 
-	
-	
 }

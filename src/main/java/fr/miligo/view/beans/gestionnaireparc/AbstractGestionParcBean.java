@@ -6,13 +6,10 @@
 package fr.miligo.view.beans.gestionnaireparc;
 
 import fr.miligo.model.entities.parc.Borne;
-import fr.miligo.model.entities.vehicule.Disponibilite;
+import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.entities.vehicule.Vehicule;
 import fr.miligo.model.facades.parc.FacadeBorne;
-import fr.miligo.model.facades.vehicule.FacadeDisponibilite;
-import fr.miligo.model.facades.vehicule.FacadeVehicule;
-import java.util.ArrayList;
-import java.util.List;
+import fr.miligo.model.facades.emprunt.FacadeVehicule;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -24,9 +21,6 @@ import lombok.Setter;
  * @author codeur
  */
 public abstract class AbstractGestionParcBean {
-    
-    @Inject
-    protected FacadeDisponibilite facadeDispo;
     
     @Inject
     protected FacadeVehicule facadeVehicule;
@@ -45,7 +39,7 @@ public abstract class AbstractGestionParcBean {
     protected Borne emplacementBorne;
     
     @Getter
-    protected List<Disponibilite> listeDispo;
+    protected DisponibiliteEnum[] listeDispo;
     
     /**
      * Permet d'afficher el growMessage

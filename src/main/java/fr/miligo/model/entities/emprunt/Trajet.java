@@ -8,10 +8,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
+import fr.miligo.model.dao.RequetesDaoEmpruntImmediat;
 import fr.miligo.model.entities.parc.Borne;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -32,6 +35,7 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Dependent
 @Builder
+@NamedQueries({ @NamedQuery(name = "rechercherTrajetByBornes", query = RequetesDaoEmpruntImmediat.RECHERCHER_TRAJET_BY_BORNES) })
 public class Trajet extends AbstractEntity {
 
 	@Column(name = "LONGUEUR_TRAJET")

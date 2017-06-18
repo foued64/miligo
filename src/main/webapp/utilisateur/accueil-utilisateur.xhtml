@@ -6,36 +6,49 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:cps="http://java.sun.com/jsf/composite/composites">
 
-    <ui:define name="title">Accueil - Utilisateur</ui:define>
-    <ui:define name="content">
-        <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+	<ui:define name="title">Accueil - Utilisateur</ui:define>
+	<ui:define name="content">
+		<ui:include
+			src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
 
-        <p:button value="Emprunter" outcome="emprunter-vehicule.xhtml"  />
-        <p:button value="Restituer" disabled="true"/>
-        <p:button value="Réserver" disabled="true"/>
+		<p:growl globalOnly="true" autoUpdate="true" />
+
+		<div class="pageMobile">
+                    <h:form>
+			<p:commandButton class="btnMobile" value="Emprunter"
+                                         actionListener="#{accueilBeans.entrerEmprunt()}" 
+                                         onerror="#{accueilBeans.checkVehiculesDispoBorneOnError()}"/>
+			<p:button class="btnMobile" value="Restituer" />
+			<p:button class="btnMobile" value="Réserver" />
+                    </h:form>
+		</div>
+
+		<hr />
+
+		<p:messages id="messages" showIcon="false" showDetail="false"
+			autoUpdate="true" closable="false" />
+
+		<!-- Ici le tableau récapitulatif des réservations -->
+
+		<p:dataTable var="car" value="#{listeDesReservations}">
+			<p:column headerText="Liste des réservations">
+				<h:outputText value="#{r.id}" />
+			</p:column>
+
+			<p:column headerText="Départ -Arrivée">
+				<h:outputText value="#{r.trajetDepart} - #{r.trajetArrivee}" />
+			</p:column>
+
+			<p:column headerText="GDH">
+				<h:outputText value="#{r.gdh}" />
+			</p:column>
+
+			<p:column headerText="Empruntable">
+				<h:outputText value="#{r.empruntPossible}" />
+			</p:column>
+		</p:dataTable>
 
 
-        <!-- Ici le tableau récapitulatif des réservations -->
-
-        <p:dataTable var="car" value="#{listeDesReservations}">
-            <p:column headerText="Liste des réservations">
-                <h:outputText value="#{r.id}" />
-            </p:column>
-
-            <p:column headerText="Départ -Arrivée">
-                <h:outputText value="#{r.trajetDepart} - #{r.trajetArrivee}" />
-            </p:column>
-
-            <p:column headerText="Date - Heure">
-                <h:outputText value="#{r.gdh}" />
-            </p:column>
-
-            <p:column headerText="Action">
-                <h:outputText value="#{r.empruntPossible}" />
-            </p:column>
-        </p:dataTable>
-
-
-    </ui:define>
+	</ui:define>
 
 </ui:composition>
