@@ -18,10 +18,6 @@ import fr.miligo.model.entities.vehicule.Vehicule;
 import fr.miligo.model.facades.emprunt.FacadeClient;
 import fr.miligo.model.facades.emprunt.FacadeVehicule;
 import fr.miligo.model.facades.parc.FacadeBorne;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.faces.context.FacesContext;
 import lombok.Getter;
 import lombok.extern.apachecommons.CommonsLog;
 import net.entetrs.commons.jsf.JsfUtils;
@@ -83,12 +79,10 @@ public class AccueilBeans extends AbstractBean implements Serializable {
      * redirection a la page emprunt-vehicule si nok message d'erreur
      */
     public void entrerEmprunt() {
-         System.out.println("AVANT fr.miligo.view.beans.accueil.AccueilBeans.entrerEmprunt()");
         try {
             checkVehiculesDispoBorne();
-           
+            JsfUtils.putInFlashScope(KEY_BORNE_DEPART, this.borneAller);
             redirectToURL(URL_EMPRUNT);
-            System.out.println("APRES fr.miligo.view.beans.accueil.AccueilBeans.entrerEmprunt()");
         } catch (MiligoException e) {
             addErrorMessage(e.getMessage());
         }

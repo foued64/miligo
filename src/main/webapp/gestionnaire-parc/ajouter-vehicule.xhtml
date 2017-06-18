@@ -59,7 +59,7 @@
                     
                     <p:outputLabel value="Borne de ratachement : " for="selectOneBorne"  />
                     <p:selectOneMenu id="selectOneBorne" value="#{ajouterVehiculekBean.vehicule.borne}" converter="#{genericConverter}" required="true" >
-                        <f:selectItems value="#{ajouterVehiculekBean.lstBorne}" var="b" itemLabel="#{b.nomBorne}" itemValue="#{b}"  />
+                        <f:selectItems value="#{ajouterVehiculekBean.lstBorne}" var="b" itemLabel="#{b.site.nom}" itemValue="#{b}"  />
                     </p:selectOneMenu>
                     <p:message for="selectOneBorne"/>
 
