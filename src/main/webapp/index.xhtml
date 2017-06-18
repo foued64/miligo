@@ -13,11 +13,9 @@
         
         <h2>DEMO</h2>
 
-        <h:form id="loginForm" prependId="false" class="form-horizontal">	
-            <p:button value="Emprunter un véhicule" style="margin-top: 10px; margin-left : 10px;" outcome="utilisateur/accueil-utilisateur.xhtml"/>
-
-            <p:button value="Modifier la disponibilité d'un véhicule" style="margin-top: 10px; margin-left : 10px;" outcome="gestionnaire-parc/accueil-gestionnaire-parc.xhtml"/>
-
+        <h:form>
+            <p:commandButton value="Emprunter un véhicule" action="utilisateur/accueil-utilisateur.xhtml?faces-redirect=true" />
+            <p:commandButton value="Modifier la disponibilité d'un véhicule" action="gestionnaire-parc/accueil-gestionnaire-parc.xhtml?faces-redirect=true" />
         </h:form>
 
     </ui:define>

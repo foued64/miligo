@@ -28,7 +28,7 @@ import net.entetrs.commons.jsf.JsfUtils;
 @CommonsLog
 public class AccueilBeans extends AbstractBean implements Serializable {
 
-    private static final String URL_EMPRUNT = "emprunter-vehicule.xhtml?faces-redirect=true";
+    private static final String URL_EMPRUNT = "emprunter-vehicule.xhtml";
 
     // Facade
     @Inject
@@ -60,6 +60,7 @@ public class AccueilBeans extends AbstractBean implements Serializable {
         clientCourant = facadeClient.read("5OXOSFDkEeexFAAAsvkz1Q");
 
         putInHttpSession(CLIENT_SESSION, clientCourant);
+        System.out.println(clientCourant);
 
         // Recupere l'adresse ip du support utilisé avant d'arriver sur la page
         // pour pouvoir conaitre la borneAller. FLASHSCOPED

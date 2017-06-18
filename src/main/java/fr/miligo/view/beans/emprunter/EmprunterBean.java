@@ -10,6 +10,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import fr.miligo.exceptions.MiligoException;
+import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.emprunt.Trajet;
 import fr.miligo.model.entities.parc.Borne;
 import fr.miligo.model.entities.vehicule.TypeVehicule;
@@ -48,6 +49,7 @@ public class EmprunterBean extends AbstractEmprunterBean implements Serializable
 
 	@PostConstruct
 	public void init() {
+            System.out.println(((Client) getObjectInSession(CLIENT_SESSION)));
 
 		clientCourant = facadeClient.read("5OXOSFDkEeexFAAAsvkz1Q");
 

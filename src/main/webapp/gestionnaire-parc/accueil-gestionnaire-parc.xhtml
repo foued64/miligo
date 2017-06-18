@@ -41,8 +41,8 @@
                     <h:outputText value="#{v.disponibilite}" />
                 </p:column>
 
-                <p:column headerText="Emplacement" sortBy="#{v.borne.nomBorne}">
-                    <h:outputText value="#{v.borne.nomBorne}" />
+                <p:column headerText="Emplacement" sortBy="#{v.borne.site.nom}">
+                    <h:outputText value="#{v.borne.site.nom}" />
                 </p:column>
                 <p:column headerText="Action">
                     <p:commandLink actionListener="#{accueilGestionParckBean.mettreVehiculeEnFlashScope(v)}"

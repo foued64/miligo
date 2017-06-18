@@ -71,7 +71,8 @@ public class EmprunterResumeBean extends AbstractEmprunterBean implements Serial
 		this.trajet = (Trajet) JsfUtils.getFromFlashScope(KEY_TRAJET_FLASH_SCOPE);
 		this.tempsEmprunt = (Date) JsfUtils.getFromFlashScope(KEY_TEMPS_EMPRUNT_FLASH_SCOPE);
 		this.typeVehicule = (TypeVehicule) JsfUtils.getFromFlashScope(KEY_TYPE_VEHICULE_FLASH_SCOPE);
-		clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
+		this.clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
+                System.out.println(clientCourant);
 	}
 
 	public void creerEmprunt() {

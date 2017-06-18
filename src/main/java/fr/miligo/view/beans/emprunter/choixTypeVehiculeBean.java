@@ -1,5 +1,6 @@
 package fr.miligo.view.beans.emprunter;
 
+import static fr.miligo.common.AbstractBean.CLIENT_SESSION;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +11,7 @@ import javax.inject.Named;
 
 import fr.miligo.exceptions.MessagesException;
 import fr.miligo.exceptions.MiligoException;
+import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.emprunt.Trajet;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.entities.vehicule.TypeVehicule;
@@ -67,6 +69,7 @@ public class choixTypeVehiculeBean extends AbstractEmprunterBean implements Seri
      */
     @PostConstruct
     public void init() {
+        System.out.println(((Client) getObjectInSession(CLIENT_SESSION)));
 
         // Récupération du trajet,du client et du temps de l'emprunt en
         // flashScoped
