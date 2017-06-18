@@ -1,11 +1,11 @@
 version: '2'
 services:
   frontal:
-    image: zyra83/miligo-front:latest
+    image: zyra83/miligo-front:0.1.0
     links:
     - payara:payara
   payara:
-    image: zyra83/miligo-app:latest
+    image: zyra83/miligo-app:0.1.0
     links:
     - database-mysql:database-mysql
     ports:
@@ -18,4 +18,4 @@ services:
     - --debug
     - 'true'
   database-mysql:
-    image: zyra83/miligo-db:latest
+    image: zyra83/miligo-db:0.1.0
