@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.emprunt.Trajet;
 import fr.miligo.model.entities.parc.Adresse;
 import fr.miligo.model.entities.parc.Borne;
@@ -24,6 +25,7 @@ import fr.miligo.model.entities.vehicule.Marque;
 import fr.miligo.model.entities.vehicule.Modele;
 import fr.miligo.model.entities.vehicule.TypeVehicule;
 import fr.miligo.model.entities.vehicule.Vehicule;
+import fr.miligo.model.facades.emprunt.FacadeClient;
 import fr.miligo.model.facades.emprunt.FacadeTrajet;
 import fr.miligo.model.facades.emprunt.FacadeVehicule;
 import fr.miligo.model.facades.parc.FacadeAdresse;
@@ -86,6 +88,9 @@ public class InitSingleton {
 	@Inject
 	private FacadeMaintenance facadeMaintenance;
 	
+	@Inject
+	private FacadeClient facadeClient;
+	
 	/**
 	 * Méthode d'initialisation de l'application.
 	 * 
@@ -106,6 +111,7 @@ public class InitSingleton {
 		this.initialiserTrajet();
 		this.initialiserVehicule();
 		this.initialiserMaintenance();
+		this.initialiserClient();
 	}
 
 	/**
@@ -453,22 +459,56 @@ public class InitSingleton {
 	}
 
 	/**
-	 * Initialisation des vehicules
+	 * Initialisation des maintenances
 	 * 	 */
 	private void initialiserMaintenance() {
-		if (facadeVehicule.isEmpty()) {
-			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des vehicules .");
+		if (facadeMaintenance.isEmpty()) {
+			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des maintenance .");
                         
                         try {
-                            Properties vehiculeProperties = loadFromResource("vehicule.properties");
+                            Properties maintenanceProperties = loadFromResource("maintenance.properties");
                             
-                            vehiculeProperties.entrySet().stream().map(this::mapPropertyEntryToVehicule).forEach(facadeVehicule::create);
+                            maintenanceProperties.entrySet().stream().map(this::mapPropertyEntryToMaintenance).forEach(facadeMaintenance::create);
                         } catch (Exception e) {
-                            System.err.println("Impossible de charger vehicule.properties"  + e.getMessage());
+                            System.err.println("Impossible de charger maintenance.properties"  + e.getMessage());
                             
                         }
 		}
 	}  
+	
+	/**
+	 *  Traitement du fichier properties client
+	 * @param entry
+	 * @return
+	 */
+	public Client mapPropertyEntryToClient(Entry<?, ?> entry) {
+		String nom = entry.getKey().toString();
+		
+		String[] values = entry.getValue().toString().split(",");
+		String prenom = values[0];
+		String adressemail = values[1];
+		Integer milipoint = Integer.parseInt(values[2]);
+		String gsbdd = values[3];
+		return facadeClient.newInstance(nom,prenom,adressemail,milipoint,gsbdd);
+	}
+
+	/**
+	 * Initialisation des client
+	 * 	 */
+	private void initialiserClient() {
+		if (facadeClient.isEmpty()) {
+			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des vehicules .");
+                        
+                        try {
+                            Properties clientProperties = loadFromResource("client.properties");
+                            
+                            clientProperties.entrySet().stream().map(this::mapPropertyEntryToClient).forEach(facadeClient::create);
+                        } catch (Exception e) {
+                            System.err.println("Impossible de charger client.properties"  + e.getMessage());
+                            
+                        }
+		}
+	}
 	
 	
 	/**

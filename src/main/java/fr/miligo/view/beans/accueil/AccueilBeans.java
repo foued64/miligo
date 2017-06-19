@@ -57,7 +57,9 @@ public class AccueilBeans extends AbstractBean implements Serializable {
     public void init() {
         //Recupere le client courant
         //TODO a modifier quand l'authentification sera faite
-        clientCourant = facadeClient.read("5OXOSFDkEeexFAAAsvkz1Q");
+    	
+    	
+        clientCourant = facadeClient.readbyNom("PALPA");
 
         putInHttpSession(CLIENT_SESSION, clientCourant);
         System.out.println(clientCourant);
@@ -65,7 +67,7 @@ public class AccueilBeans extends AbstractBean implements Serializable {
         // Recupere l'adresse ip du support utilisé avant d'arriver sur la page
         // pour pouvoir conaitre la borneAller. FLASHSCOPED
         //TODO a modifier quand nous aurons les adresses ip des tablettes des bornes
-        String adresseIp = "51.51.51.51";
+        String adresseIp = "100.100.100.101";
 
         // Récuperation de la borne selon l'adresse ip
         this.borneAller = facadeBorne.searchFirstResult("adresseIp", adresseIp);
