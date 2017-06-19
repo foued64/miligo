@@ -13,7 +13,7 @@ public class FacadeMarque extends AbstractFacade<Marque> {
 
 	
 	
-	private static String READ_BY_NOM = "select m from MARQUE m where m.libelle = :libelle ";
+	
 	
 	/**
 	 * Méthode de fabrication d'un marque
@@ -29,14 +29,14 @@ public class FacadeMarque extends AbstractFacade<Marque> {
 
 
 /**
- *  fonction qui retourne une ville par rapport au nom de la marque
+ *  fonction qui retourne une marque
  * @param libelle
  * @return
  */
 	public Marque readbyNom(String libelle)
 	{
-		TypedQuery<Marque> tq =getEntityManager().createNamedQuery(READ_BY_NOM,Marque.class);
-		tq.setParameter(":libelle",libelle);
+		TypedQuery<Marque> tq =getEntityManager().createNamedQuery("MARQUE_SEARCH_BY_LIB",Marque.class);
+		tq.setParameter("libelle",libelle);
 		Marque m=tq.getSingleResult();
 		
 		return m;

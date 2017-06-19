@@ -15,7 +15,6 @@ public class FacadeBorne extends AbstractFacade<Borne> {
 	@Inject
 	private FacadeSite facadeSite;
 	
-	private static String READ_BY_NOM = "select b from BORNE b where b.nomBorne = :libelle ";
 	
 	/**
 	 * Méthode de fabrication d'un borne
@@ -28,7 +27,7 @@ public class FacadeBorne extends AbstractFacade<Borne> {
 	 */
 	public Borne newInstance(String nomBorne,String adresseIp, String lattitude,String longitude,String site) {
 		
-		Site s = facadeSite.readbyNom(nomBorne);
+		Site s = facadeSite.readbyNom(site);
 		Borne b = super.newInstance();
 		b.setAdresseIp(adresseIp);
 		b.setLatitude(lattitude);
@@ -47,8 +46,8 @@ public class FacadeBorne extends AbstractFacade<Borne> {
  */
 	public Borne readbyNom(String nom)
 	{
-		TypedQuery<Borne> tq =getEntityManager().createNamedQuery(READ_BY_NOM,Borne.class);
-		tq.setParameter(":libelle",nom);
+		TypedQuery<Borne> tq =getEntityManager().createNamedQuery("BORNE_SEARCH_BY_LIB",Borne.class);
+		tq.setParameter("libelle",nom);
 		Borne b=tq.getSingleResult();
 		
 		return b;

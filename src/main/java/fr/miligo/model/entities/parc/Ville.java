@@ -3,6 +3,7 @@ package fr.miligo.model.entities.parc;
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
@@ -22,6 +23,7 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @Dependent
+@NamedQuery(name="VILLE_SEARCH_BY_LIB", query="select v from Ville v where v.libelle = :libelle ")
 public class Ville extends AbstractEntity {
 
 	@Column(name = "CODE_POSTAL")

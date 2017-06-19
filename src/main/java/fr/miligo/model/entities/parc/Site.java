@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,6 +28,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent
+@NamedQuery(name="SITE_SEARCH_BY_LIB", query="select s from Site s where s.nom = :libelle ")
 public class Site extends AbstractEntity {
 
 	@Column(name = "NOM_SITE", nullable = false)

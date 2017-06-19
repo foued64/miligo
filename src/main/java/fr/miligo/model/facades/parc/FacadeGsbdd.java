@@ -13,7 +13,7 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class FacadeGsbdd extends AbstractFacade<Gsbdd> {
 
-	private static String READ_BY_NOM = "select g from GSBDD g where g.libelle = :libelle ";
+
 	
 	
 	/**
@@ -38,8 +38,8 @@ public class FacadeGsbdd extends AbstractFacade<Gsbdd> {
  */
 	public Gsbdd readbyNom(String nom)
 	{
-		TypedQuery<Gsbdd> tq =getEntityManager().createNamedQuery(READ_BY_NOM,Gsbdd.class);
-		tq.setParameter(":libelle",nom);
+		TypedQuery<Gsbdd> tq =getEntityManager().createNamedQuery("GSBDD_SEARCH_BY_LIB",Gsbdd.class);
+		tq.setParameter("libelle",nom);
 		Gsbdd g=tq.getSingleResult();
 		
 		return g;

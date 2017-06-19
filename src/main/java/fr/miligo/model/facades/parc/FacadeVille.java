@@ -11,8 +11,6 @@ import fr.miligo.model.entities.parc.Ville;
 public class FacadeVille extends AbstractFacade<Ville> {
 
  
-	private static String READ_BY_NOM = "select v.* from VILLE v where v.libelle = :libelle ";
-	
 	/**
 	 * Méthode de fabrication d'un ville
 	 * @param code postal
@@ -35,8 +33,9 @@ public class FacadeVille extends AbstractFacade<Ville> {
  */
 	public Ville readbyNom(String nom)
 	{
-		TypedQuery<Ville> tq =getEntityManager().createNamedQuery(READ_BY_NOM,Ville.class);
-		tq.setParameter(":libelle",nom);
+	
+		TypedQuery<Ville> tq =getEntityManager().createNamedQuery("VILLE_SEARCH_BY_LIB",Ville.class);
+		tq.setParameter("libelle",nom);
 		Ville v=tq.getSingleResult();
 		
 		return v;

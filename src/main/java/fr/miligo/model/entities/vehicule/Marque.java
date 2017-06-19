@@ -7,6 +7,7 @@ import javax.enterprise.context.Dependent;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,6 +27,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent
+@NamedQuery(name="MARQUE_SEARCH_BY_LIB", query="select m from Marque m where m.libelle = :libelle ")
 public class Marque extends AbstractEntity {
 
 	@Column(name = "LIBELLE_MARQUE", nullable = false)

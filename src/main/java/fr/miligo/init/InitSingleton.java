@@ -178,6 +178,11 @@ public class InitSingleton {
 		String numero = values[0];
 		String voie = values[1];
 		String ville = values[2];
+		
+		if(numero.isEmpty())
+		{
+			return facadeAdresse.newInstance(voie,ville);
+		}
 		return facadeAdresse.newInstance(numero,voie,ville);
 	}
 
@@ -402,7 +407,7 @@ public class InitSingleton {
 	 */
 	public Vehicule mapPropertyEntryToVehicule(Entry<?, ?> entry) {
 		String libelle = entry.getKey().toString();
-		
+
 		String[] values = entry.getValue().toString().split(",");
 		String immatriculation = values[0];
 		Integer kilometrage = Integer.parseInt(values[1]);
@@ -412,6 +417,7 @@ public class InitSingleton {
 		String borne = values[5];
 		String disponible = values[6];
 		String modele = values[7];
+
 		return facadeVehicule.newInstance(libelle,immatriculation,kilometrage,batterie,puissance,dateMiseEnCirculation,borne,disponible,modele);
 	}
 
@@ -424,7 +430,7 @@ public class InitSingleton {
                         
                         try {
                             Properties vehiculeProperties = loadFromResource("vehicule.properties");
-                            
+
                             vehiculeProperties.entrySet().stream().map(this::mapPropertyEntryToVehicule).forEach(facadeVehicule::create);
                         } catch (Exception e) {
                             System.err.println("Impossible de charger vehicule.properties"  + e.getMessage());

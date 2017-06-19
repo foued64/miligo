@@ -15,8 +15,7 @@ import fr.miligo.model.entities.vehicule.TypeVehicule;
 public class FacadeTypeVehicule extends AbstractFacade<TypeVehicule> {
 
 
-	private static String READ_BY_NOM = "select t from TYPE_VEHICULE t where t.libelle = :libelle ";
-	
+
 	/**
 	 * Permet de choisir le typeVehicule en fonction de la distance du trajet
 	 * @param longueurTrajet {@link Trajet}
@@ -65,8 +64,8 @@ public class FacadeTypeVehicule extends AbstractFacade<TypeVehicule> {
  */
 	public TypeVehicule readbyNom(String nom)
 	{
-		TypedQuery<TypeVehicule> tq =getEntityManager().createNamedQuery(READ_BY_NOM,TypeVehicule.class);
-		tq.setParameter(":libelle",nom);
+		TypedQuery<TypeVehicule> tq =getEntityManager().createNamedQuery("TYPEVEHICULE_SEARCH_BY_LIB",TypeVehicule.class);
+		tq.setParameter("libelle",nom);
 		TypeVehicule t=tq.getSingleResult();
 		
 		return t;

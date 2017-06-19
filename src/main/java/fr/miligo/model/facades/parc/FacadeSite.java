@@ -1,21 +1,23 @@
 package fr.miligo.model.facades.parc;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 
 import fr.miligo.common.AbstractFacade;
 import fr.miligo.model.entities.parc.Adresse;
 import fr.miligo.model.entities.parc.Gsbdd;
 import fr.miligo.model.entities.parc.Site;
-import fr.miligo.model.entities.parc.Ville;
 
 @Stateless
 public class FacadeSite extends AbstractFacade<Site> {
 
 	
-	private static String READ_BY_NOM = "select s.* from SITE s where s.nom = :libelle ";
-
+	
+	@Inject
 	private FacadeGsbdd facadeGsbdd;
+	
+	@Inject
 	private FacadeAdresse facadeAdresse;
 	
 	/**
@@ -43,8 +45,8 @@ public class FacadeSite extends AbstractFacade<Site> {
  */
 	public Site readbyNom(String nom)
 	{
-		TypedQuery<Site> tq =getEntityManager().createNamedQuery(READ_BY_NOM,Site.class);
-		tq.setParameter(":libelle",nom);
+		TypedQuery<Site> tq =getEntityManager().createNamedQuery("SITE_SEARCH_BY_LIB",Site.class);
+		tq.setParameter("libelle",nom);
 		Site s=tq.getSingleResult();
 		
 		return s;
