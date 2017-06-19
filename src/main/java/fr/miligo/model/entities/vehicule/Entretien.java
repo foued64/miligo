@@ -35,7 +35,7 @@ public class Entretien extends AbstractEntity {
 //	@Temporal(TemporalType.DATE)
     @Setter
     Date dateEntretien;
-
+     
     @ManyToOne
     @JoinColumn(name = "ID_VEHICULE", nullable = false)
     @Setter

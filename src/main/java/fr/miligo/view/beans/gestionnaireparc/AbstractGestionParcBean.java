@@ -5,6 +5,7 @@
  */
 package fr.miligo.view.beans.gestionnaireparc;
 
+import fr.miligo.common.AbstractBean;
 import fr.miligo.model.entities.parc.Borne;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.entities.vehicule.Vehicule;
@@ -20,7 +21,7 @@ import lombok.Setter;
  *
  * @author codeur
  */
-public abstract class AbstractGestionParcBean {
+public abstract class AbstractGestionParcBean extends AbstractBean {
     
     @Inject
     protected FacadeVehicule facadeVehicule;
@@ -41,15 +42,5 @@ public abstract class AbstractGestionParcBean {
     @Getter
     protected DisponibiliteEnum[] listeDispo;
     
-    /**
-     * Permet d'afficher el growMessage
-     *
-     * @param resume
-     * @param detail
-     */
-    public void addMessage(String resume, String detail) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, resume, detail);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
     
 }
