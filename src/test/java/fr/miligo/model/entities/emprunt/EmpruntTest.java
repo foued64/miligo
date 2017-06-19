@@ -6,9 +6,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import org.junit.Assert;
-import org.junit.Test;
+
 
 /**
  * Classe de test des objets liés aux emprunts.
@@ -37,7 +38,7 @@ public class EmpruntTest {
 		ldt = ldt.plusHours(heure.longValue());
 
 		System.out.println(ldt);
-		Assert.assertTrue(ldt.getHour() == 1);
+                Assert.assertTrue(ldt.getHour() == 1);
 		Assert.assertTrue(ldt.getMinute() == 0);
 	}
 
