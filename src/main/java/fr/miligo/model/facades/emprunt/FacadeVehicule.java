@@ -1,8 +1,10 @@
 package fr.miligo.model.facades.emprunt;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 
 import fr.miligo.common.AbstractFacade;
@@ -11,6 +13,8 @@ import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.parc.Borne;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.entities.vehicule.Entretien;
+import fr.miligo.model.entities.vehicule.Modele;
+import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.entities.vehicule.TypeVehicule;
 import fr.miligo.model.entities.vehicule.Vehicule;
 import fr.miligo.model.facades.parc.FacadeBorne;
@@ -18,12 +22,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import javax.inject.Inject;
+import fr.miligo.model.facades.parc.FacadeBorne;
+import fr.miligo.model.facades.vehicule.FacadeModele;
 
 @Stateless
 public class FacadeVehicule extends AbstractFacade<Vehicule> {
 
-    @Inject
-    private FacadeBorne facadeBorne;
+	@Inject
+	private FacadeBorne facadeBorne;
+	
+	@Inject
+	private FacadeModele facadeModele;
 
     public void modifierDisponibiliteVehicule(Vehicule vehicule, DisponibiliteEnum disponibiliteEnum) {
         if (vehicule != null && disponibiliteEnum != null) {
@@ -46,6 +55,42 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
         }
     }
 
+	/**
+	 * Méthode de fabrication d'un Vehicule
+	 * @param immatriculation
+	 * @param kilometrage
+	 * @param batterie
+	 * @param puissance
+	 * @param datemiseencirculation
+	 * @param borne
+	 * @param disponible
+	 * @param modele
+	 * @return une nouvelle instance de vehicule
+	 */
+	public Vehicule newInstance(String libelle,String immatriculation,Integer kilometrage,Integer batterie,String puissance,Date datemiseencirculation,String borne,String disponible,String modele) {
+		
+		Borne bornee = facadeBorne.readbyNom(borne);
+		Modele modelee = facadeModele.readbyNom(modele);
+		
+		
+		Vehicule vehicule = super.newInstance();
+		vehicule.setBorne(bornee);
+		vehicule.setDateMiseEnCirculation(datemiseencirculation);
+		vehicule.setImmatriculation(immatriculation);
+		vehicule.setKilometrage(kilometrage);
+		vehicule.setLibelle(libelle);
+		vehicule.setModele(modelee);
+		vehicule.setNiveauBatterie(batterie);
+		vehicule.setPuissance(puissance);
+		vehicule.setDisponibilite(DisponibiliteEnum.valueOf(disponible));
+		
+		return vehicule;
+	
+	}	
+	
+	
+	
+	
     public List<Vehicule> findVehiculesByDisponibilteAndByBorneByTypeVehicule(DisponibiliteEnum disponibilite,
             Borne borne, TypeVehicule typeVehicule) throws MiligoException {
 

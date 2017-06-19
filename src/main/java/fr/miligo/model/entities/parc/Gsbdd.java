@@ -6,6 +6,7 @@ import java.util.List;
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,6 +27,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent
+@NamedQuery(name="GSBDD_SEARCH_BY_LIB", query="select g from Gsbdd g where g.libelle = :libelle ")
 public class Gsbdd extends AbstractEntity {
 
 	@Column(name = "NUMERO_CREDO")

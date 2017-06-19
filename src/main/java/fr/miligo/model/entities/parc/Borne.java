@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,6 +33,7 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Builder
 @Dependent
+@NamedQuery(name="BORNE_SEARCH_BY_LIB", query="select b from Borne b where b.nomBorne = :libelle ")
 public class Borne extends AbstractEntity {
 
 	@Column(name = "NOM_BORNE", nullable = false)

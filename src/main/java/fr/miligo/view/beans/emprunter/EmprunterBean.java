@@ -51,9 +51,6 @@ public class EmprunterBean extends AbstractEmprunterBean implements Serializable
 	public void init() {
             System.out.println(((Client) getObjectInSession(CLIENT_SESSION)));
 
-		clientCourant = facadeClient.read("5OXOSFDkEeexFAAAsvkz1Q");
-
-		putInHttpSession(CLIENT_SESSION, clientCourant);
 
 		// Récupération de toute les bornes
 		// TODO il faudra récupérer que les bornes de la gsbdd correspondant au
@@ -74,7 +71,11 @@ public class EmprunterBean extends AbstractEmprunterBean implements Serializable
 	public void validerTrajet() throws MiligoException {
 		// Récupération du trajet existant déjà en bdd
 		// en prenant en paramètre les 2 bornes
+		System.out.println("Aller : "+this.borneAller.getId()+" - Arrivée : "+this.borneRetour.getId());
+		
 		this.trajet = facadeTrajet.rechercherTrajet(this.borneAller, this.borneRetour);
+		
+		
 
 		// Mise en flashScope des variables pour la page permettant la selection
 		// du type de véhicule
