@@ -1,0 +1,23 @@
+{
+    "name": "Miligo!",
+    "short_name": "Miligo!",
+    "lang": "fr-FR",
+    "icons": [
+        {
+            "src": "img/favicon/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "img/favicon/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#459e00",
+    "background_color": "#ffffff",
+    "scope": "/",
+    "start_url": "/index.xhtml",
+    "display": "standalone",
+    "orientation": "landscape"
+}
