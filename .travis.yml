@@ -14,12 +14,6 @@ addons:
     # permet à sonarqube de commenter les Pull Requests
     github_token:
       secure: "c/kWlOED/ifMs9cSgHOF7y+8uM0PYMuvE4qI8pLtwmtUeiiUMILmGNheQamOCjtWvLPFK/3rkrpKnE9Ig8e9c8uiW/Y3/+q1IOXL5Kv2YcF1jsybi2rnMzNDPUudOZ11oKOyQtyinlZrD/AWGiDJQ43ssHc9h7g/ZFAh52nvpzpQFjAVnNuLGq9gifmo9NeFeHrg3eCPA3SzrD3+CEqndyR65cK05JTSNQtNpqjsmTF69+Oi00eA5y5QffkFueriygL6qQhpCkq+GWfx988Ri60kI2fsSlIVMRsJ/vMfIg5qrvTFjvA7abYIxdGuf9ZSjRC+hhK5NHOTWvZU867e/J4sNiIBUrfxnAauX5phwmC/c8fXRrlPON5ADEiydxAPzVshqAAGAX5Y+Cg5vHluSSm8HkS9T7+mV/Wi2jc0KFMQxNbB25R/hgOe1URpijhzrcHmwHx3/8XY9OK/8qIqTDhdoC6WhSIbWdImz9yNjDBjCyU8B3ed/b0sXb6A/gyNDM6ZGvJMfpfhHoFDD3vRvEXvnk726x2m1NSaKpDa56cGHMbtpCvyUqooPDBvwVX8jbbIXkwFOUqt6fynGf9pHwqI4mm1GndamlooHuNb2HU5YAmED8QdkgWCKvbCiw9BV6TJo/dNzqEJE4W9DHVAFNIrBbU5EqB9KsLMc1OvrV8="
-  addons:
-    chrome: stable
-    
-before_install:
-  - # start your web application and listen on `localhost`
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost
 
 install:
   - mvn install:install-file -Dfile=outillage/librairies/generic-commons-tools.jar -DgroupId=net.entetrs.commons -DartifactId=generic-common-tools -Dversion=1.0 -Dpackaging=jar
