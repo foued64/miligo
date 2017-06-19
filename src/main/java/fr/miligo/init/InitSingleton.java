@@ -133,8 +133,10 @@ public class InitSingleton {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des gsbdd.");
                         
                         try {
+                        	// chargement fichier properties
                             Properties gsbddProperties = loadFromResource("gsbdd.properties");
                             
+                            // boucle lambda de creation de données
                             gsbddProperties.entrySet().stream().map(this::mapPropertyEntryToGsbdd).forEach(facadeGsbdd::create);
                         } catch (Exception e) {
                             System.err.println("Impossible de charger gsbdd.properties"  + e.getMessage());
@@ -162,6 +164,7 @@ public class InitSingleton {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des villes.");
                         
                         try {
+                        	// chargement fichier properties
                             Properties villeProperties = loadFromResource("ville.properties");
                             
                             villeProperties.entrySet().stream().map(this::mapPropertyEntryToVille).forEach(facadeVille::create);
@@ -200,8 +203,9 @@ public class InitSingleton {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des adresses.");
                         
                         try {
+                        	// chargement fichier properties
                             Properties adresseProperties = loadFromResource("adresse.properties");
-                            
+                         // boucle lambda de creation de données
                             adresseProperties.entrySet().stream().map(this::mapPropertyEntryToAdresse).forEach(facadeAdresse::create);
                         } catch (Exception e) {
                             System.err.println("Impossible de charger adresse.properties"  + e.getMessage());
@@ -231,8 +235,9 @@ public class InitSingleton {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des marques.");
                         
                         try {
+                        	// chargement fichier properties
                             Properties marqueProperties = loadFromResource("marque.properties");
-                            
+                         // boucle lambda de creation de données
                             marqueProperties.entrySet().stream().map(this::mapPropertyEntryToMarque).forEach(facadeMarque::create);
                         } catch (Exception e) {
                             System.err.println("Impossible de charger marque.properties"  + e.getMessage());
@@ -263,8 +268,9 @@ public class InitSingleton {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des modele.");
                         
                         try {
+                        	// chargement fichier properties
                             Properties modeleProperties = loadFromResource("modele.properties");
-                            
+                         // boucle lambda de creation de données
                             modeleProperties.entrySet().stream().map(this::mapPropertyEntryToModele).forEach(facadeModele::create);
                         } catch (Exception e) {
                             System.err.println("Impossible de charger modele.properties"  + e.getMessage());
@@ -294,8 +300,9 @@ public class InitSingleton {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des type de vehicule.");
                         
                         try {
+                        	// chargement fichier properties
                             Properties typeVehiculeProperties = loadFromResource("type_vehicule.properties");
-                            
+                         // boucle lambda de creation de données
                             typeVehiculeProperties.entrySet().stream().map(this::mapPropertyEntryToTypeVehicule).forEach(facadeTypeVehicule::create);
                         } catch (Exception e) {
                             System.err.println("Impossible de charger type_vehicule.properties"  + e.getMessage());
@@ -327,8 +334,9 @@ public class InitSingleton {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des sites.");
                         
                         try {
+                        	// chargement fichier properties
                             Properties siteProperties = loadFromResource("site.properties");
-                            
+                         // boucle lambda de creation de données
                             siteProperties.entrySet().stream().map(this::mapPropertyEntryToSite).forEach(facadeSite::create);
                         } catch (Exception e) {
                             System.err.println("Impossible de charger site.properties"  + e.getMessage());
@@ -362,8 +370,9 @@ public class InitSingleton {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des bornes.");
                         
                         try {
+                        	// chargement fichier properties
                             Properties borneProperties = loadFromResource("borne.properties");
-                            
+                         // boucle lambda de creation de données
                             borneProperties.entrySet().stream().map(this::mapPropertyEntryToBorne).forEach(facadeBorne::create);
                         } catch (Exception e) {
                             System.err.println("Impossible de charger borne.properties"  + e.getMessage());
@@ -396,8 +405,9 @@ public class InitSingleton {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des trajets .");
                         
                         try {
+                        	// chargement fichier properties
                             Properties trajetProperties = loadFromResource("trajet.properties");
-                            
+                         // boucle lambda de creation de données
                             trajetProperties.entrySet().stream().map(this::mapPropertyEntryToTrajet).forEach(facadeTrajet::create);
                         } catch (Exception e) {
                             System.err.println("Impossible de charger trajet.properties"  + e.getMessage());
@@ -435,8 +445,9 @@ public class InitSingleton {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des vehicules .");
                         
                         try {
+                        	// chargement fichier properties
                             Properties vehiculeProperties = loadFromResource("vehicule.properties");
-
+                         // boucle lambda de creation de données
                             vehiculeProperties.entrySet().stream().map(this::mapPropertyEntryToVehicule).forEach(facadeVehicule::create);
                         } catch (Exception e) {
                             System.err.println("Impossible de charger vehicule.properties"  + e.getMessage());
@@ -466,8 +477,9 @@ public class InitSingleton {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des maintenance .");
                         
                         try {
+                        	// chargement fichier properties
                             Properties maintenanceProperties = loadFromResource("maintenance.properties");
-                            
+                         // boucle lambda de creation de données
                             maintenanceProperties.entrySet().stream().map(this::mapPropertyEntryToMaintenance).forEach(facadeMaintenance::create);
                         } catch (Exception e) {
                             System.err.println("Impossible de charger maintenance.properties"  + e.getMessage());
@@ -500,8 +512,9 @@ public class InitSingleton {
 			LogUtils.logFormat(LOGGER, LogLevel.INFO, "%s", "Initialisation de la liste des vehicules .");
                         
                         try {
+                        	// chargement fichier properties
                             Properties clientProperties = loadFromResource("client.properties");
-                            
+                         // boucle lambda de creation de données
                             clientProperties.entrySet().stream().map(this::mapPropertyEntryToClient).forEach(facadeClient::create);
                         } catch (Exception e) {
                             System.err.println("Impossible de charger client.properties"  + e.getMessage());

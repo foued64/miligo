@@ -23,9 +23,13 @@ public class FacadeGsbdd extends AbstractFacade<Gsbdd> {
 	 * @return une nouvelle instance de gsbdd
 	 */
 	public Gsbdd newInstance(String codeCredo, String libelle) {
+		// nouvel instance de gsbdd
 		Gsbdd g = super.newInstance();
+		//set des valeur
 		g.setNumeroCredo(codeCredo);
 		g.setLibelle(libelle);
+		
+		// retour de la nouvelle instance 
 		return g;
 	}	
 	
@@ -38,6 +42,7 @@ public class FacadeGsbdd extends AbstractFacade<Gsbdd> {
  */
 	public Gsbdd readbyNom(String nom)
 	{
+		
 		TypedQuery<Gsbdd> tq =getEntityManager().createNamedQuery("GSBDD_SEARCH_BY_LIB",Gsbdd.class);
 		tq.setParameter("libelle",nom);
 		Gsbdd g=tq.getSingleResult();
