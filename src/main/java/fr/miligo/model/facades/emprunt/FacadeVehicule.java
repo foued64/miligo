@@ -216,6 +216,14 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
     }
 
     /**
+     * Retourne le nombre de vehicule en BDD.
+     */
+    public int nbreVehiculeTotal() {
+        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(v.id) FROM Vehicule v", Long.class);
+        return tq.getSingleResult().intValue();
+    }
+   
+    /**
      * Retourne un véhicule disponible.
      *
      * @param typeVehicule
@@ -232,11 +240,70 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
             } else {
                 throw new MiligoException(MessagesException.AUCUN_VEHICULE);
             }
-
         } catch (Exception e) {
             throw new MiligoException(e);
         }
     }
+
+    /**
+     * Retourne le nombre de vehicule DISPONIBLE en BDD.
+     * @return 
+     */
+    public int nbreVehiculeDispo() {
+        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(v.id) FROM Vehicule v WHERE v.disponibilite =:enum", Long.class);
+        tq.setParameter("enum", DisponibiliteEnum.DISPONIBLE);
+        return tq.getSingleResult().intValue();
+    }
+    
+    /**
+     * Retourne le nombre de vehicule EMPRUNTE en BDD.
+     */
+    public int nbreVehiculeEmprunter() {
+        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(v.id) FROM Vehicule v WHERE v.disponibilite =:enum", Long.class);
+        tq.setParameter("enum", DisponibiliteEnum.EMPRUNTE);
+        return tq.getSingleResult().intValue();
+    }
+    
+    /**
+     * Retourne le nombre de vehicule EN_CHARGE en BDD.
+     */
+    public int nbreVehiculeEnCharge() {
+        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(v.id) FROM Vehicule v WHERE v.disponibilite =:enum", Long.class);
+        tq.setParameter("enum", DisponibiliteEnum.EN_CHARGE);
+        return tq.getSingleResult().intValue();
+    }
+    
+    /**
+     * Retourne le nombre de vehicule MAINTENANCE en BDD.
+     */
+    public int nbreVehiculeEnMaintenance() {
+        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(v.id) FROM Vehicule v WHERE v.disponibilite =:enum", Long.class);
+        tq.setParameter("enum", DisponibiliteEnum.MAINTENANCE);
+        return tq.getSingleResult().intValue();
+    }
+    
+    /**
+     * Retourne le nombre de vehicule RESERVE en BDD.
+     */
+    public int nbreVehiculeReserve() {
+        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(v.id) FROM Vehicule v WHERE v.disponibilite =:enum", Long.class);
+        tq.setParameter("enum", DisponibiliteEnum.RESERVE);
+        return tq.getSingleResult().intValue();
+    }
+	/**
+	 * Creer un nouvelle instance de vehicule avec les listes intancier
+	 *
+	 * @return Vehicule
+	 */
+	public Vehicule newInstanceVehicule() {
+		Vehicule v = new Vehicule();
+		v.setListeEmpruntImmediats(new ArrayList<>());
+		v.setListeEmpruntReservations(new ArrayList<>());
+		v.setListeEntretiens(new ArrayList<>());
+		v.setListeIncidents(new ArrayList<>());
+		return v;
+	}
+
 
     /**
      * Retourne un véhicule à restituer par un client.

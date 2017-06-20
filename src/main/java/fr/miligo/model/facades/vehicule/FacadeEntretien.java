@@ -4,6 +4,7 @@ import fr.miligo.common.AbstractFacade;
 import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.vehicule.Entretien;
 import fr.miligo.model.entities.vehicule.Vehicule;
+import fr.miligo.model.entities.vehicule.Maintenance;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
@@ -14,6 +15,13 @@ import javax.persistence.TypedQuery;
 @Stateless
 public class FacadeEntretien extends AbstractFacade<Entretien> {
 
+    /**
+     * Retourne le nombre total d'entretien en BDD.
+     */
+    public int nbreEntretienTotal() {
+        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(e.id) FROM Entretien e", Long.class);
+        return tq.getSingleResult().intValue();
+    }
     
     /**
      * Permet de recuperer la liste des entretiens en cours du vehicule.
@@ -31,4 +39,15 @@ public class FacadeEntretien extends AbstractFacade<Entretien> {
             throw new MiligoException(e);
         }
     }
+    /**
+     * Retourne le nombre de vehicule DISPONIBLE en BDD.
+     * @param libelle
+     * @return 
+     */
+    public int nbreEntretienParMaintenance(Maintenance m) {
+        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(e.id) FROM Entretien e WHERE e.listeMaintenance=:maintenance ", Long.class);
+        tq.setParameter("maintenance", m);
+        return tq.getSingleResult().intValue();
+    }
+
 }

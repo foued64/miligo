@@ -16,9 +16,11 @@ import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.emprunt.EmpruntImmediat;
 import fr.miligo.model.entities.emprunt.Trajet;
+import fr.miligo.model.entities.parc.Borne;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.entities.vehicule.TypeVehicule;
 import fr.miligo.model.entities.vehicule.Vehicule;
+import javax.persistence.TypedQuery;
 import net.entetrs.commons.cdi.CDIUtils;
 
 @Stateless
@@ -110,4 +112,13 @@ public class FacadeEmpruntImmediat extends AbstractFacade<EmpruntImmediat> {
 		}
 	}
 
+    
+    /**
+     * Retourne le nombre d'emprunt immediat en BDD.
+     */
+    public int nbreEmpruntParTrajet(Trajet t) {
+        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(e.id) FROM EmpruntImmediat e WHERE e.trajet=:t", Long.class);
+        tq.setParameter("t", t);
+        return tq.getSingleResult().intValue();
+    }
 }

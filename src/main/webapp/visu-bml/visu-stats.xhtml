@@ -10,31 +10,40 @@
     <ui:define name="content">
         <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
         <h:form>
-            <p:panel id="panelVisuStats" style="text-align: center" >
-                
-                <h:form>
-                    <p:dataTable id="dataTableStatistiques" var="v" value="#{visuStatsBeans.listeTrajetUnique}" style="margin-top : 40px;" rows="2">
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Trajet"  />
-                            </f:facet>
-                             <h:outputText value="#{v.key}" />
-                        </p:column>
+            <p:panel class="ui-g" id="panelVisuStats" style="text-align: center" >
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nombre"/>
-                            </f:facet>
-                            <h:outputText value="#{v.value}" />
-                        </p:column>
-                    </p:dataTable>
-                    
-                    <p:chart type="bar" model="#{visuStatsBeans.bmDispoVehicule}" style="height:300px"/>
-                    
-                    <p:chart type="bar" model="#{visuStatsBeans.bmMaintenanceVehicule}" style="height:300px"/>
-                    
-                    
+                <h:form>
+                    <div class="ui-g-12 ui-g-nopad">
+                        <div class="ui-g-6">
+                            <p:outputLabel value="Trajets les plus effectués" />
+                            <p:dataTable id="dataTableStatistiques" var="v" value="#{statsTrajetBeans.listeTrajetUnique}" style="margin-top : 40px;" rows="3">
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Trajet"  />
+                                    </f:facet>
+                                    <h:outputText value="#{v.key}" />
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nombre"/>
+                                    </f:facet>
+                                    <h:outputText value="#{v.value}" />
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+
+                        <div class="ui-g-6">
+                            <p:chart type="bar" model="#{statsDisponibiliteVehiculeBeans.bmDispoVehicule}" style="height:300px"/>
+                        </div>
+
+                        <div class="ui-g-6">
+                            <p:chart type="bar" model="#{statsEntretienVehiculeBeans.bmEntretien}" style="height:300px"/>
+                        </div>
+
+                    </div>
                 </h:form>
+
             </p:panel>
         </h:form>
     </ui:define>
