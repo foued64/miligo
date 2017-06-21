@@ -19,6 +19,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
+import lombok.extern.apachecommons.CommonsLog;
 
 /**
  *  Page qui permet d'ajouter un véchicule. 
@@ -26,6 +27,7 @@ import lombok.Getter;
  */
 @ViewScoped
 @Named
+@CommonsLog
 public class AjouterVehiculekBean extends AbstractGestionParcBean implements Serializable  {
     
     public static final String FLASH_PARAM_VEHICULE = "vehicule_selectionne";
@@ -56,6 +58,9 @@ public class AjouterVehiculekBean extends AbstractGestionParcBean implements Ser
     public void ajouterVechiule(){
         facadeVehicule.create(vehicule);
         addMessage("Ajout réussi", "Le véhicule à bien été ajouté.");
+        if(log.isInfoEnabled()){
+            log.info("Le véhicule à bien été ajouté.");
+        }
     }
     
  
