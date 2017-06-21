@@ -33,14 +33,17 @@
 	 <dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
+			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>net.bootsfaces</groupId>
 			<artifactId>bootsfaces</artifactId>
 			<version>1.1.1</version>
 			<scope>compile</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.omnifaces</groupId>
 			<artifactId>omnifaces</artifactId>
@@ -51,6 +54,7 @@
 			<artifactId>primefaces</artifactId>
 			<version>6.1</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -62,11 +66,13 @@
             <artifactId>generic-common-tools</artifactId>
             <version>1.0</version>
         </dependency>
+        
         <dependency>
             <groupId>net.entetrs.commons</groupId>
             <artifactId>jpa-common-tools</artifactId>
             <version>1.0</version>
         </dependency>
+        
         <dependency>
             <groupId>net.entetrs.commons</groupId>
             <artifactId>jsf-common-tools</artifactId>
@@ -77,32 +83,38 @@
             <artifactId>security-common-tools</artifactId>
             <version>1.0</version>
         </dependency>
+        
 		<dependency>
 	        <groupId>org.springframework.security</groupId>
 	        <artifactId>spring-security-web</artifactId>
 	        <version>4.2.3.RELEASE</version>
 	    </dependency>
+	    
 	    <dependency>
 		  <groupId>junit</groupId>
 		  <artifactId>junit</artifactId>
 		  <version>4.12</version>
 		  <scope>test</scope>
 		</dependency>
+		
 		<dependency>
 		    <groupId>org.ocpsoft.rewrite</groupId>
 		    <artifactId>rewrite-servlet</artifactId>
 		    <version>3.4.1.Final</version>
 		</dependency>
+		
 		<dependency>
 		    <groupId>org.ocpsoft.rewrite</groupId>
 		    <artifactId>rewrite-config-prettyfaces</artifactId>
 		    <version>3.4.1.Final</version>
 		</dependency>
+		
 		<dependency>
 		    <groupId>log4j</groupId>
 		    <artifactId>log4j</artifactId>
 		    <version>1.2.17</version>
 		</dependency>
+		
 		<dependency>
 		    <groupId>commons-logging</groupId>
 		    <artifactId>commons-logging</artifactId>
@@ -114,8 +126,48 @@
 			<artifactId>south-street</artifactId>
 			<version>1.0.10</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jboss.arquillian.junit</groupId>
+			<artifactId>arquillian-junit-container</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.jboss.arquillian.container</groupId>
+			<artifactId>arquillian-glassfish-embedded-3.1</artifactId>
+			<version>1.0.0.Final</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>fish.payara.extras</groupId>
+			<artifactId>payara-embedded-web</artifactId>
+			<version>4.1.2.172</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>fish.payara.api</groupId>
+			<artifactId>payara-api</artifactId>
+			<version>4.1.2.172</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.196</version>
+			<scope>test</scope>
+		</dependency>
+		
 	</dependencies>
-
 
 	<build>
 		<plugins>
@@ -136,9 +188,24 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.1.0</version>
 				<configuration>
-                                        <failOnMissingWebXml>false</failOnMissingWebXml>
-                                        <warName>miligo</warName>
-                                </configuration>
+                	<failOnMissingWebXml>false</failOnMissingWebXml>
+                    <warName>miligo</warName>
+                </configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.20</version>
+				<configuration>
+					<systemProperties>
+						<arquillian.launch>glassfish-embedded</arquillian.launch>
+					</systemProperties>
+					<systemPropertyVariables>
+						<java.util.logging.config.file>
+						${project.build.testOutputDirectory}/logging.properties
+						</java.util.logging.config.file>
+					</systemPropertyVariables>
+                </configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -175,6 +242,15 @@
 				<artifactId>javaee-web-api</artifactId>
 				<version>7.0</version>
 			</dependency>
+			<dependency>
+				<groupId>org.jboss.arquillian</groupId>
+				<artifactId>arquillian-bom</artifactId>
+				<version>1.1.13.Final</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			
 		</dependencies>
+		
 	</dependencyManagement>
 </project>
