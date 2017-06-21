@@ -28,7 +28,7 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "BORNE")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(of = {"nomBorne", "adresseIp", "latitude", "longitude", "site"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Builder

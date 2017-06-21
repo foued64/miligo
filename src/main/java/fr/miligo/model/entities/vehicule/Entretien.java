@@ -12,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
-import java.util.Objects;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -26,7 +24,7 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "ENTRETIEN")
 @NoArgsConstructor
-@ToString
+@ToString(of={"dateEntretien", "vehicule"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent

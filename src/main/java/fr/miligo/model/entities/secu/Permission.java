@@ -22,7 +22,7 @@ import lombok.ToString;
 // Annotations Lombok
 @Getter
 @Setter
-@ToString
+@ToString(of="nom")
 public class Permission extends AbstractEntity {
 
 	// Champs métier

@@ -20,7 +20,7 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "MODELE")
 @NoArgsConstructor
-@ToString
+@ToString(of = {"libelle", "marque", "typeVehicule"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter

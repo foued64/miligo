@@ -23,7 +23,7 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "GSBDD")
 @NoArgsConstructor
-@ToString
+@ToString(of = {"numeroCredo", "libelle"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent

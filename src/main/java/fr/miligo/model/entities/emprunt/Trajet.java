@@ -30,7 +30,7 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "TRAJET")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(of = {"longueurTrajet", "indiceCarbone", "borneDepart", "borneArrivee"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent

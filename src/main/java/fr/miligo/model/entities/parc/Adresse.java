@@ -20,7 +20,7 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "ADRESSE")
 @NoArgsConstructor
-@ToString
+@ToString(of = {"numero", "voie", "ville"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter

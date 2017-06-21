@@ -1,6 +1,5 @@
 package fr.miligo.model.entities.vehicule;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,7 +34,7 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "VEHICULE")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(of = {"libelle", "immatriculation", "puissance", "kilometrage", "dateMiseEnCirculation", "disponibilite", "modele", "borne"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent
