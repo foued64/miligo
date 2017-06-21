@@ -10,8 +10,6 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.emprunt.Trajet;
@@ -38,8 +36,6 @@ import fr.miligo.model.facades.vehicule.FacadeMarque;
 import fr.miligo.model.facades.vehicule.FacadeModele;
 import fr.miligo.model.facades.vehicule.FacadeTypeVehicule;
 import lombok.extern.apachecommons.CommonsLog;
-import net.entetrs.commons.logs.LogUtils;
-import net.entetrs.commons.logs.LogUtils.LogLevel;
 
 /**
  * Singleton d'initialisation de l'application.
