@@ -17,6 +17,9 @@ import net.entetrs.commons.uuid.UUIDRepresentation;
 // Annotations LomBok
 @Getter
 @EqualsAndHashCode(of = "id")
+/**
+ * Classe abstraite qui génère un identifiant unique (UUID) pour les entités
+ */
 public abstract class AbstractEntity implements Serializable {
 
 	// Champs techniques
