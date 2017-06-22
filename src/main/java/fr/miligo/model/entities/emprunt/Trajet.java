@@ -25,6 +25,10 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * Entité métier représentant un Trajet entre deux bornes.
+ * @author codeur
+ */
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "TRAJET")
@@ -36,7 +40,7 @@ import lombok.experimental.FieldDefaults;
 @Dependent
 @Builder
 @NamedQueries({ @NamedQuery(name = "rechercherTrajetByBornes", query = RequetesDaoEmpruntImmediat.RECHERCHER_TRAJET_BY_BORNES) })
-public class Trajet extends AbstractEntity {
+public class Trajet extends AbstractEntity{
 
 	@Column(name = "LONGUEUR_TRAJET")
 	@Setter
@@ -58,5 +62,4 @@ public class Trajet extends AbstractEntity {
 
 	@OneToMany(mappedBy = "trajet")
 	List<Reservation> listeReservations = new ArrayList<>();
-
 }

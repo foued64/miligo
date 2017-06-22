@@ -31,25 +31,17 @@ import net.entetrs.commons.jsf.JsfUtils;
 @Named
 public class AccueilGestionParckBean extends AbstractGestionParcBean implements Serializable  {
     
+    /**
+     * Constante pour le flashScope.
+     */
     public static final String FLASH_PARAM_VEHICULE = "vehicule_selectionne";
     
+    /**
+     * Liste des véhicules.
+     */
     @Getter
     protected List<Vehicule> lstVehiculeBorne = new ArrayList<>();
     
-    @Inject
-    private FacadeEntretien facadeEntretien;
-    
-    @Inject
-    private FacadeMaintenance facadeMaintenance;
-    
-    @Inject
-    private FacadeIncident facadeIncident;
-      
-    @Inject
-    private FacadeEmpruntImmediat facadeEmpruntImmediat;
-    
-    @Inject
-    private FacadeEmpruntReservation facadeEmpruntReservation;
     
     @PostConstruct
     private void init(){
@@ -62,13 +54,7 @@ public class AccueilGestionParckBean extends AbstractGestionParcBean implements 
 //        lstVehiculeBorne = facadeVehicule.vehiculeBorne(emplacementBorne);
         lstVehiculeBorne = facadeVehicule.readAll();
     
-    }
-    
-    /**
-     * AJouter au HTMl
-     * 
-     */
-     
+    }     
     /**
      * Recherche la liste des véhicule associéer a la borne.
      * @param immat 
@@ -85,28 +71,5 @@ public class AccueilGestionParckBean extends AbstractGestionParcBean implements 
         JsfUtils.putInFlashScope(FLASH_PARAM_VEHICULE, vechiculeSelectionne);
     }   
     
-//    /**
-//     * Supprime le vehicule passer en paramtre.
-//     * @param v 
-//     */
-//    public void supprimerVechiule(Vehicule v){
-//        
-//        if(!v.getListeEntretiens().isEmpty()){
-//            v.getListeEntretiens().stream().map((e) -> {e.setListeMaintenance(new ArrayList<>());return e;}).forEachOrdered((e) -> {facadeEntretien.delete(e);});
-//        }
-//        if(!v.getListeEmpruntImmediats().isEmpty()){
-//            v.getListeEmpruntImmediats().forEach((eI) -> { facadeEmpruntImmediat.delete(eI);});
-//        }
-//        if(!v.getListeEmpruntReservations().isEmpty()){
-//            v.getListeEmpruntReservations().forEach((eR) -> { facadeEmpruntReservation.delete(eR);});
-//        }
-//        if(!v.getListeIncidents().isEmpty()){
-//            v.getListeIncidents().forEach((i) -> { facadeIncident.delete(i);});
-//        }
-//       
-//        facadeVehicule.delete(v);
-//        lstVehiculeBorne = facadeVehicule.readAll();
-//        addMessage("Suppresion réussi", "Le véhicule à bien été supprimé.");
-//    }
     
 }

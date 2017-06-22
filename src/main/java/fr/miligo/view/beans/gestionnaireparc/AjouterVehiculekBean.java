@@ -30,20 +30,37 @@ import lombok.extern.apachecommons.CommonsLog;
 @CommonsLog
 public class AjouterVehiculekBean extends AbstractGestionParcBean implements Serializable  {
     
-    public static final String FLASH_PARAM_VEHICULE = "vehicule_selectionne";
     
+    /**
+     * Liste des modele de véhicules.
+     */
     @Getter
     protected List<Modele> lstModele = new ArrayList<>();
     
-     @Getter
+    /**
+     * Liste des bornes.
+     */
+    @Getter
     protected List<Borne> lstBorne = new ArrayList<>();
     
+    /**
+    * EJB proposant les services métiers sur les modeles.
+    */
     @Inject
     private FacadeModele facadeModele;
     
+    /**
+     * Date du jour.
+     */
     @Getter
     private Date dateDuJour;
     
+    /** Initialise la page
+     * Initialise la liste des modele et des bornes
+     * Initialise la liste des bornes
+     * Initialise la liste des disponibilité
+     * Initialise la date du jour.
+     */
     @PostConstruct
     private void init(){
         lstModele = facadeModele.readAll();

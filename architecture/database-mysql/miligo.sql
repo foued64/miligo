@@ -101,8 +101,8 @@ CREATE TABLE `EMPRUNT_RESERVATION` (
 
 CREATE TABLE `ENTRETIEN` (
   `ID` varchar(24) NOT NULL,
-  `DATE_ENTRETIEN` date NOT NULL,
-  `DESCRIPTION_ENTRETIEN` longtext,
+  `DATE_ENTRETIEN_DEBUT` datetime NOT NULL,
+  `DATE_ENTRETIEN_FIN` datetime,
   `LIBELLE` varchar(255) DEFAULT NULL,
   `ID_VEHICULE` varchar(24) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -681,6 +681,10 @@ ALTER TABLE `VEHICULE`
 -- Contenu de la table `MAINTENANCE`
 --
 INSERT INTO `MAINTENANCE` (`ID`, `LIBELLE_MAINTENANCE`) VALUES
-('ChZfkFLcEeexFAAAsvkz1Q', 'PNEU'),
-('EANQrFLcEeexFAAAsvkz1Q', 'FREIN');
-
+('932JjlZREeeQewAApgBq0w', 'Vidange'),
+('ChZfkFLcEeexFAAAsvkz1Q', 'Pneu'),
+('CIClwlZSEeeQewAApgBq0w', 'Pare-choc'),
+('EANQrFLcEeexFAAAsvkz1Q', 'Frein'),
+('GbpQaFZSEeeQewAApgBq0w', 'Phare'),
+('K7V5blZSEeeQewAApgBq0w', 'Bloc moteur'),
+('KfjR6FZSEeeQewAApgBq0w', 'Courroie distribution');
