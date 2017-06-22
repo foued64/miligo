@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
@@ -39,6 +40,10 @@ import lombok.experimental.FieldDefaults;
 		@NamedQuery(name = "entretienEnCoursVoiture", query = RequetesDaoEntretien.ENTRETIEN_COURS_BY_VEHICULE) })
 public class Entretien extends AbstractEntity {
 
+	@Column(name = "DATE_ENTRETIEN", nullable = false)
+	// @Temporal(TemporalType.DATE)
+	@Setter
+	Date dateEntretien;
 
     @Column(name = "DATE_ENTRETIEN_DEBUT", nullable = false)
     @Setter

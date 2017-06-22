@@ -19,22 +19,18 @@
         <div class="pageMobile">
 
             <h:form id="frmVE">
-
-                <div>
-                    <p:commandButton id="btnVE" value=" "
-                                     rendered="#{choixTypeVehiculeBean.btnVE}" class="btnImageVE"
-                                     actionListener="#{choixTypeVehiculeBean.choixVE()}" 
-                                     onerror="#{choixTypeVehiculeBean.checkAvantDispoVEOnError()}"/>
-
-                    <p:commandButton id="btnVAE" value=" "
-                                     rendered="#{choixTypeVehiculeBean.btnVAE}" class="btnImageVAE"
-                                     actionListener="#{choixTypeVehiculeBean.choixVAE()}" 
-                                     onerror="#{choixTypeVehiculeBean.checkAvantDispoVAEOnError()}"/>
-                </div>
-
-                <p:messages id="messages" showIcon="false" showDetail="false"
-                            autoUpdate="true" closable="false" 
-                            />
+				<p:panel header="Choisissez un type de véhicule">
+	                <div>
+	                    <p:commandButton id="btnVE" value=" "
+	                                     rendered="#{choixTypeVehiculeBean.btnVE}" class="btnImageVE"
+	                                     actionListener="#{choixTypeVehiculeBean.choixVE()}"/>
+	
+	                    <p:commandButton id="btnVAE" value=" "
+	                                     rendered="#{choixTypeVehiculeBean.btnVAE}" class="btnImageVAE"
+	                                     actionListener="#{choixTypeVehiculeBean.choixVAE()}"/>
+	                </div>
+				</p:panel>
+                <p:messages id="messages" showIcon="false" showDetail="false" autoUpdate="true" closable="false"/>
             
 
             <div id="validation">

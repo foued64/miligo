@@ -1,53 +1,73 @@
 package fr.miligo.model.facades.emprunt;
 
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
+import javax.ejb.Schedule;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import fr.miligo.common.AbstractFacade;
 import fr.miligo.exceptions.MessagesException;
 import fr.miligo.exceptions.MiligoException;
+import fr.miligo.model.entities.emprunt.Client;
+import fr.miligo.model.entities.emprunt.EmpruntImmediat;
+import fr.miligo.model.entities.emprunt.EmpruntReservation;
 import fr.miligo.model.entities.parc.Borne;
-import fr.miligo.model.entities.vehicule.Modele;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
+import fr.miligo.model.entities.vehicule.Entretien;
+import fr.miligo.model.entities.vehicule.Incident;
+import fr.miligo.model.entities.vehicule.Modele;
 import fr.miligo.model.entities.vehicule.TypeVehicule;
 import fr.miligo.model.entities.vehicule.Vehicule;
-import java.util.ArrayList;
-import javax.inject.Inject;
 import fr.miligo.model.facades.parc.FacadeBorne;
 import fr.miligo.model.facades.vehicule.FacadeModele;
+import lombok.extern.apachecommons.CommonsLog;
 
 @Stateless
+@CommonsLog
 public class FacadeVehicule extends AbstractFacade<Vehicule> {
 
 	@Inject
 	private FacadeBorne facadeBorne;
-	
+
+	@Inject
+	private FacadeEmpruntImmediat facadeEmpruntImmediat;
+
+	@Inject
+	private FacadeEmpruntReservation facadeEmpruntReservation;
+
 	@Inject
 	private FacadeModele facadeModele;
 
-    public void modifierDisponibiliteVehicule(Vehicule vehicule, DisponibiliteEnum disponibiliteEnum) {
-        if (vehicule != null && disponibiliteEnum != null) {
-            vehicule.setDisponibilite(disponibiliteEnum);
-            update(vehicule);
-        }
-    }
+	@Inject
+	private Incident incident;
 
-    public List<Vehicule> findVehiculesByDisponibilteAndByBorne(DisponibiliteEnum disponibilite, Borne borne)
-            throws MiligoException {
-        try {
-            TypedQuery<Vehicule> q = getEntityManager().createNamedQuery("findVehiculesByDisponibiliteAndByBorne",
-                    Vehicule.class);
-            q.setParameter("dispo", disponibilite);
-            q.setParameter("idBorne", borne.getId());
+	public void modifierDisponibiliteVehicule(Vehicule vehicule, DisponibiliteEnum disponibiliteEnum) {
+		if (vehicule != null && disponibiliteEnum != null) {
+			vehicule.setDisponibilite(disponibiliteEnum);
+			update(vehicule);
+		}
+	}
 
-            return q.getResultList();
-        } catch (Exception e) {
-            throw new MiligoException(e);
-        }
-    }
+	public List<Vehicule> findVehiculesByDisponibilteAndByBorne(DisponibiliteEnum disponibilite, Borne borne)
+			throws MiligoException {
+		try {
+			TypedQuery<Vehicule> q = getEntityManager().createNamedQuery("findVehiculesByDisponibiliteAndByBorne",
+					Vehicule.class);
+			q.setParameter("dispo", disponibilite);
+			q.setParameter("idBorne", borne.getId());
+
+			return q.getResultList();
+		} catch (Exception e) {
+			throw new MiligoException(e);
+		}
+	}
 
 	/**
 	 * Méthode de fabrication d'un Vehicule
@@ -61,12 +81,12 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
 	 * @param modele
 	 * @return une nouvelle instance de vehicule
 	 */
-	public Vehicule newInstance(String libelle,String immatriculation,Integer kilometrage,Integer batterie,String puissance,Date datemiseencirculation,String borne,String disponible,String modele) {
-		
+	public Vehicule newInstance(String libelle, String immatriculation, Integer kilometrage, Integer batterie,
+			String puissance, Date datemiseencirculation, String borne, String disponible, String modele) {
+
 		Borne bornee = facadeBorne.readbyNom(borne);
 		Modele modelee = facadeModele.readbyNom(modele);
-		
-		
+
 		Vehicule vehicule = super.newInstance();
 		vehicule.setBorne(bornee);
 		vehicule.setDateMiseEnCirculation(datemiseencirculation);
@@ -75,164 +95,267 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
 		vehicule.setLibelle(libelle);
 		vehicule.setModele(modelee);
 		vehicule.setNiveauBatterie(batterie);
-		vehicule.setPuissance(puissance);
 		vehicule.setDisponibilite(DisponibiliteEnum.valueOf(disponible));
-		
+
 		return vehicule;
-	
-	}	
-	
-	
-	
-	
-    public List<Vehicule> findVehiculesByDisponibilteAndByBorneByTypeVehicule(DisponibiliteEnum disponibilite,
-            Borne borne, TypeVehicule typeVehicule) throws MiligoException {
 
-        try {
-            TypedQuery<Vehicule> q = getEntityManager().createNamedQuery("findVehiculeByDispoByBorneByTypeVehicule",
-                    Vehicule.class);
-            q.setParameter("dispo", disponibilite);
-            q.setParameter("idBorne", borne.getId());
-            q.setParameter("idTypeVehicule", typeVehicule.getId());
+	}
 
-            return q.getResultList();
-        } catch (Exception e) {
-            throw new MiligoException(e);
-        }
+	public List<Vehicule> findVehiculesByDisponibilteAndByBorneByTypeVehicule(DisponibiliteEnum disponibilite,
+			Borne borne, TypeVehicule typeVehicule) throws MiligoException {
 
-    }
+		try {
+			TypedQuery<Vehicule> q = getEntityManager().createNamedQuery("findVehiculeByDispoByBorneByTypeVehicule",
+					Vehicule.class);
+			q.setParameter("dispo", disponibilite);
+			q.setParameter("idBorne", borne.getId());
+			q.setParameter("idTypeVehicule", typeVehicule.getId());
 
-//    /**
-//     * Permet de triée la liste des enrtretiens du vehicule en fonction de la
-//     * dateEntretien Du plus moins au plus recents.
-//     *
-//     * @param v Attention il faut que la listeEntretien soit différent de vide.
-//     * @return
-//     */
-//    public Vehicule trieListEntretien(Vehicule v) {
-//        if (!v.getListeEntretiens().isEmpty()) {
-//            List<Entretien> lstEntretien = v.getListeEntretiens();
-//
-//            Collections.sort(lstEntretien, new Comparator<Entretien>() {
-//                @Override
-//                public int compare(Entretien e1, Entretien e2) {
-//                    return (e1.getDateEntretien().compareTo(e2.getDateEntretien()));
-//                }
-//            });
-//            v.setListeEntretiens(lstEntretien);
-//        }
-//        return v;
-//    }
+			return q.getResultList();
+		} catch (Exception e) {
+			throw new MiligoException(e);
+		}
+	}
 
-    /**
-     * Recuperer la liste des véhicule en fonctione de al borne
-     *
-     * @param borne Borne
-     * @return liste vehicule ou null
-     */
-    public List<Vehicule> lstVehiculeBorne(Borne borne) {
-        if (borne.getId() != null) {
-            return null;
-        }
-        //recuperation en BDD des bornes
-        Borne b = facadeBorne.read(borne.getId());
-        List<Vehicule> lstVehicule;
+	/**
+	 * Permet de triée la liste des enrtretiens du vehicule en fonction de la
+	 * dateEntretien Du plus moins au plus recents.
+	 *
+	 * @param v Attention il faut que la listeEntretien soit différent de vide.
+	 * @return
+	 */
+	public Vehicule trieListEntretien(Vehicule v) {
+		if (!v.getListeEntretiens().isEmpty()) {
+			List<Entretien> lstEntretien = v.getListeEntretiens();
 
-        TypedQuery<Vehicule> tq = getEntityManager().createQuery("SELECT v FROM Vehicule v WHERE v.borne =:borne ", Vehicule.class);
-        tq.setParameter("borne", b);
+			Collections.sort(lstEntretien, new Comparator<Entretien>() {
+				@Override
+				public int compare(Entretien e1, Entretien e2) {
+					return (e1.getDateEntretien().compareTo(e2.getDateEntretien()));
+				}
+			});
+			v.setListeEntretiens(lstEntretien);
+		}
+		return v;
+	}
 
-        lstVehicule = tq.getResultList();
+	/**
+	 * Recuperer la liste des véhicule en fonctione de al borne
+	 *
+	 * @param borne Borne
+	 * @return liste vehicule ou null
+	 */
+	public List<Vehicule> lstVehiculeBorne(Borne borne) {
+		if (borne.getId() != null) {
+			return null;
+		}
+		// recuperation en BDD des bornes
+		Borne b = facadeBorne.read(borne.getId());
+		List<Vehicule> lstVehicule;
 
-        return lstVehicule;
-    }
+		TypedQuery<Vehicule> tq = getEntityManager().createQuery("SELECT v FROM Vehicule v WHERE v.borne =:borne ",
+				Vehicule.class);
+		tq.setParameter("borne", b);
 
-    /**
-     * Modifie la disponibilité d'un vehicule
-     *
-     * @param v Vehicule
-     * @param dispo Disponibilite
-     */
-    public void modifierDispoVehicule(Vehicule v, DisponibiliteEnum dispo) {
-        v.setDisponibilite(dispo);
-        this.update(v);
-    }
+		lstVehicule = tq.getResultList();
 
-    /**
-     * Recherche un vehicule ou une liste de vehicule qui contient
-     * l'immatriculation exact ou un bout
-     *
-     * @param immat String
-     * @return List Vehicule
-     */
-    public List<Vehicule> rechercherVehiculeByImmat(String immat) {
-        if (immat == null) {
-            return null;
-        }
-        List<Vehicule> lstVehicule = null;
-        TypedQuery<Vehicule> tq = getEntityManager().createQuery("SELECT v FROM Vehicule v WHERE v.immatriculation LIKE '%:immat' ", Vehicule.class);
-        tq.setParameter(1, immat);
-        System.out.println("Requete " + tq.toString());
+		return lstVehicule;
+	}
 
-        if (!tq.getResultList().isEmpty()) {
-            lstVehicule = tq.getResultList();
-        }
+	/**
+	 * Modifie la disponibilité d'un vehicule
+	 *
+	 * @param v Vehicule
+	 * @param dispo Disponibilite
+	 */
+	public void modifierDispoVehicule(Vehicule v, DisponibiliteEnum dispo) {
+		v.setDisponibilite(dispo);
+		this.update(v);
+	}
 
-        return lstVehicule;
-    }
+	/**
+	 * Recherche un vehicule ou une liste de vehicule qui contient
+	 * l'immatriculation exact ou un bout
+	 *
+	 * @param immat String
+	 * @return List Vehicule
+	 */
+	public List<Vehicule> rechercherVehiculeByImmat(String immat) {
+		if (immat == null) {
+			return null;
+		}
+		List<Vehicule> lstVehicule = null;
+		TypedQuery<Vehicule> tq = getEntityManager()
+				.createQuery("SELECT v FROM Vehicule v WHERE v.immatriculation LIKE '%:immat' ", Vehicule.class);
+		tq.setParameter(1, immat);
+		System.out.println("Requete " + tq.toString());
 
-    /**
-     * Creer un nouvelle instance de vehicule avec les listes intancier
-     *
-     * @return Vehicule
-     */
-    public Vehicule newInstanceVehicule() {
-        Vehicule v = new Vehicule();
-        v.setListeEmpruntImmediats(new ArrayList<>());
-        v.setListeEmpruntReservations(new ArrayList<>());
-        v.setListeEntretiens(new ArrayList<>());
-        v.setListeIncidents(new ArrayList<>());
-        return v;
-    }
+		if (!tq.getResultList().isEmpty()) {
+			lstVehicule = tq.getResultList();
+		}
 
-    /**
-     * Retourne un véhicule disponible.
-     *
-     * @param typeVehicule
-     * @param borneDepart
-     * @return
-     * @throws MiligoException Si véhicule pas disponible
-     */
-    public Vehicule getVehiculeDispo(TypeVehicule typeVehicule, Borne borneDepart) throws MiligoException {
-        try {
-            List<Vehicule> lstVehicule = findVehiculesByDisponibilteAndByBorneByTypeVehicule(
-                    DisponibiliteEnum.DISPONIBLE, borneDepart, typeVehicule);
-            if (!lstVehicule.isEmpty()) {
-                return lstVehicule.get(0);
-            } else {
-                throw new MiligoException(MessagesException.AUCUN_VEHICULE);
-            }
+		return lstVehicule;
+	}
 
-        } catch (Exception e) {
-            throw new MiligoException(e);
-        }
-    }
-    
-    
-     /**
-      * Retourne le vechiule en BDD.
-      */
-    public int nbreVehiculeTotal() {
-        TypedQuery<Integer> tq = getEntityManager().createQuery("SELECT COUNT(v) FROM Vehicule v", Integer.class);
-        return tq.getSingleResult();
-    }
-    
-     /**
-      * Retourne le vechiule en BDD.
-      */
-    public int nbreVehiculeDispo() {
-        TypedQuery<Integer> tq = getEntityManager().createQuery("SELECT COUNT(v) FROM Vehicule v WHERE v.disponibilite =:enum", Integer.class);
-        tq.setParameter("enum", DisponibiliteEnum.DISPONIBLE.toString());
-        return tq.getSingleResult();
-    }
-    
+	/**
+	 * Retourne le vechiule en BDD.
+	 */
+	public int nbreVehiculeTotal() {
+		TypedQuery<Integer> tq = getEntityManager().createQuery("SELECT COUNT(v) FROM Vehicule v", Integer.class);
+		return tq.getSingleResult();
+	}
+
+	/**
+	 * Retourne le vechiule en BDD.
+	 */
+	public int nbreVehiculeDispo() {
+		TypedQuery<Integer> tq = getEntityManager()
+				.createQuery("SELECT COUNT(v) FROM Vehicule v WHERE v.disponibilite =:enum", Integer.class);
+		tq.setParameter("enum", DisponibiliteEnum.DISPONIBLE.toString());
+		return tq.getSingleResult();
+	}
+
+	/**
+	 * Creer un nouvelle instance de vehicule avec les listes intancier
+	 *
+	 * @return Vehicule
+	 */
+	public Vehicule newInstanceVehicule() {
+		Vehicule v = new Vehicule();
+		v.setListeEmpruntImmediats(new ArrayList<>());
+		v.setListeEmpruntReservations(new ArrayList<>());
+		v.setListeEntretiens(new ArrayList<>());
+		v.setListeIncidents(new ArrayList<>());
+		return v;
+	}
+
+	/**
+	 * Retourne un véhicule disponible.
+	 *
+	 * @param typeVehicule
+	 * @param borneDepart
+	 * @return
+	 * @throws MiligoException Si véhicule pas disponible
+	 */
+	public Vehicule getVehiculeDispo(TypeVehicule typeVehicule, Borne borneDepart) throws MiligoException {
+		try {
+			List<Vehicule> lstVehicule = findVehiculesByDisponibilteAndByBorneByTypeVehicule(
+					DisponibiliteEnum.DISPONIBLE, borneDepart, typeVehicule);
+			if (!lstVehicule.isEmpty()) {
+				return lstVehicule.get(0);
+			} else {
+				throw new MiligoException(MessagesException.AUCUN_VEHICULE);
+			}
+
+		} catch (Exception e) {
+			throw new MiligoException(e);
+		}
+	}
+
+	/**
+	 * Retourne un véhicule à restituer par un client.
+	 * @param client
+	 * @return
+	 * @throws MiligoException
+	 */
+	public Vehicule findVehiculeARestituer(Client client) throws MiligoException {
+		try {
+			Vehicule vehicule = null;
+			TypedQuery<Vehicule> query = getEntityManager().createNamedQuery("findVehiculeARestituerByClient",
+					Vehicule.class);
+			query.setParameter("idClient", client.getId());
+			query.setParameter("disponibilite", DisponibiliteEnum.EMPRUNTE);
+
+			vehicule = query.getSingleResult();
+
+			return vehicule;
+		} catch (NoResultException nre) {
+			return null;
+		} catch (Exception e) {
+			throw new MiligoException(e);
+		}
+	}
+
+	public void restituerVehiculeEmpruntImmediat(Client client, Vehicule vehicule, String descriptionIncident,
+			Date dateHeureeureArrivee, Integer satisfaction, Borne borneArrivee) throws MiligoException {
+
+		if (descriptionIncident != null && !descriptionIncident.isEmpty()) {
+			vehicule.setDisponibilite(DisponibiliteEnum.MAINTENANCE);
+			incident.setClient(client);
+			incident.setDateIncident(new Date());
+			incident.setDescriptionIncident(descriptionIncident);
+			incident.setVehicule(vehicule);
+			vehicule.getListeIncidents().add(incident);
+		} else {
+			if (vehicule.getNiveauBatterie() <= borneArrivee.getConfigurationBorne().getSeuilRechargement()) {
+				vehicule.setDisponibilite(DisponibiliteEnum.EN_CHARGE);
+			} else {
+				vehicule.setDisponibilite(DisponibiliteEnum.DISPONIBLE);
+			}
+		}
+		vehicule.setBorne(borneArrivee);
+
+		EmpruntImmediat empruntImmediat = facadeEmpruntImmediat.findEmpruntImmediatEnCoursByClient(client);
+		EmpruntReservation empruntReservation = facadeEmpruntReservation.findEmpruntReservationEnCoursByClient(client);
+
+		if (empruntImmediat != null) {
+			empruntImmediat.setGdhRetourReel(dateHeureeureArrivee);
+			empruntImmediat.setSatisfaction(satisfaction);
+
+			facadeEmpruntImmediat.update(empruntImmediat);
+		} else if (empruntReservation != null) {
+			empruntReservation.setGdhRetourReel(dateHeureeureArrivee);
+			empruntReservation.setSatisfaction(satisfaction);
+
+			facadeEmpruntReservation.update(empruntReservation);
+		}
+
+		update(vehicule);
+	}
+
+	public Boolean hasVehiculesDispoByTypeAndByBorne(TypeVehicule typeVehicule, Borne borne) {
+		TypedQuery<Long> q = getEntityManager().createNamedQuery("compterNbVehiculesDispoByTypeAndByBorne", Long.class);
+		q.setParameter("dispo", DisponibiliteEnum.DISPONIBLE);
+		q.setParameter("idBorne", borne.getId());
+		q.setParameter("idTypeVehicule", typeVehicule.getId());
+
+		Long nbVehicules = q.getSingleResult();
+
+		if (nbVehicules > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Tâche de fond qui va vérifier si les véhicules EN_CHARGE ont eu le temps dêtre chargés
+	 */
+	@Schedule(minute = "*/15", hour = "*") // toute les 15 min
+	public void chargerVehicule() throws MiligoException {
+
+		if (log.isInfoEnabled()) {
+			log.info("Début de la vérification de la charge des véhicules");
+		}
+		List<EmpruntImmediat> listeEmpruntImmediats = facadeEmpruntImmediat
+				.findEmpruntImmediatPourRechargementVehicules();
+
+		Date heureArrivee;
+		Date tempsCharge;
+		Date dateHeureFinChargement;
+		Date dateHeureActuelle = new Date();
+
+		for (EmpruntImmediat empruntImmediat : listeEmpruntImmediats) {
+			heureArrivee = empruntImmediat.getGdhRetourReel();
+			tempsCharge = empruntImmediat.getTrajet().getBorneArrivee().getConfigurationBorne().getTempsCharge();
+			dateHeureFinChargement = facadeEmpruntImmediat.ajouterTempsTrajet(heureArrivee, tempsCharge);
+
+			if (!dateHeureFinChargement.after(dateHeureActuelle)) {
+				empruntImmediat.getVehicule().setDisponibilite(DisponibiliteEnum.DISPONIBLE);
+				update(empruntImmediat.getVehicule());
+			}
+		}
+		if (log.isInfoEnabled()) {
+			log.info("Fin de la vérification de la charge des véhicules");
+		}
+	}
 }

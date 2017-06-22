@@ -10,13 +10,15 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import fr.miligo.exceptions.MiligoException;
-import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.emprunt.Trajet;
 import fr.miligo.model.entities.parc.Borne;
 import fr.miligo.model.entities.vehicule.TypeVehicule;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.apachecommons.CommonsLog;
 import net.entetrs.commons.jsf.JsfUtils;
+
+@CommonsLog
 
 @SuppressWarnings("serial")
 @ViewScoped
@@ -49,18 +51,21 @@ public class EmprunterBean extends AbstractEmprunterBean implements Serializable
 
 	@PostConstruct
 	public void init() {
-            System.out.println(((Client) getObjectInSession(CLIENT_SESSION)));
+		try {
+			clientCourant = getClientFromSession();
 
+			// Récuperation de la borne par le flashscoped
+			this.borneAller = (Borne) JsfUtils.getFromFlashScope(KEY_FLASH_SCOPE_BORNE_ACTUELLE);
 
-		// Récupération de toute les bornes
-		// TODO il faudra récupérer que les bornes de la gsbdd correspondant au
-		// client
-		lstBorne = new ArrayList<>();
-		lstBorne = facadeBorne.readAll();
-                
-                // Récuperation de la borne par le flashscoped
-                this.borneAller = (Borne) JsfUtils.getFromFlashScope(KEY_BORNE_DEPART);
-
+			// Récupération de toute les bornes
+			lstBorne = new ArrayList<>();
+			lstBorne = facadeBorne.findBornesByGsbdd(borneAller.getSite().getGsbdd());
+		} catch (MiligoException e) {
+			if (log.isErrorEnabled()) {
+				log.error(e.getMessage());
+			}
+			addErrorMessage(e.getMessage());
+		}
 	}
 
 	/**
@@ -81,7 +86,6 @@ public class EmprunterBean extends AbstractEmprunterBean implements Serializable
 		// du type de véhicule
 		JsfUtils.putInFlashScope(KEY_TRAJET_FLASH_SCOPE, this.trajet);
 		JsfUtils.putInFlashScope(KEY_TEMPS_EMPRUNT_FLASH_SCOPE, this.tempsEmprunt);
-
 	}
 
 }
