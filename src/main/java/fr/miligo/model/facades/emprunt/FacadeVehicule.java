@@ -4,23 +4,17 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 
 import fr.miligo.common.AbstractFacade;
 import fr.miligo.exceptions.MessagesException;
 import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.parc.Borne;
-import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
-import fr.miligo.model.entities.vehicule.Entretien;
 import fr.miligo.model.entities.vehicule.Modele;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.entities.vehicule.TypeVehicule;
 import fr.miligo.model.entities.vehicule.Vehicule;
-import fr.miligo.model.facades.parc.FacadeBorne;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import javax.inject.Inject;
 import fr.miligo.model.facades.parc.FacadeBorne;
 import fr.miligo.model.facades.vehicule.FacadeModele;
@@ -108,27 +102,27 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
 
     }
 
-    /**
-     * Permet de triée la liste des enrtretiens du vehicule en fonction de la
-     * dateEntretien Du plus moins au plus recents.
-     *
-     * @param v Attention il faut que la listeEntretien soit différent de vide.
-     * @return
-     */
-    public Vehicule trieListEntretien(Vehicule v) {
-        if (!v.getListeEntretiens().isEmpty()) {
-            List<Entretien> lstEntretien = v.getListeEntretiens();
-
-            Collections.sort(lstEntretien, new Comparator<Entretien>() {
-                @Override
-                public int compare(Entretien e1, Entretien e2) {
-                    return (e1.getDateEntretien().compareTo(e2.getDateEntretien()));
-                }
-            });
-            v.setListeEntretiens(lstEntretien);
-        }
-        return v;
-    }
+//    /**
+//     * Permet de triée la liste des enrtretiens du vehicule en fonction de la
+//     * dateEntretien Du plus moins au plus recents.
+//     *
+//     * @param v Attention il faut que la listeEntretien soit différent de vide.
+//     * @return
+//     */
+//    public Vehicule trieListEntretien(Vehicule v) {
+//        if (!v.getListeEntretiens().isEmpty()) {
+//            List<Entretien> lstEntretien = v.getListeEntretiens();
+//
+//            Collections.sort(lstEntretien, new Comparator<Entretien>() {
+//                @Override
+//                public int compare(Entretien e1, Entretien e2) {
+//                    return (e1.getDateEntretien().compareTo(e2.getDateEntretien()));
+//                }
+//            });
+//            v.setListeEntretiens(lstEntretien);
+//        }
+//        return v;
+//    }
 
     /**
      * Recuperer la liste des véhicule en fonctione de al borne
@@ -222,4 +216,23 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
             throw new MiligoException(e);
         }
     }
+    
+    
+     /**
+      * Retourne le vechiule en BDD.
+      */
+    public int nbreVehiculeTotal() {
+        TypedQuery<Integer> tq = getEntityManager().createQuery("SELECT COUNT(v) FROM Vehicule v", Integer.class);
+        return tq.getSingleResult();
+    }
+    
+     /**
+      * Retourne le vechiule en BDD.
+      */
+    public int nbreVehiculeDispo() {
+        TypedQuery<Integer> tq = getEntityManager().createQuery("SELECT COUNT(v) FROM Vehicule v WHERE v.disponibilite =:enum", Integer.class);
+        tq.setParameter("enum", DisponibiliteEnum.DISPONIBLE.toString());
+        return tq.getSingleResult();
+    }
+    
 }

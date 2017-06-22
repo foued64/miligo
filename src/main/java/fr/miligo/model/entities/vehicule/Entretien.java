@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
+import fr.miligo.model.dao.RequetesDaoEntretien;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -20,6 +23,10 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * Entité métier représentant un Entretien du véhicule.
+ * @author codeur
+ */
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "ENTRETIEN")
@@ -28,14 +35,23 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent
+@NamedQueries({
+		@NamedQuery(name = "entretienEnCoursVoiture", query = RequetesDaoEntretien.ENTRETIEN_COURS_BY_VEHICULE) })
 public class Entretien extends AbstractEntity {
 
 
-    @Column(name = "DATE_ENTRETIEN", nullable = false)
-//	@Temporal(TemporalType.DATE)
+    @Column(name = "DATE_ENTRETIEN_DEBUT", nullable = false)
     @Setter
-    Date dateEntretien;
-     
+    Date dateEntretienDebut;
+    
+    @Column(name = "DATE_ENTRETIEN_FIN")
+    @Setter
+    Date dateEntretienFin;
+        
+    @Column(name = "LIBELLE")
+    @Setter
+    String libelle;
+    
     @ManyToOne
     @JoinColumn(name = "ID_VEHICULE", nullable = false)
     @Setter

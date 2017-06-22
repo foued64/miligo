@@ -60,44 +60,6 @@ public class FacadeTrajet extends AbstractFacade<Trajet> {
         }
     }
     
-    
-    /**
-     * 
-     * @return 
-     */
-    public List<Trajet> listTrajetPreferer(){
-        List<Trajet> lstTrajet = new ArrayList<>();
-        List<Reservation> lstReservation = new ArrayList<>();
-        List<EmpruntImmediat> lstEmpruntImmediat = new ArrayList<>();
-        
-        
-        
-        //Je recuper la liste des reserations et des emprunts pour pourvoir avoir chaque trajet efféctué.
-        lstReservation = facadeReservation.readAll();
-        lstEmpruntImmediat = facadeEmpruntImmediat.readAll();
-        
-        //Pour chaque emprunt je recupere le trajet
-        for (EmpruntImmediat empruntImmediat : lstEmpruntImmediat) {
-            lstTrajet.add(empruntImmediat.getTrajet());
-        }
-        
-        //Pour chaque reservation je recupere le trajet
-        for (Reservation reservation : lstReservation) {
-            lstTrajet.add(reservation.getTrajet());
-        }
-        for (Trajet trajet : lstTrajet) {
-            
-        }
-        
-        Collections.sort(lstTrajet);
-        for (Trajet trajet : lstTrajet) {
-            System.out.println("BBBBBBBBBBBBBBBBBBBBBBBB");
-            System.out.println(trajet.getBorneDepart().getNomBorne());
-        }
-//        lstTrajet.
-        
-        return lstTrajet;
-    }
         
 
 
