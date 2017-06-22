@@ -15,7 +15,7 @@
                 <h:form>
                     <div class="ui-g-12 ui-g-nopad">
                         <div class="ui-g-6">
-                            <p:outputLabel value="Trajets les plus effectués" />
+                            <p:outputLabel value="Trajets les plus effectués - #{statsTrajetBeans.clientCourant.gsbdd.libelle}" />
                             <p:dataTable id="dataTableStatistiques" var="v" value="#{statsTrajetBeans.listeTrajetUnique}" style="margin-top : 40px;" rows="3">
                                 <p:column>
                                     <f:facet name="header">

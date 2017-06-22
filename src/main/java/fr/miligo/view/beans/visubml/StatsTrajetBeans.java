@@ -6,6 +6,7 @@
 package fr.miligo.view.beans.visubml;
 
 import fr.miligo.common.AbstractBean;
+import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.emprunt.Trajet;
 import fr.miligo.model.facades.emprunt.FacadeEmpruntImmediat;
 import fr.miligo.model.facades.emprunt.FacadeTrajet;
@@ -20,7 +21,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -41,30 +41,38 @@ public class StatsTrajetBeans extends AbstractBean implements Serializable {
 
     @Inject
     private FacadeTrajet facadeTrajet;
-
+    
     @Getter
     private List<Trajet> listeDesTrajets = new ArrayList<>();
 
     @Getter
     private Map<String, Integer> listeTrajetUnique = new HashMap<String, Integer>();
+    
+    // Attributs
+    @Getter
+    private Client clientCourant;
 
     @PostConstruct
     public void init() {
+        
+        clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
         listeDesTrajets = facadeTrajet.readAll();
         constructionDesStatsTrajet();
     }
 
     /**
      * Contruction de la cle= Trajet et j'incremente la valeur.
+     * TO-DO : Prendre en compte les trajets des Empruntrs réservés.
      */
     private void constructionDesStatsTrajet() {
-
+        
         for (Trajet trajet : listeDesTrajets) {
 
+            if(trajet.getBorneDepart().getSite().getGsbdd().getId().equals(clientCourant.getGsbdd().getId())){
             listeTrajetUnique.put(String.format("%s - %s", trajet.getBorneDepart().getSite().getNom(),
                     trajet.getBorneArrivee().getSite().getNom()),
-                    facadeEmpruntImmediat.nbreEmpruntParTrajet(trajet));
-
+                    facadeEmpruntImmediat.nbreEmpruntParTrajet(trajet, clientCourant.getGsbdd()));
+            }
         }
     }
 
@@ -75,14 +83,7 @@ public class StatsTrajetBeans extends AbstractBean implements Serializable {
      */
     public List<Map.Entry<String, Integer>> getListeTrajetUnique() {
         listeTrajetUnique = sortByValue(listeTrajetUnique);
-        
-        for(Map.Entry<String, Integer> entry : listeTrajetUnique.entrySet())
-        {
-            System.out.println(entry.getKey()+" => "+entry.getValue());
-        }
-        
         Set<Map.Entry<String, Integer>> liste = listeTrajetUnique.entrySet();
-
         return new ArrayList<Map.Entry<String, Integer>>(liste);
     }
 
