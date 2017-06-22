@@ -26,7 +26,6 @@ public class FacadeEntretien extends AbstractFacade<Entretien> {
         try {
             TypedQuery<Entretien> q = getEntityManager().createNamedQuery("entretienEnCoursVoiture",Entretien.class);
             q.setParameter("vehicule", v);
-
             return q.getSingleResult();
         } catch (Exception e) {
             throw new MiligoException(e);

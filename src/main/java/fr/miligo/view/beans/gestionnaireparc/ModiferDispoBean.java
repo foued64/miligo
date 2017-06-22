@@ -172,14 +172,13 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
     public void modifVehicule() {
         
         if(vehicule.getDisponibilite().equals(DisponibiliteEnum.MAINTENANCE)){
-           
-            //On recupere l'entretien en cours du véhicule ou null
-            Entretien e = recupereEntretienEnCours(vehicule);
-            /**
-             * Test si l'entretien est différent de null
-             * Si oui : on rajoute à l'entretien en cours un maintenance.
-             */
-            if(e != null){
+           Vehicule vBdd = facadeVehicule.read(vehicule.getId());
+           /**
+            * Test si le vehicule en bdd est en maitenance comme le vechicule affiche.
+            */
+           if(!vehicule.getDisponibilite().MAINTENANCE.toString().equals(vBdd.getDisponibilite().MAINTENANCE.toString())){
+               //On recupere l'entretien en cours du véhicule ou null
+                Entretien e = recupereEntretienEnCours(vehicule);
                 entretien = facadeEntretien.read(e.getId());
                 for (Maintenance maint : tabMaitenance) {
                     Maintenance m = facadeMaintenance.read(maint.getId());
@@ -191,7 +190,7 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
                 if (log.isInfoEnabled()){
                     log.info("Modfication de l'entretien en cours.");					
                 }
-            }else{
+           }else{
                 /**
                  * On créer un nouveau entretien.
                  */                

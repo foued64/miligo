@@ -27,24 +27,25 @@
                 <p:outputLabel value="Nombre de véhicule présent en ce moment : 
                                #{accueilGestionParckBean.lstVehiculeBorne.size()}" style="float: right;"/>
             </p:panelGrid>                
-            <p:dataTable id="dataTableLstVehicule" var="v" value="#{accueilGestionParckBean.lstVehiculeBorne}" style="margin-top : 40px;">
-                <p:column headerText="N° immatricualtion" filterBy="#{v.immatriculation}" 
+            <p:dataTable id="dataTableLstVehicule" var="v" value="#{accueilGestionParckBean.lstVehiculeBorne}" style="margin-top : 40px;"
+                         paginator="true" rows="10" rowsPerPageTemplate="5,10,15">
+                <p:column headerText="N° immatricualtion" filterBy="#{v.immatriculation}"  style="width: 200px;text-align: center;"
                           filterMatchMode="contains" sortBy="#{v.immatriculation}" >
                     <h:outputText value="#{v.immatriculation}" />
                 </p:column>
 
-                <p:column headerText="Type de véhicule" sortBy="#{v.modele.typeVehicule.libelle}">
+                <p:column headerText="Type de véhicule"  sortBy="#{v.modele.typeVehicule.libelle}" style="width: 200px;text-align: center;" >
                     <h:outputText value="#{v.modele.typeVehicule.libelle}" />
                 </p:column>
 
-                <p:column headerText="Etat général" sortBy="#{v.disponibilite}">
+                <p:column headerText="Etat général" sortBy="#{v.disponibilite}" style="width: 200px;text-align: center;" >
                     <h:outputText value="#{v.disponibilite}" />
                 </p:column>
 
                 <p:column headerText="Emplacement" sortBy="#{v.borne.site.nom}">
                     <h:outputText value="#{v.borne.site.nom}" />
                 </p:column>
-                <p:column headerText="Action">
+                <p:column headerText="Action" style="width: 150px; text-align: center;" >
                     <p:commandLink actionListener="#{accueilGestionParckBean.mettreVehiculeEnFlashScope(v)}"
                                    action="modif-vehicule.xhtml" value="Modifier" />
                 </p:column>
