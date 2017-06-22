@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import fr.miligo.exceptions.MessagesException;
 import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.emprunt.Trajet;
 import fr.miligo.model.entities.parc.Borne;
@@ -76,16 +77,27 @@ public class EmprunterBean extends AbstractEmprunterBean implements Serializable
 	public void validerTrajet() throws MiligoException {
 		// Récupération du trajet existant déjà en bdd
 		// en prenant en paramètre les 2 bornes
-		System.out.println("Aller : "+this.borneAller.getId()+" - Arrivée : "+this.borneRetour.getId());
-		
 		this.trajet = facadeTrajet.rechercherTrajet(this.borneAller, this.borneRetour);
-		
-		
 
-		// Mise en flashScope des variables pour la page permettant la selection
-		// du type de véhicule
-		JsfUtils.putInFlashScope(KEY_TRAJET_FLASH_SCOPE, this.trajet);
-		JsfUtils.putInFlashScope(KEY_TEMPS_EMPRUNT_FLASH_SCOPE, this.tempsEmprunt);
+		if (trajet == null) {
+			addErrorMessage(MessagesException.TRAJET_NON_TROUVE);
+		} else {
+			// Mise en flashScope des variables pour la page permettant la selection
+			// du type de véhicule
+			JsfUtils.putInFlashScope(KEY_TRAJET_FLASH_SCOPE, this.trajet);
+			JsfUtils.putInFlashScope(KEY_TEMPS_EMPRUNT_FLASH_SCOPE, this.tempsEmprunt);
+		}
+	}
+
+	public List<Borne> autoCompleteBorne(String query) {
+		List<Borne> lstResultats = new ArrayList<>();
+		for (int i = 0; i < lstBorne.size(); i++) {
+			Borne borne = lstBorne.get(i);
+			if (borne.getSite().getNom().toLowerCase().contains(query.toLowerCase())) {
+				lstResultats.add(borne);
+			}
+		}
+		return lstResultats;
 	}
 
 }

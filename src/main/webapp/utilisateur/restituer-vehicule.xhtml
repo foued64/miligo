@@ -48,20 +48,11 @@
 			
 			<p:accordionPanel activeIndex="-1" >
 				<p:tab title="Signaler un incident" >
-					<p:panelGrid styleClass="ui-panelgrid-blank">
-						<p:row>
-							<p:column>
-								<h:outputLabel for="inputCommentaire" value="Commentaires sur l'état du véhicule" />	
-							</p:column>
-							<p:column>
-								<p:inputTextarea id="inputCommentaire" value="#{restituerBean.commentaireEtatVehicule}" cols="40"  autoResize="true" />	
-							</p:column>
-						</p:row>
-						<p:row>
-							<p:column colspan="2" style="text-align:center;">
-								<img id="imgEtatVehicule" src="../resources/img/zoe-etat-vert-bordure.png" alt="Aucune image trouvée" />
-							</p:column>						
-						</p:row>				     	
+					<p:panelGrid styleClass="ui-panelgrid-blank" columns="1">						
+						<h:outputLabel for="inputCommentaire" value="Commentaires sur l'état du véhicule" />				
+						<p:inputTextarea id="inputCommentaire" value="#{restituerBean.commentaireEtatVehicule}" cols="40" maxlength="600" counter="display" counterTemplate="{0} caractères restants"  autoResize="true" />										
+						<h:outputText id="display"/>	
+						<img id="imgEtatVehicule" src="../resources/img/zoe-etat-vert-bordure.png" alt="Aucune image trouvée" />				     
 			        </p:panelGrid>
 		        </p:tab>
 			</p:accordionPanel>
@@ -72,11 +63,7 @@
 				<p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />					
 			</div>
 			
-		</h:form>
-		
-		
-
-		
+		</h:form>		
 	</ui:define>
 	
 </ui:composition>

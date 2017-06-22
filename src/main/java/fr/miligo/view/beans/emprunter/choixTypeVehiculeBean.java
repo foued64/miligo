@@ -102,18 +102,23 @@ public class choixTypeVehiculeBean extends AbstractEmprunterBean implements Seri
 			if (this.lstTv.contains(typeVE) && this.lstTv.contains(typeVAE)) {
 				if (trajet.getLongueurTrajet() < trajet.getBorneDepart().getConfigurationBorne().getDistanceMin()) {
 					isBtnVAE = true;
+					isBtnVE = false;
+					this.btnChoixAutreVehicule = true;
+				} else if (trajet.getLongueurTrajet() > trajet.getBorneDepart().getConfigurationBorne()
+						.getDistanceMax()) {
+					isBtnVAE = false;
+					isBtnVE = true;
+					this.btnChoixAutreVehicule = true;
 				} else {
+					isBtnVAE = true;
 					isBtnVE = true;
 				}
-				this.btnChoixAutreVehicule = true;
-			}
 
-			// si il y a le type vehicule VE affiche le bouton VE
-			if (this.lstTv.contains(typeVE)) {
+			} else if (this.lstTv.contains(typeVE)) {
+				// si il y a le type vehicule VE affiche le bouton VE
 				this.isBtnVE = true;
-			}
-			// si il y a le type vehicule VAE affiche le bouton VAE
-			if (this.lstTv.contains(typeVAE)) {
+			} else if (this.lstTv.contains(typeVAE)) {
+				// si il y a le type vehicule VAE affiche le bouton VAE
 				this.isBtnVAE = true;
 			}
 		}
@@ -137,13 +142,9 @@ public class choixTypeVehiculeBean extends AbstractEmprunterBean implements Seri
 	 * Change la visibiliter des boutons VE et VAE
 	 */
 	public void choisirAutreTypeDeVehicule() {
-		if (isBtnVAE) {
-			isBtnVAE = false;
-			isBtnVE = true;
-		} else {
-			isBtnVAE = true;
-			isBtnVE = false;
-		}
+		isBtnVAE = true;
+		isBtnVE = true;
+		btnChoixAutreVehicule = false;
 	}
 
 	/**

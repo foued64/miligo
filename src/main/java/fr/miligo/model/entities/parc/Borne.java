@@ -32,13 +32,14 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "BORNE")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(of = {"nomBorne", "adresseIp", "latitude", "longitude", "site"})
+@ToString(of = { "nomBorne", "adresseIp", "latitude", "longitude", "site" })
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Builder
 @Dependent
-@NamedQueries({@NamedQuery(name = "findBornesByGsbdd", query = RequetesDaoBorne.FIND_BORNES_BY_GSBDD),
-               @NamedQuery(name="BORNE_SEARCH_BY_LIB", query="select b from Borne b where b.nomBorne = :libelle ")})
+@NamedQueries({
+		@NamedQuery(name = "findBornesByGsbdd", query = RequetesDaoBorne.FIND_BORNES_BY_GSBDD),
+		@NamedQuery(name = "BORNE_SEARCH_BY_LIB", query = "select b from Borne b where b.nomBorne = :libelle ") })
 public class Borne extends AbstractEntity {
 
 	@Column(name = "NOM_BORNE", nullable = false)
@@ -64,6 +65,7 @@ public class Borne extends AbstractEntity {
 
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	@JoinColumn(name = "ID_CONFIGURATION_BORNE")
+	@Setter
 	ConfigurationBorne configurationBorne;
 
 	@OneToMany(mappedBy = "borne")

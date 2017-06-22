@@ -9,4 +9,6 @@ public final class MessagesException {
 	public static final String POURCENTAGE_BATTERIE_NON_SAISI = "Veuillez sélectionner le niveau de charge de la batterie";
 
 	public static final String EMPRUNT_EN_COURS = "Vous ne pouvez pas emprunter plusieurs véhicules à la fois";
+
+	public static final String TRAJET_NON_TROUVE = "Ce trajet n'a pas été trouvé";
 }

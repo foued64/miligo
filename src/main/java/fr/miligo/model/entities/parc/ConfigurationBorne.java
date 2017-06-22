@@ -2,6 +2,7 @@ package fr.miligo.model.entities.parc;
 
 import java.util.Date;
 
+import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
@@ -25,6 +26,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
+@Dependent
 public class ConfigurationBorne extends AbstractEntity {
 
 	@Column(name = "TEMPS_CHARGE", columnDefinition = "time default '01:00:00'")

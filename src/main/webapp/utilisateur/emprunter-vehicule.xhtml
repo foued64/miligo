@@ -22,22 +22,18 @@
 						<h:outputLabel value="Vous êtes à : "/>
 						<h:outputText value="#{emprunterBean.borneAller.site.nom}"/>
 			
-						<p:outputLabel for="car" value="Choisir un point d'arrivée :" />
-						<p:selectOneMenu id="car" value="#{emprunterBean.borneRetour}" converter="#{genericConverter}" required="true" requiredMessage="Veuillez sélectionner une destination">
-				            <f:selectItem itemValue="" itemLabel="Sélectionné une destination" noSelectionOption="true" />
-				            <f:selectItems value="#{emprunterBean.lstBorne}" var="b" itemLabel="#{b.site.nom}" 
-				            itemValue="#{b}" />
-				        </p:selectOneMenu>
-	
+						<p:outputLabel for="borneA" value="Choisir un point d'arrivée :" />
+						<p:autoComplete id="borneA" dropdown="true" converter="#{genericConverter}" value="#{emprunterBean.borneRetour}" var="b" itemLabel="#{b.site.nom}" itemValue="#{b}" completeMethod="#{emprunterBean.autoCompleteBorne}" />
+						
 						<p:outputLabel for="duree" value="Durée du trajet : " />
-	                    <p:calendar id="duree" value="#{emprunterBean.tempsEmprunt}" pattern="HH:mm" timeOnly="true" mask="99:99" maxHour="7" maxMinute="45"  stepMinute="15" required="true" requiredMessage="Veuillez saisir une durée de trajet"/>
+	                    <p:calendar id="duree" value="#{emprunterBean.tempsEmprunt}" pattern="HH:mm" timeOnly="true" mask="99:99" maxHour="7" maxMinute="45"  stepMinute="15" required="true" requiredMessage="Veuillez saisir une durée de trajet"/>						
 					</p:panelGrid>
 				</p:panel>
 				
 				
-				<div id="validation">									
-					<p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
+				<div id="validation">
 					<p:commandButton actionListener="#{emprunterBean.validerTrajet()}" action="choix-vehicule-vevae.xhtml?faces-redirect=true" value="Emprunter"/>									
+					<p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />														
 				</div>
 				
 			</h:form>
