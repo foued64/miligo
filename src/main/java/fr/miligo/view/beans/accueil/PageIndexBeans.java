@@ -6,18 +6,11 @@
 package fr.miligo.view.beans.accueil;
 
 import fr.miligo.common.AbstractBean;
-import fr.miligo.model.entities.emprunt.Client;
-import fr.miligo.model.facades.emprunt.FacadeClient;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.apachecommons.CommonsLog;
 
 /**
@@ -28,29 +21,29 @@ import lombok.extern.apachecommons.CommonsLog;
 @ViewScoped
 @Named
 @CommonsLog
-public class PageIndexBeans extends AbstractBean implements Serializable
-{
-    @Inject
-    private FacadeClient facadeClient;
+public class PageIndexBeans extends AbstractBean implements Serializable {
     
     @Getter
-    private List<Client> listeClient = new ArrayList<>();
+    private String casDutilisation;
     
     @Getter
-    @Setter
-    private Client clientCourant;
+    private String lien;
     
     @PostConstruct
-    public void init() {
-        
-        listeClient = facadeClient.readAll();
-        clientCourant = facadeClient.readbyNom(listeClient.get(0).getNom());
-        putInHttpSession(CLIENT_SESSION, clientCourant);
-        
-    }
-    
-    public void misEnSessionDuClient()
+    public void init()
     {
-        putInHttpSession(CLIENT_SESSION, clientCourant);
+        String role=(String) getObjectInSession(ROLE_SESSION);
+        if("Bureau Maintenance Logistique".equals(role)){
+            casDutilisation="Statistiques";
+            lien="visu-bml/visu-stats.xhtml?faces-redirect=true";
+        }
+        if("Gestionnaire de Parc".equals(role)){
+            casDutilisation="Modifier la disponibilité d'un véhicule";
+            lien="gestionnaire-parc/accueil-gestionnaire-parc.xhtml?faces-redirect=true";
+        }
+        if("Utilisateur".equals(role)){
+            casDutilisation="Emprunter un véhicule";
+            lien="utilisateur/accueil-utilisateur.xhtml?faces-redirect=true";
+        }
     }
 }

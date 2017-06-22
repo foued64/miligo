@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-light.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                >
+
+
+    <ui:define name="title">DEMO - IT2</ui:define>
+
+    <ui:define name="content">
+
+        <h2>DEMO - IT2</h2>
+
+        <h:form class="ui-g">
+            <p:panel class="ui-g-12">
+                <p:outputLabel value="1 - Choix du client (pour choisir une GSBDD)" />
+                <p:selectOneMenu class="ui-g-12" value="#{pageContexteBeans.clientCourant}" converter="#{genericConverter}">
+                    <f:selectItems value="#{pageContexteBeans.listeClient}" var="c" itemLabel="#{c.nom}" itemValue="#{c}"  />
+                    <p:ajax listener="#{pageContexteBeans.misEnSessionDuClient()}" update="@form" />
+                </p:selectOneMenu>
+            </p:panel>
+
+            <p:panel class="ui-g-12">
+                <p:outputLabel class="ui-g-12" value=" Nom : #{pageContexteBeans.clientCourant.nom}"  />
+                <p:outputLabel class="ui-g-12" value=" Prénom : #{pageContexteBeans.clientCourant.prenom}" />
+                <p:outputLabel class="ui-g-12" value=" Mail : #{pageContexteBeans.clientCourant.adresseMail}" />
+                <p:outputLabel class="ui-g-12" value=" Gsbdd : #{pageContexteBeans.clientCourant.gsbdd.libelle}" />
+            </p:panel>
+            
+            <p:panel class="ui-g-12">
+                <p:outputLabel value="2 - Choix du rôle" />
+                <p:selectOneMenu class="ui-g-12" value="#{pageContexteBeans.roleCourant}" converter="#{genericConverter}">
+                    <f:selectItems value="#{pageContexteBeans.listeRole}" var="r" itemValue="#{r}" itemLabel="#{r}"/>
+                    <p:ajax listener="#{pageContexteBeans.misEnSessionDuRole()}" update="@form" />
+                </p:selectOneMenu>
+            </p:panel>
+            
+            <p:panel class="ui-g-12">
+                <p:outputLabel value="3 - Choix du poste" />
+                <p:selectOneMenu class="ui-g-12" value="#{pageContexteBeans.borneCourante}" converter="#{genericConverter}">
+                    <f:selectItems value="#{pageContexteBeans.listeBorne}" var="b" itemValue="#{b}" itemLabel="#{b.nomBorne}"/>
+                    <p:ajax listener="#{pageContexteBeans.misEnSessionDeLaBorne()}" update="@form" />
+                </p:selectOneMenu>
+            </p:panel>
+
+
+            <p:panel class="ui-g-12">
+                <p:commandButton class="ui-g-12" value="GO!" action="index.xhtml?faces-redirect=true" />
+                
+            </p:panel>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

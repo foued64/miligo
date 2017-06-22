@@ -48,33 +48,31 @@ public class AccueilBeans extends AbstractBean implements Serializable {
 	@Getter
 	private Client clientCourant;
 
-	/**
-	 * Initialisation en récupérant le client le met en session recupere
-	 * l'adresse ip du support qui permet de recuperer la borne aller pour la
-	 * mettre en flashscoped
-	 */
-	@PostConstruct
-	public void init() {
-		// Recupere le client courant
-		if (getClientFromSession() == null) {
-			clientCourant = facadeClient.readbyNom("PALPA");
-			putInHttpSession(CLIENT_SESSION, clientCourant);
-		}
+    
+    /**
+     * Initialisation en récupérant le client le met en session recupere
+     * l'adresse ip du support qui permet de recuperer la borne aller pour la
+     * mettre en flashscoped
+     */
+    @PostConstruct
+    public void init() {
+        //Recupere le client courant
+        //TODO a modifier quand l'authentification sera faite
+    	
+    	
+        clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
 
-		clientCourant = getClientFromSession();
+        
 
 		// Recupere l'adresse ip du support utilisé avant d'arriver sur la page
 		// pour pouvoir conaitre la borneAller. FLASHSCOPED
 		// TODO a modifier quand nous aurons les adresses ip des tablettes des bornes
 		String adresseIp = "100.100.100.101";
 
-		// Récuperation de la borne selon l'adresse ip
-		this.borneActuelle = facadeBorne.searchFirstResult("adresseIp", adresseIp);
+        // Récuperation de la borne selon l'adresse ip
+        this.borneAller = (Borne) JsfUtils.getFromFlashScope(KEY_BORNE_DEPART);
 
-		// mise en flashScope de la borne aller
-		JsfUtils.putInFlashScope(KEY_FLASH_SCOPE_BORNE_ACTUELLE, this.borneActuelle);
-
-	}
+    }
 
 	/**
 	 * Verifie si un vehicule et disponible dans la borne si ok renvoi

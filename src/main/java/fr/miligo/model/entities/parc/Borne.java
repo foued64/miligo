@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import fr.miligo.common.AbstractEntity;
 import fr.miligo.model.dao.RequetesDaoBorne;
 import fr.miligo.model.entities.vehicule.Vehicule;
+import javax.persistence.NamedQueries;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
