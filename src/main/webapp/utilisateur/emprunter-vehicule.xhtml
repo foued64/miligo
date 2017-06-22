@@ -23,7 +23,7 @@
 						<h:outputText value="#{emprunterBean.borneAller.site.nom}"/>
 			
 						<p:outputLabel for="borneA" value="Choisir un point d'arrivée :" />
-						<p:autoComplete id="borneA" dropdown="true" converter="#{genericConverter}" value="#{emprunterBean.borneRetour}" var="b" itemLabel="#{b.site.nom}" itemValue="#{b}" completeMethod="#{emprunterBean.autoCompleteBorne}" />
+						<p:autoComplete id="borneA" required="true" requiredMessage="Vous devez sélectionner une borne d'arrivée" dropdown="true" converter="#{genericConverter}" value="#{emprunterBean.borneRetour}" var="b" itemLabel="#{b.site.nom}" itemValue="#{b}" completeMethod="#{emprunterBean.autoCompleteBorne}" />
 						
 						<p:outputLabel for="duree" value="Durée du trajet : " />
 	                    <p:calendar id="duree" value="#{emprunterBean.tempsEmprunt}" pattern="HH:mm" timeOnly="true" mask="99:99" maxHour="7" maxMinute="45"  stepMinute="15" required="true" requiredMessage="Veuillez saisir une durée de trajet"/>						
