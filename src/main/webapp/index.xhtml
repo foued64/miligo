@@ -7,22 +7,29 @@
                 >
 
 
-    <ui:define name="title">DEMO - IT1</ui:define>
+    <ui:define name="title">DEMO - IT2</ui:define>
 
     <ui:define name="content">
 
-        <h2>DEMO - IT1</h2>
+        <h2>DEMO - IT2</h2>
 
         <h:form class="ui-g">
-            <p:panel>
-                <p:outputLabel class="ui-g-12" value=" Nom : #{accueilBeans.clientCourant.nom}" />
-                <p:outputLabel class="ui-g-12" value=" Prénom : #{accueilBeans.clientCourant.prenom}" />
-                <p:outputLabel class="ui-g-12" value=" Mail : #{accueilBeans.clientCourant.adresseMail}" />
-                <p:outputLabel class="ui-g-12" value=" Gsbdd : #{accueilBeans.clientCourant.gsbdd.libelle}" />
-
+            <p:panel class="ui-g-4">
+                <p:selectOneMenu value="#{pageIndexBeans.clientCourant}" converter="#{genericConverter}">
+                    <f:selectItems value="#{pageIndexBeans.listeClient}" var="c" itemLabel="#{c.nom}" itemValue="#{c}"  />
+                    <p:ajax listener="#{pageIndexBeans.misEnSessionDuClient()}" update="@form" />
+                </p:selectOneMenu>
             </p:panel>
 
-            <p:panel>
+            <p:panel class="ui-g-8">
+                <p:outputLabel class="ui-g-12" value=" Nom : #{pageIndexBeans.clientCourant.nom}" />
+                <p:outputLabel class="ui-g-12" value=" Prénom : #{pageIndexBeans.clientCourant.prenom}" />
+                <p:outputLabel class="ui-g-12" value=" Mail : #{pageIndexBeans.clientCourant.adresseMail}" />
+                <p:outputLabel class="ui-g-12" value=" Gsbdd : #{pageIndexBeans.clientCourant.gsbdd.libelle}" />
+            </p:panel>
+
+
+            <p:panel class="ui-g-12">
                 <p:commandButton class="ui-g-12" value="Emprunter un véhicule" action="utilisateur/accueil-utilisateur.xhtml?faces-redirect=true" />
                 <p:commandButton class="ui-g-12" value="Modifier la disponibilité d'un véhicule" action="gestionnaire-parc/accueil-gestionnaire-parc.xhtml?faces-redirect=true" />
                 <p:commandButton class="ui-g-12" value="Statistique" action="visu-bml/visu-stats.xhtml?faces-redirect=true" />
