@@ -1,13 +1,17 @@
 package fr.miligo.model.facades.parc;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.TypedQuery;
 
 import fr.miligo.common.AbstractFacade;
+import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.parc.Borne;
 import fr.miligo.model.entities.parc.Site;
 import fr.miligo.model.entities.parc.Ville;
+import fr.miligo.model.entities.parc.Gsbdd;
 
 @Stateless
 public class FacadeBorne extends AbstractFacade<Borne> {
@@ -55,4 +59,15 @@ public class FacadeBorne extends AbstractFacade<Borne> {
 	
 
 	
+	public List<Borne> findBornesByGsbdd(Gsbdd gsbdd) throws MiligoException {
+		try {
+			TypedQuery<Borne> q = getEntityManager().createNamedQuery("findBornesByGsbdd", Borne.class);
+			q.setParameter("idGsbdd", gsbdd.getId());
+
+			return q.getResultList();
+		} catch (Exception e) {
+			throw new MiligoException(e.getMessage());
+		}
+	}
+
 }

@@ -10,27 +10,33 @@
 	<ui:define name="content">
 		<ui:include
 			src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
-
-		<p:growl globalOnly="true" autoUpdate="true" />
-
+		
+		
+		
 		<div class="pageMobile">
-                    <h:form>
-			<p:commandButton class="btnMobile" value="Emprunter"
-                                         actionListener="#{accueilBeans.entrerEmprunt()}" 
-                                         onerror="#{accueilBeans.checkVehiculesDispoBorneOnError()}"/>
-                        <p:button class="btnMobile" value="Restituer" disabled="true" />
-                        <p:button class="btnMobile" value="Réserver" disabled="true" />
-                    </h:form>
-		</div>
+              <h:form>                         
+				<p:commandButton class="btnMobile" value="Emprunter"
+                                      actionListener="#{accueilBeans.entrerEmprunt()}" 
+                                      onerror="#{accueilBeans.checkVehiculesDispoBorneOnError()}"/>
 
+				<p:commandButton class="btnMobile" value="Restituer"
+                                      actionListener="#{accueilBeans.entrerRestitutionVehicule()}"/>                                      
+  
+                <p:button class="btnMobile" value="Réserver" disabled="true" />
+                              
+              </h:form>
+		</div>
+		
+		<p:messages id="messages" showIcon="false" showDetail="false" autoUpdate="true" closable="true" />		
+		
+		
 		<hr />
 
-		<p:messages id="messages" showIcon="false" showDetail="false"
-			autoUpdate="true" closable="false" />
+	
 
 		<!-- Ici le tableau récapitulatif des réservations -->
 
-		<p:dataTable var="car" value="#{listeDesReservations}">
+		<p:dataTable var="car" value="#{listeDesReservations}" emptyMessage="Vous n'avez aucune réservation">
 			<p:column headerText="Liste des réservations">
 				<h:outputText value="#{r.id}" />
 			</p:column>

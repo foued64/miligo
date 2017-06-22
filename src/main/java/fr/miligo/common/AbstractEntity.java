@@ -12,6 +12,10 @@ import lombok.Getter;
 import net.entetrs.commons.uuid.GeneratedUUID;
 import net.entetrs.commons.uuid.UUIDRepresentation;
 
+/**
+ * Classe abstraite commune à toutes les entités métier.
+ * @author AMET
+ */
 @SuppressWarnings("serial")
 @MappedSuperclass
 // Annotations LomBok

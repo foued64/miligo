@@ -16,37 +16,24 @@
 			
 			
 			<h:form>
-				<p:panelGrid id="optionsTrajet" columns="2" style="margin-bottom:10px;">
-					<p:row id="positionBorne">
-						<p:column><h:outputText value="Vous êtes à : "/></p:column>
-						<p:column><h:outputText value="#{emprunterBean.borneAller.site.nom}" /></p:column>
-					</p:row>
-					<p:row id="choixTrajet">
-						<p:column><h:outputText value="Choisir un point d'arrivée :" /></p:column>
-						<p:column>
-							
-							 <p:selectOneMenu id="car" value="#{emprunterBean.borneRetour}" converter="#{genericConverter}" required="true">
-					            <f:selectItem itemValue="" itemLabel="Sélectionné une destination" noSelectionOption="true" />
-					            <f:selectItems value="#{emprunterBean.lstBorne}" var="b" itemLabel="#{b.site.nom}" 
-					            itemValue="#{b}" />
-					        </p:selectOneMenu>
-							
-							
-							
-			           	 </p:column>
-			        </p:row>
-					<p:row id="dureeTrajet">
-						<p:column><p:outputLabel for="duree" value="Durée du trajet : " /></p:column>
-                                        <p:column><p:calendar id="duree" value="#{emprunterBean.tempsEmprunt}" pattern="HH:mm" timeOnly="true"  required="true"/></p:column>
-        			</p:row>
-				</p:panelGrid>
+				<p:messages id="messages" showIcon="false" showDetail="false" autoUpdate="true" closable="false"/>
+				<p:panel header="Emprunt d'un véhicule">
+					<p:panelGrid id="optionsTrajet" columns="2" style="margin-bottom:10px;" styleClass="ui-panelgrid-blank">
+						<h:outputLabel value="Vous êtes à : "/>
+						<h:outputText value="#{emprunterBean.borneAller.site.nom}"/>
+			
+						<p:outputLabel for="borneA" value="Choisir un point d'arrivée :" />
+						<p:autoComplete id="borneA" dropdown="true" converter="#{genericConverter}" value="#{emprunterBean.borneRetour}" var="b" itemLabel="#{b.site.nom}" itemValue="#{b}" completeMethod="#{emprunterBean.autoCompleteBorne}" />
+						
+						<p:outputLabel for="duree" value="Durée du trajet : " />
+	                    <p:calendar id="duree" value="#{emprunterBean.tempsEmprunt}" pattern="HH:mm" timeOnly="true" mask="99:99" maxHour="7" maxMinute="45"  stepMinute="15" required="true" requiredMessage="Veuillez saisir une durée de trajet"/>						
+					</p:panelGrid>
+				</p:panel>
 				
-
 				
 				<div id="validation">
-					<p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />
-				
-					<p:commandButton actionListener="#{emprunterBean.validerTrajet()}" action="choix-vehicule-vevae.xhtml?faces-redirect=true" value="Emprunter"/>
+					<p:commandButton actionListener="#{emprunterBean.validerTrajet()}" action="choix-vehicule-vevae.xhtml?faces-redirect=true" value="Emprunter"/>									
+					<p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />														
 				</div>
 				
 			</h:form>
