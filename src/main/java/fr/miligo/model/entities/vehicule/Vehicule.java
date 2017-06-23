@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import fr.miligo.common.AbstractEntity;
 import fr.miligo.model.dao.RequetesDaoEmpruntImmediat;
 import fr.miligo.model.dao.RequetesDaoRestituerVehicule;
+import fr.miligo.model.dao.RequetesDaoStatistiques;
 import fr.miligo.model.entities.emprunt.EmpruntImmediat;
 import fr.miligo.model.entities.emprunt.EmpruntReservation;
 import fr.miligo.model.entities.parc.Borne;
@@ -47,7 +48,9 @@ import lombok.experimental.FieldDefaults;
                 @NamedQuery(name = "lstVehiculeBySite", query = RequetesDaoEmpruntImmediat.LST_VEHICULE_BY_SITE),
 		@NamedQuery(name = "findVehiculeByDispoByBorneByTypeVehicule", query = RequetesDaoEmpruntImmediat.RECHERCHER_VEHICULE_BY_BORNE_AND_DISPO_AND_TYPE_VEHICULE),
 		@NamedQuery(name = "findVehiculeARestituerByClient", query = RequetesDaoRestituerVehicule.RECHERCHER_VEHICULE_A_RESTITUER_BY_CLIENT),
-		@NamedQuery(name = "compterNbVehiculesDispoByTypeAndByBorne", query = RequetesDaoEmpruntImmediat.COMPTER_VEHICULE_BY_TYPE_AND_BORNE_AND_DISPO) })
+		@NamedQuery(name = "compterNbVehiculesDispoByTypeAndByBorne", query = RequetesDaoEmpruntImmediat.COMPTER_VEHICULE_BY_TYPE_AND_BORNE_AND_DISPO),
+                @NamedQuery(name = "nombreVehiculeParEtat", query = RequetesDaoStatistiques.NB_VEHICULE_PAR_ETAT),
+                @NamedQuery(name = "nombreTotalVehicule", query = RequetesDaoStatistiques.NB_TOTAL_VEHICULE)})
 public class Vehicule extends AbstractEntity {
 
 	@Column(name = "LIBELLE_VEHICULE", nullable = false)

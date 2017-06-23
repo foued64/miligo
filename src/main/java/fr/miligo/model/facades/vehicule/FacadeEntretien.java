@@ -17,9 +17,10 @@ public class FacadeEntretien extends AbstractFacade<Entretien> {
 
     /**
      * Retourne le nombre total d'entretien en BDD.
+     * @return 
      */
     public int nbreEntretienTotal() {
-        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(e.id) FROM Entretien e", Long.class);
+        TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreEntretienTotal", Long.class);
         return tq.getSingleResult().intValue();
     }
     
@@ -41,11 +42,11 @@ public class FacadeEntretien extends AbstractFacade<Entretien> {
     }
     /**
      * Retourne le nombre de vehicule DISPONIBLE en BDD.
-     * @param libelle
+     * @param m
      * @return 
      */
     public int nbreEntretienParMaintenance(Maintenance m) {
-        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(e.id) FROM Entretien e WHERE e.listeMaintenance=:maintenance ", Long.class);
+        TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreEntretienParMaintenance", Long.class);
         tq.setParameter("maintenance", m);
         return tq.getSingleResult().intValue();
     }

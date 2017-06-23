@@ -16,6 +16,10 @@ import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
 import fr.miligo.model.dao.RequetesDaoEntretien;
+import fr.miligo.model.dao.RequetesDaoStatistiques;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,7 +40,9 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Dependent
 @NamedQueries({
-		@NamedQuery(name = "entretienEnCoursVoiture", query = RequetesDaoEntretien.ENTRETIEN_COURS_BY_VEHICULE) })
+		@NamedQuery(name = "entretienEnCoursVoiture", query = RequetesDaoEntretien.ENTRETIEN_COURS_BY_VEHICULE),
+        @NamedQuery(name = "nombreEntretienParMaintenance", query = RequetesDaoStatistiques.NB_ENTRETIEN_PAR_MAINTENANCE),
+        @NamedQuery(name = "nombreEntretienTotal", query = RequetesDaoStatistiques.NB_ENTRETIEN_TOTAL)})
 public class Entretien extends AbstractEntity {
 
     @Column(name = "DATE_ENTRETIEN_DEBUT", nullable = false)

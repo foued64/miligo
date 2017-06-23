@@ -6,6 +6,8 @@
 package fr.miligo.view.beans.visubml;
 
 import fr.miligo.common.AbstractBean;
+import static fr.miligo.common.AbstractBean.CLIENT_SESSION;
+import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.vehicule.Maintenance;
 import fr.miligo.model.facades.vehicule.FacadeEntretien;
 import fr.miligo.model.facades.vehicule.FacadeMaintenance;
@@ -39,6 +41,9 @@ public class StatsEntretienVehiculeBeans extends AbstractBean implements Seriali
     private FacadeMaintenance facadeMaintenance;
     
     @Getter
+    private Client clientCourant;
+    
+    @Getter
     @Setter
     private BarChartModel bmEntretien;
     
@@ -47,9 +52,8 @@ public class StatsEntretienVehiculeBeans extends AbstractBean implements Seriali
     
     @PostConstruct
     public void init() {
-
+        clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
         listeMaintenance = facadeMaintenance.readAll();
-        createBarModelDispo();
     }
 
     /**

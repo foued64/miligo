@@ -6,6 +6,7 @@
 package fr.miligo.view.beans.visubml;
 
 import fr.miligo.common.AbstractBean;
+import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.facades.emprunt.FacadeVehicule;
 import java.io.Serializable;
@@ -31,6 +32,9 @@ public class StatsDisponibiliteVehiculeBeans extends AbstractBean implements Ser
 
     @Inject
     private FacadeVehicule facadeVehicule;
+    
+    @Getter
+    private Client clientCourant;
 
     @Getter
     @Setter
@@ -39,6 +43,7 @@ public class StatsDisponibiliteVehiculeBeans extends AbstractBean implements Ser
     @PostConstruct
     public void init() {
 
+        clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
             createBarModelDispo();
     }
 

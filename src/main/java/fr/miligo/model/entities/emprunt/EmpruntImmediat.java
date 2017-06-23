@@ -15,6 +15,7 @@ import javax.persistence.TemporalType;
 
 import fr.miligo.common.AbstractEntity;
 import fr.miligo.model.dao.RequetesDaoRestituerVehicule;
+import fr.miligo.model.dao.RequetesDaoStatistiques;
 import fr.miligo.model.entities.vehicule.Vehicule;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -34,7 +35,8 @@ import lombok.experimental.FieldDefaults;
 @Dependent
 @NamedQueries({
 		@NamedQuery(name = "findEmpruntEnCoursByClient", query = RequetesDaoRestituerVehicule.RECHERCHER_EMPRUNT_IMMEDIAT_EN_COURS_BY_CLIENT),
-		@NamedQuery(name = "findEmpruntImmediatsPourRechargementVehicules", query = RequetesDaoRestituerVehicule.RECHERCHER_VEHICULE_A_RECHARGER) })
+		@NamedQuery(name = "findEmpruntImmediatsPourRechargementVehicules", query = RequetesDaoRestituerVehicule.RECHERCHER_VEHICULE_A_RECHARGER),
+                @NamedQuery(name = "nombreEmpruntParTrajet", query = RequetesDaoStatistiques.NB_EMPRUNT_PAR_TRAJET)})
 public class EmpruntImmediat extends AbstractEntity {
 
 	@ManyToOne

@@ -15,6 +15,7 @@ import javax.persistence.TypedQuery;
 import fr.miligo.common.AbstractFacade;
 import fr.miligo.exceptions.MessagesException;
 import fr.miligo.exceptions.MiligoException;
+import fr.miligo.model.dao.RequetesDaoStatistiques;
 import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.emprunt.EmpruntImmediat;
 import fr.miligo.model.entities.emprunt.EmpruntReservation;
@@ -187,18 +188,18 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
      * Retourne le vechiule en BDD.
      */
     public int nbreVehiculeTotal() {
-        TypedQuery<Integer> tq = getEntityManager().createQuery("SELECT COUNT(v) FROM Vehicule v", Integer.class);
-        return tq.getSingleResult();
+        TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreTotalVehicule", Long.class);
+        return tq.getSingleResult().intValue();
     }
 
     /**
      * Retourne le vechiule en BDD.
      */
     public int nbreVehiculeDispo() {
-        TypedQuery<Integer> tq = getEntityManager()
-                .createQuery("SELECT COUNT(v) FROM Vehicule v WHERE v.disponibilite =:enum", Integer.class);
-        tq.setParameter("enum", DisponibiliteEnum.DISPONIBLE.toString());
-        return tq.getSingleResult();
+        TypedQuery<Long> tq = getEntityManager()
+                .createNamedQuery("nombreVehiculeParEtat", Long.class);
+        tq.setParameter("enum", DisponibiliteEnum.DISPONIBLE);
+        return tq.getSingleResult().intValue();
     }
 
     /**
@@ -239,9 +240,10 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
     
     /**
      * Retourne le nombre de vehicule EMPRUNTE en BDD.
+     * @return 
      */
     public int nbreVehiculeEmprunter() {
-        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(v.id) FROM Vehicule v WHERE v.disponibilite =:enum", Long.class);
+        TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreVehiculeParEtat", Long.class);
         tq.setParameter("enum", DisponibiliteEnum.EMPRUNTE);
         return tq.getSingleResult().intValue();
     }
@@ -250,7 +252,7 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
      * Retourne le nombre de vehicule EN_CHARGE en BDD.
      */
     public int nbreVehiculeEnCharge() {
-        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(v.id) FROM Vehicule v WHERE v.disponibilite =:enum", Long.class);
+        TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreVehiculeParEtat", Long.class);
         tq.setParameter("enum", DisponibiliteEnum.EN_CHARGE);
         return tq.getSingleResult().intValue();
     }
@@ -259,7 +261,7 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
      * Retourne le nombre de vehicule MAINTENANCE en BDD.
      */
     public int nbreVehiculeEnMaintenance() {
-        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(v.id) FROM Vehicule v WHERE v.disponibilite =:enum", Long.class);
+        TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreVehiculeParEtat", Long.class);
         tq.setParameter("enum", DisponibiliteEnum.MAINTENANCE);
         return tq.getSingleResult().intValue();
     }
@@ -268,7 +270,7 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
      * Retourne le nombre de vehicule RESERVE en BDD.
      */
     public int nbreVehiculeReserve() {
-        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(v.id) FROM Vehicule v WHERE v.disponibilite =:enum", Long.class);
+        TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreVehiculeParEtat", Long.class);
         tq.setParameter("enum", DisponibiliteEnum.RESERVE);
         return tq.getSingleResult().intValue();
     }

@@ -9,7 +9,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
 
 import fr.miligo.common.AbstractFacade;
 import fr.miligo.exceptions.MiligoException;
@@ -120,7 +119,7 @@ public class FacadeEmpruntImmediat extends AbstractFacade<EmpruntImmediat> {
      * @return 
      */
     public int nbreEmpruntParTrajet(Trajet t, Gsbdd g) {
-        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(e.id) FROM EmpruntImmediat e WHERE e.trajet=:t AND e.client.gsbdd=:g", Long.class);
+        TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreEmpruntParTrajet", Long.class);
         tq.setParameter("t", t);
         tq.setParameter("g", g);
         return tq.getSingleResult().intValue();
