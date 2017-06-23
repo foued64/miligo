@@ -9,14 +9,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
 import fr.miligo.model.dao.RequetesDaoEntretien;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,7 +31,7 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "ENTRETIEN")
 @NoArgsConstructor
-@ToString(of={"dateEntretien", "vehicule"})
+@ToString(of={"dateEntretienDebut", "vehicule"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent

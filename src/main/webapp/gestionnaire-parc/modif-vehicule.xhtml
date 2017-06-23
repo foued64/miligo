@@ -78,7 +78,7 @@
                                      requiredMessage="Remplir libellé de l'entretien"
                                      required="true" disabled="#{modiferDispoBean.entretienVisu}"/>
 
-                        <p:outputLabel value ="En début entretien" for="calendrier" />
+                        <p:outputLabel value ="Début de l'entretien" for="calendrier" />
                         <p:calendar id="calendrier" locale="fr" mindate="#{modiferDispoBean.dateMinEntretien}" 
                                     pattern="dd/MM/yyyy" mask="true" required="true" requiredMessage="Remplir la date Entretien"
                                     disabled="#{modiferDispoBean.entretienVisu}" value="#{modiferDispoBean.entretien.dateEntretienDebut}"/>
