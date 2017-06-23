@@ -43,6 +43,8 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @NamedQueries({
 		@NamedQuery(name = "findVehiculesByDisponibiliteAndByBorne", query = RequetesDaoEmpruntImmediat.RECHERCHER_VEHICULE_BY_BORNE_AND_DISPO),
+                @NamedQuery(name = "lstVehiculeByGsbdd", query = RequetesDaoEmpruntImmediat.LST_VEHICULE_BY_GSBDD),
+                @NamedQuery(name = "lstVehiculeBySite", query = RequetesDaoEmpruntImmediat.LST_VEHICULE_BY_SITE),
 		@NamedQuery(name = "findVehiculeByDispoByBorneByTypeVehicule", query = RequetesDaoEmpruntImmediat.RECHERCHER_VEHICULE_BY_BORNE_AND_DISPO_AND_TYPE_VEHICULE),
 		@NamedQuery(name = "findVehiculeARestituerByClient", query = RequetesDaoRestituerVehicule.RECHERCHER_VEHICULE_A_RESTITUER_BY_CLIENT),
 		@NamedQuery(name = "compterNbVehiculesDispoByTypeAndByBorne", query = RequetesDaoEmpruntImmediat.COMPTER_VEHICULE_BY_TYPE_AND_BORNE_AND_DISPO) })

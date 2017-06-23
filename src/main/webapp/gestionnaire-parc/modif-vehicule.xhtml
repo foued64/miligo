@@ -118,7 +118,7 @@
             <!-- Boutons -->
             <div class="ui-g">
                 <div class="ui-g-12">
-                    <p:commandButton value="Retour à l'accueil" action="accueil-gestionnaire-parc.xhtml" />
+                    <p:button value="Retour à l'accueil" outcome="accueil-gestionnaire-parc.xhtml" />
                     <p:commandButton value="Valider" actionListener="#{modiferDispoBean.modifVehicule()}" 
                                      action="accueil-gestionnaire-parc.xhtml?faces-redirect=true" update="message">
                         <p:confirm id="confirmMessage" message="#{modiferDispoBean.messageConfirmation}" />
