@@ -30,8 +30,10 @@ import net.entetrs.commons.cdi.CDIUtils;
 import net.entetrs.commons.jsf.JsfUtils;
 
 /**
- * Beans lier a la page modif-vehicule.xhtml.
- * @author Seb
+ * ManagedBean JSF gérant la modif dispo.
+ * 
+ * @author 
+ *
  */
 @ViewScoped
 @Named
@@ -176,7 +178,7 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
            /**
             * Test si le vehicule en bdd est en maitenance comme le vechicule affiche.
             */
-           if(!vehicule.getDisponibilite().MAINTENANCE.toString().equals(vBdd.getDisponibilite().MAINTENANCE.toString())){
+           if(vBdd.getDisponibilite().toString().equals(DisponibiliteEnum.MAINTENANCE.toString())){
                //On recupere l'entretien en cours du véhicule ou null
                 Entretien e = recupereEntretienEnCours(vehicule);
                 entretien = facadeEntretien.read(e.getId());

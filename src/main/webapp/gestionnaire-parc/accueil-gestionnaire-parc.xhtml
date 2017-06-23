@@ -11,7 +11,8 @@
     <ui:define name="content">
 
         <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
-
+        
+        <p:growl globalOnly="true" autoUpdate="true" />
 
 
         <div style="margin-top : 40px;"><p:outputLabel value="Emplacement de la borne : "  /></div>
@@ -25,9 +26,9 @@
             <p:panelGrid columns="2">
                 <p:button value="Ajouter un véhicule" outcome="ajouter-vehicule.xhtml" />
                 <p:outputLabel value="Nombre de véhicule présent en ce moment : 
-                               #{accueilGestionParckBean.lstVehiculeBorne.size()}" style="float: right;"/>
+                               #{accueilGestionParckBean.lstVehicule.size()}" style="float: right;"/>
             </p:panelGrid>                
-            <p:dataTable id="dataTableLstVehicule" var="v" value="#{accueilGestionParckBean.lstVehiculeBorne}" style="margin-top : 40px;"
+            <p:dataTable id="dataTableLstVehicule" var="v" value="#{accueilGestionParckBean.lstVehicule}" style="margin-top : 40px;"
                          paginator="true" rows="10" rowsPerPageTemplate="5,10,15">
                 <p:column headerText="N° immatricualtion" filterBy="#{v.immatriculation}"  style="width: 200px;text-align: center;"
                           filterMatchMode="contains" sortBy="#{v.immatriculation}" >
