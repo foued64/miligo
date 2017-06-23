@@ -115,6 +115,9 @@ public class FacadeEmpruntImmediat extends AbstractFacade<EmpruntImmediat> {
     
     /**
      * Retourne le nombre d'emprunt immediat en BDD.
+     * @param t
+     * @param g
+     * @return 
      */
     public int nbreEmpruntParTrajet(Trajet t, Gsbdd g) {
         TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(e.id) FROM EmpruntImmediat e WHERE e.trajet=:t AND e.client.gsbdd=:g", Long.class);

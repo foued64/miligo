@@ -6,12 +6,14 @@
 package fr.miligo.view.beans.accueil;
 
 import fr.miligo.common.AbstractBean;
+import fr.miligo.model.entities.parc.Borne;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.extern.apachecommons.CommonsLog;
+import net.entetrs.commons.jsf.JsfUtils;
 
 /**
  *
@@ -42,7 +44,7 @@ public class PageIndexBeans extends AbstractBean implements Serializable {
             lien="gestionnaire-parc/accueil-gestionnaire-parc.xhtml?faces-redirect=true";
         }
         if("Utilisateur".equals(role)){
-            casDutilisation="Emprunter un véhicule";
+            casDutilisation="Emprunter ou Restituer un véhicule";
             lien="utilisateur/accueil-utilisateur.xhtml?faces-redirect=true";
         }
     }

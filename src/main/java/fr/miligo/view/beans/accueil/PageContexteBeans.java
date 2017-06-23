@@ -6,6 +6,7 @@
 package fr.miligo.view.beans.accueil;
 
 import fr.miligo.common.AbstractBean;
+import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.parc.Borne;
 import fr.miligo.model.facades.emprunt.FacadeClient;
@@ -30,69 +31,71 @@ import net.entetrs.commons.jsf.JsfUtils;
 @ViewScoped
 @Named
 @CommonsLog
-public class PageContexteBeans extends AbstractBean implements Serializable
-{
+public class PageContexteBeans extends AbstractBean implements Serializable {
+
     @Inject
     private FacadeClient facadeClient;
-    
+
     @Inject
     private FacadeBorne facadeBorne;
-    
+
     @Getter
     private List<Client> listeClient = new ArrayList<>();
-    
+
     @Getter
     private final List<String> listeRole = new ArrayList<>();
-    
+
     @Getter
     private List<Borne> listeBorne = new ArrayList<>();
-    
+
     @Getter
     @Setter
     private Client clientCourant;
-    
+
     @Getter
     @Setter
     private Borne borneCourante;
-    
+
     @Getter
     @Setter
     private String roleCourant;
-    
+
     @PostConstruct
     public void init() {
-        
+
         listeRole.add("Bureau Maintenance Logistique");
         listeRole.add("Gestionnaire de Parc");
         listeRole.add("Utilisateur");
         listeClient = facadeClient.readAll();
-        
+
         clientCourant = facadeClient.readbyNom(listeClient.get(0).getNom());
         roleCourant = listeRole.get(0);
         putInHttpSession(CLIENT_SESSION, clientCourant);
         putInHttpSession(ROLE_SESSION, roleCourant);
-        
+
     }
-    
-    public void misEnSessionDuClient()
-    {
+
+    public void misEnSessionDuClient() throws MiligoException {
         putInHttpSession(CLIENT_SESSION, clientCourant);
         misEnSessionDuRole();
     }
-    
-    public void misEnSessionDuRole()
-    {
+
+    public void misEnSessionDuRole() throws MiligoException {
         putInHttpSession(ROLE_SESSION, roleCourant);
-        if("Utilisateur".equals(roleCourant)){
-            listeBorne = facadeBorne.readbyGsbdd(clientCourant.getGsbdd().getLibelle());
-        }else{
+        if ("Utilisateur".equals(roleCourant)) {
+            try {
+                listeBorne = facadeBorne.findBornesByGsbdd(clientCourant.getGsbdd());
+            } catch (MiligoException ex) {
+                throw new MiligoException(ex.getMessage());
+            }
+        } else {
             listeBorne = null;
         }
-                
+
     }
-    
-    public void misEnSessionDeLaBorne()
-    {
-        JsfUtils.putInFlashScope(KEY_BORNE_DEPART, borneCourante);
+
+    public void misEnSessionDeLaBorne() {
+        System.out.println(borneCourante.getNomBorne()+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        putInHttpSession(KEY_BORNE_DEPART, borneCourante);
     }
 }

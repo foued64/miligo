@@ -70,7 +70,8 @@ public class AccueilBeans extends AbstractBean implements Serializable {
 		String adresseIp = "100.100.100.101";
 
         // Récuperation de la borne selon l'adresse ip
-        this.borneAller = (Borne) JsfUtils.getFromFlashScope(KEY_BORNE_DEPART);
+        this.borneActuelle = (Borne) getObjectInSession(KEY_BORNE_DEPART);
+        //System.out.println(borneActuelle.getNomBorne()+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
     }
 

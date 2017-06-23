@@ -214,14 +214,6 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
         v.setListeIncidents(new ArrayList<>());
         return v;
     }
-
-    /**
-     * Retourne le nombre de vehicule en BDD.
-     */
-    public int nbreVehiculeTotal() {
-        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(v.id) FROM Vehicule v", Long.class);
-        return tq.getSingleResult().intValue();
-    }
    
     /**
      * Retourne un véhicule disponible.
@@ -243,16 +235,6 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
         } catch (Exception e) {
             throw new MiligoException(e);
         }
-    }
-
-    /**
-     * Retourne le nombre de vehicule DISPONIBLE en BDD.
-     * @return 
-     */
-    public int nbreVehiculeDispo() {
-        TypedQuery<Long> tq = getEntityManager().createQuery("SELECT COUNT(v.id) FROM Vehicule v WHERE v.disponibilite =:enum", Long.class);
-        tq.setParameter("enum", DisponibiliteEnum.DISPONIBLE);
-        return tq.getSingleResult().intValue();
     }
     
     /**
@@ -290,19 +272,6 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
         tq.setParameter("enum", DisponibiliteEnum.RESERVE);
         return tq.getSingleResult().intValue();
     }
-	/**
-	 * Creer un nouvelle instance de vehicule avec les listes intancier
-	 *
-	 * @return Vehicule
-	 */
-	public Vehicule newInstanceVehicule() {
-		Vehicule v = new Vehicule();
-		v.setListeEmpruntImmediats(new ArrayList<>());
-		v.setListeEmpruntReservations(new ArrayList<>());
-		v.setListeEntretiens(new ArrayList<>());
-		v.setListeIncidents(new ArrayList<>());
-		return v;
-	}
 
 
     /**
