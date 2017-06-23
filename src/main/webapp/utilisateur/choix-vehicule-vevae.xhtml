@@ -19,6 +19,11 @@
         <div class="pageMobile">
 
             <h:form id="frmVE">
+            
+            	<f:metadata>
+				  <f:event type="preRenderView" listener="#{choixTypeVehiculeBean.keepInFlashScope()}"/>
+				</f:metadata>
+            
 				<p:panel header="Choisissez un type de véhicule">
 	                <div>
 	                    <p:commandButton id="btnVE" value=" "
@@ -32,15 +37,14 @@
 				</p:panel>
                 <p:messages id="messages" showIcon="false" showDetail="false" autoUpdate="true" closable="false"/>
             
-
-            <div id="validation">
-                <p:commandButton value="Afficher les autres types de véhicules disponibles"
-                                 update=":frmVE"
-                                 actionListener="#{choixTypeVehiculeBean.choisirAutreTypeDeVehicule()}"
-                                 rendered="#{choixTypeVehiculeBean.btnChoixAutreVehicule}" />
-                <p:button value="Retour à l'accueil"
-                          outcome="accueil-utilisateur.xhtml" />
-            </div>
+	            <div id="validation">
+	                <p:commandButton value="Afficher les autres types de véhicules disponibles"
+	                                 update=":frmVE"
+	                                 actionListener="#{choixTypeVehiculeBean.choisirAutreTypeDeVehicule()}"
+	                                 rendered="#{choixTypeVehiculeBean.btnChoixAutreVehicule}" />
+	                <p:button value="Retour à l'accueil"
+	                          outcome="accueil-utilisateur.xhtml" />
+	            </div>
                 
             </h:form>
 

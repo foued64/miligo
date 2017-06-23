@@ -16,6 +16,10 @@
 			
 			
 			<h:form>
+				<f:metadata>
+				  <f:event type="preRenderView" listener="#{emprunterBean.keepInFlashScope()}"/>
+				</f:metadata>
+			
 				<p:messages id="messages" showIcon="false" showDetail="false" autoUpdate="true" closable="false"/>
 				<p:panel header="Emprunt d'un véhicule">
 					<p:panelGrid id="optionsTrajet" columns="2" style="margin-bottom:10px;" styleClass="ui-panelgrid-blank">

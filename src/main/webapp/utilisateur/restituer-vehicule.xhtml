@@ -16,6 +16,9 @@
 		
 		<p:messages id="messages" showIcon="false" showDetail="false" autoUpdate="true" closable="true" />
 		<h:form>
+			<f:metadata>
+			  <f:event type="preRenderView" listener="#{restituerBean.keepInFlashScope()}"/>
+			</f:metadata>
 			<p:panel header="Restitution d'un véhicule">
 				<p:panelGrid id="optionsTrajet" columns="2" styleClass="ui-panelgrid-blank">				
 	

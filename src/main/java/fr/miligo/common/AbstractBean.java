@@ -1,6 +1,8 @@
 package fr.miligo.common;
 
 import java.io.IOException;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.emprunt.Client;
+import net.entetrs.commons.jsf.JsfUtils;
 
 /**
  * Classe abstraite regroupant les fonctions mutualisés des différents Beans
@@ -38,50 +41,50 @@ public abstract class AbstractBean {
 
 	// Attributs
 	private FacesContext context;
-	
-        /**
-         * Affichage d'un message prenant en paramètre deux Strings : resume et detail
-         * @param resume
-         * @param detail 
-         */
+
+	/**
+	 * Affichage d'un message prenant en paramètre deux Strings : resume et detail
+	 * @param resume
+	 * @param detail
+	 */
 
 	public void addMessage(String resume, String detail) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, resume, detail);
 		ecrireMessage(message);
 	}
 
-        /**
-         * Affichage d'un message prenant en paramètre un String : detail
-         * @param detail 
-         */
+	/**
+	 * Affichage d'un message prenant en paramètre un String : detail
+	 * @param detail
+	 */
 	public void addMessage(String detail) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, detail, null);
 		ecrireMessage(message);
 	}
 
-        /**
-         * Affichage d'un message d'erreur prenant en paramètre un String : detail
-         * @param detail 
-         */
+	/**
+	 * Affichage d'un message d'erreur prenant en paramètre un String : detail
+	 * @param detail
+	 */
 	public void addErrorMessage(String detail) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, detail, null);
 		ecrireMessage(message);
 	}
 
-        /**
-         * Affichage d'un message d'avertissement prenant en paramètre un String : detail
-         * @param detail 
-         */
+	/**
+	 * Affichage d'un message d'avertissement prenant en paramètre un String : detail
+	 * @param detail
+	 */
 	public void addWarningMessage(String detail) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, detail, null);
 		ecrireMessage(message);
 	}
 
-        /**
-         * Place un objet passé en paramètre en session http.
-         * @param key
-         * @param value 
-         */
+	/**
+	 * Place un objet passé en paramètre en session http.
+	 * @param key
+	 * @param value
+	 */
 	public void putInHttpSession(String key, Object value) {
 		HttpSession session = getHttpSession();
 		if (session != null) {
@@ -89,11 +92,11 @@ public abstract class AbstractBean {
 		}
 	}
 
-        /**
-         * Recupère un objet placé en session http par l'intermédiaire de sa clé.
-         * @param key
-         * @return 
-         */
+	/**
+	 * Recupère un objet placé en session http par l'intermédiaire de sa clé.
+	 * @param key
+	 * @return
+	 */
 	public Object getObjectInSession(String key) {
 		HttpSession session = getHttpSession();
 		if (session != null) {
@@ -109,11 +112,11 @@ public abstract class AbstractBean {
 		return null;
 	}
 
-        /**
-         * Redirection automatique vers une URL passé en paramètres
-         * @param url
-         * @throws MiligoException 
-         */
+	/**
+	 * Redirection automatique vers une URL passé en paramètres
+	 * @param url
+	 * @throws MiligoException
+	 */
 	public void redirectToURL(String url) throws MiligoException {
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(url);
@@ -128,6 +131,17 @@ public abstract class AbstractBean {
 	 */
 	public Client getClientFromSession() {
 		return (Client) getObjectInSession(CLIENT_SESSION);
+	}
+
+	/**
+	 * Garde les valeurs dans le flash scope lorsqu'une page est rechargée.
+	 */
+	public void keepInFlashScope() {
+		Set<Entry<String, Object>> entries = FacesContext.getCurrentInstance().getExternalContext().getFlash()
+				.entrySet();
+		for (Entry<String, Object> entry : entries) {
+			JsfUtils.putInFlashScope(entry.getKey(), entry.getValue());
+		}
 	}
 
 	/**
