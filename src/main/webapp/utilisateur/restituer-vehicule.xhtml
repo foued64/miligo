@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/template-standard-utilisateur.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cps="http://java.sun.com/jsf/composite/composites">
+	
+<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+
+    <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+
+	<ui:define name="content">
+	<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+		
+		
+		<p:messages id="messages" showIcon="false" showDetail="false" autoUpdate="true" closable="true" />
+		<h:form>
+			<f:metadata>
+			  <f:event type="preRenderView" listener="#{restituerBean.keepInFlashScope()}"/>
+			</f:metadata>
+			<p:panel header="Restitution d'un véhicule">
+				<p:panelGrid id="optionsTrajet" columns="2" styleClass="ui-panelgrid-blank">				
+	
+					<h:outputLabel value="Votre véhicule"/>
+					<h:outputText value="#{restituerBean.vehicule.immatriculation}" styleClass="bold"/>
+	
+					<h:outputLabel for="inputNomSite" value="Vous êtes à"/>
+					<h:outputText id="inputNomSite" value="#{restituerBean.borneArrivee.site.nom}" styleClass="bold"/>
+		
+					
+					<h:outputLabel for="outputHeureArr" value="Heure d'arrivée" />
+					<cps:outputDateTime id="outputHeureArr" pattern="HH:mm" type="time" value="#{restituerBean.heureArrivee}" styleClass="bold"/>		
+					
+					<h:outputLabel for="sliderBatterie" id="outputNivBatterie" value=" " class="batteryLevel"/>			
+					<p:panelGrid columns="1">									   
+						<h:inputHidden id="txt2" value="#{restituerBean.pourcentageBatterie}" required="true" requiredMessage="Veuillez sélectionner le niveau de batterie" />        			
+		      			<p:slider for="txt2" display="outputNivBatterie" minValue="0" maxValue="100" step="5"  displayTemplate=" %{value}" style="width: 300px !important;" />								
+					</p:panelGrid>
+								
+										       
+					<p:outputLabel for="spinnerNbKm" value="Nombre de km au compteur" />		    
+			     	<p:inputNumber value="#{restituerBean.nbKm}" requiredMessage="Veuillez saisir le kilometrage du vehicule" maxValue="999999"  id="spinnerNbKm" decimalPlaces="0" maxlength="6" symbol=" km" symbolPosition="s" required="true" styleClass="bold"/>
+					
+					<h:outputLabel for="inputSatisfaction" value="Votre taux de statisfaction" />
+			     	<p:rating  id="inputSatisfaction" value="#{restituerBean.tauxSatisfaction}"  cancel="false" />	
+			        
+				</p:panelGrid>
+			</p:panel>
+			
+			
+			<p:accordionPanel activeIndex="-1" >
+				<p:tab title="Signaler un incident" >
+					<p:panelGrid styleClass="ui-panelgrid-blank" columns="1">						
+						<h:outputLabel for="inputCommentaire" value="Commentaires sur l'état du véhicule" />				
+						<p:inputTextarea id="inputCommentaire" value="#{restituerBean.commentaireEtatVehicule}" cols="40" maxlength="600" counter="display" counterTemplate="{0} caractères restants"  autoResize="true" />										
+						<h:outputText id="display"/>	
+						<img id="imgEtatVehicule" src="../resources/img/zoe-etat-vert-bordure.png" alt="Aucune image trouvée" />				     
+			        </p:panelGrid>
+		        </p:tab>
+			</p:accordionPanel>
+
+			
+			<div id="validation">
+				<p:commandButton actionListener="#{restituerBean.restituer()}" value="Restituer"/>
+				<p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />					
+			</div>
+			
+		</h:form>		
+	</ui:define>
+	
+</ui:composition>

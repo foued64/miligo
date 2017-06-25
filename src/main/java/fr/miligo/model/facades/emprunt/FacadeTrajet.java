@@ -2,6 +2,7 @@ package fr.miligo.model.facades.emprunt;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import fr.miligo.common.AbstractFacade;
@@ -15,6 +16,12 @@ public class FacadeTrajet extends AbstractFacade<Trajet> {
 
 	@Inject
 	private FacadeBorne facadeBorne;
+
+	@Inject
+	private FacadeReservation facadeReservation;
+
+	@Inject
+	private FacadeEmpruntImmediat facadeEmpruntImmediat;
 
 	/**
 	 * Recherche le trajet en fonction de la borne aller et de la borne retour
@@ -42,9 +49,34 @@ public class FacadeTrajet extends AbstractFacade<Trajet> {
 			t = tq.getSingleResult();
 
 			return t;
+		} catch (NoResultException nre) {
+			return null;
 		} catch (Exception e) {
 			throw new MiligoException(e);
 		}
+	}
+
+	/**
+	 * Méthode de fabrication d'un trajet
+	 * @param indice
+	 * @param longueur
+	 * @param borneArrive
+	 * @param borneDepart
+	 * @return une nouvelle instance de trajet
+	 */
+	public Trajet newInstance(Integer indice, Double longueur, String borneArrive, String borneDepart) {
+
+		Borne bornearrive = facadeBorne.readbyNom(borneArrive);
+		Borne bornedepart = facadeBorne.readbyNom(borneDepart);
+
+		Trajet t = super.newInstance();
+		t.setIndiceCarbone(indice);
+		t.setLongueurTrajet(longueur);
+		t.setBorneArrivee(bornearrive);
+		t.setBorneDepart(bornedepart);
+
+		return t;
+
 	}
 
 }

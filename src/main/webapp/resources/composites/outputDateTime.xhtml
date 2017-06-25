@@ -7,12 +7,13 @@
 
 <composite:interface>
 	<composite:attribute name="value"  required="true" />
-	<composite:attribute name="pattern" required="true" />
+	<composite:attribute name="pattern" default="hh:mm"/>
 	<composite:attribute name="type" required="true" />
+	<composite:attribute name="styleClass" required="true" />
 </composite:interface>
 
 <composite:implementation>
-	<h:outputText value="#{cc.attrs.value}">
+	<h:outputText value="#{cc.attrs.value}" styleClass="#{cc.attrs.styleClass}">
 		<f:convertDateTime type="#{cc.attrs.type}" pattern="#{cc.attrs.pattern}" timeZone="Europe/Paris" />
 	</h:outputText>
 </composite:implementation>

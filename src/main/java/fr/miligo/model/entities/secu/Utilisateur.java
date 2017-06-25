@@ -28,7 +28,7 @@ import lombok.ToString;
 // Annotations LomBok
 @Getter
 @Setter
-@ToString
+@ToString(of = {"identifiant", "motDePasseHashe", "nom", "prenom", "email"})
 public class Utilisateur extends AbstractEntity {
 
 	// Champs métier

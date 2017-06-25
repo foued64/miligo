@@ -12,7 +12,6 @@ COPY miligo.war /opt/payara41/glassfish/domains/domain1/autodeploy
 RUN \
 $PAYARA_PATH/bin/asadmin start-domain && \
 $PAYARA_PATH/bin/asadmin --user $ADMIN_USER --passwordfile=/opt/pwdfile create-jdbc-connection-pool --datasourceclassname com.mysql.jdbc.jdbc2.optional.MysqlDataSource --restype javax.sql.DataSource --property user=root:password=rootroot:DatabaseName=MILIGO:ServerName=database-mysql:port=3306 miligoPool && \
-$PAYARA_PATH/bin/asadmin --user $ADMIN_USER --passwordfile=/opt/pwdfile create-jdbc-resource --connectionpoolid miligoPool jdbc/miligo && \
-$PAYARA_PATH/bin/asadmin stop-domain
+$PAYARA_PATH/bin/asadmin --user $ADMIN_USER --passwordfile=/opt/pwdfile create-jdbc-resource --connectionpoolid miligoPool jdbc/miligo
 
 EXPOSE 4848 8009 9009 8080 8181

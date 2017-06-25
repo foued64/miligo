@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,10 +28,11 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "CLIENT")
 @NoArgsConstructor
-@ToString
+@ToString(of = { "nom", "prenom" })
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent
+@NamedQuery(name="VILLE_SEARCH_BY_NOM", query="select c from Client c where c.nom = :nom ")
 public class Client extends AbstractEntity {
 
 	@Column(name = "NOM", nullable = false)

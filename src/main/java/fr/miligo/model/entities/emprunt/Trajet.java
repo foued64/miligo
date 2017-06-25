@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import fr.miligo.common.AbstractEntity;
 import fr.miligo.model.dao.RequetesDaoEmpruntImmediat;
 import fr.miligo.model.entities.parc.Borne;
+import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,18 +26,22 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * Entité métier représentant un Trajet entre deux bornes.
+ * @author codeur
+ */
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "TRAJET")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(of = {"longueurTrajet", "indiceCarbone", "borneDepart", "borneArrivee"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent
 @Builder
 @NamedQueries({ @NamedQuery(name = "rechercherTrajetByBornes", query = RequetesDaoEmpruntImmediat.RECHERCHER_TRAJET_BY_BORNES) })
-public class Trajet extends AbstractEntity {
+public class Trajet extends AbstractEntity implements Comparable<Trajet>{
 
 	@Column(name = "LONGUEUR_TRAJET")
 	@Setter
@@ -58,5 +63,40 @@ public class Trajet extends AbstractEntity {
 
 	@OneToMany(mappedBy = "trajet")
 	List<Reservation> listeReservations = new ArrayList<>();
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Trajet other = (Trajet) obj;
+        if (!Objects.equals(this.borneDepart, other.borneDepart)) {
+            return false;
+        }
+//        if (!Objects.equals(this.borneArrivee, other.borneArrivee)) {
+//            return false;
+//        }
+        return true;
+    }
+
+        
+        
+        
+    @Override
+    public int compareTo(Trajet o) {
+        return this.borneDepart.getNomBorne().compareTo(o.getBorneDepart().getNomBorne());
+    }
 
 }

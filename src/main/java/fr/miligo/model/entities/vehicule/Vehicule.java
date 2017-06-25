@@ -1,10 +1,10 @@
 package fr.miligo.model.entities.vehicule;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.Dependent;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,6 +18,8 @@ import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
 import fr.miligo.model.dao.RequetesDaoEmpruntImmediat;
+import fr.miligo.model.dao.RequetesDaoRestituerVehicule;
+import fr.miligo.model.dao.RequetesDaoStatistiques;
 import fr.miligo.model.entities.emprunt.EmpruntImmediat;
 import fr.miligo.model.entities.emprunt.EmpruntReservation;
 import fr.miligo.model.entities.parc.Borne;
@@ -35,14 +37,20 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "VEHICULE")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@ToString(of = { "libelle", "immatriculation", "puissance", "niveauBatterie", "kilometrage", "dateMiseEnCirculation" })
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent
 @Builder
 @NamedQueries({
 		@NamedQuery(name = "findVehiculesByDisponibiliteAndByBorne", query = RequetesDaoEmpruntImmediat.RECHERCHER_VEHICULE_BY_BORNE_AND_DISPO),
-		@NamedQuery(name = "findVehiculeByDispoByBorneByTypeVehicule", query = RequetesDaoEmpruntImmediat.RECHERCHER_VEHICULE_BY_BORNE_AND_DISPO_AND_TYPE_VEHICULE) })
+                @NamedQuery(name = "lstVehiculeByGsbdd", query = RequetesDaoEmpruntImmediat.LST_VEHICULE_BY_GSBDD),
+                @NamedQuery(name = "lstVehiculeBySite", query = RequetesDaoEmpruntImmediat.LST_VEHICULE_BY_SITE),
+		@NamedQuery(name = "findVehiculeByDispoByBorneByTypeVehicule", query = RequetesDaoEmpruntImmediat.RECHERCHER_VEHICULE_BY_BORNE_AND_DISPO_AND_TYPE_VEHICULE),
+		@NamedQuery(name = "findVehiculeARestituerByClient", query = RequetesDaoRestituerVehicule.RECHERCHER_VEHICULE_A_RESTITUER_BY_CLIENT),
+		@NamedQuery(name = "compterNbVehiculesDispoByTypeAndByBorne", query = RequetesDaoEmpruntImmediat.COMPTER_VEHICULE_BY_TYPE_AND_BORNE_AND_DISPO),
+                @NamedQuery(name = "nombreVehiculeParEtat", query = RequetesDaoStatistiques.NB_VEHICULE_PAR_ETAT),
+                @NamedQuery(name = "nombreTotalVehicule", query = RequetesDaoStatistiques.NB_TOTAL_VEHICULE)})
 public class Vehicule extends AbstractEntity {
 
 	@Column(name = "LIBELLE_VEHICULE", nullable = false)
@@ -85,19 +93,19 @@ public class Vehicule extends AbstractEntity {
 	Borne borne;
 
 	@OneToMany(mappedBy = "vehicule")
-        @Setter
+	@Setter
 	List<Entretien> listeEntretiens;
 
-	@OneToMany(mappedBy = "vehicule")
-        @Setter
+	@OneToMany(mappedBy = "vehicule", cascade = { CascadeType.REMOVE, CascadeType.MERGE })
+	@Setter
 	List<Incident> listeIncidents;
 
 	@OneToMany(mappedBy = "vehicule")
-        @Setter
+	@Setter
 	List<EmpruntImmediat> listeEmpruntImmediats;
 
 	@OneToMany(mappedBy = "vehicule")
-        @Setter
+	@Setter
 	List<EmpruntReservation> listeEmpruntReservations;
 
 }

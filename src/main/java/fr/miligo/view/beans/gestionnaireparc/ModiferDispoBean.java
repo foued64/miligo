@@ -5,6 +5,7 @@
  */
 package fr.miligo.view.beans.gestionnaireparc;
 
+import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.entities.vehicule.Entretien;
 import fr.miligo.model.entities.vehicule.Maintenance;
@@ -16,6 +17,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -23,47 +26,93 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.apachecommons.CommonsLog;
+import net.entetrs.commons.cdi.CDIUtils;
 import net.entetrs.commons.jsf.JsfUtils;
 
 /**
+ * ManagedBean JSF gérant la modif dispo.
+ * 
+ * @author 
  *
- * @author codeur
  */
 @ViewScoped
 @Named
 @CommonsLog
 public class ModiferDispoBean extends AbstractGestionParcBean implements Serializable {
 
+    /**
+    * EJB proposant les services métiers sur les Maintenance.
+    */
     @Inject
     private FacadeMaintenance facadeMaintenance;
 
+   /**
+    * EJB proposant les services métiers sur les entretiens.
+    */
     @Inject
     private FacadeEntretien facadeEntretien;
 
+    /**
+    * Variable utilise pour le rendere dans le xhtml
+    * Affiche ou non l'ajout d'un entretien et la liste des maintenances en cours.
+    */
     @Getter
     @Setter
     private boolean isPanelMaintenantVisu = false;
 
-    @Getter
-    private List<Maintenance> listeMaintenance = new ArrayList<>();
-
-    @Getter
-    private Date dateMinEntretien;
-    
+    /**
+     *  Permet de rendre afficher le libellé et la date début entretien.
+     */
     @Getter
     @Setter
-    private String dispo;
-   
+    private boolean isEntretienVisu = false;
+    
+    /**
+     * Liste de des maintenances.
+     */
+    @Getter
+    private List<Maintenance> listeMaintenance = new ArrayList<>();
+    
+    /**
+     * Liste des maitenances dans un entretien.
+     */
+    @Getter
+    private List<Maintenance> listeEntretienMaintenance = new ArrayList<>();
+    
+    /**
+     * Date minimum de l'entretien
+     * Initialisé a la date du jour.
+     */
+    @Getter
+    private Date dateMinEntretien;  
+    
+    /**
+     * Entretien.
+     */
     @Getter
     @Setter
     @Inject
     private Entretien entretien;
 
+    /**
+     * Utiliser pour la multipleChexbox.
+     */
     @Getter
     @Setter
-    @Inject
-    private Maintenance maintenance;
+    private Maintenance[] tabMaitenance;
 
+    /**
+     * Permet de changer le message de confirmation.
+     */
+    @Getter
+    @Setter
+    private String messageConfirmation = "Etes vous sure de modifier le véhicule ?";
+    
+    /** Initialise la page
+     * Mise en place dateMinimum entretien
+     * Recupere entretienEnCours
+     * Initialise la liste Dispo et Cause(Maintenance).
+     */
     @PostConstruct
     public void init() {
         dateMinEntretien = java.sql.Date.valueOf(LocalDate.now());
@@ -72,27 +121,35 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
 
         vehicule = facadeVehicule.read(v.getId());
         /**
-         * Permet de savoir si la disponibilité est en maitenance.
+         * Permet de savoir si la disponibilité est en maitenance
          * Pour la modif du vechiule il faut mettre l'entretien en fin.
          */
         if(vehicule.getDisponibilite().equals(DisponibiliteEnum.MAINTENANCE)){
-          isPanelMaintenantVisu = true;
+            entretien = recupereEntretienEnCours(vehicule);
+            isPanelMaintenantVisu = true;
+            isEntretienVisu = true;
+            listeEntretienMaintenance = entretien.getListeMaintenance();
+            
         }
-
-        //EN attente de l'enumeartion dispo MAILLOT
         listeDispo = DisponibiliteEnum.values();
-
         listeMaintenance = facadeMaintenance.readAll();
     }
 
     /**
-     * Affiche si la disponibilitée est INDISPONIBLE le panel associée.
+     * Affiche en fonction de la disponibilitée est MAINTENANCE le panel associée.
      */
     public void affichePageMaintenance() {
         if (vehicule.getDisponibilite().equals(DisponibiliteEnum.MAINTENANCE)) {
             isPanelMaintenantVisu = true;
-        }else if(vehicule.getDisponibilite().equals(DisponibiliteEnum.DISPONIBLE)){
+        }else{
             isPanelMaintenantVisu = false;
+        }
+        Vehicule vBdd = facadeVehicule.read(vehicule.getId());
+        
+        if(!vehicule.getDisponibilite().toString().equals(vBdd.getDisponibilite().toString())){
+            messageConfirmation = "Etes vous sure de modifier l'état du véhicule ?";
+        }else{
+            messageConfirmation = "Etes vous sure de modifier le véhicule ?";
         }
     }
 
@@ -101,28 +158,96 @@ public class ModiferDispoBean extends AbstractGestionParcBean implements Seriali
      */
     public void modifVehiculeImmat() {
         facadeVehicule.update(vehicule);
-        addMessage("Modifier l'immatriculation", "Modification prise en compte.");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nouvel immatriculation ");
+        sb.append(vehicule.getImmatriculation());
+        addMessage("Modifier véhicule", sb.toString());
         if (log.isInfoEnabled()){
-            log.info("Modfication Prise en compte");					
+            log.info("Modfication de l'immatriculation prise en compte");					
 	}
     }
 
     /**
      * Permet de creer un entretien du véchiule si la dispo passe de DISPO -> En maitenance
-     * Sinon mets un date de fin a l'entretien pour rendre le vehicule a nouveau disponible.
+     * Sinon mets une date de fin a l'entretien pour rendre le vehicule a nouveau disponible.
      */
     public void modifVehicule() {
+        
         if(vehicule.getDisponibilite().equals(DisponibiliteEnum.MAINTENANCE)){
-            entretien.setVehicule(vehicule);
-            Maintenance m = facadeMaintenance.read(maintenance.getId());
-            entretien.getListeMaintenance().add(m);
-            facadeEntretien.create(entretien);
-            facadeVehicule.update(vehicule);
+           Vehicule vBdd = facadeVehicule.read(vehicule.getId());
+           /**
+            * Test si le vehicule en bdd est en maitenance comme le vechicule affiche.
+            */
+           if(vBdd.getDisponibilite().toString().equals(DisponibiliteEnum.MAINTENANCE.toString())){
+               //On recupere l'entretien en cours du véhicule ou null
+                Entretien e = recupereEntretienEnCours(vehicule);
+                entretien = facadeEntretien.read(e.getId());
+                for (Maintenance maint : tabMaitenance) {
+                    Maintenance m = facadeMaintenance.read(maint.getId());
+                    if(!entretien.getListeMaintenance().contains(m)){
+                        entretien.getListeMaintenance().add(m);
+                    }
+                }
+                facadeEntretien.update(entretien);
+                if (log.isInfoEnabled()){
+                    log.info("Modfication de l'entretien en cours.");					
+                }
+           }else{
+                /**
+                 * On créer un nouveau entretien.
+                 */                
+                //Passe le vehicuel dans l'entretien
+                entretien.setVehicule(vehicule);
+                for (Maintenance maint : tabMaitenance) {
+                     Maintenance m = facadeMaintenance.read(maint.getId());
+                     entretien.getListeMaintenance().add(m);
+                }
+                //Creer l entretien
+                facadeEntretien.create(entretien);
+                if (log.isInfoEnabled()){
+                    log.info("Création de l'entretien.");					
+                }
+                //Passe le vechicule en Maintenace
+                facadeVehicule.update(vehicule);
+                if (log.isInfoEnabled()){
+                    log.info("Mise a jour du véhicule. (Ajout entretien pour le véhicule)");					
+                }
+            }
+            CDIUtils.getBean(Entretien.class);
+            CDIUtils.getBean(Vehicule.class);
         }else{
-           facadeVehicule.update(vehicule);
+            /**
+             * On cloture l'entretien en rajoutant une date de fin.
+             */
+             entretien = facadeEntretien.read(entretien.getId());
+             if(entretien != null){
+                 entretien.setDateEntretienFin(dateMinEntretien);
+                facadeEntretien.update(entretien);
+                if (log.isInfoEnabled()){
+                    log.info("Cloture l'entretien en cours sur le véhicule");					
+                }
+             }
+             facadeVehicule.update(vehicule);
+             if (log.isInfoEnabled()){
+                log.info("Mise a jour du véhicule.");					
+            }
         }
         
         addMessage("Succès de la modification", "Le véhicule à bien été modifié.");
     }
-
+    
+    /**
+     * On recupere l'entretien du véhicule en cours sinon null.
+     * @param v vehicule
+     * @return Entretien ou null
+     */
+    private Entretien recupereEntretienEnCours(Vehicule v){
+        try {
+            return facadeEntretien.entretienEnCourVehicule(v);
+        } catch (MiligoException ex) {
+            Logger.getLogger(ModiferDispoBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
 }

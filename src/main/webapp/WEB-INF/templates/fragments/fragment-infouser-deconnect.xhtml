@@ -8,8 +8,8 @@
 
     <div id="infoProfil">
         
-        <p:link value="Se déconnecter"
-                       outcome="/index.xhtml"
+        <p:outputLabel value="#{accueilBeans.clientCourant.prenom} #{accueilBeans.clientCourant.nom} - " /><p:link value="Se déconnecter"
+                       outcome="/contexte.xhtml"
                        />
 
     </div>

@@ -1,6 +1,8 @@
 DROP SCHEMA IF EXISTS MILIGO;
 CREATE SCHEMA MILIGO;
 USE MILIGO;
+SHOW TABLES;
+
 
 CREATE TABLE `ADRESSE` (
   `ID` varchar(24) NOT NULL,
@@ -17,6 +19,29 @@ INSERT INTO `ADRESSE` (`ID`, `NUMERO`, `VOIE`, `ID_VILLE`) VALUES
 ('Bx8DjlDmEeexFAAAsvkz1Q', '01', 'ricard', 'Bx8faFDmEeexFAAAsvkz1Q'),
 ('Ka40SFDlEeexFAAAsvkz1Q', '8', 'impasse Cesaire', 'Ka4yNlDlEeexFAAAsvkz1Q');
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `CONFIGURATION`
+--
+
+CREATE TABLE `CONFIGURATION_BORNE` (
+  `ID` varchar(24) NOT NULL,
+  `DISTANCE_MAX` int(11) DEFAULT '16',
+  `DISTANCE_MIN` int(11) DEFAULT '8',
+  `SEUIL_RECHARGEMENT` int(11) DEFAULT '50',
+  `TEMPS_CHARGE` time DEFAULT '01:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `BORNE`
+--
+
+INSERT INTO `CONFIGURATION_BORNE`(`ID`, `DISTANCE_MAX`, `DISTANCE_MIN`, `SEUIL_RECHARGEMENT`, `TEMPS_CHARGE`) VALUES
+('gi0imlDmEeexFAAAsvazer', 16, 8, 50, '01:00:00'),
+('gi0imlDmEeexFAAAsqsdf', 16, 8, 50, '01:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -29,16 +54,17 @@ CREATE TABLE `BORNE` (
   `LATITUDE` varchar(255) DEFAULT NULL,
   `LONGITUDE` varchar(255) DEFAULT NULL,
   `NOM_BORNE` varchar(255) NOT NULL,
-  `ID_SITE` varchar(24) NOT NULL
+  `ID_SITE` varchar(24) NOT NULL,
+  `ID_CONFIGURATION_BORNE` varchar(24) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `BORNE`
 --
 
-INSERT INTO `BORNE` (`ID`, `ADRESSE_IP`, `LATITUDE`, `LONGITUDE`, `NOM_BORNE`, `ID_SITE`) VALUES
-('gi0imlDmEeexFAAAsvkz1Q', '51.51.51.51', '44G', '15CM', 'Borne 2', 'Ka42MlDlEeexFAAAsvkz1Q'),
-('ZaUGxFDmEeexFAAAsvkz1Q', '221.01.02.03', '01N.O', '58.F', 'Borne 1', 'Bx8o8FDmEeexFAAAsvkz1Q');
+INSERT INTO `BORNE` (`ID`, `ADRESSE_IP`, `LATITUDE`, `LONGITUDE`, `NOM_BORNE`, `ID_SITE`, `ID_CONFIGURATION_BORNE`) VALUES
+('gi0imlDmEeexFAAAsvkz1Q', '51.51.51.51', '44G', '15CM', 'Borne 2', 'Ka42MlDlEeexFAAAsvkz1Q','gi0imlDmEeexFAAAsvazer'),
+('ZaUGxFDmEeexFAAAsvkz1Q', '221.01.02.03', '01N.O', '58.F', 'Borne 1', 'Bx8o8FDmEeexFAAAsvkz1Q','gi0imlDmEeexFAAAsqsdf');
 
 -- --------------------------------------------------------
 
@@ -73,6 +99,7 @@ CREATE TABLE `EMPRUNT_IMMEDIAT` (
   `GDH_DEPART` datetime NOT NULL,
   `GDH_RETOUR_PREVU` datetime DEFAULT NULL,
   `GDH_RETOUR_REEL` datetime DEFAULT NULL,
+  `SATISFACTION` int(1) DEFAULT NULL,
   `ID_CLIENT` varchar(24) NOT NULL,
   `ID_TRAJET` varchar(24) NOT NULL,
   `ID_VEHICULE` varchar(24) NOT NULL
@@ -87,6 +114,7 @@ CREATE TABLE `EMPRUNT_IMMEDIAT` (
 CREATE TABLE `EMPRUNT_RESERVATION` (
   `ID` varchar(24) NOT NULL,
   `GDH_RETOUR_REEL` datetime DEFAULT NULL,
+  `SATISFACTION` int(1) DEFAULT NULL,
   `ID_VEHICULE` varchar(24) DEFAULT NULL,
   `ID_RESERVATION` varchar(24) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -99,8 +127,8 @@ CREATE TABLE `EMPRUNT_RESERVATION` (
 
 CREATE TABLE `ENTRETIEN` (
   `ID` varchar(24) NOT NULL,
-  `DATE_ENTRETIEN` date NOT NULL,
-  `DESCRIPTION_ENTRETIEN` longtext,
+  `DATE_ENTRETIEN_DEBUT` datetime NOT NULL,
+  `DATE_ENTRETIEN_FIN` datetime,
   `LIBELLE` varchar(255) DEFAULT NULL,
   `ID_VEHICULE` varchar(24) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -679,6 +707,10 @@ ALTER TABLE `VEHICULE`
 -- Contenu de la table `MAINTENANCE`
 --
 INSERT INTO `MAINTENANCE` (`ID`, `LIBELLE_MAINTENANCE`) VALUES
-('ChZfkFLcEeexFAAAsvkz1Q', 'PNEU'),
-('EANQrFLcEeexFAAAsvkz1Q', 'FREIN');
-
+('932JjlZREeeQewAApgBq0w', 'Vidange'),
+('ChZfkFLcEeexFAAAsvkz1Q', 'Pneu'),
+('CIClwlZSEeeQewAApgBq0w', 'Pare-choc'),
+('EANQrFLcEeexFAAAsvkz1Q', 'Frein'),
+('GbpQaFZSEeeQewAApgBq0w', 'Phare'),
+('K7V5blZSEeeQewAApgBq0w', 'Bloc moteur'),
+('KfjR6FZSEeeQewAApgBq0w', 'Courroie distribution');

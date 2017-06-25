@@ -22,7 +22,6 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "MAINTENANCE")
 @NoArgsConstructor
-//@ToString
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter

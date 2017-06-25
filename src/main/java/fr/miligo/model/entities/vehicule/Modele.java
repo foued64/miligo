@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
@@ -19,11 +20,12 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "MODELE")
 @NoArgsConstructor
-@ToString
+@ToString(of = {"libelle", "marque", "typeVehicule"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
 @Dependent
+@NamedQuery(name="MODELE_SEARCH_BY_LIB", query="select m from Modele m where m.libelle = :libelle ")
 public class Modele extends AbstractEntity {
 
 	@Column(name = "LIBELLE_MODELE", nullable = false)

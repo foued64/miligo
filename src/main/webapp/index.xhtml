@@ -7,15 +7,18 @@
                 >
 
 
-    <ui:define name="title">DEMO - IT1</ui:define>
+    <ui:define name="title">DEMO - IT2</ui:define>
 
     <ui:define name="content">
-        
-        <h2>DEMO - IT1</h2>
 
-        <h:form>
-            <p:commandButton value="Emprunter un véhicule" action="utilisateur/accueil-utilisateur.xhtml?faces-redirect=true" />
-            <p:commandButton value="Modifier la disponibilité d'un véhicule" action="gestionnaire-parc/accueil-gestionnaire-parc.xhtml?faces-redirect=true" />
+        <h2>DEMO - IT2</h2>
+
+        <h:form class="ui-g">
+            
+            <p:panel class="ui-g-12">
+                <p:button class="ui-g-12" value="#{pageIndexBeans.casDutilisation}" outcome="#{pageIndexBeans.lien}"  />
+               
+            </p:panel>
         </h:form>
 
     </ui:define>

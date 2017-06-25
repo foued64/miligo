@@ -1,0 +1,28 @@
+version: '2'
+services:
+  payara:
+    image: zyra83/miligo-app:0.2.0
+    links:
+    - alias-database-server:database-mysql
+    ports:
+    - 8484:4848/tcp
+    - 8080:8080/tcp
+    command:
+    - bin/asadmin
+    - start-domain
+    - -v
+    - --debug
+    - 'true'
+    labels:
+      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+      io.rancher.scheduler.affinity:host_label_ne: persistent=1
+  database-mysql:
+    image: zyra83/miligo-db:0.2.0
+  alias-app-server:
+    image: rancher/dns-service
+    links:
+    - payara:payara
+  alias-database-server:
+    image: rancher/dns-service
+    links:
+    - database-mysql:database-mysql

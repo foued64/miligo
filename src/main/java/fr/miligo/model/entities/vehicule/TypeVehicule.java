@@ -6,6 +6,7 @@ import java.util.List;
 import javax.enterprise.context.Dependent;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,10 +23,11 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "TYPE_VEHICULE")
 @NoArgsConstructor
-@ToString
+@ToString(of = "libelle")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent
+@NamedQuery(name="TYPEVEHICULE_SEARCH_BY_LIB", query="select t from TypeVehicule t where t.libelle = :libelle ")
 public class TypeVehicule extends AbstractEntity {
 
 	@Column(name = "LIBELLE_TYPE_VEHICULE", nullable = false)

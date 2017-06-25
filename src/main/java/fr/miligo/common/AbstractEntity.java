@@ -9,19 +9,21 @@ import javax.persistence.MappedSuperclass;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 import net.entetrs.commons.uuid.GeneratedUUID;
 import net.entetrs.commons.uuid.UUIDRepresentation;
 
+/**
+ * Classe abstraite commune à toutes les entités métier.
+ * @author AMET
+ */
 @SuppressWarnings("serial")
 @MappedSuperclass
 // Annotations LomBok
 @Getter
-/**
- * J'ai rajouter le setter pour pouvoir faire les tests avec la borne.SEB
- */
-@Setter
 @EqualsAndHashCode(of = "id")
+/**
+ * Classe abstraite qui génère un identifiant unique (UUID) pour les entités
+ */
 public abstract class AbstractEntity implements Serializable {
 
 	// Champs techniques

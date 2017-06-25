@@ -28,7 +28,7 @@ import lombok.ToString;
 // Annotations Lombok
 @Getter
 @Setter
-@ToString
+@ToString(of = "nom")
 public class Role extends AbstractEntity {
 
 	// Champs métier

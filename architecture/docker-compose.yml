@@ -3,7 +3,7 @@ version: '2'
 services:
   frontal:
     build: frontal
-    image: zyra83/miligo-front:0.1.0
+    image: zyra83/miligo-front:0.2.0
     ports:
       - "80:80"
       - "443:443"
@@ -11,7 +11,7 @@ services:
       - payara
   payara:
     build: payara
-    image: zyra83/miligo-app:0.1.0
+    image: zyra83/miligo-app:0.2.0
     command: bin/asadmin start-domain -v --debug true
     ports:
       - "8080:8080"
@@ -20,4 +20,4 @@ services:
       - database-mysql
   database-mysql:
     build: database-mysql
-    image: zyra83/miligo-db:0.1.0
+    image: zyra83/miligo-db:0.2.0

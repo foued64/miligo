@@ -26,7 +26,7 @@ import lombok.experimental.FieldDefaults;
 @Entity
 @Table(name = "RESERVATION")
 @NoArgsConstructor
-@ToString
+@ToString(of = {"numeroReservation", "etat", "dateReservation", "demandeur", "conducteur", "typeVehicule", "trajet", "empruntReservation"})
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter

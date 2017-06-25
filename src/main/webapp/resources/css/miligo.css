@@ -73,6 +73,11 @@ html
     background-image:linear-gradient(white, yellow);
 }
 
+#bml
+{
+    background-image:linear-gradient(white, lightcoral);
+}
+
 
 .container-big
 {
@@ -83,13 +88,6 @@ html
     margin : 0;
 }
 
-.footer
-{
-    position : absolute;
-    bottom : 0;
-    right : 0;
-    left : 0;
-}
 
 /*.btnMobile
 {
@@ -130,6 +128,24 @@ html
     float : bottom;
 }
 
+.batteryLevel::before { 
+  	content: "Niveau de batterie";
+  	font-weight: normal !important;
+}
+
+.batteryLevel { 
+	font-weight: bold;
+}
+
+#imgEtatVehicule{
+	width: 400px !important;
+	height: 270px !important;
+}
+
+.bold{
+	font-weight: bold;
+}
+
 
 @media screen and (max-width: 1024px)
 {
@@ -161,3 +177,18 @@ html
         display : none;
     }
 }
+
+.ui-clock,
+.ui-clock.ui-widget-header{
+	border: none !important;
+	background: none !important;
+	position: absolute !important;
+	left:10px !important;
+	font-weight: normal !important;
+	top:3em !important;
+}
+
+footer{
+	position: absolute;
+}
+
