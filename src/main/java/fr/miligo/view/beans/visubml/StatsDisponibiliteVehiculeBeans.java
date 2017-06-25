@@ -59,14 +59,14 @@ public class StatsDisponibiliteVehiculeBeans extends AbstractBean implements Ser
         try {
             bmDispoVehicule = initBarModelDispo();
 
-            bmDispoVehicule.setTitle("Disponibilités des véhicules.");
+            bmDispoVehicule.setTitle("Disponibilité des véhicules");
             bmDispoVehicule.setLegendPosition("ne");
 
             Axis xAxis = bmDispoVehicule.getAxis(AxisType.X);
-            xAxis.setLabel("Type disponibilité");
-
+            xAxis.setLabel("Type de disponibilité");
+            
             Axis yAxis = bmDispoVehicule.getAxis(AxisType.Y);
-            yAxis.setLabel("Nombre de véhicule");
+            yAxis.setLabel("Nombre de véhicules");
             yAxis.setMin(0);
             yAxis.setMax(facadeVehicule.nbreVehiculeTotal() + 1);
 

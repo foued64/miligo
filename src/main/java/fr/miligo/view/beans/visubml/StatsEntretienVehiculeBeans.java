@@ -79,7 +79,7 @@ public class StatsEntretienVehiculeBeans extends AbstractBean implements Seriali
             xAxis.setLabel("Type de maintenance");
 
             Axis yAxis = bmEntretien.getAxis(AxisType.Y);
-            yAxis.setLabel("Nombre de maintenance");
+            yAxis.setLabel("Nombre de maintenances");
             yAxis.setMin(0);
             yAxis.setMax(facadeEntretien.nbreEntretienTotal() + 1);
         } catch (Exception e) {
