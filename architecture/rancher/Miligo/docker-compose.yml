@@ -18,9 +18,6 @@ services:
       io.rancher.scheduler.affinity:host_label_ne: persistent=1
   database-mysql:
     image: zyra83/miligo-db:0.2.0
-    labels:
-      io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-      io.rancher.scheduler.affinity:host_label_ne: persistent=1
   alias-app-server:
     image: rancher/dns-service
     links:
