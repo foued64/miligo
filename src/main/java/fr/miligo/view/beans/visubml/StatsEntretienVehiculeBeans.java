@@ -20,6 +20,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.apachecommons.CommonsLog;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -32,47 +33,60 @@ import org.primefaces.model.chart.ChartSeries;
  */
 @ViewScoped
 @Named
+@CommonsLog
 public class StatsEntretienVehiculeBeans extends AbstractBean implements Serializable {
-    
+
     @Inject
     private FacadeEntretien facadeEntretien;
-    
+
     @Inject
     private FacadeMaintenance facadeMaintenance;
-    
+
     @Getter
     private Client clientCourant;
-    
+
     @Getter
     @Setter
     private BarChartModel bmEntretien;
-    
+
     @Getter
     private List<Maintenance> listeMaintenance = new ArrayList<>();
-    
+
     @PostConstruct
     public void init() {
         clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
+        if (log.isInfoEnabled()) {
+            log.info(String.format("Stat. entretien véhicule pour %s", clientCourant));
+        }
         listeMaintenance = facadeMaintenance.readAll();
+        createBarModelDispo();
     }
 
     /**
      * Créer barModel.
      */
     private void createBarModelDispo() {
-        bmEntretien = initBarModelDispo();
+        if (log.isInfoEnabled()) {
+            log.info("Création du diagramme de dispo.");
+        }
+        try {
+            bmEntretien = initBarModelDispo();
 
-        bmEntretien.setTitle("Nombre de Maintenances sur les véhicules");
-        bmEntretien.setLegendPosition("ne");
+            bmEntretien.setTitle("Nombre de Maintenances sur les véhicules");
+            bmEntretien.setLegendPosition("ne");
 
-        Axis xAxis = bmEntretien.getAxis(AxisType.X);
-        xAxis.setLabel("Type de maintenance");
+            Axis xAxis = bmEntretien.getAxis(AxisType.X);
+            xAxis.setLabel("Type de maintenance");
 
-        Axis yAxis = bmEntretien.getAxis(AxisType.Y);
-        yAxis.setLabel("Nombre de maintenance");
-        yAxis.setMin(0);
-        yAxis.setMax(facadeEntretien.nbreEntretienTotal()+1);
-        
+            Axis yAxis = bmEntretien.getAxis(AxisType.Y);
+            yAxis.setLabel("Nombre de maintenance");
+            yAxis.setMin(0);
+            yAxis.setMax(facadeEntretien.nbreEntretienTotal() + 1);
+        } catch (Exception e) {
+            if (log.isErrorEnabled()) {
+                log.error(String.format("Exception à la création du diagramme de dispos %s", e), e);
+            }
+        }
     }
 
     /**
@@ -81,18 +95,20 @@ public class StatsEntretienVehiculeBeans extends AbstractBean implements Seriali
      * @return
      */
     private BarChartModel initBarModelDispo() {
+        if (log.isInfoEnabled()) {
+            log.info(String.format("Injection des données de maintenances dans le diagramme de dispo pour %s maintenance(s).", listeMaintenance.size()));
+        }
         BarChartModel model = new BarChartModel();
         ChartSeries dispo = new ChartSeries();
         dispo.setLabel("Maintenance");
-        
-        for(Maintenance m : listeMaintenance)
-        {
+        listeMaintenance.forEach((m) -> {
+            if (log.isInfoEnabled()) {
+                log.info(String.format("Stats pour maintenance %s", m));
+            }
             dispo.set(m.getLibelle(), facadeEntretien.nbreEntretienParMaintenance(m));
-        }
-
+        });
         model.addSeries(dispo);
-
         return model;
     }
-    
+
 }

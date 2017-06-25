@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.apachecommons.CommonsLog;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
@@ -28,11 +29,12 @@ import org.primefaces.model.chart.ChartSeries;
  */
 @ViewScoped
 @Named
+@CommonsLog
 public class StatsDisponibiliteVehiculeBeans extends AbstractBean implements Serializable {
 
     @Inject
     private FacadeVehicule facadeVehicule;
-    
+
     @Getter
     private Client clientCourant;
 
@@ -44,26 +46,35 @@ public class StatsDisponibiliteVehiculeBeans extends AbstractBean implements Ser
     public void init() {
 
         clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
-            createBarModelDispo();
+        if (log.isInfoEnabled()) {
+            log.info(String.format("Stat. dispo. véhicule pour %s", clientCourant));
+        }
+        createBarModelDispo();
     }
 
     /**
      * Créer barModel.
      */
     private void createBarModelDispo() {
-        bmDispoVehicule = initBarModelDispo();
+        try {
+            bmDispoVehicule = initBarModelDispo();
 
-        bmDispoVehicule.setTitle("Disponibilités des véhicules.");
-        bmDispoVehicule.setLegendPosition("ne");
+            bmDispoVehicule.setTitle("Disponibilités des véhicules.");
+            bmDispoVehicule.setLegendPosition("ne");
 
-        Axis xAxis = bmDispoVehicule.getAxis(AxisType.X);
-        xAxis.setLabel("Type disponibilité");
+            Axis xAxis = bmDispoVehicule.getAxis(AxisType.X);
+            xAxis.setLabel("Type disponibilité");
 
-        Axis yAxis = bmDispoVehicule.getAxis(AxisType.Y);
-        yAxis.setLabel("Nombre de véhicule");
-        yAxis.setMin(0);
-        yAxis.setMax(facadeVehicule.nbreVehiculeTotal()+1);
-      
+            Axis yAxis = bmDispoVehicule.getAxis(AxisType.Y);
+            yAxis.setLabel("Nombre de véhicule");
+            yAxis.setMin(0);
+            yAxis.setMax(facadeVehicule.nbreVehiculeTotal() + 1);
+
+        } catch (Exception e) {
+            if (log.isErrorEnabled()) {
+                log.error(String.format("Erreur à la création du BarModelDispo %s", e.getMessage()), e);
+            }
+        }
     }
 
     /**
@@ -73,17 +84,21 @@ public class StatsDisponibiliteVehiculeBeans extends AbstractBean implements Ser
      */
     private BarChartModel initBarModelDispo() {
         BarChartModel model = new BarChartModel();
-        ChartSeries dispo = new ChartSeries();
-        dispo.setLabel("Disponibilité");
-        
-        dispo.set(DisponibiliteEnum.DISPONIBLE.toString(), facadeVehicule.nbreVehiculeDispo());
-        dispo.set(DisponibiliteEnum.EMPRUNTE.toString(), facadeVehicule.nbreVehiculeEmprunter());
-        dispo.set(DisponibiliteEnum.EN_CHARGE.toString(), facadeVehicule.nbreVehiculeEnCharge());
-        dispo.set(DisponibiliteEnum.MAINTENANCE.toString(), facadeVehicule.nbreVehiculeEnMaintenance());
-        dispo.set(DisponibiliteEnum.RESERVE.toString(), facadeVehicule.nbreVehiculeReserve());
+        try {
+            ChartSeries dispo = new ChartSeries();
+            dispo.setLabel("Disponibilité");
+            dispo.set(DisponibiliteEnum.DISPONIBLE.toString(), facadeVehicule.nbreVehiculeDispo());
+            dispo.set(DisponibiliteEnum.EMPRUNTE.toString(), facadeVehicule.nbreVehiculeEmprunter());
+            dispo.set(DisponibiliteEnum.EN_CHARGE.toString(), facadeVehicule.nbreVehiculeEnCharge());
+            dispo.set(DisponibiliteEnum.MAINTENANCE.toString(), facadeVehicule.nbreVehiculeEnMaintenance());
+            dispo.set(DisponibiliteEnum.RESERVE.toString(), facadeVehicule.nbreVehiculeReserve());
 
-        model.addSeries(dispo);
-
+            model.addSeries(dispo);
+        } catch (Exception e) {
+            if (log.isErrorEnabled()) {
+                log.error(String.format("Erreur à l'injection des données dans le BarModelDispo %s", e.getMessage()), e);
+            }
+        }
         return model;
     }
 
