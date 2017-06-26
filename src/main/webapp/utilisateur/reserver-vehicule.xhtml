@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/template-standard-utilisateur.xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:cps="http://java.sun.com/jsf/composite/composites">
+	
+<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+
+    <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+
+	<ui:define name="content">
+	<ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+			
+			
+			
+			<h:form>
+				<f:metadata>
+				  <f:event type="preRenderView" listener="#{reserverBean.keepInFlashScope()}"/>
+				</f:metadata>
+			
+				<p:messages id="messages" showIcon="false" showDetail="false" autoUpdate="true" closable="false"/>
+				<p:panel header="Reserver un véhicule">
+					<p:panelGrid id="optionsTrajet" columns="2" style="margin-bottom:10px;" styleClass="ui-panelgrid-blank">
+						<p:outputLabel for="borneA" value="Choisir un point de départ :" />
+						<p:autoComplete id="borneA" required="true" requiredMessage="Vous devez sélectionner une borne de départ" dropdown="true" converter="#{genericConverter}" value="#{reserverBean.borneRetour}" var="b" itemLabel="#{b.site.nom}" itemValue="#{b}" completeMethod="#{reserverBean.autoCompleteBorne}" />						
+			
+						<p:outputLabel for="borneR" value="Choisir un point d'arrivée :" />
+						<p:autoComplete id="borneR" required="true" requiredMessage="Vous devez sélectionner une borne d'arrivée" dropdown="true" converter="#{genericConverter}" value="#{reserverBean.borneRetour}" var="b" itemLabel="#{b.site.nom}" itemValue="#{b}" completeMethod="#{reserverBean.autoCompleteBorne}" />
+						
+						<p:outputLabel for="heureDepart" value="Date et heure de départ : " />
+	                    <p:calendar id="heureDepart" value="#{reserverBean.tempsEmprunt}" pattern="dd/MM/yyyy HH:mm" mask="99/99/9999 99:99" maxHour="23" maxMinute="45"  stepMinute="15" required="true" requiredMessage="Veuillez saisir la date de départ"/>						
+					
+						<p:outputLabel for="duree" value="Durée de la réservation : " />
+	                    <p:calendar id="duree" value="#{reserverBean.tempsEmprunt}" pattern="HH:mm" timeOnly="true" mask="99:99" maxHour="7" maxMinute="45"  stepMinute="15" required="true" requiredMessage="Veuillez saisir une durée de trajet"/>						
+					
+					</p:panelGrid>
+				</p:panel>
+				
+				
+				<div id="validation">
+					<p:commandButton actionListener="#{reserver.validerTrajet()}" action="choix-vehicule-vevae.xhtml?faces-redirect=true" value="Suivant"/>									
+					<p:button value="Annuler" outcome="accueil-utilisateur.xhtml" />														
+				</div>
+				
+			</h:form>
+		
+		
+	</ui:define>
+	
+</ui:composition>

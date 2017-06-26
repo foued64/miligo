@@ -1,4 +1,4 @@
-package fr.miligo.view.beans.emprunter;
+package fr.miligo.view.beans.reserver;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import net.entetrs.commons.jsf.JsfUtils;
 @SuppressWarnings("serial")
 @ViewScoped
 @Named
-public class EmprunterBean extends AbstractEmprunterBean implements Serializable {
+public class ReserverBean extends AbstractReserverBean implements Serializable {
 
 	// Attributs
 	@Getter
@@ -43,25 +43,28 @@ public class EmprunterBean extends AbstractEmprunterBean implements Serializable
 
 	@Getter
 	@Setter
+	private Date dateHeureDepart;
+
+	@Getter
+	@Setter
 	private Date tempsEmprunt;
 
 	@PostConstruct
 	public void init() {
+
+		clientCourant = getClientFromSession();
+
 		try {
-			clientCourant = getClientFromSession();
-
-			// Récuperation de la borne par le flashscoped
-			this.borneAller = (Borne) JsfUtils.getFromFlashScope(KEY_FLASH_SCOPE_BORNE_ACTUELLE);
-
-			// Récupération de toute les bornes
+			// Récupération de toute les bornes de la GSBDD du client
 			lstBorne = new ArrayList<>();
-			lstBorne = facadeBorne.findBornesByGsbdd(borneAller.getSite().getGsbdd());
+			lstBorne = facadeBorne.findBornesByGsbdd(clientCourant.getGsbdd());
 		} catch (MiligoException e) {
 			if (log.isErrorEnabled()) {
 				log.error(e.getMessage());
 			}
 			addErrorMessage(e.getMessage());
 		}
+
 	}
 
 	/**
@@ -81,9 +84,16 @@ public class EmprunterBean extends AbstractEmprunterBean implements Serializable
 			// du type de véhicule
 			JsfUtils.putInFlashScope(KEY_TRAJET_FLASH_SCOPE, this.trajet);
 			JsfUtils.putInFlashScope(KEY_TEMPS_EMPRUNT_FLASH_SCOPE, this.tempsEmprunt);
+			JsfUtils.putInFlashScope(KEY_TEMPS_DATE_HEURE_RESERVATION_FLASH_SCOPE, this.dateHeureDepart);
 		}
 	}
 
+	/**
+	 * Sur la saisie faite sur la page,
+	 * retourne la recherche des bornes correspondantes
+	 * @param query
+	 * @return
+	 */
 	public List<Borne> autoCompleteBorne(String query) {
 		List<Borne> lstResultats = new ArrayList<>();
 		for (int i = 0; i < lstBorne.size(); i++) {
