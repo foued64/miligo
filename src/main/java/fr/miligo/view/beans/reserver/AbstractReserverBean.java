@@ -18,12 +18,11 @@ public class AbstractReserverBean extends AbstractBean {
 
 	protected static final String EMPRUNTER_VEHICULE_OK = "EMPRUNT.VEHICULE.OK";
 
-	protected static final String URL_ECRAN_RESUME = "emprunter-resume.xhtml";
+	protected static final String URL_ECRAN_RESUME = "reserver-resume.xhtml";
 
 	protected static final String KEY_TRAJET_FLASH_SCOPE = "trajet";
 	protected static final String KEY_TEMPS_EMPRUNT_FLASH_SCOPE = "tempsEmprunt";
 	protected static final String KEY_TYPE_VEHICULE_FLASH_SCOPE = "typeVehicule";
-
 	protected static final String KEY_TEMPS_DATE_HEURE_RESERVATION_FLASH_SCOPE = "tempsEmprunt";
 
 	// Facade

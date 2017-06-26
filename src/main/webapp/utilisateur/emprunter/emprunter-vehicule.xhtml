@@ -36,8 +36,8 @@
 				
 				
 				<div id="validation">
-					<p:commandButton actionListener="#{emprunterBean.validerTrajet()}" action="choix-vehicule-vevae.xhtml?faces-redirect=true" value="Emprunter"/>									
-					<p:button value="Retour à l'accueil" outcome="accueil-utilisateur.xhtml" />														
+					<p:commandButton actionListener="#{emprunterBean.validerTrajet()}" action="../choix-vehicule/choix-vehicule-vevae.xhtml?faces-redirect=true" value="Emprunter"/>									
+					<p:commandButton  value="Retour à l'accueil" action="../accueil-utilisateur.xhtml?faces-redirect=true" immediate="true"/>														
 				</div>
 				
 			</h:form>

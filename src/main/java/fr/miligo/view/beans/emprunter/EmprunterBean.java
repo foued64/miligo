@@ -81,6 +81,7 @@ public class EmprunterBean extends AbstractEmprunterBean implements Serializable
 			// du type de véhicule
 			JsfUtils.putInFlashScope(KEY_TRAJET_FLASH_SCOPE, this.trajet);
 			JsfUtils.putInFlashScope(KEY_TEMPS_EMPRUNT_FLASH_SCOPE, this.tempsEmprunt);
+			JsfUtils.putInFlashScope(KEY_ECRAN_RESUME_FLASH_SCOPE, URL_ECRAN_RESUME);
 		}
 	}
 

@@ -23,13 +23,14 @@ public abstract class AbstractBean {
 	 * clé du client dans la session http.
 	 */
 	public static final String CLIENT_SESSION = "client";
-        public static final String ROLE_SESSION = "role";
-        protected static final String KEY_BORNE_DEPART = "borne";
+	public static final String ROLE_SESSION = "role";
+	protected static final String KEY_BORNE_DEPART = "borne";
 
 	/**
 	 * Clé de la borne dans le flash scope
 	 */
 	protected static final String KEY_FLASH_SCOPE_BORNE_ACTUELLE = "borne";
+	public static final String KEY_ECRAN_RESUME_FLASH_SCOPE = "ecran";
 
 	/**
 	 * Clé du véhicule dans le flash scope

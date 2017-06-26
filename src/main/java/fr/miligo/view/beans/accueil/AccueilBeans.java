@@ -28,7 +28,7 @@ import net.entetrs.commons.jsf.JsfUtils;
 @CommonsLog
 public class AccueilBeans extends AbstractBean implements Serializable {
 
-	private static final String URL_EMPRUNT = "emprunter-vehicule.xhtml";
+	private static final String URL_EMPRUNT = "emprunter/emprunter-vehicule.xhtml";
 	private static final String URL_RESTITUER = "restituer-vehicule.xhtml";
 
 	// Facade
@@ -48,32 +48,28 @@ public class AccueilBeans extends AbstractBean implements Serializable {
 	@Getter
 	private Client clientCourant;
 
-    
-    /**
-     * Initialisation en récupérant le client le met en session recupere
-     * l'adresse ip du support qui permet de recuperer la borne aller pour la
-     * mettre en flashscoped
-     */
-    @PostConstruct
-    public void init() {
-        //Recupere le client courant
-        //TODO a modifier quand l'authentification sera faite
-    	
-    	
-        clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
+	/**
+	 * Initialisation en récupérant le client le met en session recupere
+	 * l'adresse ip du support qui permet de recuperer la borne aller pour la
+	 * mettre en flashscoped
+	 */
+	@PostConstruct
+	public void init() {
+		// Recupere le client courant
+		// TODO a modifier quand l'authentification sera faite
 
-        
+		clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
 
 		// Recupere l'adresse ip du support utilisé avant d'arriver sur la page
 		// pour pouvoir conaitre la borneAller. FLASHSCOPED
 		// TODO a modifier quand nous aurons les adresses ip des tablettes des bornes
 		String adresseIp = "100.100.100.101";
 
-        // Récuperation de la borne selon l'adresse ip
-        this.borneActuelle = (Borne) getObjectInSession(KEY_BORNE_DEPART);
-        //System.out.println(borneActuelle.getNomBorne()+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		// Récuperation de la borne selon l'adresse ip
+		this.borneActuelle = (Borne) getObjectInSession(KEY_BORNE_DEPART);
+		// System.out.println(borneActuelle.getNomBorne()+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
-    }
+	}
 
 	/**
 	 * Verifie si un vehicule et disponible dans la borne si ok renvoi

@@ -49,10 +49,18 @@ public class ReserverBean extends AbstractReserverBean implements Serializable {
 	@Setter
 	private Date tempsEmprunt;
 
+	@Getter
+	@Setter
+	private Date minDate;
+
 	@PostConstruct
 	public void init() {
 
+		// Récupération du client en session
 		clientCourant = getClientFromSession();
+
+		// Initialisation de la minDate à la date du jour
+		this.minDate = new Date();
 
 		try {
 			// Récupération de toute les bornes de la GSBDD du client
@@ -85,6 +93,7 @@ public class ReserverBean extends AbstractReserverBean implements Serializable {
 			JsfUtils.putInFlashScope(KEY_TRAJET_FLASH_SCOPE, this.trajet);
 			JsfUtils.putInFlashScope(KEY_TEMPS_EMPRUNT_FLASH_SCOPE, this.tempsEmprunt);
 			JsfUtils.putInFlashScope(KEY_TEMPS_DATE_HEURE_RESERVATION_FLASH_SCOPE, this.dateHeureDepart);
+			JsfUtils.putInFlashScope(KEY_ECRAN_RESUME_FLASH_SCOPE, URL_ECRAN_RESUME);
 		}
 	}
 

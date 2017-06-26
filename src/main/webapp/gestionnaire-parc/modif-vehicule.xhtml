@@ -81,7 +81,8 @@
                         <p:outputLabel value ="Début de l'entretien" for="calendrier" />
                         <p:calendar id="calendrier" locale="fr" mindate="#{modiferDispoBean.dateMinEntretien}" 
                                     pattern="dd/MM/yyyy" mask="true" required="true" requiredMessage="Remplir la date Entretien"
-                                    disabled="#{modiferDispoBean.entretienVisu}" value="#{modiferDispoBean.entretien.dateEntretienDebut}"/>
+                                    disabled="#{modiferDispoBean.entretienVisu}" value="#{modiferDispoBean.entretien.dateEntretienDebut}"
+                                    validator="dateValidator"/>
                         
                         <p:outputLabel value="Cause" />                        
                         <p:selectCheckboxMenu id="menu" value="#{modiferDispoBean.tabMaitenance}" label="Cause" converter="#{genericConverter}"

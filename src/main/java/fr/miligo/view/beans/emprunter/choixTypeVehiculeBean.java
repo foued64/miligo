@@ -160,7 +160,7 @@ public class choixTypeVehiculeBean extends AbstractEmprunterBean implements Seri
 			JsfUtils.putInFlashScope(KEY_TEMPS_EMPRUNT_FLASH_SCOPE, tempsEmprunt);
 			JsfUtils.putInFlashScope(KEY_TYPE_VEHICULE_FLASH_SCOPE, typeVehicule);
 			checkVehiculesDispoBorneByTypeVehicule(typeVehicule);
-			redirectToURL(URL_ECRAN_RESUME);
+			redirectToURL(JsfUtils.getFromFlashScope(KEY_ECRAN_RESUME_FLASH_SCOPE).toString());
 		} catch (MiligoException e) {
 			if (log.isErrorEnabled()) {
 				log.error(e.getMessage());
