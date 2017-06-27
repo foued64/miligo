@@ -13,7 +13,7 @@
 
         <h2>DEMO - IT2</h2>
 
-        <h:form class="ui-g">
+        <h:form class="ui-g" >
             <p:panel class="ui-g-12">
                 <p:outputLabel value="1 - Choix du client (pour choisir une GSBDD)" />
                 <p:selectOneMenu class="ui-g-12" value="#{pageContexteBeans.clientCourant}" converter="#{genericConverter}">
@@ -28,7 +28,7 @@
                 <p:outputLabel class="ui-g-12" value=" Mail : #{pageContexteBeans.clientCourant.adresseMail}" />
                 <p:outputLabel class="ui-g-12" value=" Gsbdd : #{pageContexteBeans.clientCourant.gsbdd.libelle}" />
             </p:panel>
-            
+
             <p:panel class="ui-g-12">
                 <p:outputLabel value="2 - Choix du rôle" />
                 <p:selectOneMenu class="ui-g-12" value="#{pageContexteBeans.roleCourant}" converter="#{genericConverter}">
@@ -36,10 +36,11 @@
                     <p:ajax listener="#{pageContexteBeans.misEnSessionDuRole()}" update="@form" />
                 </p:selectOneMenu>
             </p:panel>
-            
+
             <p:panel class="ui-g-12">
                 <p:outputLabel value="3 - Choix du poste" />
                 <p:selectOneMenu class="ui-g-12" value="#{pageContexteBeans.borneCourante}" converter="#{genericConverter}">
+                    <f:selectItem itemLabel="Choisissez une borne..." itemValue="#{null}" />
                     <f:selectItems value="#{pageContexteBeans.listeBorne}" var="b" itemValue="#{b}" itemLabel="#{b.nomBorne}"/>
                     <p:ajax listener="#{pageContexteBeans.misEnSessionDeLaBorne()}" update="@form" />
                 </p:selectOneMenu>
@@ -47,8 +48,8 @@
 
 
             <p:panel class="ui-g-12">
-                <p:commandButton class="ui-g-12" value="GO!" action="index.xhtml?faces-redirect=true" />
-                
+                <p:commandButton class="ui-g-12" value="GO!" action="#{pageContexteBeans.checkBorneNull()}" />
+
             </p:panel>
         </h:form>
 

@@ -14,6 +14,8 @@ import fr.miligo.model.facades.parc.FacadeBorne;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -95,7 +97,21 @@ public class PageContexteBeans extends AbstractBean implements Serializable {
     }
 
     public void misEnSessionDeLaBorne() {
-        System.out.println(borneCourante.getNomBorne()+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        System.out.println(borneCourante.getNomBorne() + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         putInHttpSession(KEY_BORNE_DEPART, borneCourante);
+    }
+
+    public void checkBorneNull() {
+        
+        //System.out.println(borneCourante.getNomBorne() + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        //System.out.println(roleCourant + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        
+        if (borneCourante != null || !"Utilisateur".equals(roleCourant)) {
+            try {
+                redirectToURL("index.xhtml?faces-redirect=true");
+            } catch (MiligoException ex) {
+                Logger.getLogger(PageContexteBeans.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }
