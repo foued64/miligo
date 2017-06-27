@@ -2,6 +2,7 @@ package fr.miligo.model.facades.vehicule;
 
 import fr.miligo.common.AbstractFacade;
 import fr.miligo.exceptions.MiligoException;
+import fr.miligo.model.entities.parc.Gsbdd;
 import fr.miligo.model.entities.vehicule.Entretien;
 import fr.miligo.model.entities.vehicule.Vehicule;
 import fr.miligo.model.entities.vehicule.Maintenance;
@@ -45,9 +46,10 @@ public class FacadeEntretien extends AbstractFacade<Entretien> {
      * @param m
      * @return 
      */
-    public int nbreEntretienParMaintenance(Maintenance m) {
+    public int nbreEntretienParMaintenance(Maintenance m, Gsbdd gsbdd) {
         TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreEntretienParMaintenance", Long.class);
         tq.setParameter("maintenance", m);
+        tq.setParameter("g", gsbdd);
         return tq.getSingleResult().intValue();
     }
 

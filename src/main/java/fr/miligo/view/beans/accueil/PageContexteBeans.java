@@ -23,7 +23,6 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.apachecommons.CommonsLog;
-import net.entetrs.commons.jsf.JsfUtils;
 
 /**
  *

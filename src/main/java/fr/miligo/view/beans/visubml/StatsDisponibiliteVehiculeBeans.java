@@ -10,6 +10,8 @@ import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.facades.emprunt.FacadeVehicule;
 import java.io.Serializable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -17,10 +19,7 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.apachecommons.CommonsLog;
-import org.primefaces.model.chart.Axis;
-import org.primefaces.model.chart.AxisType;
-import org.primefaces.model.chart.BarChartModel;
-import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.DonutChartModel;
 
 /**
  * Page qui permet d'afficher les statistiques
@@ -40,7 +39,7 @@ public class StatsDisponibiliteVehiculeBeans extends AbstractBean implements Ser
 
     @Getter
     @Setter
-    private BarChartModel bmDispoVehicule;
+    private DonutChartModel donutDispoVehicule;
 
     @PostConstruct
     public void init() {
@@ -49,56 +48,42 @@ public class StatsDisponibiliteVehiculeBeans extends AbstractBean implements Ser
         if (log.isInfoEnabled()) {
             log.info(String.format("Stat. dispo. véhicule pour %s", clientCourant));
         }
-        createBarModelDispo();
+        createDonutDispoVehicule();
     }
 
     /**
-     * Créer barModel.
+     * Crée le PieModel
      */
-    private void createBarModelDispo() {
+    private void createDonutDispoVehicule() {
+
         try {
-            bmDispoVehicule = initBarModelDispo();
-
-            bmDispoVehicule.setTitle("Disponibilité des véhicules");
-            bmDispoVehicule.setLegendPosition("ne");
-
-            Axis xAxis = bmDispoVehicule.getAxis(AxisType.X);
-            xAxis.setLabel("Type de disponibilité");
-            
-            Axis yAxis = bmDispoVehicule.getAxis(AxisType.Y);
-            yAxis.setLabel("Nombre de véhicules");
-            yAxis.setMin(0);
-            yAxis.setMax(facadeVehicule.nbreVehiculeTotal() + 1);
+            donutDispoVehicule = initDonutModel();
+            donutDispoVehicule.setTitle("Disponibilité des véhicules");
+            donutDispoVehicule.setLegendPosition("w");
 
         } catch (Exception e) {
             if (log.isErrorEnabled()) {
-                log.error(String.format("Erreur à la création du BarModelDispo %s", e.getMessage()), e);
+                log.error(String.format("Erreur à la création du pieDispoVehicule %s", e.getMessage()), e);
             }
         }
     }
 
     /**
-     * Initialise la barModel.
+     * Initialise le donutModel
      *
      * @return
      */
-    private BarChartModel initBarModelDispo() {
-        BarChartModel model = new BarChartModel();
-        try {
-            ChartSeries dispo = new ChartSeries();
-            dispo.setLabel("Disponibilité");
-            dispo.set(DisponibiliteEnum.DISPONIBLE.toString(), facadeVehicule.nbreVehiculeDispo());
-            dispo.set(DisponibiliteEnum.EMPRUNTE.toString(), facadeVehicule.nbreVehiculeEmprunter());
-            dispo.set(DisponibiliteEnum.EN_CHARGE.toString(), facadeVehicule.nbreVehiculeEnCharge());
-            dispo.set(DisponibiliteEnum.MAINTENANCE.toString(), facadeVehicule.nbreVehiculeEnMaintenance());
-            dispo.set(DisponibiliteEnum.RESERVE.toString(), facadeVehicule.nbreVehiculeReserve());
+    private DonutChartModel initDonutModel() {
+        DonutChartModel model = new DonutChartModel();
 
-            model.addSeries(dispo);
-        } catch (Exception e) {
-            if (log.isErrorEnabled()) {
-                log.error(String.format("Erreur à l'injection des données dans le BarModelDispo %s", e.getMessage()), e);
-            }
-        }
+        Map<String, Number> donut1 = new LinkedHashMap<>();
+        donut1.put(DisponibiliteEnum.DISPONIBLE.toString(), facadeVehicule.nbreVehiculeDispo(clientCourant.getGsbdd()));
+        donut1.put(DisponibiliteEnum.EMPRUNTE.toString(), facadeVehicule.nbreVehiculeEmprunter(clientCourant.getGsbdd()));
+        donut1.put(DisponibiliteEnum.EN_CHARGE.toString(), facadeVehicule.nbreVehiculeEnCharge(clientCourant.getGsbdd()));
+        donut1.put(DisponibiliteEnum.MAINTENANCE.toString(), facadeVehicule.nbreVehiculeEnMaintenance(clientCourant.getGsbdd()));
+        donut1.put(DisponibiliteEnum.RESERVE.toString(), facadeVehicule.nbreVehiculeReserve(clientCourant.getGsbdd()));
+        model.addCircle(donut1);
+
         return model;
     }
 

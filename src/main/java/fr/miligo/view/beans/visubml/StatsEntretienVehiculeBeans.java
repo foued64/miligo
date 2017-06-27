@@ -13,7 +13,9 @@ import fr.miligo.model.facades.vehicule.FacadeEntretien;
 import fr.miligo.model.facades.vehicule.FacadeMaintenance;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -21,10 +23,8 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.apachecommons.CommonsLog;
-import org.primefaces.model.chart.Axis;
-import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
-import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.DonutChartModel;
 
 /**
  * Page qui permet d'afficher les statistiques
@@ -44,10 +44,10 @@ public class StatsEntretienVehiculeBeans extends AbstractBean implements Seriali
 
     @Getter
     private Client clientCourant;
-
+    
     @Getter
     @Setter
-    private BarChartModel bmEntretien;
+    private DonutChartModel donutMaintenanceVehicule;
 
     @Getter
     private List<Maintenance> listeMaintenance = new ArrayList<>();
@@ -59,55 +59,45 @@ public class StatsEntretienVehiculeBeans extends AbstractBean implements Seriali
             log.info(String.format("Stat. entretien véhicule pour %s", clientCourant));
         }
         listeMaintenance = facadeMaintenance.readAll();
-        createBarModelDispo();
+        createDonutMaintenanceVehicule();
     }
-
+    
     /**
-     * Créer barModel.
+     * Crée le PieModel
      */
-    private void createBarModelDispo() {
-        if (log.isInfoEnabled()) {
-            log.info("Création du diagramme de dispo.");
-        }
+    private void createDonutMaintenanceVehicule() {
+
         try {
-            bmEntretien = initBarModelDispo();
+            donutMaintenanceVehicule = initDonutModel();
+            donutMaintenanceVehicule.setTitle("Nombre de maintenance sur les véhicules");
+            donutMaintenanceVehicule.setLegendPosition("w");
 
-            bmEntretien.setTitle("Nombre de Maintenances sur les véhicules");
-            bmEntretien.setLegendPosition("ne");
-
-            Axis xAxis = bmEntretien.getAxis(AxisType.X);
-            xAxis.setLabel("Type de maintenance");
-
-            Axis yAxis = bmEntretien.getAxis(AxisType.Y);
-            yAxis.setLabel("Nombre de maintenances");
-            yAxis.setMin(0);
-            yAxis.setMax(facadeEntretien.nbreEntretienTotal() + 1);
         } catch (Exception e) {
             if (log.isErrorEnabled()) {
-                log.error(String.format("Exception à la création du diagramme de dispos %s", e), e);
+                log.error(String.format("Erreur à la création du donutMaintenanceVehicule %s", e.getMessage()), e);
             }
         }
     }
-
-    /**
-     * Initialise la barModel.
+    
+     /**
+     * Initialise le donutModel
      *
      * @return
      */
-    private BarChartModel initBarModelDispo() {
-        if (log.isInfoEnabled()) {
-            log.info(String.format("Injection des données de maintenances dans le diagramme de dispo pour %s maintenance(s).", listeMaintenance.size()));
-        }
-        BarChartModel model = new BarChartModel();
-        ChartSeries dispo = new ChartSeries();
-        dispo.setLabel("Maintenance");
+    private DonutChartModel initDonutModel() {
+        DonutChartModel model = new DonutChartModel();
+
+        Map<String, Number> donut1 = new LinkedHashMap<>();
+        
         listeMaintenance.forEach((m) -> {
             if (log.isInfoEnabled()) {
                 log.info(String.format("Stats pour maintenance %s", m));
             }
-            dispo.set(m.getLibelle(), facadeEntretien.nbreEntretienParMaintenance(m));
+            donut1.put(m.getLibelle(), facadeEntretien.nbreEntretienParMaintenance(m, clientCourant.getGsbdd()));
         });
-        model.addSeries(dispo);
+        
+        model.addCircle(donut1);
+
         return model;
     }
 

@@ -187,18 +187,20 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
     /**
      * Retourne le vechiule en BDD.
      */
-    public int nbreVehiculeTotal() {
+    public int nbreVehiculeTotal(Gsbdd gsbdd) {
         TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreTotalVehicule", Long.class);
+        tq.setParameter("g", gsbdd);
         return tq.getSingleResult().intValue();
     }
 
     /**
      * Retourne le vechiule en BDD.
      */
-    public int nbreVehiculeDispo() {
+    public int nbreVehiculeDispo(Gsbdd gsbdd) {
         TypedQuery<Long> tq = getEntityManager()
                 .createNamedQuery("nombreVehiculeParEtat", Long.class);
         tq.setParameter("enum", DisponibiliteEnum.DISPONIBLE);
+        tq.setParameter("g", gsbdd);
         return tq.getSingleResult().intValue();
     }
 
@@ -242,36 +244,40 @@ public class FacadeVehicule extends AbstractFacade<Vehicule> {
      * Retourne le nombre de vehicule EMPRUNTE en BDD.
      * @return 
      */
-    public int nbreVehiculeEmprunter() {
+    public int nbreVehiculeEmprunter(Gsbdd gsbdd) {
         TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreVehiculeParEtat", Long.class);
         tq.setParameter("enum", DisponibiliteEnum.EMPRUNTE);
+        tq.setParameter("g", gsbdd);
         return tq.getSingleResult().intValue();
     }
     
     /**
      * Retourne le nombre de vehicule EN_CHARGE en BDD.
      */
-    public int nbreVehiculeEnCharge() {
+    public int nbreVehiculeEnCharge(Gsbdd gsbdd) {
         TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreVehiculeParEtat", Long.class);
         tq.setParameter("enum", DisponibiliteEnum.EN_CHARGE);
+        tq.setParameter("g", gsbdd);
         return tq.getSingleResult().intValue();
     }
     
     /**
      * Retourne le nombre de vehicule MAINTENANCE en BDD.
      */
-    public int nbreVehiculeEnMaintenance() {
+    public int nbreVehiculeEnMaintenance(Gsbdd gsbdd) {
         TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreVehiculeParEtat", Long.class);
         tq.setParameter("enum", DisponibiliteEnum.MAINTENANCE);
+        tq.setParameter("g", gsbdd);
         return tq.getSingleResult().intValue();
     }
     
     /**
      * Retourne le nombre de vehicule RESERVE en BDD.
      */
-    public int nbreVehiculeReserve() {
+    public int nbreVehiculeReserve(Gsbdd gsbdd) {
         TypedQuery<Long> tq = getEntityManager().createNamedQuery("nombreVehiculeParEtat", Long.class);
         tq.setParameter("enum", DisponibiliteEnum.RESERVE);
+        tq.setParameter("g", gsbdd);
         return tq.getSingleResult().intValue();
     }
 
