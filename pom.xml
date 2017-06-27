@@ -15,6 +15,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <jacoco.version>0.7.5.201505241946</jacoco.version>
+        <junit.version>4.12</junit.version>
     </properties>
 
     <dependencyManagement>
@@ -34,7 +36,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
- 
+
     <repositories>
         <repository>
             <id>prime-repo</id>
@@ -44,6 +46,12 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <!-- pour le newInstance en test unitaire base64 -->
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.9</version>
+        </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -139,7 +147,7 @@
             <artifactId>south-street</artifactId>
             <version>1.0.10</version>
         </dependency>
-        
+
         <!-- début arquilian -->
         <dependency>
             <groupId>javax</groupId>
@@ -234,6 +242,44 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- début de jacoco pour report de l'analyse de code à sonar -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <dataFile>target/jacoco.exec</dataFile>
+                            <outputDirectory>target/jacoco-ut</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <systemPropertyVariables>
+                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+            <!-- fin de jacoco -->
             <!-- debut arquilian -->
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -244,11 +290,11 @@
                     </systemProperties>
                 </configuration>
             </plugin>
-            <!-- fin arquilian -->    
+            <!-- fin arquilian -->
         </plugins>
         <testResources>
             <testResource>
-                <!-- répertoire des ressources de test pour Arquillian --> 
+                <!-- répertoire des ressources de test pour Arquillian -->
                 <directory>src/test/resources</directory>
             </testResource>
         </testResources>
