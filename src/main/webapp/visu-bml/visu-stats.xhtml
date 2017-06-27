@@ -4,6 +4,7 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="/WEB-INF/templates/template-standard-bml.xhtml"
                 xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite/composites"
                 >
 
     <ui:define name="title">Consulter Statistiques - Bureau Maintenance et Logistique</ui:define>
@@ -12,9 +13,12 @@
 
 
         <h:form>
-            <p:tabView>
-                <p:tab title="Trajets les plus effectués">
-                    <p:outputLabel value="Trajets les plus effectués - #{statsTrajetBeans.clientCourant.gsbdd.libelle}" />
+            <p:tabView  >
+                <p:tab title="Trajets les plus effectués" >
+                    <p:outputLabel style="float:left;" value="Trajets les plus effectués - #{statsTrajetBeans.clientCourant.gsbdd.libelle}" />
+                     <div class="btnExport" >
+            			<composite:buttonExport />
+            		</div>
                     <p:dataTable id="dataTableStatistiques" var="v" value="#{statsTrajetBeans.listeTrajetUnique}" style="margin-top : 40px;" rows="10">
                         <p:column>
                             <f:facet name="header">
@@ -32,15 +36,25 @@
                     </p:dataTable>
                 </p:tab>
 
-                <p:tab title="Disponibilité des véhicules">
-                    <p:chart responsive="true" type="donut" model="#{statsDisponibiliteVehiculeBeans.donutDispoVehicule}" style="height:500px;"/>
+                <p:tab styleClass="onglets" title="Disponibilité des véhicules">
+                	<div class="btnExport1" >
+            			<composite:buttonExport />
+            		</div>
+                    <p:chart responsive="true" type="donut" model="#{statsDisponibiliteVehiculeBeans.donutDispoVehicule}" style="height:500px; margin-top : 40px;"/>
+                	
                 </p:tab>
 
-                <p:tab title="Maintenance des Véhicules">
-                    <p:chart responsive="true" type="donut" model="#{statsEntretienVehiculeBeans.donutMaintenanceVehicule}"  style="height:500px;"/>
+                <p:tab  styleClass="onglets" title="Maintenance des Véhicules">
+                	<div class="btnExport" >
+            			<composite:buttonExport />
+            		</div>
+                    <p:chart responsive="true" type="donut" model="#{statsEntretienVehiculeBeans.donutMaintenanceVehicule}"  style="height:500px;margin-top : 40px;"/>
                 </p:tab>
+                
+                
 
-            </p:tabView>>
+            </p:tabView>
+           
         </h:form>
 
     </ui:define>

@@ -14,6 +14,39 @@ footer {
 		display: none !important;
 }
 
+.btnExport{
+		display: none !important;
+}
+
 @page{
 	size: landscape;
+	
+	
+}
+
+.ui-tabs-nav{
+	display:none !important;
+}
+
+.jqplot-grid-canvas{
+	margin-top : 40px !important;
+	
+}
+
+.jqplot-base-canvas{
+	font-size: 32px !important;
+}
+
+.jqplot-series-canvas{
+	margin-top : 40px !important;
+}
+
+.onglets{
+	position:absolute;
+	height:100%;
+	width:100%;
+}
+
+body{
+	
 }
