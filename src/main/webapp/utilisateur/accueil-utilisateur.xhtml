@@ -34,27 +34,32 @@
 		
 		<hr />
 
-	
+		
 
 		<!-- Ici le tableau récapitulatif des réservations -->
+		
+		<h:form>
+		    <!-- Rafraichit le dataTable toutes les 5 min (300 secondes) -->
+			<p:poll interval="300" listener="#{accueilBeans.chargerListeReservations()}"  update="dtReservations" />
 
-		<p:dataTable var="r" value="#{accueilBeans.listeReservations}" emptyMessage="Vous n'avez aucune réservation">
-			<p:column headerText="Liste des réservations">
-				<h:outputText value="#{r.numeroReservation}" />
-			</p:column>
-
-			<p:column headerText="Départ -Arrivée">
-				<h:outputText value="#{r.trajet.borneDepart.site.nom} -> #{r.trajet.borneArrivee.site.nom}" />
-			</p:column>
-
-			<p:column headerText="Date de la réservation">
-				<cps:outputDateTime  pattern="dd/MM/yyyy HH:mm" type="datetime" value="#{r.dateReservation}"/>
-			</p:column>
-
-			<p:column headerText="Action">
-				<p:commandButton value="Emprunter" disabled="true"/>
-			</p:column>
-		</p:dataTable>
+			<p:dataTable id="dtReservations" var="r" value="#{accueilBeans.listeReservations}" emptyMessage="Vous n'avez aucune réservation">
+				<p:column headerText="Liste des réservations">
+					<h:outputText value="#{r.numeroReservation}" />
+				</p:column>
+	
+				<p:column headerText="Départ -Arrivée">
+					<h:outputText value="#{r.trajet.borneDepart.site.nom} -> #{r.trajet.borneArrivee.site.nom}" />
+				</p:column>
+	
+				<p:column headerText="Date de la réservation">
+					<cps:outputDateTime  pattern="dd/MM/yyyy HH:mm" type="datetime" value="#{r.dateReservation}"/>
+				</p:column>
+	
+				<p:column headerText="Action">
+					<p:commandButton value="Emprunter" disabled="true"/>
+				</p:column>
+			</p:dataTable>
+		</h:form>
 
 	</ui:define>
 

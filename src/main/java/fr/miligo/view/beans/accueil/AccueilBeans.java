@@ -56,17 +56,13 @@ public class AccueilBeans extends AbstractBean implements Serializable {
 	 */
 	@PostConstruct
 	public void init() {
-		try {
-			// Recupere le client courant
-			// TODO a modifier quand l'authentification sera faite
-			clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
+		// Recupere le client courant
+		// TODO a modifier quand l'authentification sera faite
+		clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
 
-			// Récuperation de la borne selon l'adresse ip
-			borneActuelle = (Borne) getObjectInSession(KEY_BORNE_DEPART);
-			listeReservations = facadeReservation.findListeReservationsByClient(clientCourant);
-		} catch (MiligoException e) {
-			addErrorMessage(e.getMessage());
-		}
+		// Récuperation de la borne selon l'adresse ip
+		borneActuelle = (Borne) getObjectInSession(KEY_BORNE_DEPART);
+		chargerListeReservations();
 	}
 
 	/**
@@ -115,6 +111,17 @@ public class AccueilBeans extends AbstractBean implements Serializable {
 	public void checkVehiculesDispoBorneOnError() {
 		try {
 			checkVehiculesDispoBorne();
+		} catch (MiligoException e) {
+			if (log.isErrorEnabled()) {
+				log.error(e.getMessage());
+			}
+			addErrorMessage(e.getMessage());
+		}
+	}
+
+	public void chargerListeReservations() {
+		try {
+			listeReservations = facadeReservation.findListeReservationsByClient(clientCourant);
 		} catch (MiligoException e) {
 			if (log.isErrorEnabled()) {
 				log.error(e.getMessage());
