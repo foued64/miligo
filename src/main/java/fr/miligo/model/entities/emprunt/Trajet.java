@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import fr.miligo.common.AbstractEntity;
 import fr.miligo.model.dao.RequetesDaoTrajet;
 import fr.miligo.model.entities.parc.Borne;
-import java.util.Objects;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

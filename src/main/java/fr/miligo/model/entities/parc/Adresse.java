@@ -9,6 +9,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
+import fr.miligo.model.dao.RequetesDaoAdresse;
+import javax.persistence.NamedQueries;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +18,12 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * Entité métier représentant une adresse.
+ * 
+ * @author etrs
+ *
+ */
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "ADRESSE")
@@ -25,16 +33,28 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @Dependent
-@NamedQuery(name="ADRESS_SEARCH_BY_LIB", query="select a from Adresse a where a.voie = :adresse ")
+
+@NamedQueries({
+                @NamedQuery(name="findAdresseByVoie", query=RequetesDaoAdresse.FIND_ADRESSE_BY_VOIE)
+})
 public class Adresse extends AbstractEntity {
 
-	@Column(name = "NUMERO")
-	String numero;
+    /**
+     * Numero de l'adresse.
+     */
+    @Column(name = "NUMERO")
+    String numero;
 
-	@Column(name = "VOIE")
-	String voie;
+    /**
+     * Voie de l'adresse.
+     */
+    @Column(name = "VOIE")
+    String voie;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_VILLE", nullable = false)
-	Ville ville;
+    /**
+     * Ville associée a l'adresse.
+     */
+    @ManyToOne
+    @JoinColumn(name = "ID_VILLE", nullable = false)
+    Ville ville;
 }
