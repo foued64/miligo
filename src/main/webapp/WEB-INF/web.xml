@@ -98,7 +98,7 @@
 	<!-- SESSION TIMEOUT : BEGIN -->
 	
 	<session-config>
-		<session-timeout>5</session-timeout>
+		<session-timeout>15</session-timeout>
 	</session-config>
 	<!-- SESSION TIMEOUT : END -->
 
