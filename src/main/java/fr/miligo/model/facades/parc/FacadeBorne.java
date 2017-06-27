@@ -1,6 +1,5 @@
 package fr.miligo.model.facades.parc;
 
-import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -10,27 +9,39 @@ import fr.miligo.common.AbstractFacade;
 import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.parc.Borne;
 import fr.miligo.model.entities.parc.Site;
-import fr.miligo.model.entities.parc.Ville;
 import fr.miligo.model.entities.parc.Gsbdd;
 import java.util.List;
 
+/**
+ * EJB session proposant une façade aux servces métier de l'entité Borne.
+ *
+ * @author codeur
+ */
 @Stateless
 public class FacadeBorne extends AbstractFacade<Borne> {
 
+    /**
+     * EJB proposant les services métiers sur le site.
+     */
     @Inject
     private FacadeSite facadeSite;
 
-	
-	public List<Borne> findBornesByGsbdd(Gsbdd gsbdd) throws MiligoException {
-		try {
-			TypedQuery<Borne> q = getEntityManager().createNamedQuery("findBornesByGsbdd", Borne.class);
-			q.setParameter("idGsbdd", gsbdd.getId());
+    /**
+     * Recupere une liste de borne en fonction de la GSBDD.
+     * @param gsbdd
+     * @return
+     * @throws MiligoException 
+     */
+    public List<Borne> findBornesByGsbdd(Gsbdd gsbdd) throws MiligoException {
+        try {
+            TypedQuery<Borne> q = getEntityManager().createNamedQuery("findBornesByGsbdd", Borne.class);
+            q.setParameter("idGsbdd", gsbdd.getId());
 
-			return q.getResultList();
-		} catch (Exception e) {
-			throw new MiligoException(e.getMessage());
-		}
-	}
+            return q.getResultList();
+        } catch (Exception e) {
+            throw new MiligoException(e.getMessage());
+        }
+    }
 
     /**
      * Méthode de fabrication d'un borne
@@ -56,13 +67,13 @@ public class FacadeBorne extends AbstractFacade<Borne> {
     }
 
     /**
-     * fonction qui retourne une borne
+     * Recherche une borne en fonction du libelle.
      *
      * @param nom
      * @return
      */
     public Borne readbyNom(String nom) {
-        TypedQuery<Borne> tq = getEntityManager().createNamedQuery("BORNE_SEARCH_BY_LIB", Borne.class);
+        TypedQuery<Borne> tq = getEntityManager().createNamedQuery("findBornesByLib", Borne.class);
         tq.setParameter("libelle", nom);
         Borne b = tq.getSingleResult();
 

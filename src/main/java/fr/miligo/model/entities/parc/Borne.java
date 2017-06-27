@@ -9,7 +9,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -28,6 +27,12 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * Entité métier représentant une borne.
+ * 
+ * @author etrs
+ *
+ */
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "BORNE")
@@ -40,35 +45,57 @@ import lombok.experimental.FieldDefaults;
 @Dependent
 @NamedQueries({
 		@NamedQuery(name = "findBornesByGsbdd", query = RequetesDaoBorne.FIND_BORNES_BY_GSBDD),
-		@NamedQuery(name = "BORNE_SEARCH_BY_LIB", query = "select b from Borne b where b.nomBorne = :libelle ") })
+		@NamedQuery(name = "findBornesByLib", query = RequetesDaoBorne.BORNE_SEARCH_BY_LIB) 
+})
 public class Borne extends AbstractEntity {
 
-	@Column(name = "NOM_BORNE", nullable = false)
-	@Setter
-	String nomBorne;
+    /**
+     * Nom de la borne.
+     */
+    @Column(name = "NOM_BORNE", nullable = false)
+    @Setter
+    String nomBorne;
 
-	@Column(name = "ADRESSE_IP")
-	@Setter
-	String adresseIp;
+    /**
+     * Adresse ip de la borne.
+     */
+    @Column(name = "ADRESSE_IP")
+    @Setter
+    String adresseIp;
 
-	@Column(name = "LATITUDE")
-	@Setter
-	String latitude;
+    /**
+     * Lattitude de la borne.
+     */
+    @Column(name = "LATITUDE")
+    @Setter
+    String latitude;
 
-	@Column(name = "LONGITUDE")
-	@Setter
-	String longitude;
+    /**
+     * Longitude de la borne.
+     */
+    @Column(name = "LONGITUDE")
+    @Setter
+    String longitude;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_SITE", nullable = false)
-	@Setter
-	Site site;
+    /**
+     * Site de rattachement de la borne.
+     */
+    @ManyToOne
+    @JoinColumn(name = "ID_SITE", nullable = false)
+    @Setter
+    Site site;
 
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
-	@JoinColumn(name = "ID_CONFIGURATION_BORNE")
-	@Setter
-	ConfigurationBorne configurationBorne;
+    /**
+     * Configuration de la borne.
+     */
+    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+    @JoinColumn(name = "ID_CONFIGURATION_BORNE")
+    @Setter
+    ConfigurationBorne configurationBorne;
 
-	@OneToMany(mappedBy = "borne")
-	List<Vehicule> listeVehicules = new ArrayList<>();
+    /**
+     * List de vehicule dans la borne.
+     */
+    @OneToMany(mappedBy = "borne")
+    List<Vehicule> listeVehicules = new ArrayList<>();
 }
