@@ -9,43 +9,40 @@
     <ui:define name="title">Consulter Statistiques - Bureau Maintenance et Logistique</ui:define>
     <ui:define name="content">
         <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+
+
         <h:form>
-            <p:panel class="ui-g" id="panelVisuStats" style="text-align: center" >
+            <p:tabView>
+                <p:tab title="Trajets les plus effectués">
+                    <p:outputLabel value="Trajets les plus effectués - #{statsTrajetBeans.clientCourant.gsbdd.libelle}" />
+                    <p:dataTable id="dataTableStatistiques" var="v" value="#{statsTrajetBeans.listeTrajetUnique}" style="margin-top : 40px;" rows="10">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Trajet"  />
+                            </f:facet>
+                            <h:outputText value="#{v.key}" />
+                        </p:column>
 
-                <h:form>
-                    <div class="ui-g-12 ui-g-nopad">
-                        <div class="ui-g-6">
-                            <p:outputLabel value="Trajets les plus effectués - #{statsTrajetBeans.clientCourant.gsbdd.libelle}" />
-                            <p:dataTable id="dataTableStatistiques" var="v" value="#{statsTrajetBeans.listeTrajetUnique}" style="margin-top : 40px;" rows="3">
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Trajet"  />
-                                    </f:facet>
-                                    <h:outputText value="#{v.key}" />
-                                </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre"/>
+                            </f:facet>
+                            <h:outputText value="#{v.value}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
 
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Nombre"/>
-                                    </f:facet>
-                                    <h:outputText value="#{v.value}" />
-                                </p:column>
-                            </p:dataTable>
-                        </div>
+                <p:tab title="Disponibilité des véhicules">
+                    <p:chart responsive="true" type="donut" model="#{statsDisponibiliteVehiculeBeans.donutDispoVehicule}" style="height:500px;"/>
+                </p:tab>
 
-                        <div class="ui-g-6">
-                            <p:chart responsive="true" type="donut" model="#{statsDisponibiliteVehiculeBeans.donutDispoVehicule}" />
-                        </div>
+                <p:tab title="Maintenance des Véhicules">
+                    <p:chart responsive="true" type="donut" model="#{statsEntretienVehiculeBeans.donutMaintenanceVehicule}"  style="height:500px;"/>
+                </p:tab>
 
-                        <div class="ui-g-6">
-                            <p:chart responsive="true" type="donut" model="#{statsEntretienVehiculeBeans.donutMaintenanceVehicule}" />
-                        </div>
-
-                    </div>
-                </h:form>
-
-            </p:panel>
+            </p:tabView>>
         </h:form>
+
     </ui:define>
 
 </ui:composition>
