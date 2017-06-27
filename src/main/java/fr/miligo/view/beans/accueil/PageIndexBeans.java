@@ -6,14 +6,12 @@
 package fr.miligo.view.beans.accueil;
 
 import fr.miligo.common.AbstractBean;
-import fr.miligo.model.entities.parc.Borne;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import lombok.Getter;
 import lombok.extern.apachecommons.CommonsLog;
-import net.entetrs.commons.jsf.JsfUtils;
 
 /**
  *
@@ -37,10 +35,10 @@ public class PageIndexBeans extends AbstractBean implements Serializable {
         String role=(String) getObjectInSession(ROLE_SESSION);
         if("Bureau Maintenance Logistique".equals(role)){
             casDutilisation="Statistiques";
-            lien="visu-bml/visu-stats.xhtml?faces-redirect=true";
+            lien="visu-bml/visu-stats.xhtml?faces-redirect=true";  
         }
         if("Gestionnaire de Parc".equals(role)){
-            casDutilisation="Modifier la disponibilité d'un véhicule";
+            casDutilisation="Liste des véhicules";
             lien="gestionnaire-parc/accueil-gestionnaire-parc.xhtml?faces-redirect=true";
         }
         if("Utilisateur".equals(role)){

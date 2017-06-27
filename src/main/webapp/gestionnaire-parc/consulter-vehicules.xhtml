@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-standard-gestionnaire.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:cps="http://java.sun.com/jsf/composite/composites">
+
+    <ui:define name="title">Consulter - Gestionnaire de Parc</ui:define>
+
+    <ui:define name="content">
+
+        <ui:include src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+        
+        <p:growl globalOnly="true" autoUpdate="true" />
+
+        <hr />
+        <!-- Ici le tableau récapitulatif des véhicules -->
+
+        <h:form id="formAcceuilGestion" >
+            <p:panelGrid columns="2"> 
+                <f:facet name="header">
+                    <p:outputLabel value="Informations liées au véhicule" />
+                </f:facet>
+
+
+                <p:outputLabel id="champImmat" value="Immatriculation " />
+                <p:outputLabel value="#{consulterVehiculeBean.vehicule.immatriculation}" />
+
+                <p:outputLabel value="GSBDD"/> 
+                <p:outputLabel value="#{consulterVehiculeBean.gsbdd}" />
+
+                <p:outputLabel value="Site" />
+                <p:outputLabel value="#{consulterVehiculeBean.site}" />
+            </p:panelGrid>
+            
+            <p:tabView>
+                <p:tab title="Utilisateurs">
+                    <p:dataTable value="#{consulterVehiculeBean.lstEmprunt}" var="emprunt"
+                                 emptyMessage="Aucune reservation ou emprunt du vehicule.">
+                        <p:column headerText="Date">
+                            
+                            <h:outputText value="#{emprunt.gdhDepart}">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Utilisateur">
+                            <h:outputText value="#{emprunt.client.nom}" />
+                        </p:column>
+                        
+                        <p:column headerText="Trajet">
+                            <h:outputText value="#{emprunt.trajet.borneDepart.nomBorne} - #{emprunt.trajet.borneArrivee.nomBorne}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+                
+                <p:tab title="Entretiens">
+                    <p:dataTable value="#{consulterVehiculeBean.vehicule.listeEntretiens}" var="e"
+                                 emptyMessage="Aucun entretien du véhicule.">
+                        <p:column headerText="Date" sortBy="#{e.dateEntretienDebut}">
+                            
+                            <h:outputText value="#{e.dateEntretienDebut}">
+                                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Libellé entretien">
+                            <h:outputText value="#{e.libelle}" />
+                        </p:column>
+                        
+                        <p:column headerText="Cause entretien">
+                            <p:dataList value="#{e.listeMaintenance}" var="m">
+                                <h:outputText value="#{m.libelle}" />
+                            </p:dataList>
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+            </p:tabView>
+            <p:button value="Retour à l'accueil" outcome="accueil-gestionnaire-parc.xhtml" />
+        </h:form>
+
+
+    </ui:define>
+
+</ui:composition>

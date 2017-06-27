@@ -46,9 +46,12 @@
                 <p:column headerText="Emplacement" sortBy="#{v.borne.site.nom}">
                     <h:outputText value="#{v.borne.site.nom}" />
                 </p:column>
-                <p:column headerText="Action" style="width: 150px; text-align: center;" >
+                <p:column headerText="Action" style="width: 180px; text-align: center;" >
                     <p:commandLink actionListener="#{accueilGestionParckBean.mettreVehiculeEnFlashScope(v)}"
                                    action="modif-vehicule.xhtml" value="Modifier" />
+                    <h:outputText value=" / " />
+                    <p:commandLink actionListener="#{accueilGestionParckBean.mettreVehiculeEnFlashScope(v)}"
+                                   action="consulter-vehicules.xhtml" value="Consulter" />
                 </p:column>
             </p:dataTable>
         </h:form>
