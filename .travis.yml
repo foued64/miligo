@@ -28,7 +28,7 @@ script:
   # JaCoCo is used to have code coverage, the agent has to be activated
   #- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar cobertura:cobertura
   # the following command line builds the project, runs the tests with coverage and then execute the SonarQube analysis
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+  - mvn clean install org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar
 cache:
   directories:
     - '$HOME/.m2/repository'
