@@ -11,72 +11,74 @@ import fr.miligo.model.entities.emprunt.Trajet;
 import fr.miligo.model.entities.parc.Borne;
 import fr.miligo.model.facades.parc.FacadeBorne;
 
+/**
+ * EJB session proposant une façade aux services métier de l'entité Trajet.
+ *
+ * @author codeur
+ */
 @Stateless
 public class FacadeTrajet extends AbstractFacade<Trajet> {
 
-	@Inject
-	private FacadeBorne facadeBorne;
+   /**
+    * EJB proposant les services métiers sur les bornes.
+    */
+    @Inject
+    private FacadeBorne facadeBorne;
 
-	@Inject
-	private FacadeReservation facadeReservation;
+    /**
+     * Recherche le trajet en fonction de la borne aller et de la borne retour
+     * 
+     * @param aller
+     * @param retour
+     * @return le {@link Trajet}
+     * @throws MiligoException
+     */
+    public Trajet rechercherTrajet(Borne aller, Borne retour) throws MiligoException {
+        try {
+            // recuperation en BDD des bornes
+            Borne borneAller = facadeBorne.read(aller.getId());
+            Borne borneRetour = facadeBorne.read(retour.getId());
 
-	@Inject
-	private FacadeEmpruntImmediat facadeEmpruntImmediat;
+            Trajet t;
 
-	/**
-	 * Recherche le trajet en fonction de la borne aller et de la borne retour
-	 * 
-	 * @param aller
-	 * @param retour
-	 * @return le {@link Trajet}
-	 * @throws MiligoException
-	 */
-	public Trajet rechercherTrajet(Borne aller, Borne retour) throws MiligoException {
-		try {
-			// recuperation en BDD des bornes
-			Borne borneAller = facadeBorne.read(aller.getId());
-			Borne borneRetour = facadeBorne.read(retour.getId());
+            // Recherche du trajet en base avec pour parametre les bornes aller et
+            // retour
+            TypedQuery<Trajet> tq = getEntityManager().createNamedQuery("rechercherTrajetByBornes", Trajet.class);
+            tq.setParameter("borneD", borneAller);
+            tq.setParameter("borneA", borneRetour);
 
-			Trajet t;
+            // Récupération du resultat de la requête
+            t = tq.getSingleResult();
 
-			// Recherche du trajet en base avec pour parametre les bornes aller et
-			// retour
-			TypedQuery<Trajet> tq = getEntityManager().createNamedQuery("rechercherTrajetByBornes", Trajet.class);
-			tq.setParameter("borneD", borneAller);
-			tq.setParameter("borneA", borneRetour);
+            return t;
+        } catch (NoResultException nre) {
+                return null;
+        } catch (Exception e) {
+                throw new MiligoException(e);
+        }
+    }
 
-			// Récupération du resultat de la requête
-			t = tq.getSingleResult();
+    /**
+     * Méthode de fabrication d'un trajet
+     * @param indice
+     * @param longueur
+     * @param borneArrive
+     * @param borneDepart
+     * @return une nouvelle instance de trajet
+     */
+    public Trajet newInstance(Integer indice, Double longueur, String borneArrive, String borneDepart) {
 
-			return t;
-		} catch (NoResultException nre) {
-			return null;
-		} catch (Exception e) {
-			throw new MiligoException(e);
-		}
-	}
+        Borne bornearrive = facadeBorne.readbyNom(borneArrive);
+        Borne bornedepart = facadeBorne.readbyNom(borneDepart);
 
-	/**
-	 * Méthode de fabrication d'un trajet
-	 * @param indice
-	 * @param longueur
-	 * @param borneArrive
-	 * @param borneDepart
-	 * @return une nouvelle instance de trajet
-	 */
-	public Trajet newInstance(Integer indice, Double longueur, String borneArrive, String borneDepart) {
+        Trajet t = super.newInstance();
+        t.setIndiceCarbone(indice);
+        t.setLongueurTrajet(longueur);
+        t.setBorneArrivee(bornearrive);
+        t.setBorneDepart(bornedepart);
 
-		Borne bornearrive = facadeBorne.readbyNom(borneArrive);
-		Borne bornedepart = facadeBorne.readbyNom(borneDepart);
+        return t;
 
-		Trajet t = super.newInstance();
-		t.setIndiceCarbone(indice);
-		t.setLongueurTrajet(longueur);
-		t.setBorneArrivee(bornearrive);
-		t.setBorneDepart(bornedepart);
-
-		return t;
-
-	}
+    }
 
 }

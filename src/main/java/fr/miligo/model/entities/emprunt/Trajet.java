@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
-import fr.miligo.model.dao.RequetesDaoEmpruntImmediat;
+import fr.miligo.model.dao.RequetesDaoTrajet;
 import fr.miligo.model.entities.parc.Borne;
 import java.util.Objects;
 import lombok.AccessLevel;
@@ -40,63 +40,44 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Dependent
 @Builder
-@NamedQueries({ @NamedQuery(name = "rechercherTrajetByBornes", query = RequetesDaoEmpruntImmediat.RECHERCHER_TRAJET_BY_BORNES) })
-public class Trajet extends AbstractEntity implements Comparable<Trajet>{
+@NamedQueries({ @NamedQuery(name = "rechercherTrajetByBornes", query = RequetesDaoTrajet.RECHERCHER_TRAJET_BY_BORNES) })
+public class Trajet extends AbstractEntity {
 
-	@Column(name = "LONGUEUR_TRAJET")
-	@Setter
-	Double longueurTrajet;
+    /**
+     * Longueur du trajet.
+     */
+    @Column(name = "LONGUEUR_TRAJET")
+    @Setter
+    Double longueurTrajet;
 
-	@Column(name = "INDICE_CARBONE")
-	@Setter
-	Integer indiceCarbone;
+    /**
+     * Indice carbone du trajet.
+     */
+    @Column(name = "INDICE_CARBONE")
+    @Setter
+    Integer indiceCarbone;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_BORNE_DEPART", nullable = false)
-	@Setter
-	Borne borneDepart;
+    /**
+     * Borne de depart du trajet.
+     */
+    @ManyToOne
+    @JoinColumn(name = "ID_BORNE_DEPART", nullable = false)
+    @Setter
+    Borne borneDepart;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_BORNE_ARRIVEE", nullable = false)
-	@Setter
-	Borne borneArrivee;
+    /**
+     * Borne d'arrivée du trajet.
+     */
+    @ManyToOne
+    @JoinColumn(name = "ID_BORNE_ARRIVEE", nullable = false)
+    @Setter
+    Borne borneArrivee;
 
-	@OneToMany(mappedBy = "trajet")
-	List<Reservation> listeReservations = new ArrayList<>();
+    /**
+     * Liste des reservations en focntion du trajet.
+     */
+    @OneToMany(mappedBy = "trajet")
+    List<Reservation> listeReservations = new ArrayList<>();
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Trajet other = (Trajet) obj;
-        if (!Objects.equals(this.borneDepart, other.borneDepart)) {
-            return false;
-        }
-//        if (!Objects.equals(this.borneArrivee, other.borneArrivee)) {
-//            return false;
-//        }
-        return true;
-    }
-
-        
-        
-        
-    @Override
-    public int compareTo(Trajet o) {
-        return this.borneDepart.getNomBorne().compareTo(o.getBorneDepart().getNomBorne());
-    }
-
+   
 }
