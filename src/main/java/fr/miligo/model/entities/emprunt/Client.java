@@ -15,14 +15,24 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.Email;
 
 import fr.miligo.common.AbstractEntity;
+import fr.miligo.model.dao.RequetesDaoClient;
 import fr.miligo.model.entities.parc.Gsbdd;
 import fr.miligo.model.entities.vehicule.Incident;
+import javax.persistence.NamedQueries;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
+
+
+/**
+ * Entité métier représentant un client.
+ * 
+ * @author etrs
+ *
+ */
 
 @SuppressWarnings("serial")
 @Entity
@@ -32,37 +42,63 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent
-@NamedQuery(name="VILLE_SEARCH_BY_NOM", query="select c from Client c where c.nom = :nom ")
+@NamedQueries({
+                @NamedQuery(name="findClientByNom", query=RequetesDaoClient.RECHERCHER_CLIENT_BY_NOM)
+})
 public class Client extends AbstractEntity {
 
-	@Column(name = "NOM", nullable = false)
-	@Setter
-	String nom;
+    /**
+     * Nom d'un client.
+     */
+    @Column(name = "NOM", nullable = false)
+    @Setter
+    String nom;
 
-	@Column(name = "PRENOM", nullable = false)
-	@Setter
-	String prenom;
+    /**
+     * Prenom d'un client.
+     */
+    @Column(name = "PRENOM", nullable = false)
+    @Setter
+    String prenom;
 
-	@Column(name = "ADRESSE_MAIL", nullable = false)
-	@Setter
-	@Email
-	String adresseMail;
+    /**
+     * Adresse mail du client.
+     */
+    @Column(name = "ADRESSE_MAIL", nullable = false)
+    @Setter
+    @Email
+    String adresseMail;
 
-	@Column(name = "MILIPOINTS", nullable = false, columnDefinition = "INT default '0'")
-	@Setter
-	Integer milipoints;
+    /**
+     * Point miligo collecte par le client.
+     */
+    @Column(name = "MILIPOINTS", nullable = false, columnDefinition = "INT default '0'")
+    @Setter
+    Integer milipoints;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_GSBDD", nullable = false)
-	@Setter
-	Gsbdd gsbdd;
+    /**
+     * GSBDD du client.
+     */
+    @ManyToOne
+    @JoinColumn(name = "ID_GSBDD", nullable = false)
+    @Setter
+    Gsbdd gsbdd;
 
-	@OneToMany(mappedBy = "conducteur")
-	List<Reservation> listeReservationConducteurs = new ArrayList<>();
+    /**
+     * Liste des reservations d'un client.
+     */
+    @OneToMany(mappedBy = "conducteur")
+    List<Reservation> listeReservationConducteurs = new ArrayList<>();
 
-	@OneToMany(mappedBy = "client")
-	List<Incident> listeIncidents = new ArrayList<>();
+    /**
+     * Liste des incident du client.
+     */
+    @OneToMany(mappedBy = "client")
+    List<Incident> listeIncidents = new ArrayList<>();
 
-	@OneToMany(mappedBy = "client")
-	List<EmpruntImmediat> listeEmpruntImmediats = new ArrayList<>();
+    /**
+     * Liste des emprunts Immediat du client.
+     */
+    @OneToMany(mappedBy = "client")
+    List<EmpruntImmediat> listeEmpruntImmediats = new ArrayList<>();
 }
