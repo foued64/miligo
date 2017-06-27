@@ -1,6 +1,7 @@
 package fr.miligo.view.beans.accueil;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,12 +13,12 @@ import fr.miligo.common.AbstractBean;
 import fr.miligo.exceptions.MessagesException;
 import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.emprunt.Client;
+import fr.miligo.model.entities.emprunt.Reservation;
 import fr.miligo.model.entities.parc.Borne;
 import fr.miligo.model.entities.vehicule.DisponibiliteEnum;
 import fr.miligo.model.entities.vehicule.Vehicule;
-import fr.miligo.model.facades.emprunt.FacadeClient;
+import fr.miligo.model.facades.emprunt.FacadeReservation;
 import fr.miligo.model.facades.emprunt.FacadeVehicule;
-import fr.miligo.model.facades.parc.FacadeBorne;
 import lombok.Getter;
 import lombok.extern.apachecommons.CommonsLog;
 import net.entetrs.commons.jsf.JsfUtils;
@@ -28,18 +29,15 @@ import net.entetrs.commons.jsf.JsfUtils;
 @CommonsLog
 public class AccueilBeans extends AbstractBean implements Serializable {
 
-	private static final String URL_EMPRUNT = "emprunter/emprunter-vehicule.xhtml";
+	private static final String URL_EMPRUNT = "emprunter-vehicule.xhtml";
 	private static final String URL_RESTITUER = "restituer-vehicule.xhtml";
 
 	// Facade
 	@Inject
-	private FacadeBorne facadeBorne;
-
-	@Inject
-	private FacadeClient facadeClient;
-
-	@Inject
 	private FacadeVehicule facadeVehicule;
+
+	@Inject
+	private FacadeReservation facadeReservation;
 
 	@Inject
 	private Borne borneActuelle;
@@ -48,6 +46,9 @@ public class AccueilBeans extends AbstractBean implements Serializable {
 	@Getter
 	private Client clientCourant;
 
+	@Getter
+	private List<Reservation> listeReservations = new ArrayList<>();
+
 	/**
 	 * Initialisation en récupérant le client le met en session recupere
 	 * l'adresse ip du support qui permet de recuperer la borne aller pour la
@@ -55,20 +56,17 @@ public class AccueilBeans extends AbstractBean implements Serializable {
 	 */
 	@PostConstruct
 	public void init() {
-		// Recupere le client courant
-		// TODO a modifier quand l'authentification sera faite
+		try {
+			// Recupere le client courant
+			// TODO a modifier quand l'authentification sera faite
+			clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
 
-		clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
-
-		// Recupere l'adresse ip du support utilisé avant d'arriver sur la page
-		// pour pouvoir conaitre la borneAller. FLASHSCOPED
-		// TODO a modifier quand nous aurons les adresses ip des tablettes des bornes
-		String adresseIp = "100.100.100.101";
-
-		// Récuperation de la borne selon l'adresse ip
-		this.borneActuelle = (Borne) getObjectInSession(KEY_BORNE_DEPART);
-		// System.out.println(borneActuelle.getNomBorne()+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
+			// Récuperation de la borne selon l'adresse ip
+			borneActuelle = (Borne) getObjectInSession(KEY_BORNE_DEPART);
+			listeReservations = facadeReservation.findListeReservationsByClient(clientCourant);
+		} catch (MiligoException e) {
+			addErrorMessage(e.getMessage());
+		}
 	}
 
 	/**

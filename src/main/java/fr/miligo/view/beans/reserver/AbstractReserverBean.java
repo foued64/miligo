@@ -23,7 +23,7 @@ public class AbstractReserverBean extends AbstractBean {
 	protected static final String KEY_TRAJET_FLASH_SCOPE = "trajet";
 	protected static final String KEY_TEMPS_EMPRUNT_FLASH_SCOPE = "tempsEmprunt";
 	protected static final String KEY_TYPE_VEHICULE_FLASH_SCOPE = "typeVehicule";
-	protected static final String KEY_TEMPS_DATE_HEURE_RESERVATION_FLASH_SCOPE = "tempsEmprunt";
+	protected static final String KEY_TEMPS_DATE_HEURE_RESERVATION_FLASH_SCOPE = "dateReservation";
 
 	// Facade
 

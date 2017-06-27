@@ -30,7 +30,7 @@
 						<p:autoComplete id="borneR" required="true" requiredMessage="Vous devez sélectionner une borne d'arrivée" dropdown="true" converter="#{genericConverter}" value="#{reserverBean.borneRetour}" var="b" itemLabel="#{b.site.nom}" itemValue="#{b}" completeMethod="#{reserverBean.autoCompleteBorne}" />
 						
 						<p:outputLabel for="heureDepart" value="Date et heure de départ : " />
-	                    <p:calendar id="heureDepart" value="#{reserverBean.tempsEmprunt}" pattern="dd/MM/yyyy HH:mm" mask="99/99/9999 99:99" maxHour="23" maxMinute="45"  stepMinute="15" mindate="#{reserverBean.minDate}" validator="dateValidator" required="true" requiredMessage="Veuillez saisir la date de départ"/>						
+	                    <p:calendar id="heureDepart" value="#{reserverBean.dateHeureDepart}" pattern="dd/MM/yyyy HH:mm" mask="99/99/9999 99:99" maxHour="23" maxMinute="45"  stepMinute="15" mindate="#{reserverBean.minDate}" validator="dateValidator" required="true" requiredMessage="Veuillez saisir la date de départ"/>						
 					
 						<p:outputLabel for="duree" value="Durée de la réservation : " />
 	                    <p:calendar id="duree" value="#{reserverBean.tempsEmprunt}" pattern="HH:mm" timeOnly="true" mask="99:99" maxHour="7" maxMinute="45"  stepMinute="15" required="true" requiredMessage="Veuillez saisir la durée de la réservation"/>						

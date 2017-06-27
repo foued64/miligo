@@ -17,7 +17,6 @@ import fr.miligo.exceptions.MiligoException;
 import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.emprunt.Trajet;
 import fr.miligo.model.entities.vehicule.TypeVehicule;
-import fr.miligo.model.entities.vehicule.Vehicule;
 import fr.miligo.model.facades.emprunt.FacadeReservation;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,11 +46,15 @@ public class ReserverResumeBean extends AbstractReserverBean implements Serializ
 
 	@Getter
 	@Setter
+	private Date dateReservation;
+
+	@Getter
+	@Setter
 	private TypeVehicule typeVehicule;
 
 	@Getter
 	@Setter
-	private boolean btnCestParti = true;
+	private boolean btnReservation = true;
 
 	@Getter
 	@Setter
@@ -63,27 +66,24 @@ public class ReserverResumeBean extends AbstractReserverBean implements Serializ
 
 	@PostConstruct
 	public void init() {
-
 		this.btnRetour = BTN_RETOUR_ANNULE;
 		this.trajet = (Trajet) JsfUtils.getFromFlashScope(KEY_TRAJET_FLASH_SCOPE);
-		this.tempsEmprunt = (Date) JsfUtils.getFromFlashScope(KEY_TEMPS_EMPRUNT_FLASH_SCOPE);
 		this.typeVehicule = (TypeVehicule) JsfUtils.getFromFlashScope(KEY_TYPE_VEHICULE_FLASH_SCOPE);
 		this.clientCourant = (Client) getObjectInSession(CLIENT_SESSION);
+		this.tempsEmprunt = (Date) JsfUtils.getFromFlashScope(KEY_TEMPS_EMPRUNT_FLASH_SCOPE);
+		this.dateReservation = (Date) JsfUtils.getFromFlashScope(KEY_TEMPS_DATE_HEURE_RESERVATION_FLASH_SCOPE);
 	}
 
-	public void creerEmprunt() {
+	public void creerReservation() {
 		try {
-			Vehicule vehiculeSelectionne = facadeEmpruntImmediat.emprunter(clientCourant, typeVehicule, trajet,
-					tempsEmprunt);
-			this.btnCestParti = false;
-			this.btnRetour = BTN_RETOUR;
+			String numReservation = facadeReservation.creerReservation(clientCourant, typeVehicule, trajet,
+					tempsEmprunt, dateReservation);
 
-			String libelleTypeVehicule = vehiculeSelectionne.getModele().getTypeVehicule().getLibelle();
-			String modele = vehiculeSelectionne.getModele().getLibelle();
-			String immat = vehiculeSelectionne.getImmatriculation();
+			addMessage(String.format("Votre réservation n°%s est bien enregistrée", numReservation));
 
-			addMessage(String.format("Vous pouvez récupérer votre %s, %s n°%s", libelleTypeVehicule, modele, immat),
-					null);
+			btnReservation = false;
+			btnRetour = BTN_RETOUR;
+
 		} catch (MiligoException e) {
 			if (log.isErrorEnabled()) {
 				log.error(e.getMessage());

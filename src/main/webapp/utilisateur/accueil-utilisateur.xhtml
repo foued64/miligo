@@ -38,24 +38,23 @@
 
 		<!-- Ici le tableau récapitulatif des réservations -->
 
-		<p:dataTable var="car" value="#{listeDesReservations}" emptyMessage="Vous n'avez aucune réservation">
+		<p:dataTable var="r" value="#{accueilBeans.listeReservations}" emptyMessage="Vous n'avez aucune réservation">
 			<p:column headerText="Liste des réservations">
-				<h:outputText value="#{r.id}" />
+				<h:outputText value="#{r.numeroReservation}" />
 			</p:column>
 
 			<p:column headerText="Départ -Arrivée">
-				<h:outputText value="#{r.trajetDepart} - #{r.trajetArrivee}" />
+				<h:outputText value="#{r.trajet.borneDepart.site.nom} -> #{r.trajet.borneArrivee.site.nom}" />
 			</p:column>
 
-			<p:column headerText="GDH">
-				<h:outputText value="#{r.gdh}" />
+			<p:column headerText="Date de la réservation">
+				<cps:outputDateTime  pattern="dd/MM/yyyy HH:mm" type="datetime" value="#{r.dateReservation}"/>
 			</p:column>
 
-			<p:column headerText="Empruntable">
-				<h:outputText value="#{r.empruntPossible}" />
+			<p:column headerText="Action">
+				<p:commandButton value="Emprunter" disabled="true"/>
 			</p:column>
 		</p:dataTable>
-
 
 	</ui:define>
 

@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/templates/template-standard-utilisateur.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:cps="http://java.sun.com/jsf/composite/composites">
+
+	<ui:define name="title">Accueil - Utilisateur</ui:define>
+	<ui:define name="content">
+		<ui:include
+			src="/WEB-INF/templates/fragments/fragment-infouser-deconnect.xhtml" />
+	
+	  <h:form id="formBoutton">
+	  
+	  		<f:metadata>
+			  <f:event type="preRenderView" listener="#{reserverResumeBean.keepInFlashScope()}"/>
+			</f:metadata>  
+	  
+			<div class="pageMobile">
+	                    <p:messages id="messages" showDetail="false" autoUpdate="true"
+						closable="false" />
+	                        
+				<p:panel header="Résumé de la réservation avant validation">				
+					<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+	
+						<p:outputLabel value="Résumé du trajet : " />
+						<p:outputLabel value="#{reserverResumeBean.trajet.borneDepart.site.nom} -> #{reserverResumeBean.trajet.borneArrivee.site.nom}" styleClass="bold" />
+					
+						<p:outputLabel value="Distance  (km): " />		
+						<p:outputLabel value="#{reserverResumeBean.trajet.longueurTrajet}"  styleClass="bold"/>	
+			
+						<p:outputLabel value="Date de la réservation : " />						
+						<cps:outputDateTime  pattern="dd/MM/yyyy HH:mm" type="datetime" value="#{reserverResumeBean.dateReservation}" styleClass="bold"/>
+			
+			
+						<p:outputLabel value="Durée (hh:mm) : " />						
+						<cps:outputDateTime  pattern="HH:mm " type="time" value="#{reserverResumeBean.tempsEmprunt}" styleClass="bold"/>
+			
+						<p:outputLabel value="Type véhicule : " />							
+						<p:outputLabel value="#{reserverResumeBean.typeVehicule.libelle}"  styleClass="bold"/>
+	
+					</p:panelGrid>
+				</p:panel>
+			</div>
+	
+			<div>
+		        	
+		        
+					<div id="validation">
+						<p:commandButton value="C'est parti!"
+							actionListener="#{reserverResumeBean.creerReservation()}"
+							update="@form :formBoutton"
+							rendered="#{reserverResumeBean.btnReservation}"/>
+						
+		                 <p:button value="#{reserverResumeBean.btnRetour}"
+							outcome="accueil-utilisateur.xhtml" />
+					</div>
+	           
+	     	 </div>
+		 </h:form>
+		
+	</ui:define>
+
+</ui:composition>
