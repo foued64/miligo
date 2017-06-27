@@ -1,0 +1,19 @@
+header {
+	display: none !important;
+}
+
+footer {
+	display: none !important;
+}
+
+.banniere{
+	display: none !important;
+}
+
+#infoProfil{
+		display: none !important;
+}
+
+@page{
+	size: landscape;
+}
