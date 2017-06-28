@@ -41,6 +41,7 @@ public class FacadeEntretien extends AbstractFacade<Entretien> {
             throw new MiligoException(e);
         }
     }
+    
     /**
      * Retourne le nombre de vehicule DISPONIBLE en BDD.
      * @param m
