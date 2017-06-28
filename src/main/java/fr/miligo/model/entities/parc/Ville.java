@@ -7,6 +7,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
+import fr.miligo.model.dao.RequetesDaoVille;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,12 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * Entité métier représentant une Ville.
+ * 
+ * @author etrs
+ *
+ */
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "VILLE")
@@ -23,12 +30,18 @@ import lombok.experimental.FieldDefaults;
 @Getter
 @Setter
 @Dependent
-@NamedQuery(name="VILLE_SEARCH_BY_LIB", query="select v from Ville v where v.libelle = :libelle ")
+@NamedQuery(name="findVilleByLib", query=RequetesDaoVille.VILLE_SEARCH_BY_LIB)
 public class Ville extends AbstractEntity {
 
-	@Column(name = "CODE_POSTAL")
-	String codePostal;
+    /**
+     * Code postal de la ville.
+     */
+    @Column(name = "CODE_POSTAL")
+    String codePostal;
 
-	@Column(name = "VILLE")
-	String libelle;
+    /**
+     * Libelle de la ville.
+     */
+    @Column(name = "VILLE")
+    String libelle;
 }
