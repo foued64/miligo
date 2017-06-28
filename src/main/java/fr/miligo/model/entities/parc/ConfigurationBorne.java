@@ -18,6 +18,12 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * Entité métier représentant la configuration de l'application.
+ * 
+ * @author etrs
+ *
+ */
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "CONFIGURATION_BORNE")
@@ -29,20 +35,35 @@ import lombok.experimental.FieldDefaults;
 @Dependent
 public class ConfigurationBorne extends AbstractEntity {
 
-	@Column(name = "TEMPS_CHARGE", columnDefinition = "time default '01:00:00'")
-	@Temporal(TemporalType.TIME)
-	Date tempsCharge;
+    /**
+     * Temps de charge d'une borne.
+     */
+    @Column(name = "TEMPS_CHARGE", columnDefinition = "time default '01:00:00'")
+    @Temporal(TemporalType.TIME)
+    Date tempsCharge;
 
-	@Column(name = "DISTANCE_MIN", columnDefinition = "int default 8")
-	Integer distanceMin;
+    /**
+     * Distance min pour l'obtention de VE.
+     */
+    @Column(name = "DISTANCE_MIN", columnDefinition = "int default 8")
+    Integer distanceMin;
 
-	@Column(name = "DISTANCE_MAX", columnDefinition = "int default 16")
-	Integer distanceMax;
+    /**
+     * Distance max pour l'obtention de VE.
+     */
+    @Column(name = "DISTANCE_MAX", columnDefinition = "int default 16")
+    Integer distanceMax;
 
-	@Column(name = "SEUIL_RECHARGEMENT", columnDefinition = "int default 50")
-	Integer seuilRechargement;
+    /**
+     * Seuil de rechargement minium pour un emprunt ou reservation.
+     */
+    @Column(name = "SEUIL_RECHARGEMENT", columnDefinition = "int default 50")
+    Integer seuilRechargement;
 
-	@OneToOne(mappedBy = "configurationBorne")
-	Borne borne;
+    /**
+     * Lien avec la borne.
+     */
+    @OneToOne(mappedBy = "configurationBorne")
+    Borne borne;
 
 }
