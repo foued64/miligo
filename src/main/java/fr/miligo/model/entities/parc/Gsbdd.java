@@ -11,7 +11,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
+import fr.miligo.model.dao.RequetesDaoGsbdd;
 import fr.miligo.model.entities.emprunt.Client;
+import javax.persistence.NamedQueries;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +21,12 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * Entité métier représentant une Gsbdd.
+ * 
+ * @author etrs
+ *
+ */
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "GSBDD")
@@ -27,21 +35,35 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent
-@NamedQuery(name="GSBDD_SEARCH_BY_LIB", query="select g from Gsbdd g where g.libelle = :libelle ")
+@NamedQueries({
+                @NamedQuery(name="findGsbddByLib", query = RequetesDaoGsbdd.GSBDD_SEARCH_BY_LIB)
+})
 public class Gsbdd extends AbstractEntity {
 
-	@Column(name = "NUMERO_CREDO")
-	@Setter
-	String numeroCredo;
+    /**
+     * Numero de credo de la Gsbdd.
+     */
+    @Column(name = "NUMERO_CREDO")
+    @Setter
+    String numeroCredo;
 
-	@Column(name = "LIBELLE_GSBDD", nullable = false)
-	@Setter
-	String libelle;
+    /**
+     * Libelle de la Gsbdd.
+     */
+    @Column(name = "LIBELLE_GSBDD", nullable = false)
+    @Setter
+    String libelle;
 
-	@OneToMany(mappedBy = "gsbdd")
-	List<Site> listeSites = new ArrayList<>();
+    /**
+     * Liste des sites de la Gsbdd.
+     */
+    @OneToMany(mappedBy = "gsbdd")
+    List<Site> listeSites = new ArrayList<>();
 
-	@OneToMany(mappedBy = "gsbdd")
-	List<Client> listeClients = new ArrayList<>();
+    /**
+     * Liste des clients de la Gsbdd.
+     */
+    @OneToMany(mappedBy = "gsbdd")
+    List<Client> listeClients = new ArrayList<>();
 
 }
