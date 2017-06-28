@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import fr.miligo.common.AbstractEntity;
+import fr.miligo.model.dao.RequetesDaoSite;
+import javax.persistence.NamedQueries;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +22,12 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
+/**
+ * Entité métier représentant un site.
+ * 
+ * @author etrs
+ *
+ */
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "SITE")
@@ -28,23 +36,37 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Dependent
-@NamedQuery(name="SITE_SEARCH_BY_LIB", query="select s from Site s where s.nom = :libelle ")
+@NamedQueries({
+                @NamedQuery(name="findSiteByLib", query = RequetesDaoSite.SITE_SEARCH_BY_LIB)
+})
 public class Site extends AbstractEntity {
 
-	@Column(name = "NOM_SITE", nullable = false)
-	@Setter
-	String nom;
+    /**
+     * Nom du site.
+     */
+    @Column(name = "NOM_SITE", nullable = false)
+    @Setter
+    String nom;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_ADRESSE")
-	@Setter
-	Adresse adresse;
+    /**
+     * Adresse du site.
+     */
+    @ManyToOne
+    @JoinColumn(name = "ID_ADRESSE")
+    @Setter
+    Adresse adresse;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_GSBDD")
-	@Setter
-	Gsbdd gsbdd;
+    /**
+     * Gsbdd du site.
+     */
+    @ManyToOne
+    @JoinColumn(name = "ID_GSBDD")
+    @Setter
+    Gsbdd gsbdd;
 
-	@OneToMany(mappedBy = "site")
-	List<Borne> listeBornes = new ArrayList<>();
+    /**
+     * Liste des bornes du site.
+     */
+    @OneToMany(mappedBy = "site")
+    List<Borne> listeBornes = new ArrayList<>();
 }
