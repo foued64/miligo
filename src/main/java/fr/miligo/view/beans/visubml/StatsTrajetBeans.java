@@ -9,6 +9,7 @@ import fr.miligo.common.AbstractBean;
 import fr.miligo.model.entities.emprunt.Client;
 import fr.miligo.model.entities.emprunt.Trajet;
 import fr.miligo.model.facades.emprunt.FacadeEmpruntImmediat;
+import fr.miligo.model.facades.emprunt.FacadeEmpruntReservation;
 import fr.miligo.model.facades.emprunt.FacadeTrajet;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,6 +39,9 @@ public class StatsTrajetBeans extends AbstractBean implements Serializable {
 
     @Inject
     private FacadeEmpruntImmediat facadeEmpruntImmediat;
+    
+    @Inject
+    private FacadeEmpruntReservation facadeEmpruntReservation;
 
     @Inject
     private FacadeTrajet facadeTrajet;
@@ -62,16 +66,19 @@ public class StatsTrajetBeans extends AbstractBean implements Serializable {
 
     /**
      * Contruction de la cle= Trajet et j'incremente la valeur.
-     * TO-DO : Prendre en compte les trajets des Empruntrs réservés.
+     * TO-DO : Vérifier la bonne prise en compte des trajet issus de réservation
      */
     private void constructionDesStatsTrajet() {
         
         for (Trajet trajet : listeDesTrajets) {
 
             if(trajet.getBorneDepart().getSite().getGsbdd().getId().equals(clientCourant.getGsbdd().getId())){
-            listeTrajetUnique.put(String.format("%s - %s", trajet.getBorneDepart().getSite().getNom(),
+            listeTrajetUnique.put(String.format("Départ : %s - Arrivée : %s", trajet.getBorneDepart().getSite().getNom(),
                     trajet.getBorneArrivee().getSite().getNom()),
                     facadeEmpruntImmediat.nbreEmpruntParTrajet(trajet, clientCourant.getGsbdd()));
+            listeTrajetUnique.put(String.format("Départ : %s - Arrivée : %s", trajet.getBorneDepart().getSite().getNom(),
+                    trajet.getBorneArrivee().getSite().getNom()),
+                    facadeEmpruntReservation.nbreEmpruntParTrajetReserve(trajet, clientCourant.getGsbdd()));
             }
         }
     }
